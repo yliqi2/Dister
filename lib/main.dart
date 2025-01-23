@@ -1,4 +1,6 @@
 import 'package:dister/pages/onboarding/onboarding.dart';
+import 'package:dister/theme/dark_mode.dart';
+import 'package:dister/theme/light_mode.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,10 +16,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: lightMode,
+      darkTheme: darkMode,
       home: const Onboarding(),
     );
   }

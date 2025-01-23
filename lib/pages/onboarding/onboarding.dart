@@ -20,7 +20,8 @@ class _OnboardingState extends State<Onboarding> {
             controller: _controller,
             children: [
               Container(
-                color: Colors.blue,
+                color: Theme.of(context).colorScheme.surface,
+                child: Text('data'),
               ),
               Container(
                 color: Colors.purple,
