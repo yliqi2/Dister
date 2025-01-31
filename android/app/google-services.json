@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "562049689273",
+    "project_id": "dister-a42c8",
+    "storage_bucket": "dister-a42c8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:562049689273:android:d9a61a4c3b48c5e33a9d68",
+        "android_client_info": {
+          "package_name": "com.example.dister"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAwIN8oXF-H7FhvVoltXxIztRfc1BZgnM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
