@@ -33,12 +33,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_native_splash: ^2.4.4
   smooth_page_indicator: ^1.2.0+3
-<<<<<<< Updated upstream
-=======
   firebase_core: ^3.10.1
   firebase_auth: ^5.4.1
   flutter_dotenv: ^5.2.1
->>>>>>> Stashed changes
   
 
 
@@ -48,14 +45,20 @@ flutter_native_splash:
   ios: true
   web: true
 
-  color: "#000000"
+  color: "#FFFEEA"
   image: "assets/images/logo.png"
   branding: "assets/images/branding.png"
 
+  color_dark: "#212020"
+
+  
+
   android_12:
-    color: "#000000"
+    color: "#FFFEEA"
     image: "assets/images/logo.png"
     branding: "assets/images/branding.png"
+
+    color_dark: "#212020"
 
 
 dev_dependencies:
@@ -84,6 +87,8 @@ flutter:
   assets:
     - .env
     - assets/images/
+    - assets/images/intropage/
+    - assets/images/form_logos/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
@@ -96,17 +101,21 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+  fonts:
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/Manrope-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Manrope-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Manrope-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Manrope-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Manrope-ExtraBold.ttf
+          weight: 800
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package

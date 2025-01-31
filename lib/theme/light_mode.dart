@@ -1,8 +1,27 @@
 import 'package:flutter/material.dart';
 
 //colors
+// Colores personalizados
+Color background = const Color(0xFFFFFFFF);
+Color highLight = const Color(0xFFB8261B);
+Color text = const Color(0xFF333333);
+Color subtitle = const Color(0xA6333333);
+Color subtext = const Color(0xFF616161);
 
 //Theme
 ThemeData lightMode = ThemeData(
-    brightness: Brightness.dark,
-    colorScheme: ColorScheme.dark(surface: Colors.white));
+  fontFamily: 'Manrope',
+  brightness: Brightness.light,
+  scaffoldBackgroundColor: background,
+  primaryColor: highLight,
+  colorScheme: ColorScheme.light(
+      surface: background,
+      primary: highLight,
+      onPrimary: Colors.white,
+      secondary: text,
+      onSecondary: Colors.black,
+      error: Colors.red,
+      onError: Colors.white,
+      onSurface: subtitle,
+      tertiary: subtext),
+);
