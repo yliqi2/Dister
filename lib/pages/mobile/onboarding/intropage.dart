@@ -51,7 +51,7 @@ class Intropage extends StatelessWidget {
           ),
           // Textos en la parte inferior
           Positioned(
-            bottom: 100,
+            bottom: 10,
             left: 16,
             right: 20,
             child: Column(
