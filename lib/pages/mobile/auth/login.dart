@@ -43,9 +43,6 @@ class _LoginState extends State<Login> {
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
                   Text(
                     'Enter your details to start saving and\nshopping smarter!',
                     style: TextStyle(
@@ -191,9 +188,6 @@ class _LoginState extends State<Login> {
                                   text: 'Join Us',
                                   style: TextStyle(
                                     color:
-                                        Theme.of(context).colorScheme.primary,
-                                    decoration: TextDecoration.underline,
-                                    decorationColor:
                                         Theme.of(context).colorScheme.primary,
                                   ), // Color rojo
                                 ),

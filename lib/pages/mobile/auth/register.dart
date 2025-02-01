@@ -31,7 +31,7 @@ class _RegisterState extends State<Register> {
                 ScrollConfiguration.of(context).copyWith(scrollbars: false),
             child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
@@ -45,13 +45,10 @@ class _RegisterState extends State<Register> {
                       color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
                   Text(
                     'Let\'s get started & create your account.',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 15,
                       fontWeight: FontWeight.w500,
                       color: Theme.of(context).colorScheme.tertiary,
                     ),
@@ -258,12 +255,9 @@ class _RegisterState extends State<Register> {
                                 TextSpan(
                                   text: 'Log in',
                                   style: TextStyle(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: Theme.of(context)
-                                          .colorScheme
-                                          .primary),
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
                                 ),
                               ],
                             ),

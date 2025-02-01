@@ -14,13 +14,14 @@ ThemeData netflix = ThemeData(
   scaffoldBackgroundColor: background,
   primaryColor: highLight,
   colorScheme: ColorScheme.dark(
-    surface: background, // Fondo de tarjetas o diálogos
-    primary: highLight, // Color de énfasis principal
-    onPrimary: Colors.white, // Texto o íconos sobre 'primary'
-    secondary: text, // Color secundario
-    onSecondary: Colors.black, // Texto o íconos sobre 'secondary'
-    error: Colors.red, // Color para errores
-    onError: Colors.white, // Texto sobre fondo principal
-    onSurface: subtitle, // Texto sobre superficie
-  ),
+      surface: background, // Fondo de tarjetas o diálogos
+      primary: highLight, // Color de énfasis principal
+      onPrimary: Colors.white, // Texto o íconos sobre 'primary'
+      secondary: text, // Color secundario
+      onSecondary: Colors.black, // Texto o íconos sobre 'secondary'
+      error: Colors.red, // Color para errores
+      onError: Colors.white, // Texto sobre fondo principal
+      onSurface: subtitle,
+      tertiary: subtext // Texto sobre superficie
+      ),
 );
