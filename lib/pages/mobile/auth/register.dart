@@ -3,6 +3,7 @@ import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/auth/mytextfield.dart';
 import 'package:dister/pages/mobile/auth/primarybtn.dart';
 import 'package:dister/theme/dark_mode.dart';
+import 'package:dister/controller/firebase/auth.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -13,11 +14,22 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final _auth = AuthService();
+
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _usernameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,13 +160,8 @@ class _RegisterState extends State<Register> {
                         GestureDetector(
                           onTap: () {
                             if (_formKey.currentState?.validate() ?? false) {
-                              // Si el formulario es válido, aquí puedes agregar la lógica de registro.
-                              // Por ejemplo, podrías navegar a otra pantalla o hacer una solicitud a la API.
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Registering user...')),
-                              );
-                              // Ejemplo de navegación (después de registro exitoso):
+                              _auth.register(_emailController.text,
+                                  _passwordController.text, context);
                               // Navigator.pushReplacementNamed(context, '/home');
                             } else {
                               // Si el formulario no es válido, muestra un mensaje o resalta los errores.

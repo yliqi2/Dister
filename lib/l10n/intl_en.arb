@@ -4,5 +4,12 @@
     "title_onboarding2": "Get More,\nSpend Less",
     "subtitle_onboarding2": "Compare prices and get the best deals \nwith a tap!",
     "title_onboarding3": "Never\nMiss Out Again",
-    "subtitle_onboarding3": "Your next great deal is just\na notification away." 
+    "subtitle_onboarding3": "Your next great deal is just\na notification away." ,
+
+    "loginTitle" : "Welcome back,\nLog in your deals.",
+    "loginSubtitle" : "Enter your details to start saving and\n shopping smarter!",
+    "forgotPassword" : "Forgot your password? ",
+    "resetPassword" : "Reset your password",
+    "noAccount" : "Don't have an account? ",
+    "joinUs" : "Join Us"
 }

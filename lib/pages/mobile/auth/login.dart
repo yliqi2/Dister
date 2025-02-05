@@ -2,6 +2,7 @@ import 'package:dister/pages/mobile/auth/primarybtn.dart';
 import 'package:dister/pages/mobile/auth/register.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:dister/pages/mobile/auth/mytextfield.dart';
+import 'package:dister/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -36,7 +37,7 @@ class _LoginState extends State<Login> {
 
                   //eslogan welcome
                   Text(
-                    'Welcome back,\nLog in your deals.',
+                    S.of(context).loginTitle,
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w800,
@@ -44,7 +45,7 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                   Text(
-                    'Enter your details to start saving and\nshopping smarter!',
+                    S.of(context).loginSubtitle,
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
@@ -98,11 +99,11 @@ class _LoginState extends State<Login> {
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: 'Forgot your password? ',
+                                text: S.of(context).forgotPassword,
                                 style: TextStyle(color: subtext),
                               ),
                               TextSpan(
-                                text: 'Reset your password',
+                                text: S.of(context).resetPassword,
                                 style: TextStyle(
                                   color: Theme.of(context).colorScheme.primary,
                                   decoration: TextDecoration.underline,
@@ -180,12 +181,12 @@ class _LoginState extends State<Login> {
                             TextSpan(
                               children: [
                                 TextSpan(
-                                  text: 'Don\'t have an account? ',
+                                  text: S.of(context).noAccount,
                                   style:
                                       TextStyle(color: subtext), // Color normal
                                 ),
                                 TextSpan(
-                                  text: 'Join Us',
+                                  text: S.of(context).joinUs,
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.primary,

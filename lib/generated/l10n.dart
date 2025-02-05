@@ -114,6 +114,61 @@ class S {
       args: [],
     );
   }
+
+  /// `Welcome back,\nLog in your deals.`
+  String get loginTitle {
+    return Intl.message(
+      'Welcome back,\nLog in your deals.',
+      name: 'loginTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your details to start saving and\n shopping smarter!`
+  String get loginSubtitle {
+    return Intl.message(
+      'Enter your details to start saving and\n shopping smarter!',
+      name: 'loginSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot your password? `
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot your password? ',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reset your password`
+  String get resetPassword {
+    return Intl.message(
+      'Reset your password',
+      name: 'resetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't have an account? `
+  String get noAccount {
+    return Intl.message(
+      'Don\'t have an account? ',
+      name: 'noAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Join Us`
+  String get joinUs {
+    return Intl.message('Join Us', name: 'joinUs', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

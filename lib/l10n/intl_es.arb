@@ -4,5 +4,16 @@
     "title_onboarding2": "Obtén más,\nGasta menos",
     "subtitle_onboarding2": "¡Compara precios y encuentra las mejores ofertas con un solo toque!",
     "title_onboarding3": "Nunca te lo pierdas",
-    "subtitle_onboarding3": "Tu próxima gran oferta está\na solo una notificación de distancia."
+    "subtitle_onboarding3": "Tu próxima gran oferta está\na solo una notificación de distancia.",
+
+    "password" : "Contraseña",
+    
+    "loginTitle": "Bienvenido de nuevo,\nAccede a tus ofertas.",
+    "loginSubtitle" : "Ingresa tus datos para empezar a ahorrar y\ncomprar de manera más inteligente.",
+    "forgotPassword" : "¿Has olvidado la contraseña? ",
+    "resetPassword" : "Restablecer contraseña",
+    "noAccount" : "¿No tienes cuenta? ",
+    "joinUs" : "Unete"
+
+
 }
