@@ -47,4 +47,38 @@ class FormValidator {
 
     return null;
   }
+
+  static String? passwordValidator(String? value) {
+    final validationRules = {
+      'empty': 'Please enter a password',
+      'length': 'Password must be at least 8 characters',
+      'segurity': 'Password must include letters and numbers'
+    };
+
+    if (value == null || value.isEmpty) {
+      return validationRules['empty'];
+    }
+    if (value.length < 8) {
+      return validationRules['length'];
+    }
+    if (!RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$').hasMatch(value)) {
+      return validationRules['segurity'];
+    }
+    return null;
+  }
+
+  static String? confirmPassValidator(String? confirmPass, String pass) {
+    final validationRules = {
+      'empty': 'Please confirm your password',
+      'segurity': 'Passwords do not match'
+    };
+
+    if (confirmPass == null || confirmPass.isEmpty) {
+      return validationRules['empty'];
+    }
+    if (confirmPass != pass) {
+      return validationRules['segurity'];
+    }
+    return null;
+  }
 }

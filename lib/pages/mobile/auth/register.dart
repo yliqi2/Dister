@@ -58,7 +58,6 @@ class _RegisterState extends State<Register> {
                   ),
                   Form(
                     key: _formKey,
-                    autovalidateMode: AutovalidateMode.disabled,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,18 +91,7 @@ class _RegisterState extends State<Register> {
                           hintText: 'Enter your password',
                           label: 'Password',
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter a password';
-                            }
-                            if (value.length < 8) {
-                              return 'Password must be at least 8 characters';
-                            }
-                            if (!RegExp(
-                                    r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$')
-                                .hasMatch(value)) {
-                              return 'Password must contain at least one letter and one number';
-                            }
-                            return null;
+                            return FormValidator.passwordValidator(value);
                           },
                         ),
                         const SizedBox(
@@ -115,13 +103,8 @@ class _RegisterState extends State<Register> {
                           hintText: 'Confirm your password',
                           label: 'Confirm Password',
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please confirm your password';
-                            }
-                            if (value != _passwordController.text) {
-                              return 'Passwords do not match';
-                            }
-                            return null;
+                            return FormValidator.confirmPassValidator(
+                                value, _passwordController.text);
                           },
                         ),
                         const SizedBox(

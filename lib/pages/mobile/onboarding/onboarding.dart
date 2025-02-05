@@ -1,6 +1,8 @@
+import 'package:dister/generated/l10n.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/onboarding/intropage.dart';
 import 'package:flutter/material.dart';
+
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Onboarding extends StatefulWidget {
@@ -28,24 +30,21 @@ class _OnboardingState extends State<Onboarding> {
                   onLastPage = (index == 2);
                 });
               },
-              children: const [
+              children: [
                 Intropage(
                   background: 'assets/images/intropage/background1.png',
-                  title: 'Find what\nyou need and more',
-                  subtitles:
-                      'Discover treasures and great deals.\nConnect today!',
+                  title: S.of(context).title_onboarding,
+                  subtitles: S.of(context).subtitle_onboarding,
                 ),
                 Intropage(
                   background: 'assets/images/intropage/background2.png',
-                  title: 'Get More\nSpend Less',
-                  subtitles:
-                      'Compare prices and get the best deals \nwith a tap!',
+                  title: S.of(context).title_onboarding2,
+                  subtitles: S.of(context).subtitle_onboarding2,
                 ),
                 Intropage(
                   background: 'assets/images/intropage/background3.png',
-                  title: 'Never\nMiss Out Again',
-                  subtitles:
-                      'Your next great deal is just\na notification away.',
+                  title: S.of(context).title_onboarding3,
+                  subtitles: S.of(context).subtitle_onboarding3,
                 ),
               ],
             ),

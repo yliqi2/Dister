@@ -36,8 +36,9 @@ dependencies:
   firebase_core: ^3.10.1
   firebase_auth: ^5.4.1
   flutter_dotenv: ^5.2.1
-  
 
+  flutter_localizations:
+    sdk: flutter
 
 #flutter pub run flutter_native_splash:create si se modifica
 flutter_native_splash:
@@ -51,15 +52,12 @@ flutter_native_splash:
 
   color_dark: "#212020"
 
-  
-
   android_12:
     color: "#FFFEEA"
     image: "assets/images/logo.png"
     branding: "assets/images/branding.png"
 
     color_dark: "#212020"
-
 
 dev_dependencies:
   flutter_test:
@@ -74,7 +72,6 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -92,10 +89,8 @@ flutter:
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
@@ -116,6 +111,9 @@ flutter:
           weight: 600
         - asset: assets/fonts/Manrope-ExtraBold.ttf
           weight: 800
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_intl:
+  enabled: true
+  class_name: S
+  main_local: en
