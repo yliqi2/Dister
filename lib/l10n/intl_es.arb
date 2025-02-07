@@ -5,9 +5,35 @@
     "subtitle_onboarding2": "¡Compara precios y encuentra las mejores ofertas con un solo toque!",
     "title_onboarding3": "Nunca te lo pierdas",
     "subtitle_onboarding3": "Tu próxima gran oferta está\na solo una notificación de distancia.",
+    "continues" : "Comenzar",
 
+    "hintEmail" : "Introduce tu email",
+    "hintPass" : "Introduce tu contraseña",
     "password" : "Contraseña",
+    "loginbtn" : "Login",
+
+    "emptyUsername" : "Introduce tu usuario",
+    "shortUsername": "El usuario debe tener más de 5 caracteres",
+    "longUsername" : "El usuario no debe tener más de 15 caracteres",
+    "containsSpace" : "El usuario no puede contener espacios", 
+
+    "emptyEmail" : "Introduce tu correo",
+    "invalidEmail" : "Por favor ingrese una dirección válida",
+    "notValidDomainEmail" : "Tiene que terminar @gmail.com",
+
+    "emptyPassword" : "Introduce tu contraseña",
+    "lenghtPassword" : "La contraseña debe tener al menos 8 caracteres",
+    "segurityPassword" : "La contraseña debe tener al menos un numero",
+
+    "emptyConfirmPassword": "Por favor confirma tu contraseña",
+    "segurityConfirmPassword": "Las contraseñas no coinciden",
+
+    "formError" : "Arregla tus credenciales",
     
+    "errorCredential" : "Datos incorrectos",
+    "errorNetwork" : "Problema de red",
+    "errorUnknow" : "Error inesperado: {message}",
+
     "loginTitle": "Bienvenido de nuevo,\nAccede a tus ofertas.",
     "loginSubtitle" : "Ingresa tus datos para empezar a ahorrar y\ncomprar de manera más inteligente.",
     "forgotPassword" : "¿Has olvidado la contraseña? ",

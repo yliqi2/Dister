@@ -1,3 +1,4 @@
+import 'package:dister/pages/mobile/home/homescreen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:dister/theme/dark_mode.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: const Onboarding(),
+      home: const Homescreen(),
     );
   }
 }

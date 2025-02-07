@@ -5,6 +5,34 @@
     "subtitle_onboarding2": "Compare prices and get the best deals \nwith a tap!",
     "title_onboarding3": "Never\nMiss Out Again",
     "subtitle_onboarding3": "Your next great deal is just\na notification away." ,
+    "continues" : "Start Hunting",
+
+    "hintEmail" : "Enter your email address",
+    "hintPass" : "Enter your password",
+    "password" : "Password",
+    "loginbtn" : "Login",
+
+    "emptyUsername" : "Please enter your username",
+    "shortUsername" : "Username must be more than 5 characters",
+    "longUsername" : "Username cannot be more than 15 characters",
+    "containsSpace" : "Username cannot contain spaces", 
+
+    "emptyEmail" : "Please enter your email address",
+    "invalidEmail" : "Please enter a valid email address",
+    "notValidDomainEmail" : "Email must end with @gmail.com",
+
+    "emptyPassword" : "Please enter a password",
+    "lenghtPassword" : "Password must be a least 8 characters",
+    "segurityPassword" : "Password must include letters and numbers",
+
+    "emptyConfirmPassword": "Please confirm your password",
+    "segurityConfirmPassword": "Passwords do not match",
+
+    "formError" : "Fix the credentials",
+
+    "errorCredential" : "Incorrect credentials",
+    "errorNetwork" : "Network Problem",
+    "errorUnknow" : "Unexpected error: {message}",
 
     "loginTitle" : "Welcome back,\nLog in your deals.",
     "loginSubtitle" : "Enter your details to start saving and\n shopping smarter!",

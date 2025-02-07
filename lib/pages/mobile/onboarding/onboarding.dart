@@ -96,9 +96,9 @@ class _OnboardingState extends State<Onboarding> {
           borderRadius: BorderRadius.circular(100),
           color: Theme.of(context).colorScheme.primary,
         ),
-        child: const Text(
-          'Start Hunting',
-          style: TextStyle(
+        child: Text(
+          S.of(context).continues,
+          style: const TextStyle(
             fontFamily: 'Manrope',
             fontWeight: FontWeight.w600,
             fontSize: 12,

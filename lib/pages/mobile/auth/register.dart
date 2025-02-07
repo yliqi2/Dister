@@ -2,8 +2,10 @@ import 'package:dister/controller/firebase/form_validator.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/auth/mytextfield.dart';
 import 'package:dister/pages/mobile/auth/primarybtn.dart';
+import 'package:dister/pages/mobile/home/homescreen.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:dister/controller/firebase/auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
@@ -15,6 +17,18 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final _auth = AuthService();
+  User? users;
+
+  void register() async {
+    User? user = await _auth.register(
+      _emailController.text.toLowerCase(),
+      _passwordController.text,
+      context,
+    );
+    setState(() {
+      users = user;
+    });
+  }
 
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
@@ -80,7 +94,10 @@ class _RegisterState extends State<Register> {
                             hintText: 'Enter your username',
                             label: 'Username',
                             validator: (value) {
-                              return FormValidator.usernameValidator(value);
+                              return FormValidator.usernameValidator(
+                                value,
+                                context,
+                              );
                             }),
                         const SizedBox(
                           height: 16,
@@ -91,7 +108,7 @@ class _RegisterState extends State<Register> {
                           hintText: 'Enter your email address',
                           label: 'Email',
                           validator: (value) {
-                            return FormValidator.emailValidator(value);
+                            return FormValidator.emailValidator(value, context);
                           },
                         ),
                         const SizedBox(
@@ -103,7 +120,8 @@ class _RegisterState extends State<Register> {
                           hintText: 'Enter your password',
                           label: 'Password',
                           validator: (value) {
-                            return FormValidator.passwordValidator(value);
+                            return FormValidator.passwordValidator(
+                                value, context);
                           },
                         ),
                         const SizedBox(
@@ -116,7 +134,7 @@ class _RegisterState extends State<Register> {
                           label: 'Confirm Password',
                           validator: (value) {
                             return FormValidator.confirmPassValidator(
-                                value, _passwordController.text);
+                                value, _passwordController.text, context);
                           },
                         ),
                         const SizedBox(
@@ -160,15 +178,20 @@ class _RegisterState extends State<Register> {
                         GestureDetector(
                           onTap: () {
                             if (_formKey.currentState?.validate() ?? false) {
-                              _auth.register(_emailController.text,
-                                  _passwordController.text, context);
-                              // Navigator.pushReplacementNamed(context, '/home');
+                              if (users != null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Homescreen(),
+                                  ),
+                                );
+                              }
                             } else {
-                              // Si el formulario no es válido, muestra un mensaje o resalta los errores.
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    content: Text(
-                                        'Please fix the errors in the form')),
+                                  content:
+                                      Text('Please fix the errors in the form'),
+                                ),
                               );
                             }
                           },

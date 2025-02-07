@@ -1,8 +1,12 @@
+import 'package:dister/controller/firebase/auth.dart';
+import 'package:dister/controller/firebase/form_validator.dart';
 import 'package:dister/pages/mobile/auth/primarybtn.dart';
 import 'package:dister/pages/mobile/auth/register.dart';
+import 'package:dister/pages/mobile/home/homescreen.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:dister/pages/mobile/auth/mytextfield.dart';
 import 'package:dister/generated/l10n.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -13,6 +17,27 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
+  final _auth = AuthService();
+  User? users;
+
+  void getUser() async {
+    User? user = await _auth.login(
+      _emailController.text.toLowerCase(),
+      _passwordController.text,
+      context,
+    );
+    setState(() {
+      users = user;
+    });
+  }
+
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -64,15 +89,10 @@ class _LoginState extends State<Login> {
                         CustomTextField(
                           controller: _emailController,
                           isPassword: false,
-                          hintText: 'Enter your email address',
+                          hintText: S.of(context).hintEmail,
                           label: 'Email',
                           validator: (value) {
-                            if (value == null ||
-                                value.isEmpty ||
-                                value.contains(' ')) {
-                              return 'Please enter your username';
-                            }
-                            return null;
+                            return FormValidator.emailValidator(value, context);
                           },
                         ),
                         const SizedBox(
@@ -80,17 +100,9 @@ class _LoginState extends State<Login> {
                         ),
                         CustomTextField(
                           controller: _passwordController,
-                          hintText: 'Enter your password',
-                          label: 'Password',
+                          hintText: S.of(context).hintPass,
+                          label: S.of(context).password,
                           isPassword: true,
-                          validator: (value) {
-                            if (value == null ||
-                                value.isEmpty ||
-                                value.contains(' ')) {
-                              return 'Please enter your username';
-                            }
-                            return null;
-                          },
                         ),
                         const SizedBox(
                           height: 16,
@@ -117,7 +129,35 @@ class _LoginState extends State<Login> {
                         const SizedBox(
                           height: 24,
                         ),
-                        primaryBtn(context: context, text: 'Login'),
+                        GestureDetector(
+                          onTap: () {
+                            if (_formKey.currentState?.validate() ?? false) {
+                              getUser();
+                              if (users != null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Homescreen(),
+                                  ),
+                                );
+                              }
+                              setState(() {
+                                users = null;
+                                _emailController.clear();
+                                _passwordController.clear();
+                              });
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .removeCurrentSnackBar();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(S.of(context).formError),
+                                ),
+                              );
+                            }
+                          },
+                          child: primaryBtn(context: context, text: 'Login'),
+                        ),
                       ],
                     ),
                   ),
@@ -174,7 +214,8 @@ class _LoginState extends State<Login> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const Register()),
+                                builder: (context) => const Register(),
+                              ),
                             );
                           },
                           child: Text.rich(

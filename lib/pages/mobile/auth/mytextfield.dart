@@ -14,7 +14,7 @@ class CustomTextField extends StatefulWidget {
     required this.isPassword,
     required this.hintText,
     required this.label,
-    required this.validator,
+    this.validator,
   });
 
   @override

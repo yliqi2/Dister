@@ -115,6 +115,201 @@ class S {
     );
   }
 
+  /// `Start Hunting`
+  String get continues {
+    return Intl.message('Start Hunting', name: 'continues', desc: '', args: []);
+  }
+
+  /// `Enter your email address`
+  String get hintEmail {
+    return Intl.message(
+      'Enter your email address',
+      name: 'hintEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your password`
+  String get hintPass {
+    return Intl.message(
+      'Enter your password',
+      name: 'hintPass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message('Password', name: 'password', desc: '', args: []);
+  }
+
+  /// `Login`
+  String get loginbtn {
+    return Intl.message('Login', name: 'loginbtn', desc: '', args: []);
+  }
+
+  /// `Please enter your username`
+  String get emptyUsername {
+    return Intl.message(
+      'Please enter your username',
+      name: 'emptyUsername',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username must be more than 5 characters`
+  String get shortUsername {
+    return Intl.message(
+      'Username must be more than 5 characters',
+      name: 'shortUsername',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username cannot be more than 15 characters`
+  String get longUsername {
+    return Intl.message(
+      'Username cannot be more than 15 characters',
+      name: 'longUsername',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username cannot contain spaces`
+  String get containsSpace {
+    return Intl.message(
+      'Username cannot contain spaces',
+      name: 'containsSpace',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter your email address`
+  String get emptyEmail {
+    return Intl.message(
+      'Please enter your email address',
+      name: 'emptyEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid email address`
+  String get invalidEmail {
+    return Intl.message(
+      'Please enter a valid email address',
+      name: 'invalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email must end with @gmail.com`
+  String get notValidDomainEmail {
+    return Intl.message(
+      'Email must end with @gmail.com',
+      name: 'notValidDomainEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a password`
+  String get emptyPassword {
+    return Intl.message(
+      'Please enter a password',
+      name: 'emptyPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be a least 8 characters`
+  String get lenghtPassword {
+    return Intl.message(
+      'Password must be a least 8 characters',
+      name: 'lenghtPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must include letters and numbers`
+  String get segurityPassword {
+    return Intl.message(
+      'Password must include letters and numbers',
+      name: 'segurityPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please confirm your password`
+  String get emptyConfirmPassword {
+    return Intl.message(
+      'Please confirm your password',
+      name: 'emptyConfirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Passwords do not match`
+  String get segurityConfirmPassword {
+    return Intl.message(
+      'Passwords do not match',
+      name: 'segurityConfirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fix the credentials`
+  String get formError {
+    return Intl.message(
+      'Fix the credentials',
+      name: 'formError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incorrect credentials`
+  String get errorCredential {
+    return Intl.message(
+      'Incorrect credentials',
+      name: 'errorCredential',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network Problem`
+  String get errorNetwork {
+    return Intl.message(
+      'Network Problem',
+      name: 'errorNetwork',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unexpected error: {message}`
+  String errorUnknow(Object message) {
+    return Intl.message(
+      'Unexpected error: $message',
+      name: 'errorUnknow',
+      desc: '',
+      args: [message],
+    );
+  }
+
   /// `Welcome back,\nLog in your deals.`
   String get loginTitle {
     return Intl.message(

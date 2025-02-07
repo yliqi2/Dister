@@ -1,83 +1,71 @@
+import 'package:dister/generated/l10n.dart';
+import 'package:flutter/material.dart';
+
 class FormValidator {
   // [username] comprobación de formato correcto
-  static String? usernameValidator(String? value) {
-    // [Rules] Mapa para falicitar la lectura
-    final validationRules = {
-      'empty': 'Please enter your username',
-      'short': 'Username must be more than 5 characters',
-      'long': 'Username cannot be more than 15 characters',
-      'containsSpace': 'Username cannot contain spaces',
-    };
-
+  static String? usernameValidator(
+    String? value,
+    BuildContext context,
+  ) {
     if (value == null || value.isEmpty) {
-      return validationRules['empty'];
+      return S.of(context).emptyUsername;
     }
     if (value.length < 5) {
-      return validationRules['short'];
+      return S.of(context).shortUsername;
     }
     if (value.length > 15) {
-      return validationRules['long'];
+      return S.of(context).longUsername;
     }
     if (value.contains(' ')) {
-      return validationRules['containsSpace'];
+      return S.of(context).containsSpace;
     }
     return null;
   }
 
   //[email]
-  static String? emailValidator(String? value) {
-    final validationRules = {
-      'empty': 'Please enter your email address',
-      'invalid': 'Please enter a valid email address',
-      'notValidDomain': 'Email must end with @gmail.com',
-    };
-
+  static String? emailValidator(
+    String? value,
+    BuildContext context,
+  ) {
     if (value == null || value.isEmpty) {
-      return validationRules['empty'];
+      return S.of(context).emptyEmail;
     }
     final emailRegex =
         RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 
     if (!emailRegex.hasMatch(value)) {
-      return validationRules['invalid'];
+      return S.of(context).invalidEmail;
     }
     if (!value.endsWith('@gmail.com')) {
-      return validationRules['notValidDomain'];
+      return S.of(context).notValidDomainEmail;
     }
 
     return null;
   }
 
-  static String? passwordValidator(String? value) {
-    final validationRules = {
-      'empty': 'Please enter a password',
-      'length': 'Password must be at least 8 characters',
-      'segurity': 'Password must include letters and numbers'
-    };
-
+  static String? passwordValidator(
+    String? value,
+    BuildContext context,
+  ) {
     if (value == null || value.isEmpty) {
-      return validationRules['empty'];
+      return S.of(context).emptyPassword;
     }
     if (value.length < 8) {
-      return validationRules['length'];
+      return S.of(context).lenghtPassword;
     }
     if (!RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$').hasMatch(value)) {
-      return validationRules['segurity'];
+      return S.of(context).segurityPassword;
     }
     return null;
   }
 
-  static String? confirmPassValidator(String? confirmPass, String pass) {
-    final validationRules = {
-      'empty': 'Please confirm your password',
-      'segurity': 'Passwords do not match'
-    };
-
+  static String? confirmPassValidator(
+      String? confirmPass, String pass, BuildContext context) {
     if (confirmPass == null || confirmPass.isEmpty) {
-      return validationRules['empty'];
+      return S.of(context).emptyConfirmPassword;
     }
     if (confirmPass != pass) {
-      return validationRules['segurity'];
+      return S.of(context).segurityConfirmPassword;
     }
     return null;
   }

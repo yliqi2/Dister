@@ -20,21 +20,70 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
+  static String m0(message) => "Error inesperado: ${message}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "containsSpace": MessageLookupByLibrary.simpleMessage(
+      "El usuario no puede contener espacios",
+    ),
+    "continues": MessageLookupByLibrary.simpleMessage("Comenzar"),
+    "emptyConfirmPassword": MessageLookupByLibrary.simpleMessage(
+      "Por favor confirma tu contraseña",
+    ),
+    "emptyEmail": MessageLookupByLibrary.simpleMessage("Introduce tu correo"),
+    "emptyPassword": MessageLookupByLibrary.simpleMessage(
+      "Introduce tu contraseña",
+    ),
+    "emptyUsername": MessageLookupByLibrary.simpleMessage(
+      "Introduce tu usuario",
+    ),
+    "errorCredential": MessageLookupByLibrary.simpleMessage(
+      "Datos incorrectos",
+    ),
+    "errorNetwork": MessageLookupByLibrary.simpleMessage("Problema de red"),
+    "errorUnknow": m0,
     "forgotPassword": MessageLookupByLibrary.simpleMessage(
       "¿Has olvidado la contraseña? ",
     ),
+    "formError": MessageLookupByLibrary.simpleMessage(
+      "Arregla tus credenciales",
+    ),
+    "hintEmail": MessageLookupByLibrary.simpleMessage("Introduce tu email"),
+    "hintPass": MessageLookupByLibrary.simpleMessage("Introduce tu contraseña"),
+    "invalidEmail": MessageLookupByLibrary.simpleMessage(
+      "Por favor ingrese una dirección válida",
+    ),
     "joinUs": MessageLookupByLibrary.simpleMessage("Unete"),
+    "lenghtPassword": MessageLookupByLibrary.simpleMessage(
+      "La contraseña debe tener al menos 8 caracteres",
+    ),
     "loginSubtitle": MessageLookupByLibrary.simpleMessage(
       "Ingresa tus datos para empezar a ahorrar y\ncomprar de manera más inteligente.",
     ),
     "loginTitle": MessageLookupByLibrary.simpleMessage(
       "Bienvenido de nuevo,\nAccede a tus ofertas.",
     ),
+    "loginbtn": MessageLookupByLibrary.simpleMessage("Login"),
+    "longUsername": MessageLookupByLibrary.simpleMessage(
+      "El usuario no debe tener más de 15 caracteres",
+    ),
     "noAccount": MessageLookupByLibrary.simpleMessage("¿No tienes cuenta? "),
+    "notValidDomainEmail": MessageLookupByLibrary.simpleMessage(
+      "Tiene que terminar @gmail.com",
+    ),
+    "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Restablecer contraseña",
+    ),
+    "segurityConfirmPassword": MessageLookupByLibrary.simpleMessage(
+      "Las contraseñas no coinciden",
+    ),
+    "segurityPassword": MessageLookupByLibrary.simpleMessage(
+      "La contraseña debe tener al menos un numero",
+    ),
+    "shortUsername": MessageLookupByLibrary.simpleMessage(
+      "El usuario debe tener más de 5 caracteres",
     ),
     "subtitle_onboarding": MessageLookupByLibrary.simpleMessage(
       "Descubre tesoros y grandes ofertas.\n¡Conéctate hoy!",

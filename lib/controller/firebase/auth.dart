@@ -1,3 +1,4 @@
+import 'package:dister/generated/l10n.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,6 @@ class AuthService {
         password: password,
       );
 
-      // Si el registro es exitoso, devuelve el usuario
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
       String errorMessage;
@@ -38,15 +38,44 @@ class AuthService {
       }
 
       return null;
-    } catch (e) {
-      // Error inesperado
+    }
+  }
+
+  Future<User?> login(
+      String email, String password, BuildContext context) async {
+    String error;
+    try {
+      final credential = await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+      return credential.user;
+    } on FirebaseAuthException catch (e) {
+      // Check for known Firebase Auth error codes
+      switch (e.code) {
+        case "invalid-credential":
+          // ignore: use_build_context_synchronously
+          error = S.of(context).errorCredential; // User not found
+          break;
+        case "network-request-failed":
+          // ignore: use_build_context_synchronously
+          error = S.of(context).errorNetwork; // Network issues
+          break;
+        default:
+          error = S.of(context).errorUnknow(
+                e.message.toString(),
+              ); // General error message
+          break;
+      }
+
+      // Elimina cualquier SnackBar ya mostrado
       if (context.mounted) {
         ScaffoldMessenger.of(context).removeCurrentSnackBar();
 
+        // Muestra el nuevo SnackBar
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error inesperado: $e')),
+          SnackBar(content: Text(error)),
         );
       }
+
       return null;
     }
   }
