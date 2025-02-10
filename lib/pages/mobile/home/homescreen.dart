@@ -1,4 +1,7 @@
+import 'package:dister/generated/l10n.dart';
 import 'package:flutter/material.dart';
+
+import 'package:animated_hint_textfield/animated_hint_textfield.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -11,28 +14,72 @@ class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 100,
-        leadingWidth: 200,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 26.0),
-          child: SizedBox(
-            child: Image.asset(
-              'assets/images/intropage/intropage.png', // Ajusta la imagen dentro de las dimensiones
-              fit: BoxFit.fill,
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              pinned: false,
+              floating: true,
+              title: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Image.asset(
+                  'assets/images/dister.png',
+                ),
+              ),
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              surfaceTintColor: Colors.transparent,
+              toolbarHeight: 90,
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.notifications, color: Colors.white),
+                  onPressed: () {},
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 26.0, left: 20.0),
+                  child: IconButton(
+                    icon: const Icon(Icons.chat_bubble_outline,
+                        color: Colors.white),
+                    onPressed: () {},
+                  ),
+                ),
+              ],
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(60),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 26, vertical: 8),
+                  child: AnimatedTextField(
+                    animationType: Animationtype.typer,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.red,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      contentPadding: const EdgeInsets.all(12),
+                    ),
+                    hintTexts: [
+                      S.of(context).searchHint,
+                      S.of(context).searchHint2,
+                      S.of(context).searchHint3,
+                    ],
+                    animationDuration: const Duration(seconds: 3),
+                  ),
+                ),
+              ),
             ),
-          ),
+          ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.notifications_none_rounded),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.chat_bubble_rounded),
-          )
-        ],
       ),
     );
   }

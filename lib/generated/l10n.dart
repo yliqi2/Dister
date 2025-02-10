@@ -364,6 +364,36 @@ class S {
   String get joinUs {
     return Intl.message('Join Us', name: 'joinUs', desc: '', args: []);
   }
+
+  /// `Search for "clothes"`
+  String get searchHint {
+    return Intl.message(
+      'Search for "clothes"',
+      name: 'searchHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for "tech"`
+  String get searchHint2 {
+    return Intl.message(
+      'Search for "tech"',
+      name: 'searchHint2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for "furniture"`
+  String get searchHint3 {
+    return Intl.message(
+      'Search for "furniture"',
+      name: 'searchHint3',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

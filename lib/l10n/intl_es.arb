@@ -39,7 +39,10 @@
     "forgotPassword" : "¿Has olvidado la contraseña? ",
     "resetPassword" : "Restablecer contraseña",
     "noAccount" : "¿No tienes cuenta? ",
-    "joinUs" : "Unete"
+    "joinUs" : "Unete",
 
+    "searchHint" : "Buscar \"ropa\"",
+    "searchHint2" : "Buscar \"tecnología\"",
+    "searchHint3" : "Buscar \"muebles\""
 
 }

@@ -39,5 +39,10 @@
     "forgotPassword" : "Forgot your password? ",
     "resetPassword" : "Reset your password",
     "noAccount" : "Don't have an account? ",
-    "joinUs" : "Join Us"
+    "joinUs" : "Join Us",
+
+    "searchHint" : "Search for \"clothes\"",
+    "searchHint2" : "Search for \"tech\"",
+    "searchHint3" : "Search for \"furniture\""
+
 }

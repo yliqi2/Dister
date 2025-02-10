@@ -76,6 +76,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Restablecer contraseña",
     ),
+    "searchHint": MessageLookupByLibrary.simpleMessage("Buscar \"ropa\""),
+    "searchHint2": MessageLookupByLibrary.simpleMessage(
+      "Buscar \"tecnología\"",
+    ),
+    "searchHint3": MessageLookupByLibrary.simpleMessage("Buscar \"muebles\""),
     "segurityConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Las contraseñas no coinciden",
     ),

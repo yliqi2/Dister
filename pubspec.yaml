@@ -36,9 +36,15 @@ dependencies:
   firebase_core: ^3.10.1
   firebase_auth: ^5.4.1
   flutter_dotenv: ^5.2.1
+  animated_hint_textfield: ^1.0.3
+  shared_preferences: ^2.5.1
+
 
   flutter_localizations:
     sdk: flutter
+  provider: ^6.1.2
+
+
 
 #flutter pub run flutter_native_splash:create si se modifica
 flutter_native_splash:

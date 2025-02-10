@@ -2,6 +2,7 @@ import 'package:dister/generated/l10n.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/onboarding/intropage.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -82,9 +83,14 @@ class _OnboardingState extends State<Onboarding> {
 
   Widget loginBtn(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        //navigate to the page
-        Navigator.push(
+      onTap: () async {
+        final pref = await SharedPreferences.getInstance();
+
+        pref.setBool("onboarding", true);
+
+        if (!mounted) return;
+        Navigator.pushReplacement(
+          // ignore: use_build_context_synchronously
           context,
           MaterialPageRoute(builder: (context) => const Login()),
         );

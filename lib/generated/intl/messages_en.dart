@@ -80,6 +80,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Reset your password",
     ),
+    "searchHint": MessageLookupByLibrary.simpleMessage(
+      "Search for \"clothes\"",
+    ),
+    "searchHint2": MessageLookupByLibrary.simpleMessage("Search for \"tech\""),
+    "searchHint3": MessageLookupByLibrary.simpleMessage(
+      "Search for \"furniture\"",
+    ),
     "segurityConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Passwords do not match",
     ),
