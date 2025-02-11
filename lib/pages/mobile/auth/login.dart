@@ -139,6 +139,7 @@ class _LoginState extends State<Login> {
                                 if (user != null) {
                                   // Si el login es exitoso, navegar a la pantalla principal
                                   Navigator.push(
+                                    // ignore: use_build_context_synchronously
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => const Homescreen(),
@@ -146,8 +147,10 @@ class _LoginState extends State<Login> {
                                   );
                                 } else {
                                   // Si el login falla, muestra un mensaje de error
+                                  // ignore: use_build_context_synchronously
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
+                                        // ignore: use_build_context_synchronously
                                         content: Text(S.of(context).formError)),
                                   );
                                 }
