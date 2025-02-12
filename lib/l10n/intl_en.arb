@@ -34,6 +34,11 @@
     "errorNetwork" : "Network Problem",
     "errorUnknow" : "Unexpected error: {message}",
 
+    "emailInUse" : "Email already in use",
+
+    "signTitle" : "Sign up, to unlock deals!",
+    "signSubtitle" : "Let's get started & create your account.",
+
     "loginTitle" : "Welcome back,\nLog in your deals.",
     "loginSubtitle" : "Enter your details to start saving and\n shopping smarter!",
     "forgotPassword" : "Forgot your password? ",

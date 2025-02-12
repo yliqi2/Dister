@@ -1,5 +1,6 @@
 import 'package:dister/controller/firebase/form_validator.dart';
 import 'package:dister/controller/provider/authnotifier.dart';
+import 'package:dister/generated/l10n.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/auth/mytextfield.dart';
 import 'package:dister/pages/mobile/auth/primarybtn.dart';
@@ -19,24 +20,13 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final _auth = AuthService();
-  User? users;
-
-  void register() async {
-    User? user = await _auth.register(
-      _emailController.text.toLowerCase(),
-      _passwordController.text,
-      context,
-    );
-    setState(() {
-      users = user;
-    });
-  }
-
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+
+  User? _user;
 
   @override
   void dispose() {
@@ -47,21 +37,52 @@ class _RegisterState extends State<Register> {
     _confirmPasswordController.dispose();
   }
 
+  // Esta función muestra el SnackBar si hay un error
+  void showSnack(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
+  // Función para registrar al usuario
+  void register(AuthErrorNotifier errorNotifier) async {
+    User? user = await _auth.register(_emailController.text.toLowerCase(),
+        _passwordController.text, errorNotifier);
+    setState(() {
+      _user = user;
+    });
+
+    if (_user != null) {
+      Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Homescreen(),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Consumer<AuthErrorNotifier>(
-        // Usar el provider para escuchar cambios
         builder: (context, errorNotifier, child) {
-          // Si hay un error, mostramos un SnackBar
           if (errorNotifier.error != null) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(errorNotifier.error!)),
-              );
-            });
-            errorNotifier.error = null; 
+            switch (errorNotifier.error) {
+              case 'email-already-in-use':
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  showSnack(S.of(context).emailInUse);
+                });
+                break;
+              default:
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  showSnack(S.of(context).errorUnknow(errorNotifier.error!));
+                });
+                break;
+            }
           }
 
           return SafeArea(
@@ -72,14 +93,11 @@ class _RegisterState extends State<Register> {
                     ScrollConfiguration.of(context).copyWith(scrollbars: false),
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        'assets/images/dister.png',
-                      ),
+                      Image.asset('assets/images/dister.png'),
                       Text(
-                        'Sign up, to unlock deals!',
+                        S.of(context).signTitle,
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.w800,
@@ -87,20 +105,17 @@ class _RegisterState extends State<Register> {
                         ),
                       ),
                       Text(
-                        'Let\'s get started & create your account.',
+                        S.of(context).signSubtitle,
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
                           color: Theme.of(context).colorScheme.tertiary,
                         ),
                       ),
-                      const SizedBox(
-                        height: 24,
-                      ),
+                      const SizedBox(height: 24),
                       Form(
                         key: _formKey,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomTextField(
@@ -110,13 +125,9 @@ class _RegisterState extends State<Register> {
                                 label: 'Username',
                                 validator: (value) {
                                   return FormValidator.usernameValidator(
-                                    value,
-                                    context,
-                                  );
+                                      value, context);
                                 }),
-                            const SizedBox(
-                              height: 16,
-                            ),
+                            const SizedBox(height: 16),
                             CustomTextField(
                               controller: _emailController,
                               isPassword: false,
@@ -127,9 +138,7 @@ class _RegisterState extends State<Register> {
                                     value, context);
                               },
                             ),
-                            const SizedBox(
-                              height: 16,
-                            ),
+                            const SizedBox(height: 16),
                             CustomTextField(
                               controller: _passwordController,
                               isPassword: true,
@@ -140,9 +149,7 @@ class _RegisterState extends State<Register> {
                                     value, context);
                               },
                             ),
-                            const SizedBox(
-                              height: 16,
-                            ),
+                            const SizedBox(height: 16),
                             CustomTextField(
                               controller: _confirmPasswordController,
                               isPassword: true,
@@ -153,9 +160,7 @@ class _RegisterState extends State<Register> {
                                     value, _passwordController.text, context);
                               },
                             ),
-                            const SizedBox(
-                              height: 16,
-                            ),
+                            const SizedBox(height: 16),
                             Text.rich(
                               TextSpan(
                                 children: [
@@ -190,29 +195,14 @@ class _RegisterState extends State<Register> {
                                 ],
                               ),
                             ),
-                            const SizedBox(
-                              height: 24,
-                            ),
+                            const SizedBox(height: 24),
                             GestureDetector(
                               onTap: () {
-                                if (_formKey.currentState?.validate() ??
-                                    false) {
-                                  register();
-                                  if (users != null) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Homescreen(),
-                                      ),
-                                    );
-                                  }
+                                if (_formKey.currentState!.validate()) {
+                                  register(errorNotifier);
                                 } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                          'Please fix the errors in the form'),
-                                    ),
+                                  showSnack(
+                                    'Please fix the errors in the form',
                                   );
                                 }
                               },
@@ -222,91 +212,36 @@ class _RegisterState extends State<Register> {
                           ],
                         ),
                       ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                  child: Divider(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary)),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(
-                                  'Or',
-                                  style: TextStyle(
-                                      color: subtext,
-                                      fontFamily: 'Manrope',
-                                      fontSize: 14),
-                                ),
+                      const SizedBox(height: 24),
+                      Center(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Login(),
                               ),
-                              Expanded(
-                                  child: Divider(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .secondary)),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              socialbtn(
-                                  asset: 'assets/images/form_logos/google.png',
-                                  isApple: false),
-                              socialbtn(
-                                  asset: 'assets/images/form_logos/meta.png',
-                                  isApple: false),
-                              socialbtn(
-                                  asset: 'assets/images/form_logos/apple.png',
-                                  isApple: true),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          Center(
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const Login()),
-                                );
-                              },
-                              child: Text.rich(
+                            );
+                          },
+                          child: Text.rich(
+                            TextSpan(
+                              children: [
                                 TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: 'Already have an account? ',
-                                      style: TextStyle(color: subtext),
-                                    ),
-                                    TextSpan(
-                                      text: 'Log in',
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                      ),
-                                    ),
-                                  ],
+                                  text: S.of(context).noAccount,
+                                  style: TextStyle(color: subtext),
                                 ),
-                              ),
+                                TextSpan(
+                                  text: S.of(context).joinUs,
+                                  style: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                        ],
-                      )
+                        ),
+                      ),
                     ],
                   ),
                 ),

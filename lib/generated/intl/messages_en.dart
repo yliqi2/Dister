@@ -28,6 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Username cannot contain spaces",
     ),
     "continues": MessageLookupByLibrary.simpleMessage("Start Hunting"),
+    "emailInUse": MessageLookupByLibrary.simpleMessage("Email already in use"),
     "emptyConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
     ),
@@ -95,6 +96,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "shortUsername": MessageLookupByLibrary.simpleMessage(
       "Username must be more than 5 characters",
+    ),
+    "signSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Let\'s get started & create your account.",
+    ),
+    "signTitle": MessageLookupByLibrary.simpleMessage(
+      "Sign up, to unlock deals!",
     ),
     "subtitle_onboarding": MessageLookupByLibrary.simpleMessage(
       "Discover treasures and great deals.\nConnect today!",

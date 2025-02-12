@@ -310,6 +310,36 @@ class S {
     );
   }
 
+  /// `Email already in use`
+  String get emailInUse {
+    return Intl.message(
+      'Email already in use',
+      name: 'emailInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign up, to unlock deals!`
+  String get signTitle {
+    return Intl.message(
+      'Sign up, to unlock deals!',
+      name: 'signTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Let's get started & create your account.`
+  String get signSubtitle {
+    return Intl.message(
+      'Let\'s get started & create your account.',
+      name: 'signSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Welcome back,\nLog in your deals.`
   String get loginTitle {
     return Intl.message(

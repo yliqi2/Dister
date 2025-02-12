@@ -34,6 +34,11 @@
     "errorNetwork" : "Problema de red",
     "errorUnknow" : "Error inesperado: {message}",
 
+    "emailInUse" : "El correo electrónico ya está en uso",
+
+    "signTitle" : "Regístrate para desbloquear ofertas!",
+    "signSubtitle" : "Empecemos y crea tu cuenta.",
+
     "loginTitle": "Bienvenido de nuevo,\nAccede a tus ofertas.",
     "loginSubtitle" : "Ingresa tus datos para empezar a ahorrar y\ncomprar de manera más inteligente.",
     "forgotPassword" : "¿Has olvidado la contraseña? ",

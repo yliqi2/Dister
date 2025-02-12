@@ -28,6 +28,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "El usuario no puede contener espacios",
     ),
     "continues": MessageLookupByLibrary.simpleMessage("Comenzar"),
+    "emailInUse": MessageLookupByLibrary.simpleMessage(
+      "El correo electrónico ya está en uso",
+    ),
     "emptyConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Por favor confirma tu contraseña",
     ),
@@ -89,6 +92,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "shortUsername": MessageLookupByLibrary.simpleMessage(
       "El usuario debe tener más de 5 caracteres",
+    ),
+    "signSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Empecemos y crea tu cuenta.",
+    ),
+    "signTitle": MessageLookupByLibrary.simpleMessage(
+      "Regístrate para desbloquear ofertas!",
     ),
     "subtitle_onboarding": MessageLookupByLibrary.simpleMessage(
       "Descubre tesoros y grandes ofertas.\n¡Conéctate hoy!",

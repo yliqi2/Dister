@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  ValueNotifier<String?> errorNotifier = ValueNotifier<String?>(null);
 
   Future<User?> register(
-      String email, String password, BuildContext context) async {
+    String email,
+    String password,
+    AuthErrorNotifier errorNotifier,
+  ) async {
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -23,23 +25,13 @@ class AuthService {
 
       switch (e.code) {
         case 'email-already-in-use':
-          errorMessage =
-              'El correo electrónico ya está en uso. Intenta con otro.';
+          errorMessage = 'email-already-in-use';
           break;
         default:
-          errorMessage = 'Ha ocurrido un error desconocido: ${e.message}';
+          errorMessage = 'default';
+          break;
       }
-
-      // Elimina cualquier SnackBar ya mostrado
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-
-        // Muestra el nuevo SnackBar
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(errorMessage)),
-        );
-      }
-
+      errorNotifier.error = errorMessage;
       return null;
     }
   }
@@ -47,7 +39,6 @@ class AuthService {
   Future<User?> login(
     String email,
     String password,
-    BuildContext context,
     AuthErrorNotifier errorNotifier,
   ) async {
     String error;
@@ -59,13 +50,13 @@ class AuthService {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         switch (e.code) {
           case "invalid-credential":
-            error = S.of(context).errorCredential;
+            error = 'invalid-credential';
             break;
           case "network-request-failed":
-            error = S.of(context).errorNetwork;
+            error = 'network-request-failed';
             break;
           default:
-            error = S.of(context).errorUnknow(e.message.toString());
+            error = 'default';
             break;
         }
         errorNotifier.error = error;

@@ -31,21 +31,54 @@ class _LoginState extends State<Login> {
     _passwordController.dispose();
   }
 
+  void showSnack(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
+  void login(AuthErrorNotifier errorNotifier) async {
+    User? user = await _auth.login(
+      _emailController.text.toLowerCase(),
+      _passwordController.text,
+      errorNotifier,
+    );
+    if (user != null) {
+      Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Homescreen(),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Consumer<AuthErrorNotifier>(
-        // Usar el provider para escuchar cambios
         builder: (context, errorNotifier, child) {
-          // Si hay un error, mostramos un SnackBar
           if (errorNotifier.error != null) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(errorNotifier.error!)),
-              );
-            });
-            errorNotifier.error = null; // Limpiar el error después de mostrarlo
+            switch (errorNotifier.error) {
+              case 'invalid-credential':
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  showSnack(S.of(context).errorCredential);
+                });
+                break;
+              case 'network-request-failed':
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  showSnack(S.of(context).errorNetwork);
+                });
+                break;
+              default:
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  showSnack(S.of(context).errorUnknow(errorNotifier.error!));
+                });
+                break;
+            }
           }
 
           return SafeArea(
@@ -56,10 +89,7 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Logo de la aplicación
                     Image.asset('assets/images/dister.png'),
-
-                    // Título y subtítulo
                     Text(
                       S.of(context).loginTitle,
                       style: TextStyle(
@@ -77,8 +107,6 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     const SizedBox(height: 24),
-
-                    // Formulario de login
                     Form(
                       key: _formKey,
                       child: Column(
@@ -127,39 +155,11 @@ class _LoginState extends State<Login> {
 
                           // Botón de login
                           GestureDetector(
-                            onTap: () async {
+                            onTap: () {
                               if (_formKey.currentState?.validate() ?? false) {
-                                // Iniciar sesión
-                                User? user = await _auth.login(
-                                  _emailController.text.toLowerCase(),
-                                  _passwordController.text,
-                                  context,
-                                  errorNotifier, // Pasar el notifier para manejar errores
-                                );
-                                if (user != null) {
-                                  // Si el login es exitoso, navegar a la pantalla principal
-                                  Navigator.push(
-                                    // ignore: use_build_context_synchronously
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const Homescreen(),
-                                    ),
-                                  );
-                                } else {
-                                  // Si el login falla, muestra un mensaje de error
-                                  // ignore: use_build_context_synchronously
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        // ignore: use_build_context_synchronously
-                                        content: Text(S.of(context).formError)),
-                                  );
-                                }
+                                login(errorNotifier);
                               } else {
-                                // Si el formulario no es válido, muestra un mensaje de error
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text(S.of(context).formError)),
-                                );
+                                showSnack(S.of(context).formError);
                               }
                             },
                             child: primaryBtn(context: context, text: 'Login'),
