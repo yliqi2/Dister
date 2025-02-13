@@ -6,6 +6,7 @@ Color highLight = const Color(0xFFB8261B);
 Color text = const Color(0xFFFFFFFF);
 Color subtitle = const Color.fromRGBO(255, 255, 255, 0.65);
 Color subtext = const Color(0xFF616161);
+Color container = const Color(0xFF2A2A2A);
 
 // Tema oscuro
 ThemeData netflix = ThemeData(
@@ -14,6 +15,8 @@ ThemeData netflix = ThemeData(
   scaffoldBackgroundColor: background,
   primaryColor: highLight,
   colorScheme: ColorScheme.dark(
+      surfaceContainer: container,
+      secondaryContainer: subtext,
       surface: background, // Fondo de tarjetas o diálogos
       primary: highLight, // Color de énfasis principal
       onPrimary: Colors.white, // Texto o íconos sobre 'primary'
