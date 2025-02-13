@@ -18,6 +18,7 @@ class _HomescreenState extends State<Homescreen> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              automaticallyImplyLeading: false,
               pinned: false,
               floating: true,
               title: Padding(
@@ -78,7 +79,6 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
             ),
-            
           ],
         ),
       ),

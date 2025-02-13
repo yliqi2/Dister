@@ -7,10 +7,15 @@
     "subtitle_onboarding3": "Tu próxima gran oferta está\na solo una notificación de distancia.",
     "continues" : "Comenzar",
 
+    "hintUser" : "Introduce tu usuario",
+    "userLabel" : "Usuario",
     "hintEmail" : "Introduce tu email",
     "hintPass" : "Introduce tu contraseña",
+    "hintConfirmPass" : "Confirma tu contraseña",
     "password" : "Contraseña",
+    "confirmPassword" : "Confirma tu contraseña",
     "loginbtn" : "Login",
+    "registerbtn" : "Registrate",
 
     "emptyUsername" : "Introduce tu usuario",
     "shortUsername": "El usuario debe tener más de 5 caracteres",
@@ -38,6 +43,9 @@
 
     "signTitle" : "Regístrate para desbloquear ofertas!",
     "signSubtitle" : "Empecemos y crea tu cuenta.",
+    "infoTerms" : "Al registrarte, aceptas nuestros ",
+    "terms" : "Terminos",
+    "privacy" : "Política de privacidad",
 
     "loginTitle": "Bienvenido de nuevo,\nAccede a tus ofertas.",
     "loginSubtitle" : "Ingresa tus datos para empezar a ahorrar y\ncomprar de manera más inteligente.",
@@ -45,6 +53,8 @@
     "resetPassword" : "Restablecer contraseña",
     "noAccount" : "¿No tienes cuenta? ",
     "joinUs" : "Unete",
+    "AlreadyAccount" : "¿Ya tienes una cuenta? ",
+    "login" : "Inicia sesión",
 
     "searchHint" : "Buscar \"ropa\"",
     "searchHint2" : "Buscar \"tecnología\"",

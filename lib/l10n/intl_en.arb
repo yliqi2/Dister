@@ -7,10 +7,15 @@
     "subtitle_onboarding3": "Your next great deal is just\na notification away." ,
     "continues" : "Start Hunting",
 
+    "hintUser" : "Enter your username",
+    "userLabel" : "Username",
     "hintEmail" : "Enter your email address",
     "hintPass" : "Enter your password",
+    "hintConfirmPass" : "Confirm your password",
     "password" : "Password",
+    "confirmPassword" : "Confirm Password",
     "loginbtn" : "Login",
+    "registerbtn" : "Register",
 
     "emptyUsername" : "Please enter your username",
     "shortUsername" : "Username must be more than 5 characters",
@@ -38,6 +43,9 @@
 
     "signTitle" : "Sign up, to unlock deals!",
     "signSubtitle" : "Let's get started & create your account.",
+    "infoTerms" : "By signing up, you agree to our ",
+    "terms" : "Terms",
+    "privacy" : "Privacy Policy",
 
     "loginTitle" : "Welcome back,\nLog in your deals.",
     "loginSubtitle" : "Enter your details to start saving and\n shopping smarter!",
@@ -45,6 +53,8 @@
     "resetPassword" : "Reset your password",
     "noAccount" : "Don't have an account? ",
     "joinUs" : "Join Us",
+    "AlreadyAccount" : "Already have an account? ",
+    "login" : "Login",
 
     "searchHint" : "Search for \"clothes\"",
     "searchHint2" : "Search for \"tech\"",

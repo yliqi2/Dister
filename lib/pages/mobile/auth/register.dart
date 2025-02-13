@@ -1,4 +1,4 @@
-import 'package:dister/controller/firebase/form_validator.dart';
+import 'package:dister/controller/firebase/auth/form_validator.dart';
 import 'package:dister/controller/provider/authnotifier.dart';
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
@@ -6,7 +6,7 @@ import 'package:dister/pages/mobile/auth/mytextfield.dart';
 import 'package:dister/pages/mobile/auth/primarybtn.dart';
 import 'package:dister/pages/mobile/home/homescreen.dart';
 import 'package:dister/theme/dark_mode.dart';
-import 'package:dister/controller/firebase/auth.dart';
+import 'package:dister/controller/firebase/auth/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -121,8 +121,8 @@ class _RegisterState extends State<Register> {
                             CustomTextField(
                                 controller: _usernameController,
                                 isPassword: false,
-                                hintText: 'Enter your username',
-                                label: 'Username',
+                                hintText: S.of(context).hintUser,
+                                label: S.of(context).userLabel,
                                 validator: (value) {
                                   return FormValidator.usernameValidator(
                                       value, context);
@@ -131,7 +131,7 @@ class _RegisterState extends State<Register> {
                             CustomTextField(
                               controller: _emailController,
                               isPassword: false,
-                              hintText: 'Enter your email address',
+                              hintText: S.of(context).hintEmail,
                               label: 'Email',
                               validator: (value) {
                                 return FormValidator.emailValidator(
@@ -142,8 +142,8 @@ class _RegisterState extends State<Register> {
                             CustomTextField(
                               controller: _passwordController,
                               isPassword: true,
-                              hintText: 'Enter your password',
-                              label: 'Password',
+                              hintText: S.of(context).hintPass,
+                              label: S.of(context).password,
                               validator: (value) {
                                 return FormValidator.passwordValidator(
                                     value, context);
@@ -153,8 +153,8 @@ class _RegisterState extends State<Register> {
                             CustomTextField(
                               controller: _confirmPasswordController,
                               isPassword: true,
-                              hintText: 'Confirm your password',
-                              label: 'Confirm Password',
+                              hintText: S.of(context).hintConfirmPass,
+                              label: S.of(context).confirmPassword,
                               validator: (value) {
                                 return FormValidator.confirmPassValidator(
                                     value, _passwordController.text, context);
@@ -165,11 +165,11 @@ class _RegisterState extends State<Register> {
                               TextSpan(
                                 children: [
                                   TextSpan(
-                                    text: 'By signing up, you agree to our ',
+                                    text: S.of(context).infoTerms,
                                     style: TextStyle(color: subtext),
                                   ),
                                   TextSpan(
-                                    text: 'Terms',
+                                    text: S.of(context).terms,
                                     style: TextStyle(
                                       color:
                                           Theme.of(context).colorScheme.primary,
@@ -183,7 +183,7 @@ class _RegisterState extends State<Register> {
                                     style: TextStyle(color: subtext),
                                   ),
                                   TextSpan(
-                                    text: 'Privacy Policy',
+                                    text: S.of(context).privacy,
                                     style: TextStyle(
                                       color:
                                           Theme.of(context).colorScheme.primary,
@@ -202,12 +202,14 @@ class _RegisterState extends State<Register> {
                                   register(errorNotifier);
                                 } else {
                                   showSnack(
-                                    'Please fix the errors in the form',
+                                    S.of(context).formError,
                                   );
                                 }
                               },
                               child: primaryBtn(
-                                  context: context, text: 'Register'),
+                                context: context,
+                                text: S.of(context).registerbtn,
+                              ),
                             ),
                           ],
                         ),
@@ -227,11 +229,11 @@ class _RegisterState extends State<Register> {
                             TextSpan(
                               children: [
                                 TextSpan(
-                                  text: S.of(context).noAccount,
+                                  text: S.of(context).AlreadyAccount,
                                   style: TextStyle(color: subtext),
                                 ),
                                 TextSpan(
-                                  text: S.of(context).joinUs,
+                                  text: S.of(context).login,
                                   style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.primary,
@@ -249,35 +251,6 @@ class _RegisterState extends State<Register> {
             ),
           );
         },
-      ),
-    );
-  }
-
-  GestureDetector socialbtn({
-    required String asset,
-    required bool isApple,
-  }) {
-    return GestureDetector(
-      onTap: () {
-        // TODO: Implement social login logic
-      },
-      child: Container(
-        width: 56,
-        height: 56,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          border: Border.all(
-              color: Theme.of(context).colorScheme.secondary, width: 1.5),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Center(
-          child: isApple
-              ? Image.asset(
-                  asset,
-                  color: Theme.of(context).colorScheme.secondary,
-                )
-              : Image.asset(asset),
-        ),
       ),
     );
   }

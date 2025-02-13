@@ -24,6 +24,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "AlreadyAccount": MessageLookupByLibrary.simpleMessage(
+      "¿Ya tienes una cuenta? ",
+    ),
+    "confirmPassword": MessageLookupByLibrary.simpleMessage(
+      "Confirma tu contraseña",
+    ),
     "containsSpace": MessageLookupByLibrary.simpleMessage(
       "El usuario no puede contener espacios",
     ),
@@ -52,8 +58,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "formError": MessageLookupByLibrary.simpleMessage(
       "Arregla tus credenciales",
     ),
+    "hintConfirmPass": MessageLookupByLibrary.simpleMessage(
+      "Confirma tu contraseña",
+    ),
     "hintEmail": MessageLookupByLibrary.simpleMessage("Introduce tu email"),
     "hintPass": MessageLookupByLibrary.simpleMessage("Introduce tu contraseña"),
+    "hintUser": MessageLookupByLibrary.simpleMessage("Introduce tu usuario"),
+    "infoTerms": MessageLookupByLibrary.simpleMessage(
+      "Al registrarte, aceptas nuestros ",
+    ),
     "invalidEmail": MessageLookupByLibrary.simpleMessage(
       "Por favor ingrese una dirección válida",
     ),
@@ -61,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "lenghtPassword": MessageLookupByLibrary.simpleMessage(
       "La contraseña debe tener al menos 8 caracteres",
     ),
+    "login": MessageLookupByLibrary.simpleMessage("Inicia sesión"),
     "loginSubtitle": MessageLookupByLibrary.simpleMessage(
       "Ingresa tus datos para empezar a ahorrar y\ncomprar de manera más inteligente.",
     ),
@@ -76,6 +90,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tiene que terminar @gmail.com",
     ),
     "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
+    "privacy": MessageLookupByLibrary.simpleMessage("Política de privacidad"),
+    "registerbtn": MessageLookupByLibrary.simpleMessage("Registrate"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Restablecer contraseña",
     ),
@@ -108,6 +124,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "subtitle_onboarding3": MessageLookupByLibrary.simpleMessage(
       "Tu próxima gran oferta está\na solo una notificación de distancia.",
     ),
+    "terms": MessageLookupByLibrary.simpleMessage("Terminos"),
     "title_onboarding": MessageLookupByLibrary.simpleMessage(
       "Encuentra lo que\nnecesitas y más",
     ),
@@ -117,5 +134,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "title_onboarding3": MessageLookupByLibrary.simpleMessage(
       "Nunca te lo pierdas",
     ),
+    "userLabel": MessageLookupByLibrary.simpleMessage("Usuario"),
   };
 }

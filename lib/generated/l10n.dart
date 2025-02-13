@@ -120,6 +120,21 @@ class S {
     return Intl.message('Start Hunting', name: 'continues', desc: '', args: []);
   }
 
+  /// `Enter your username`
+  String get hintUser {
+    return Intl.message(
+      'Enter your username',
+      name: 'hintUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Username`
+  String get userLabel {
+    return Intl.message('Username', name: 'userLabel', desc: '', args: []);
+  }
+
   /// `Enter your email address`
   String get hintEmail {
     return Intl.message(
@@ -140,14 +155,39 @@ class S {
     );
   }
 
+  /// `Confirm your password`
+  String get hintConfirmPass {
+    return Intl.message(
+      'Confirm your password',
+      name: 'hintConfirmPass',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Password`
   String get password {
     return Intl.message('Password', name: 'password', desc: '', args: []);
   }
 
+  /// `Confirm Password`
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Login`
   String get loginbtn {
     return Intl.message('Login', name: 'loginbtn', desc: '', args: []);
+  }
+
+  /// `Register`
+  String get registerbtn {
+    return Intl.message('Register', name: 'registerbtn', desc: '', args: []);
   }
 
   /// `Please enter your username`
@@ -340,6 +380,26 @@ class S {
     );
   }
 
+  /// `By signing up, you agree to our `
+  String get infoTerms {
+    return Intl.message(
+      'By signing up, you agree to our ',
+      name: 'infoTerms',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Terms`
+  String get terms {
+    return Intl.message('Terms', name: 'terms', desc: '', args: []);
+  }
+
+  /// `Privacy Policy`
+  String get privacy {
+    return Intl.message('Privacy Policy', name: 'privacy', desc: '', args: []);
+  }
+
   /// `Welcome back,\nLog in your deals.`
   String get loginTitle {
     return Intl.message(
@@ -393,6 +453,21 @@ class S {
   /// `Join Us`
   String get joinUs {
     return Intl.message('Join Us', name: 'joinUs', desc: '', args: []);
+  }
+
+  /// `Already have an account? `
+  String get AlreadyAccount {
+    return Intl.message(
+      'Already have an account? ',
+      name: 'AlreadyAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Login`
+  String get login {
+    return Intl.message('Login', name: 'login', desc: '', args: []);
   }
 
   /// `Search for "clothes"`
