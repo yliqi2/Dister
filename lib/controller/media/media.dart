@@ -19,6 +19,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'package:dister/pages/tablet/login.dart';
+
 class Media extends StatelessWidget {
   const Media({super.key});
 
@@ -55,7 +57,7 @@ class Media extends StatelessWidget {
 
     }else{//En caso contrario la UI de Tablet
       
-      
+      return LoginTab();
 
     }
 
