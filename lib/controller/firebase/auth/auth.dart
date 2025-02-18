@@ -12,6 +12,7 @@ class AuthService {
   Future<User?> register(
     String email,
     String password,
+    String username,
     AuthErrorNotifier errorNotifier,
   ) async {
     try {
@@ -25,6 +26,7 @@ class AuthService {
 
       Users newUser = Users(
         uid: uid,
+        username: username,
         photo: 'assets/images/default.jpg', // Foto vacía inicialmente
         followers: 0, // Inicializamos seguidores en 0
         folliwing: 0, // Inicializamos siguiendo en 0

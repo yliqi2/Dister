@@ -1,5 +1,6 @@
 class Users {
   String uid;
+  String username;
   String photo;
   int followers;
   int folliwing;
@@ -7,6 +8,7 @@ class Users {
 
   Users({
     required this.uid,
+    required this.username,
     required this.photo,
     required this.followers,
     required this.folliwing,

@@ -48,7 +48,7 @@ class _RegisterState extends State<Register> {
   // Función para registrar al usuario
   void register(AuthErrorNotifier errorNotifier) async {
     User? user = await _auth.register(_emailController.text.toLowerCase(),
-        _passwordController.text, errorNotifier);
+        _passwordController.text, _usernameController.text, errorNotifier);
     setState(() {
       _user = user;
     });
