@@ -17,7 +17,7 @@ class _ListingtileState extends State<Listingtile> {
 
     return Container(
       width: width * 0.425,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(10),
@@ -31,6 +31,7 @@ class _ListingtileState extends State<Listingtile> {
               Row(
                 children: [
                   CircleAvatar(
+                    //TODO REFERENCIA A LA TABLA USUARIOS DONDE UID SEA UID,
                     radius: 15,
                   ),
                   const SizedBox(
@@ -40,6 +41,7 @@ class _ListingtileState extends State<Listingtile> {
                   SizedBox(
                     width: 50, // Ajusta este valor según lo que necesites
                     child: Text(
+                      //TODO REFERENCIA A LA TABLA USUARIOS DONDE UID SEA UID,
                       'nombressss',
                       style: TextStyle(fontSize: 12),
                       overflow: TextOverflow.ellipsis, // Recorta con '...'
@@ -52,10 +54,12 @@ class _ListingtileState extends State<Listingtile> {
                   widget.listing.getFormattedLikes() != '0'
                       ? Text(
                           widget.listing.getFormattedLikes(),
+                          style: const TextStyle(fontSize: 12),
                         )
                       : const SizedBox(),
                   Text(
                     widget.listing.getTimeAgo(),
+                    style: const TextStyle(fontSize: 12),
                   ),
                 ],
               ),

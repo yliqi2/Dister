@@ -19,7 +19,7 @@ class _HomescreenState extends State<Homescreen> {
     (index) => Listing(
       title: "Oferta $index",
       desc: "Descripción de la oferta $index",
-      publishedAt: DateTime.now().subtract(Duration(hours: index * 2)),
+      publishedAt: DateTime.now().subtract(Duration(hours: index * 8)),
       link: "https://example.com",
       expiresAt: DateTime.now().add(Duration(days: index)),
       originalPrice: 100.0 + index * 10,

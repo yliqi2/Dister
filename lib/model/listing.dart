@@ -32,7 +32,8 @@ class Listing {
 
   String getTimeAgo() {
     Duration difference = DateTime.now().difference(publishedAt);
-    if (difference.inDays > 0) return "${difference.inDays} D";
+    if (difference.inMinutes == 0) return "1 min.";
+    if (difference.inDays > 0) return "${difference.inDays} d";
     if (difference.inHours > 0) return "${difference.inHours} H";
     return "${difference.inMinutes} min.";
   }
@@ -51,8 +52,8 @@ class Listing {
     } else if (likes >= 1000) {
       double k = likes / 1000;
       return k >= 10
-          ? "${k.toStringAsFixed(0)}k"
-          : "${k.toStringAsFixed(1)}k"; // Redondea a 1 decimales solo si es menos que 10k
+          ? "${k.toStringAsFixed(0)}K"
+          : "${k.toStringAsFixed(1)}K"; // Redondea a 1 decimales solo si es menos que 10k
     } else {
       return likes
           .toStringAsFixed(0); // Muestra el número tal cual si es menor a 1000

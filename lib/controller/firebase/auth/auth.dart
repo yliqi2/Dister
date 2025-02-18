@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dister/model/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dister/controller/provider/authnotifier.dart';
 
@@ -5,6 +7,7 @@ import 'package:flutter/material.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<User?> register(
     String email,
@@ -17,6 +20,24 @@ class AuthService {
         email: email,
         password: password,
       );
+
+      String uid = userCredential.user!.uid;
+
+      Users newUser = Users(
+        uid: uid,
+        photo: 'assets/images/default.jpg', // Foto vacía inicialmente
+        followers: 0, // Inicializamos seguidores en 0
+        folliwing: 0, // Inicializamos siguiendo en 0
+        listings: 0, // Inicializamos publicaciones en 0
+      );
+
+      await _firestore.collection('users').doc(uid).set({
+        'uid': uid,
+        'photo': newUser.photo,
+        'followers': newUser.followers,
+        'folliwing': newUser.folliwing,
+        'listings': newUser.listings,
+      });
 
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
