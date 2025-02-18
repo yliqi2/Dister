@@ -47,20 +47,17 @@ class _ListingtileState extends State<Listingtile> {
                   ),
                 ],
               ),
-              Text.rich(
-                TextSpan(style: TextStyle(fontSize: 12), children: [
-                  TextSpan(
-                    text: '${widget.listing.getFormattedLikes()}',
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
+              Column(
+                children: [
+                  widget.listing.getFormattedLikes() != '0'
+                      ? Text(
+                          widget.listing.getFormattedLikes(),
+                        )
+                      : const SizedBox(),
+                  Text(
+                    widget.listing.getTimeAgo(),
                   ),
-                  TextSpan(
-                      text: '❤️',
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          fontSize: 10))
-                ]),
+                ],
               ),
             ],
           ),
