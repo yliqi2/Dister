@@ -1,6 +1,17 @@
+import 'package:dister/controller/firebase/auth/auth.dart';
+import 'package:dister/controller/firebase/auth/form_validator.dart';
+import 'package:dister/controller/provider/authnotifier.dart';
 import 'package:dister/generated/l10n.dart';
+import 'package:dister/pages/mobile/auth/login.dart';
+import 'package:dister/pages/mobile/auth/mytextfield.dart';
+import 'package:dister/pages/mobile/auth/primarybtn.dart';
+import 'package:dister/pages/mobile/auth/register.dart';
+import 'package:dister/pages/mobile/home/homescreen.dart';
 import 'package:dister/pages/mobile/onboarding/intropage.dart';
+import 'package:dister/theme/dark_mode.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginTab extends StatefulWidget{
   const LoginTab({super.key});
@@ -11,35 +22,234 @@ class LoginTab extends StatefulWidget{
 
 class _LoginTabState extends State<LoginTab>{
 
-  
+  final _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  @override     
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
+  void showSnack(String message) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
+  void login(AuthErrorNotifier errorNotifier) async {
+    User? user = await _auth.login(
+      _emailController.text.toLowerCase(),
+      _passwordController.text,
+      errorNotifier,
+    );
+    if (user != null) {
+      Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Homescreen(),
+        ),
+      );
+    }
+  }
 
 
 @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
    
     double height = MediaQuery.of(context).size.height;
     double widht = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-    body:Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Container(
-          height: height,
-          child: Intropage(
-                background: 'assets/images/intropage/background1.png',
-                title: S.of(context).title_onboarding,
-                subtitles: S.of(context).subtitle_onboarding,
-              ),
-        ),
-        
-        
-      ]
-    ), 
+    body: SizedBox(
+      height: height,
+      width: widht,
+      child:Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
 
+          Expanded(
+            child: Container(
+              height: height,
+              child: Intropage(
+                    background: 'assets/images/intropage/background1.png',
+                    title: S.of(context).title_onboarding,
+                    subtitles: S.of(context).subtitle_onboarding,
+                  ),
+            ),
+          ),
+
+          Expanded(
+            child: Container(
+              height: height,
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+              //child: const Login(),
+              child: Scaffold(
+                resizeToAvoidBottomInset: true,
+                body: Consumer<AuthErrorNotifier>(
+                  builder: (context, errorNotifier, child) {
+                    if (errorNotifier.error != null) {
+                      switch (errorNotifier.error) {
+                        case 'invalid-credential':
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            showSnack(S.of(context).errorCredential);
+                          });
+                          break;
+                        case 'network-request-failed':
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            showSnack(S.of(context).errorNetwork);
+                          });
+                          break;
+                        default:
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            showSnack(S.of(context).errorUnknow(errorNotifier.error!));
+                          });
+                          break;
+                      }
+                    }
+
+                    return SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                        
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                S.of(context).loginTitle,
+                                style: TextStyle(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w800,
+                                  color: Theme.of(context).colorScheme.secondary,
+                                ),
+                              ),
+                              Text(
+                                S.of(context).loginSubtitle,
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              Form(
+                                key: _formKey,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    CustomTextField(
+                                      controller: _emailController,
+                                      isPassword: false,
+                                      hintText: S.of(context).hintEmail,
+                                      label: 'Email',
+                                      validator: (value) {
+                                        return FormValidator.emailValidator(
+                                            value, context);
+                                      },
+                                    ),
+                                    const SizedBox(height: 16),
+                                    CustomTextField(
+                                      controller: _passwordController,
+                                      hintText: S.of(context).hintPass,
+                                      label: S.of(context).password,
+                                      isPassword: true,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Text.rich(
+                                      TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: S.of(context).forgotPassword,
+                                            style: TextStyle(color: subtext),
+                                          ),
+                                          TextSpan(
+                                            text: S.of(context).resetPassword,
+                                            style: TextStyle(
+                                              color:
+                                                  Theme.of(context).colorScheme.primary,
+                                              decoration: TextDecoration.underline,
+                                              decorationColor:
+                                                  Theme.of(context).colorScheme.primary,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 24),
+
+                                    // Botón de login
+                                    GestureDetector(
+                                      onTap: () {
+                                        if (_formKey.currentState?.validate() ?? false) {
+                                          login(errorNotifier);
+                                        } else {
+                                          showSnack(S.of(context).formError);
+                                        }
+                                      },
+                                      child: primaryBtn(context: context, text: 'Login'),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              // Enlace a la pantalla de registro
+                              const SizedBox(height: 24),
+                              Center(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const Register(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text.rich(
+                                    TextSpan(
+                                      children: [
+                                        TextSpan(
+                                          text: S.of(context).noAccount,
+                                          style: TextStyle(color: subtext),
+                                        ),
+                                        TextSpan(
+                                          text: S.of(context).joinUs,
+                                          style: TextStyle(
+                                            color: Theme.of(context).colorScheme.primary,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+          
+          
+          ]
+        ), 
+      ),
     );
   }
+  
+
 
 }
