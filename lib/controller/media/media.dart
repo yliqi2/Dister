@@ -19,7 +19,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-import 'package:dister/pages/tablet/loginTablet.dart';
+import 'package:dister/pages/tablet/auth/loginTablet.dart';
 
 class Media extends StatelessWidget {
   const Media({super.key});

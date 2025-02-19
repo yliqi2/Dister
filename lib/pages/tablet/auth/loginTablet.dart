@@ -4,9 +4,9 @@ import 'package:dister/controller/provider/authnotifier.dart';
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/pages/mobile/auth/mytextfield.dart';
 import 'package:dister/pages/mobile/auth/primarybtn.dart';
-import 'package:dister/pages/mobile/auth/register.dart';
-import 'package:dister/pages/mobile/home/homescreen.dart';
 import 'package:dister/pages/mobile/onboarding/intropage.dart';
+import 'package:dister/pages/tablet/auth/registerTablet.dart';
+import 'package:dister/pages/tablet/home/homeTablet.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class _LoginTabState extends State<LoginTab>{
         // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
-          builder: (context) => const Homescreen(),
+          builder: (context) => const HomeTablet(),
         ),
       );
     }
@@ -79,59 +79,58 @@ class _LoginTabState extends State<LoginTab>{
           children: [
       
             Expanded(
-                child:
-                  Stack(
+                child:Stack(
                   children: [
                     Container(
-                    height: height,
-                    child: PageView(
-                controller: _controller,
-                children: [
-                  Intropage(
-                    background: 'assets/images/intropage/background1.png',
-                    title: S.of(context).title_onboarding,
-                    subtitles: S.of(context).subtitle_onboarding,
-                  ),
-                  Intropage(
-                    background: 'assets/images/intropage/background2.png',
-                    title: S.of(context).title_onboarding2,
-                    subtitles: S.of(context).subtitle_onboarding2,
-                  ),
-                  Intropage(
-                    background: 'assets/images/intropage/background3.png',
-                    title: S.of(context).title_onboarding3,
-                    subtitles: S.of(context).subtitle_onboarding3,
-                  ),
-                ],
-              ),
-                      ),
-                      Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: Image.asset('assets/images/intropage/intropage.png'),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  padding: const EdgeInsets.only(left: 26, right: 26, bottom: 48),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SmoothPageIndicator(
+                      height: height,
+                      child: PageView(
                         controller: _controller,
-                        count: 3,
-                        effect: WormEffect(
-                          dotHeight: 16,
-                          dotWidth: 16,
-                          dotColor: Theme.of(context).colorScheme.secondary,
-                          activeDotColor: Theme.of(context).colorScheme.primary,
+                        children: [
+                          Intropage(
+                            background: 'assets/images/intropage/background1.png',
+                            title: S.of(context).title_onboarding,
+                            subtitles: S.of(context).subtitle_onboarding,
+                          ),
+                          Intropage(
+                            background: 'assets/images/intropage/background2.png',
+                            title: S.of(context).title_onboarding2,
+                            subtitles: S.of(context).subtitle_onboarding2,
+                          ),
+                          Intropage(
+                            background: 'assets/images/intropage/background3.png',
+                            title: S.of(context).title_onboarding3,
+                            subtitles: S.of(context).subtitle_onboarding3,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 16.0),
+                      child: Image.asset('assets/images/intropage/intropage.png'),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.only(left: 26, right: 26, bottom: 48),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SmoothPageIndicator(
+                              controller: _controller,
+                              count: 3,
+                              effect: WormEffect(
+                                dotHeight: 16,
+                                dotWidth: 16,
+                                dotColor: Theme.of(context).colorScheme.secondary,
+                                activeDotColor: Theme.of(context).colorScheme.primary,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-                  ],
                     ),
+                  ],
+                ),
             ),
       
             Expanded(
@@ -259,7 +258,7 @@ class _LoginTabState extends State<LoginTab>{
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => const Register(),
+                                        builder: (context) => const RegisterTap(),
                                       ),
                                     );
                                   },
