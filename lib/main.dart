@@ -17,6 +17,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
+import 'package:dister/controller/media/media.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
@@ -53,28 +55,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: FutureBuilder<User?>(
-        future: Logged().checkUserLoggedIn(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasData) {
-            return const Homescreen();
-          } else {
-            return FutureBuilder<bool>(
-              future: Welcome().seenBoarding(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  final seenOnboarding = snapshot.data ?? false;
-                  return seenOnboarding ? const Login() : const Onboarding();
-                }
-              },
-            );
-          }
-        },
-      ),
+      home: const Media(),
     );
   }
 }
