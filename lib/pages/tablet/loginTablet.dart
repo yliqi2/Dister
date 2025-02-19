@@ -2,7 +2,6 @@ import 'package:dister/controller/firebase/auth/auth.dart';
 import 'package:dister/controller/firebase/auth/form_validator.dart';
 import 'package:dister/controller/provider/authnotifier.dart';
 import 'package:dister/generated/l10n.dart';
-import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/auth/mytextfield.dart';
 import 'package:dister/pages/mobile/auth/primarybtn.dart';
 import 'package:dister/pages/mobile/auth/register.dart';
@@ -12,6 +11,7 @@ import 'package:dister/theme/dark_mode.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class LoginTab extends StatefulWidget{
   const LoginTab({super.key});
@@ -26,6 +26,8 @@ class _LoginTabState extends State<LoginTab>{
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _controller = PageController();
+
 
   @override     
   void dispose() {
@@ -67,56 +69,103 @@ class _LoginTabState extends State<LoginTab>{
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-    body: SizedBox(
-      height: height,
-      width: widht,
-      child:Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-
-          Expanded(
-            child: Container(
-              height: height,
-              child: Intropage(
+    body: SafeArea(
+      child: SizedBox(
+        height: height,
+        width: widht,
+        child:Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+      
+            Expanded(
+                child:
+                  Stack(
+                  children: [
+                    Container(
+                    height: height,
+                    child: PageView(
+                controller: _controller,
+                children: [
+                  Intropage(
                     background: 'assets/images/intropage/background1.png',
                     title: S.of(context).title_onboarding,
                     subtitles: S.of(context).subtitle_onboarding,
                   ),
+                  Intropage(
+                    background: 'assets/images/intropage/background2.png',
+                    title: S.of(context).title_onboarding2,
+                    subtitles: S.of(context).subtitle_onboarding2,
+                  ),
+                  Intropage(
+                    background: 'assets/images/intropage/background3.png',
+                    title: S.of(context).title_onboarding3,
+                    subtitles: S.of(context).subtitle_onboarding3,
+                  ),
+                ],
+              ),
+                      ),
+                      Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Image.asset('assets/images/intropage/intropage.png'),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  padding: const EdgeInsets.only(left: 26, right: 26, bottom: 48),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SmoothPageIndicator(
+                        controller: _controller,
+                        count: 3,
+                        effect: WormEffect(
+                          dotHeight: 16,
+                          dotWidth: 16,
+                          dotColor: Theme.of(context).colorScheme.secondary,
+                          activeDotColor: Theme.of(context).colorScheme.primary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+                  ],
+                    ),
             ),
-          ),
-
-          Expanded(
-            child: Container(
-              height: height,
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-              //child: const Login(),
-              child: Scaffold(
-                resizeToAvoidBottomInset: true,
-                body: Consumer<AuthErrorNotifier>(
-                  builder: (context, errorNotifier, child) {
-                    if (errorNotifier.error != null) {
-                      switch (errorNotifier.error) {
-                        case 'invalid-credential':
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            showSnack(S.of(context).errorCredential);
-                          });
-                          break;
-                        case 'network-request-failed':
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            showSnack(S.of(context).errorNetwork);
-                          });
-                          break;
-                        default:
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            showSnack(S.of(context).errorUnknow(errorNotifier.error!));
-                          });
-                          break;
+      
+            Expanded(
+              child: Container(
+                height: height,
+                //padding: EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+                //child: const Login(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+      
+                   Consumer<AuthErrorNotifier>(
+                    builder: (context, errorNotifier, child) {
+                      if (errorNotifier.error != null) {
+                        switch (errorNotifier.error) {
+                          case 'invalid-credential':
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              showSnack(S.of(context).errorCredential);
+                            });
+                            break;
+                          case 'network-request-failed':
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              showSnack(S.of(context).errorNetwork);
+                            });
+                            break;
+                          default:
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              showSnack(S.of(context).errorUnknow(errorNotifier.error!));
+                            });
+                            break;
+                        }
                       }
-                    }
-
-                    return SafeArea(
-                      child: Padding(
+      
+                      return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 26.0),
                         
                         child: SingleChildScrollView(
@@ -186,7 +235,7 @@ class _LoginTabState extends State<LoginTab>{
                                       ),
                                     ),
                                     const SizedBox(height: 24),
-
+                      
                                     // Botón de login
                                     GestureDetector(
                                       onTap: () {
@@ -201,7 +250,7 @@ class _LoginTabState extends State<LoginTab>{
                                   ],
                                 ),
                               ),
-
+                      
                               // Enlace a la pantalla de registro
                               const SizedBox(height: 24),
                               Center(
@@ -235,18 +284,21 @@ class _LoginTabState extends State<LoginTab>{
                             ],
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
+      
+                  ],
+                  
                 ),
               ),
             ),
-          ),
-          
-          
-          ]
-        ), 
-      ),
+            
+            
+            ]
+          ), 
+        ),
+    ),
     );
   }
   
