@@ -121,6 +121,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.6"
+  crystal_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: crystal_navigation_bar
+      sha256: c7a0b90bbffbde807ac01819f1ba113a302e86c2b4875cb26a14fd3fc3e91804
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   csslib:
     dependency: transitive
     description:

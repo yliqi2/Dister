@@ -7,6 +7,7 @@ Color text = const Color(0xFFFFFFFF);
 Color subtitle = const Color.fromRGBO(255, 255, 255, 0.65);
 Color subtext = const Color(0xFF616161);
 Color container = const Color(0xFF2A2A2A);
+Color navBar = const Color(0xFF1E1E1E);
 
 // Tema oscuro
 ThemeData netflix = ThemeData(
@@ -14,6 +15,7 @@ ThemeData netflix = ThemeData(
   brightness: Brightness.dark,
   scaffoldBackgroundColor: background,
   primaryColor: highLight,
+  buttonTheme: ButtonThemeData(colorScheme: ColorScheme.dark(surface: navBar)),
   colorScheme: ColorScheme.dark(
       surfaceContainer: container,
       secondaryContainer: subtext,

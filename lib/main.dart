@@ -1,14 +1,10 @@
 import 'package:dister/controller/provider/authnotifier.dart';
-import 'package:dister/controller/firebase/auth/logged.dart';
-import 'package:dister/controller/shared_prefs/welcome.dart';
-import 'package:dister/pages/mobile/auth/login.dart';
-import 'package:dister/pages/mobile/home/homescreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dister/pages/mobile/nav/navbar.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:dister/theme/dark_mode.dart';
 import 'package:dister/theme/light_mode.dart';
-import 'package:dister/pages/mobile/onboarding/onboarding.dart';
 import 'package:dister/generated/l10n.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -38,7 +34,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({ 
+  const MyApp({
     super.key,
   });
   @override
@@ -55,7 +51,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: const Media(),
+      home: Navbar(),
     );
   }
 }

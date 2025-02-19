@@ -44,6 +44,8 @@ dependencies:
     sdk: flutter
   provider: ^6.1.2
   cloud_firestore: ^5.6.3
+  crystal_navigation_bar: ^1.0.2
+
 
 
 

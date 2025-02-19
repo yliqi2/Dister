@@ -15,6 +15,8 @@ ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor: background,
   primaryColor: highLight,
+  buttonTheme:
+      ButtonThemeData(colorScheme: ColorScheme.dark(surface: background)),
   colorScheme: ColorScheme.light(
       surfaceContainer: container,
       secondaryContainer: subtext,
