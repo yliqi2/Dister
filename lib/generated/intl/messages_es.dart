@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "AlreadyAccount": MessageLookupByLibrary.simpleMessage(
       "¿Ya tienes una cuenta? ",
     ),
+    "categories": MessageLookupByLibrary.simpleMessage("Categorias"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Confirma tu contraseña",
     ),

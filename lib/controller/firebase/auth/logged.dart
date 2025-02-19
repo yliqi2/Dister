@@ -6,4 +6,6 @@ class Logged {
     User? user = auth.currentUser; 
     return user; 
   }
+
+  
 }

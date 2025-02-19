@@ -58,6 +58,7 @@
 
     "searchHint" : "Search for \"clothes\"",
     "searchHint2" : "Search for \"tech\"",
-    "searchHint3" : "Search for \"furniture\""
+    "searchHint3" : "Search for \"furniture\"",
 
+    "categories" : "Categories"
 }

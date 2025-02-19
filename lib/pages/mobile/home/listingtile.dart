@@ -21,6 +21,9 @@ class _ListingtileState extends State<Listingtile> {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainer,
         borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.tertiary,
+        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,6 +68,8 @@ class _ListingtileState extends State<Listingtile> {
               ),
             ],
           ),
+          //TODO page view de imagenes
+          // PageView()
         ],
       ),
     );

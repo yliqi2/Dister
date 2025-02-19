@@ -29,15 +29,16 @@ class AuthService {
         username: username,
         photo: 'assets/images/default.jpg', // Foto vacía inicialmente
         followers: 0, // Inicializamos seguidores en 0
-        folliwing: 0, // Inicializamos siguiendo en 0
+        following: 0, // Inicializamos siguiendo en 0
         listings: 0, // Inicializamos publicaciones en 0
       );
 
       await _firestore.collection('users').doc(uid).set({
         'uid': uid,
+        'username': newUser.username,
         'photo': newUser.photo,
         'followers': newUser.followers,
-        'folliwing': newUser.folliwing,
+        'folliwing': newUser.following,
         'listings': newUser.listings,
       });
 

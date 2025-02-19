@@ -3,7 +3,7 @@ class Users {
   String username;
   String photo;
   int followers;
-  int folliwing;
+  int following;
   int listings;
 
   Users({
@@ -11,7 +11,9 @@ class Users {
     required this.username,
     required this.photo,
     required this.followers,
-    required this.folliwing,
+    required this.following,
     required this.listings,
   });
+
+  
 }

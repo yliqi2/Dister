@@ -1,6 +1,7 @@
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/model/listing.dart';
 import 'package:dister/pages/mobile/home/listingtile.dart';
+import 'package:dister/pages/mobile/home/titletile.dart';
 import 'package:flutter/material.dart';
 
 import 'package:animated_hint_textfield/animated_hint_textfield.dart';
@@ -98,6 +99,15 @@ class _HomescreenState extends State<Homescreen> {
                     ],
                     animationDuration: const Duration(seconds: 3),
                   ),
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding:
+                  const EdgeInsets.only(right: 26, left: 26, top: 5, bottom: 5),
+              sliver: SliverToBoxAdapter(
+                child: Titletile(
+                  text: S.of(context).categories,
                 ),
               ),
             ),

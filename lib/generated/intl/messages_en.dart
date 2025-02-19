@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "AlreadyAccount": MessageLookupByLibrary.simpleMessage(
       "Already have an account? ",
     ),
+    "categories": MessageLookupByLibrary.simpleMessage("Categories"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "containsSpace": MessageLookupByLibrary.simpleMessage(
       "Username cannot contain spaces",

@@ -58,6 +58,8 @@
 
     "searchHint" : "Buscar \"ropa\"",
     "searchHint2" : "Buscar \"tecnología\"",
-    "searchHint3" : "Buscar \"muebles\""
+    "searchHint3" : "Buscar \"muebles\"",
+
+    "categories" : "Categorias"
 
 }
