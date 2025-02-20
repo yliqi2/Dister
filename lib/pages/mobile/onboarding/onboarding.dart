@@ -2,10 +2,10 @@ import 'package:dister/controller/shared_prefs/welcome.dart';
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/onboarding/intropage.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import 'package:flutter/material.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});

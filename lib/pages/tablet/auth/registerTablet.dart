@@ -5,7 +5,7 @@ import 'package:dister/generated/l10n.dart';
 import 'package:dister/pages/mobile/auth/mytextfield.dart';
 import 'package:dister/pages/mobile/auth/primarybtn.dart';
 import 'package:dister/pages/mobile/onboarding/intropage.dart';
-import 'package:dister/pages/tablet/auth/loginTablet.dart';
+import 'package:dister/pages/tablet/auth/logintablet.dart';
 import 'package:dister/pages/tablet/home/homeTablet.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:firebase_auth/firebase_auth.dart';
