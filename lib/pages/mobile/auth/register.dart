@@ -4,7 +4,6 @@ import 'package:dister/generated/l10n.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/auth/mytextfield.dart';
 import 'package:dister/pages/mobile/auth/primarybtn.dart';
-import 'package:dister/pages/mobile/home/homescreen.dart';
 import 'package:dister/pages/mobile/nav/navbar.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:dister/controller/firebase/auth/auth.dart';

@@ -5,6 +5,7 @@ class Users {
   int followers;
   int following;
   int listings;
+  String? desc;
 
   Users({
     required this.uid,
@@ -13,6 +14,7 @@ class Users {
     required this.followers,
     required this.following,
     required this.listings,
+    this.desc,
   });
 
   factory Users.fromMap(Map<String, dynamic> map) {
@@ -23,6 +25,7 @@ class Users {
       followers: map['followers'] ?? 0,
       following: map['following'] ?? 0,
       listings: map['listings'] ?? 0,
+      desc: map['desc'] ?? '',
     );
   }
 
@@ -35,6 +38,7 @@ class Users {
       'followers': followers,
       'following': following,
       'listings': listings,
+      'desc': desc,
     };
   }
 }
