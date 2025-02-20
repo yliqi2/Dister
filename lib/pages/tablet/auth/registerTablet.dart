@@ -13,11 +13,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class RegisterTap extends StatefulWidget{
+class RegisterTap extends StatefulWidget {
   const RegisterTap({super.key});
 
-@override
-State<RegisterTap> createState() => _RegisterTapState();
+  @override
+  State<RegisterTap> createState() => _RegisterTapState();
 }
 
 class _RegisterTapState extends State<RegisterTap> {
@@ -29,7 +29,7 @@ class _RegisterTapState extends State<RegisterTap> {
   final _confirmPasswordController = TextEditingController();
   final _controller = PageController();
 
-    User? _user;
+  User? _user;
 
   @override
   void dispose() {
@@ -51,30 +51,24 @@ class _RegisterTapState extends State<RegisterTap> {
   // Función para registrar al usuario
   void register(AuthErrorNotifier errorNotifier) async {
     User? user = await _auth.register(_emailController.text.toLowerCase(),
-        _passwordController.text, errorNotifier);
+        _passwordController.text, _usernameController.text, errorNotifier);
     setState(() {
       _user = user;
     });
 
     if (_user != null) {
-     Navigator.pushReplacement(
-         // ignore: use_build_context_synchronously
-         context,
-         MaterialPageRoute(
-           builder: (context) => const HomeTablet(),
-         ),
-       );
+      Navigator.pushReplacement(
+        // ignore: use_build_context_synchronously
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomeTablet(),
+        ),
+      );
     }
   }
 
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
-    
     double widht = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
@@ -84,66 +78,66 @@ class _RegisterTapState extends State<RegisterTap> {
         width: widht,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start, 
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            
             Expanded(
-                child:Stack(
-                  children: [
-                    Container(
-                      height: height,
-                      child: PageView(
-                        controller: _controller,
+              child: Stack(
+                children: [
+                  Container(
+                    height: height,
+                    child: PageView(
+                      controller: _controller,
+                      children: [
+                        Intropage(
+                          background: 'assets/images/intropage/background1.png',
+                          title: S.of(context).title_onboarding,
+                          subtitles: S.of(context).subtitle_onboarding,
+                        ),
+                        Intropage(
+                          background: 'assets/images/intropage/background2.png',
+                          title: S.of(context).title_onboarding2,
+                          subtitles: S.of(context).subtitle_onboarding2,
+                        ),
+                        Intropage(
+                          background: 'assets/images/intropage/background3.png',
+                          title: S.of(context).title_onboarding3,
+                          subtitles: S.of(context).subtitle_onboarding3,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: Image.asset('assets/images/intropage/intropage.png'),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      padding: const EdgeInsets.only(
+                          left: 26, right: 26, bottom: 48),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Intropage(
-                            background: 'assets/images/intropage/background1.png',
-                            title: S.of(context).title_onboarding,
-                            subtitles: S.of(context).subtitle_onboarding,
-                          ),
-                          Intropage(
-                            background: 'assets/images/intropage/background2.png',
-                            title: S.of(context).title_onboarding2,
-                            subtitles: S.of(context).subtitle_onboarding2,
-                          ),
-                          Intropage(
-                            background: 'assets/images/intropage/background3.png',
-                            title: S.of(context).title_onboarding3,
-                            subtitles: S.of(context).subtitle_onboarding3,
+                          SmoothPageIndicator(
+                            controller: _controller,
+                            count: 3,
+                            effect: WormEffect(
+                              dotHeight: 16,
+                              dotWidth: 16,
+                              dotColor: Theme.of(context).colorScheme.secondary,
+                              activeDotColor:
+                                  Theme.of(context).colorScheme.primary,
+                            ),
                           ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Image.asset('assets/images/intropage/intropage.png'),
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        padding: const EdgeInsets.only(left: 26, right: 26, bottom: 48),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SmoothPageIndicator(
-                              controller: _controller,
-                              count: 3,
-                              effect: WormEffect(
-                                dotHeight: 16,
-                                dotWidth: 16,
-                                dotColor: Theme.of(context).colorScheme.secondary,
-                                activeDotColor: Theme.of(context).colorScheme.primary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
             ),
-
             Expanded(
-              child:Container(
+              child: Container(
                 height: height,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +153,9 @@ class _RegisterTapState extends State<RegisterTap> {
                               break;
                             default:
                               WidgetsBinding.instance.addPostFrameCallback((_) {
-                                showSnack(S.of(context).errorUnknow(errorNotifier.error!));
+                                showSnack(S
+                                    .of(context)
+                                    .errorUnknow(errorNotifier.error!));
                               });
                               break;
                           }
@@ -167,10 +163,11 @@ class _RegisterTapState extends State<RegisterTap> {
 
                         return SafeArea(
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 26.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 26.0),
                             child: ScrollConfiguration(
-                              behavior:
-                                  ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                              behavior: ScrollConfiguration.of(context)
+                                  .copyWith(scrollbars: false),
                               child: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,7 +177,9 @@ class _RegisterTapState extends State<RegisterTap> {
                                       style: TextStyle(
                                         fontSize: 25,
                                         fontWeight: FontWeight.w800,
-                                        color: Theme.of(context).colorScheme.secondary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
                                       ),
                                     ),
                                     Text(
@@ -188,14 +187,17 @@ class _RegisterTapState extends State<RegisterTap> {
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
-                                        color: Theme.of(context).colorScheme.tertiary,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary,
                                       ),
                                     ),
                                     const SizedBox(height: 24),
                                     Form(
                                       key: _formKey,
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           CustomTextField(
                                               controller: _usernameController,
@@ -203,8 +205,9 @@ class _RegisterTapState extends State<RegisterTap> {
                                               hintText: S.of(context).hintUser,
                                               label: S.of(context).userLabel,
                                               validator: (value) {
-                                                return FormValidator.usernameValidator(
-                                                    value, context);
+                                                return FormValidator
+                                                    .usernameValidator(
+                                                        value, context);
                                               }),
                                           const SizedBox(height: 16),
                                           CustomTextField(
@@ -213,8 +216,9 @@ class _RegisterTapState extends State<RegisterTap> {
                                             hintText: S.of(context).hintEmail,
                                             label: 'Email',
                                             validator: (value) {
-                                              return FormValidator.emailValidator(
-                                                  value, context);
+                                              return FormValidator
+                                                  .emailValidator(
+                                                      value, context);
                                             },
                                           ),
                                           const SizedBox(height: 16),
@@ -224,19 +228,26 @@ class _RegisterTapState extends State<RegisterTap> {
                                             hintText: S.of(context).hintPass,
                                             label: S.of(context).password,
                                             validator: (value) {
-                                              return FormValidator.passwordValidator(
-                                                  value, context);
+                                              return FormValidator
+                                                  .passwordValidator(
+                                                      value, context);
                                             },
                                           ),
                                           const SizedBox(height: 16),
                                           CustomTextField(
-                                            controller: _confirmPasswordController,
+                                            controller:
+                                                _confirmPasswordController,
                                             isPassword: true,
-                                            hintText: S.of(context).hintConfirmPass,
-                                            label: S.of(context).confirmPassword,
+                                            hintText:
+                                                S.of(context).hintConfirmPass,
+                                            label:
+                                                S.of(context).confirmPassword,
                                             validator: (value) {
-                                              return FormValidator.confirmPassValidator(
-                                                  value, _passwordController.text, context);
+                                              return FormValidator
+                                                  .confirmPassValidator(
+                                                      value,
+                                                      _passwordController.text,
+                                                      context);
                                             },
                                           ),
                                           const SizedBox(height: 16),
@@ -245,30 +256,40 @@ class _RegisterTapState extends State<RegisterTap> {
                                               children: [
                                                 TextSpan(
                                                   text: S.of(context).infoTerms,
-                                                  style: TextStyle(color: subtext),
+                                                  style:
+                                                      TextStyle(color: subtext),
                                                 ),
                                                 TextSpan(
                                                   text: S.of(context).terms,
                                                   style: TextStyle(
-                                                    color:
-                                                        Theme.of(context).colorScheme.primary,
-                                                    decoration: TextDecoration.underline,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
+                                                    decoration: TextDecoration
+                                                        .underline,
                                                     decorationColor:
-                                                        Theme.of(context).colorScheme.primary,
+                                                        Theme.of(context)
+                                                            .colorScheme
+                                                            .primary,
                                                   ),
                                                 ),
                                                 TextSpan(
                                                   text: ' & ',
-                                                  style: TextStyle(color: subtext),
+                                                  style:
+                                                      TextStyle(color: subtext),
                                                 ),
                                                 TextSpan(
                                                   text: S.of(context).privacy,
                                                   style: TextStyle(
-                                                    color:
-                                                        Theme.of(context).colorScheme.primary,
-                                                    decoration: TextDecoration.underline,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .primary,
+                                                    decoration: TextDecoration
+                                                        .underline,
                                                     decorationColor:
-                                                        Theme.of(context).colorScheme.primary,
+                                                        Theme.of(context)
+                                                            .colorScheme
+                                                            .primary,
                                                   ),
                                                 ),
                                               ],
@@ -277,7 +298,8 @@ class _RegisterTapState extends State<RegisterTap> {
                                           const SizedBox(height: 24),
                                           GestureDetector(
                                             onTap: () {
-                                              if (_formKey.currentState!.validate()) {
+                                              if (_formKey.currentState!
+                                                  .validate()) {
                                                 register(errorNotifier);
                                               } else {
                                                 showSnack(
@@ -300,7 +322,8 @@ class _RegisterTapState extends State<RegisterTap> {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => const LoginTab(),
+                                              builder: (context) =>
+                                                  const LoginTab(),
                                             ),
                                           );
                                         },
@@ -308,14 +331,18 @@ class _RegisterTapState extends State<RegisterTap> {
                                           TextSpan(
                                             children: [
                                               TextSpan(
-                                                text: S.of(context).AlreadyAccount,
-                                                style: TextStyle(color: subtext),
+                                                text: S
+                                                    .of(context)
+                                                    .AlreadyAccount,
+                                                style:
+                                                    TextStyle(color: subtext),
                                               ),
                                               TextSpan(
                                                 text: S.of(context).login,
                                                 style: TextStyle(
-                                                  color:
-                                                      Theme.of(context).colorScheme.primary,
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
                                                 ),
                                               ),
                                             ],
@@ -338,9 +365,6 @@ class _RegisterTapState extends State<RegisterTap> {
           ],
         ),
       ),
-    
-
     );
   }
-
 }
