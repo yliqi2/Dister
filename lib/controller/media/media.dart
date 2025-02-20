@@ -2,7 +2,7 @@ import 'package:dister/pages/mobile/nav/navbar.dart';
 import 'package:dister/pages/mobile/onboarding/onboarding.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 
-import 'package:dister/pages/tablet/login.dart';
+import 'package:dister/pages/tablet/auth/loginTablet.dart';
 
 import 'package:dister/controller/firebase/auth/logged.dart';
 import 'package:dister/controller/shared_prefs/welcome.dart';
