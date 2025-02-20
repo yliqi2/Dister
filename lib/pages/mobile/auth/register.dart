@@ -5,6 +5,7 @@ import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/auth/mytextfield.dart';
 import 'package:dister/pages/mobile/auth/primarybtn.dart';
 import 'package:dister/pages/mobile/home/homescreen.dart';
+import 'package:dister/pages/mobile/nav/navbar.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:dister/controller/firebase/auth/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -58,7 +59,7 @@ class _RegisterState extends State<Register> {
         // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
-          builder: (context) => const Homescreen(),
+          builder: (context) => const Navbar(),
         ),
       );
     }

@@ -128,6 +128,57 @@ class _HomescreenState extends State<Homescreen> {
                 ),
               ),
             ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 250, // Altura del contenedor
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal, // Scroll horizontal
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 26, vertical: 10),
+                  itemCount: offers.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Listingtile(listing: offers[index]),
+                    );
+                  },
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 250, // Altura del contenedor
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal, // Scroll horizontal
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 26, vertical: 10),
+                  itemCount: offers.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Listingtile(listing: offers[index]),
+                    );
+                  },
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 250, // Altura del contenedor
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal, // Scroll horizontal
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 26, vertical: 10),
+                  itemCount: offers.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Listingtile(listing: offers[index]),
+                    );
+                  },
+                ),
+              ),
+            ),
           ],
         ),
       ),

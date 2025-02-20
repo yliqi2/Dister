@@ -83,7 +83,7 @@ class _RegisterTapState extends State<RegisterTap> {
             Expanded(
               child: Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     height: height,
                     child: PageView(
                       controller: _controller,

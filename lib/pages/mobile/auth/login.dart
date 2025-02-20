@@ -1,11 +1,12 @@
 import 'package:dister/controller/firebase/auth/form_validator.dart';
 import 'package:dister/controller/provider/authnotifier.dart';
+import 'package:dister/pages/mobile/nav/navbar.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Importar provider
 import 'package:dister/controller/firebase/auth/auth.dart'; // Importar AuthService
-import 'package:dister/pages/mobile/home/homescreen.dart'; // Pantalla principal después de login
+
 import 'package:dister/pages/mobile/auth/register.dart'; // Pantalla de registro
 import 'package:dister/pages/mobile/auth/primarybtn.dart'; // El widget de botón de login
 import 'package:dister/pages/mobile/auth/mytextfield.dart'; // El widget de campo de texto personalizado
@@ -24,7 +25,7 @@ class _LoginState extends State<Login> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  @override     
+  @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
@@ -49,7 +50,7 @@ class _LoginState extends State<Login> {
         // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
-          builder: (context) => const Homescreen(),
+          builder: (context) => const Navbar(),
         ),
       );
     }
