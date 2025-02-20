@@ -1,14 +1,14 @@
+import 'package:dister/pages/mobile/nav/navbar.dart';
 import 'package:dister/pages/mobile/onboarding/onboarding.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-
-import 'package:dister/controller/provider/authnotifier.dart';
-import 'package:dister/controller/firebase/auth/logged.dart';
-import 'package:dister/controller/shared_prefs/welcome.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
-import 'package:dister/pages/mobile/home/homescreen.dart';
 
 import 'package:dister/pages/tablet/login.dart';
+
+import 'package:dister/controller/firebase/auth/logged.dart';
+import 'package:dister/controller/shared_prefs/welcome.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:flutter/material.dart';
 
 class Media extends StatelessWidget {
   const Media({super.key});
@@ -27,7 +27,7 @@ class Media extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasData) {
-            return const Homescreen();
+            return const Navbar();
           } else {
             return FutureBuilder<bool>(
               future: Welcome().seenBoarding(),

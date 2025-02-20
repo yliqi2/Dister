@@ -33,6 +33,7 @@ class _NavbarState extends State<Navbar> {
         color: Theme.of(context).buttonTheme.colorScheme!.surface,
         padding: const EdgeInsets.symmetric(horizontal: 26.0),
         child: CrystalNavigationBar(
+          splashColor: Colors.transparent,
           currentIndex: _selectedIndex,
           onTap: selectePage,
           backgroundColor: Theme.of(context).buttonTheme.colorScheme!.surface,
