@@ -71,13 +71,22 @@ class _RegisterState extends State<Register> {
       body: Consumer<AuthErrorNotifier>(
         builder: (context, errorNotifier, child) {
           if (errorNotifier.error != null) {
+            print('errorNotifier.error: "${errorNotifier.error}"');
             switch (errorNotifier.error) {
               case 'email-already-in-use':
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   showSnack(S.of(context).emailInUse);
                 });
                 break;
+              case 'username-already-in-use':
+                print('hola he entrado dentro');
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  showSnack(S.of(context).usernameInUse);
+                  print(S.of(context).usernameInUse);
+                });
+                break;
               default:
+                print('hola estoy en el  default');
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   showSnack(S.of(context).errorUnknow(errorNotifier.error!));
                 });

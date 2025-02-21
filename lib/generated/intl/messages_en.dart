@@ -138,5 +138,8 @@ class MessageLookup extends MessageLookupByLibrary {
       "Never\nMiss Out Again",
     ),
     "userLabel": MessageLookupByLibrary.simpleMessage("Username"),
+    "usernameInUse": MessageLookupByLibrary.simpleMessage(
+      "Username already in use",
+    ),
   };
 }

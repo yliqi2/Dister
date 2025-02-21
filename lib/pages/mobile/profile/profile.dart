@@ -11,7 +11,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  bool _isExpanded = false; // Controla si se muestra todo el texto o no.
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {

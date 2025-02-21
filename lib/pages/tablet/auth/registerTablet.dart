@@ -137,7 +137,7 @@ class _RegisterTapState extends State<RegisterTap> {
               ),
             ),
             Expanded(
-              child: Container(
+              child: SizedBox(
                 height: height,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -149,6 +149,11 @@ class _RegisterTapState extends State<RegisterTap> {
                             case 'email-already-in-use':
                               WidgetsBinding.instance.addPostFrameCallback((_) {
                                 showSnack(S.of(context).emailInUse);
+                              });
+                              break;
+                            case 'username-already-in-use':
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                showSnack(S.of(context).usernameInUse);
                               });
                               break;
                             default:

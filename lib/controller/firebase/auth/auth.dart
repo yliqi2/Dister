@@ -16,6 +16,17 @@ class AuthService {
     AuthErrorNotifier errorNotifier,
   ) async {
     try {
+      var userDoc = await _firestore
+          .collection('users')
+          .where('username', isEqualTo: username)
+          .get();
+
+      if (userDoc.docs.isNotEmpty) {
+        // Si el nombre de usuario ya está en uso, lanzamos un error
+        errorNotifier.error = 'username-already-in-use';
+        return null;
+      }
+      // Si no existe, creamos un nuevo usuario en Firebase Authentication
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -24,6 +35,7 @@ class AuthService {
 
       String uid = userCredential.user!.uid;
 
+      // Creamos un objeto `Users` con los datos por defecto
       Users newUser = Users(
         uid: uid,
         username: username,
@@ -34,6 +46,7 @@ class AuthService {
         desc: '',
       );
 
+      // Almacenamos el nuevo usuario en Firestore
       await _firestore.collection('users').doc(uid).set({
         'uid': uid,
         'username': newUser.username,
@@ -44,20 +57,18 @@ class AuthService {
         'desc': newUser.desc,
       });
 
-      return userCredential.user;
+      return userCredential.user; // Devolvemos el usuario registrado
     } on FirebaseAuthException catch (e) {
-      String errorMessage;
-
+      print('estoy en el try  catch');
       switch (e.code) {
         case 'email-already-in-use':
-          errorMessage = 'email-already-in-use';
+          errorNotifier.error = 'email-already-in-use';
           break;
         default:
-          errorMessage = 'default';
+          errorNotifier.error = 'default';
           break;
       }
-      errorNotifier.error = errorMessage;
-      return null;
+      return null; // Si ocurre un error, devolvemos null
     }
   }
 

@@ -38,7 +38,8 @@
     "errorCredential" : "Incorrect credentials",
     "errorNetwork" : "Network Problem",
     "errorUnknow" : "Unexpected error: {message}",
-
+    
+    "usernameInUse" : "Username already in use",
     "emailInUse" : "Email already in use",
 
     "signTitle" : "Sign up, to unlock deals!",

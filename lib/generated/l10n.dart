@@ -350,6 +350,16 @@ class S {
     );
   }
 
+  /// `Username already in use`
+  String get usernameInUse {
+    return Intl.message(
+      'Username already in use',
+      name: 'usernameInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Email already in use`
   String get emailInUse {
     return Intl.message(
