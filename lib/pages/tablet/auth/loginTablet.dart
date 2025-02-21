@@ -41,7 +41,7 @@ class _LoginTabState extends State<LoginTab> {
     );
   }
 
-  void login(AuthErrorNotifier errorNotifier) async {
+  void login(LoginAuthErrorNotifier errorNotifier) async {
     User? user = await _auth.login(
       _emailController.text.toLowerCase(),
       _passwordController.text,
@@ -142,7 +142,7 @@ class _LoginTabState extends State<LoginTab> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Consumer<AuthErrorNotifier>(
+                        Consumer<LoginAuthErrorNotifier>(
                           builder: (context, errorNotifier, child) {
                             if (errorNotifier.error != null) {
                               switch (errorNotifier.error) {

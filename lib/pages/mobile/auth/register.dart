@@ -46,7 +46,7 @@ class _RegisterState extends State<Register> {
   }
 
   // Función para registrar al usuario
-  void register(AuthErrorNotifier errorNotifier) async {
+  void register(RegisterErrorNotifier errorNotifier) async {
     User? user = await _auth.register(_emailController.text.toLowerCase(),
         _passwordController.text, _usernameController.text, errorNotifier);
     setState(() {
@@ -68,10 +68,9 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Consumer<AuthErrorNotifier>(
+      body: Consumer<RegisterErrorNotifier>(
         builder: (context, errorNotifier, child) {
           if (errorNotifier.error != null) {
-            print('errorNotifier.error: "${errorNotifier.error}"');
             switch (errorNotifier.error) {
               case 'email-already-in-use':
                 WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -79,16 +78,8 @@ class _RegisterState extends State<Register> {
                 });
                 break;
               case 'username-already-in-use':
-                print('hola he entrado dentro');
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   showSnack(S.of(context).usernameInUse);
-                  print(S.of(context).usernameInUse);
-                });
-                break;
-              default:
-                print('hola estoy en el  default');
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  showSnack(S.of(context).errorUnknow(errorNotifier.error!));
                 });
                 break;
             }

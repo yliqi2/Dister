@@ -39,7 +39,7 @@ class _LoginState extends State<Login> {
     );
   }
 
-  void login(AuthErrorNotifier errorNotifier) async {
+  void login(LoginAuthErrorNotifier errorNotifier) async {
     User? user = await _auth.login(
       _emailController.text.toLowerCase(),
       _passwordController.text,
@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Consumer<AuthErrorNotifier>(
+      body: Consumer<LoginAuthErrorNotifier>(
         builder: (context, errorNotifier, child) {
           if (errorNotifier.error != null) {
             switch (errorNotifier.error) {

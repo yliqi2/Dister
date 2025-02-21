@@ -22,7 +22,7 @@ class _NavbarState extends State<Navbar> {
     const Realtime(),
     const Newlisting(),
     const Savelisting(),
-    Profile(),
+    const Profile(),
   ];
 
   void selectePage(int index) {

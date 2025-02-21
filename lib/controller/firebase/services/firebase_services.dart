@@ -13,9 +13,8 @@ class FirebaseServices {
     return user?.uid ?? 'error';
   }
 
-  Future<Users?> getCredentialsUser() async {
-    DocumentSnapshot dn =
-        await _fs.collection('users').doc(getCurrentUser()).get();
+  Future<Users?> getCredentialsUser(String uid) async {
+    DocumentSnapshot dn = await _fs.collection('users').doc(uid).get();
 
     if (dn.exists) {
       return Users.fromMap(dn.data() as Map<String, dynamic>);

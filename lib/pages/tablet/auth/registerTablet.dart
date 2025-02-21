@@ -49,7 +49,7 @@ class _RegisterTapState extends State<RegisterTap> {
   }
 
   // Función para registrar al usuario
-  void register(AuthErrorNotifier errorNotifier) async {
+  void register(RegisterErrorNotifier errorNotifier) async {
     User? user = await _auth.register(_emailController.text.toLowerCase(),
         _passwordController.text, _usernameController.text, errorNotifier);
     setState(() {
@@ -142,7 +142,7 @@ class _RegisterTapState extends State<RegisterTap> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Consumer<AuthErrorNotifier>(
+                    Consumer<RegisterErrorNotifier>(
                       builder: (context, errorNotifier, child) {
                         if (errorNotifier.error != null) {
                           switch (errorNotifier.error) {

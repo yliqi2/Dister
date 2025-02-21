@@ -137,7 +137,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "userLabel": MessageLookupByLibrary.simpleMessage("Usuario"),
     "usernameInUse": MessageLookupByLibrary.simpleMessage(
-      "El Usuario ya esta en uso",
+      "El usuario ya esta en uso",
     ),
   };
 }

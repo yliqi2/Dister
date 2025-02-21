@@ -181,7 +181,9 @@ class _HomescreenState extends State<Homescreen> {
             ),
             SliverToBoxAdapter(
               child: ElevatedButton(
-                  onPressed: () {}, child: Text("other profile")),
+                onPressed: () {},
+                child: Text("other profile"),
+              ),
             )
           ],
         ),

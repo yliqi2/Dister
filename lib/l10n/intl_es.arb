@@ -39,7 +39,7 @@
     "errorNetwork" : "Problema de red",
     "errorUnknow" : "Error inesperado: {message}",
 
-    "usernameInUse" : "El Usuario ya esta en uso",
+    "usernameInUse" : "El usuario ya esta en uso",
     "emailInUse" : "El correo electrónico ya está en uso",
 
     "signTitle" : "Regístrate para desbloquear ofertas!",

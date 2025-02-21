@@ -13,7 +13,7 @@ class AuthService {
     String email,
     String password,
     String username,
-    AuthErrorNotifier errorNotifier,
+    RegisterErrorNotifier errorNotifier,
   ) async {
     try {
       var userDoc = await _firestore
@@ -59,7 +59,6 @@ class AuthService {
 
       return userCredential.user; // Devolvemos el usuario registrado
     } on FirebaseAuthException catch (e) {
-      print('estoy en el try  catch');
       switch (e.code) {
         case 'email-already-in-use':
           errorNotifier.error = 'email-already-in-use';
@@ -75,7 +74,7 @@ class AuthService {
   Future<User?> login(
     String email,
     String password,
-    AuthErrorNotifier errorNotifier,
+    LoginAuthErrorNotifier errorNotifier,
   ) async {
     String error;
     try {
