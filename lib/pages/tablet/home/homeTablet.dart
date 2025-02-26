@@ -33,15 +33,15 @@ class _HomeTabletState extends State<HomeTablet>{
             Expanded(
               child: Container(
                 width: SizedLateralBar,
-                decoration: BoxDecoration(
-                  color : const Color.fromARGB(255, 108, 101, 209),
+                decoration: const BoxDecoration(
+                  color : Color.fromARGB(255, 108, 101, 209),
                 ),
               ),
             ),
 
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color : Colors.red,
                 ),
                 width: SizedHome,
