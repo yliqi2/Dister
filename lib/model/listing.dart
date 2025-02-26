@@ -14,21 +14,22 @@ class Listing {
   List<String> highlights;
   String owner; //UID de firebase_auth
 
-  Listing(
-      {required this.title,
-      required this.desc,
-      required this.publishedAt,
-      this.expiresAt,
-      required this.link,
-      required this.originalPrice,
-      required this.discountPrice,
-      required this.storeName,
-      required this.categories,
-      required this.likes,
-      this.rating,
-      required this.images,
-      required this.highlights,
-      required this.owner});
+  Listing({
+    required this.title,
+    required this.desc,
+    required this.publishedAt,
+    this.expiresAt,
+    required this.link,
+    required this.originalPrice,
+    required this.discountPrice,
+    required this.storeName,
+    required this.categories,
+    required this.likes,
+    this.rating,
+    required this.images,
+    required this.highlights,
+    required this.owner,
+  });
 
   String getTimeAgo() {
     Duration difference = DateTime.now().difference(publishedAt);

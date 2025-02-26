@@ -1,7 +1,7 @@
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/model/listing.dart';
-import 'package:dister/pages/mobile/home/listingtile.dart';
-import 'package:dister/pages/mobile/home/titletile.dart';
+import 'package:dister/widgets/listingtile.dart';
+import 'package:dister/widgets/titletile.dart';
 import 'package:flutter/material.dart';
 
 import 'package:animated_hint_textfield/animated_hint_textfield.dart';

@@ -8,8 +8,8 @@ import 'package:provider/provider.dart'; // Importar provider
 import 'package:dister/controller/firebase/auth/auth.dart'; // Importar AuthService
 
 import 'package:dister/pages/mobile/auth/register.dart'; // Pantalla de registro
-import 'package:dister/pages/mobile/auth/primarybtn.dart'; // El widget de botón de login
-import 'package:dister/pages/mobile/auth/mytextfield.dart'; // El widget de campo de texto personalizado
+import 'package:dister/widgets/primarybtn.dart'; // El widget de botón de login
+import 'package:dister/widgets/mytextfield.dart'; // El widget de campo de texto personalizado
 import 'package:dister/generated/l10n.dart'; // Soporte para internacionalización (localización)
 
 class Login extends StatefulWidget {

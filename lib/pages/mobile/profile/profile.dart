@@ -1,6 +1,6 @@
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/model/user.dart';
-import 'package:dister/pages/mobile/profile/profiletile.dart';
+import 'package:dister/widgets/profiletile.dart';
 
 import 'package:flutter/material.dart';
 
