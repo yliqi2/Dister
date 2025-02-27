@@ -130,6 +130,7 @@ class _LoginState extends State<Login> {
                             hintText: S.of(context).hintPass,
                             label: S.of(context).password,
                             isPassword: true,
+                            maxLines: 1,
                           ),
                           const SizedBox(height: 16),
                           Text.rich(

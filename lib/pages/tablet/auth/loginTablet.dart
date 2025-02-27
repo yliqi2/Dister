@@ -211,6 +211,7 @@ class _LoginTabState extends State<LoginTab> {
                                             isPassword: false,
                                             hintText: S.of(context).hintEmail,
                                             label: 'Email',
+                                            maxLines: 1,
                                             validator: (value) {
                                               return FormValidator
                                                   .emailValidator(
