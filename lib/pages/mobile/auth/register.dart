@@ -144,6 +144,7 @@ class _RegisterState extends State<Register> {
                               isPassword: true,
                               hintText: S.of(context).hintPass,
                               label: S.of(context).password,
+                              maxLines: 1,
                               validator: (value) {
                                 return FormValidator.passwordValidator(
                                     value, context);
@@ -155,6 +156,7 @@ class _RegisterState extends State<Register> {
                               isPassword: true,
                               hintText: S.of(context).hintConfirmPass,
                               label: S.of(context).confirmPassword,
+                              maxLines: 1,
                               validator: (value) {
                                 return FormValidator.confirmPassValidator(
                                     value, _passwordController.text, context);

@@ -52,7 +52,7 @@ class AuthService {
         'username': newUser.username,
         'photo': newUser.photo,
         'followers': newUser.followers,
-        'folliwing': newUser.following,
+        'following': newUser.following,
         'listings': newUser.listings,
         'desc': newUser.desc,
       });
