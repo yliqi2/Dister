@@ -225,6 +225,7 @@ class _RegisterTapState extends State<RegisterTap> {
                                                   .emailValidator(
                                                       value, context);
                                             },
+                                            maxLines: 1,
                                           ),
                                           const SizedBox(height: 16),
                                           CustomTextField(
@@ -237,6 +238,7 @@ class _RegisterTapState extends State<RegisterTap> {
                                                   .passwordValidator(
                                                       value, context);
                                             },
+                                            maxLines: 1,
                                           ),
                                           const SizedBox(height: 16),
                                           CustomTextField(
@@ -254,6 +256,7 @@ class _RegisterTapState extends State<RegisterTap> {
                                                       _passwordController.text,
                                                       context);
                                             },
+                                            maxLines: 1,
                                           ),
                                           const SizedBox(height: 16),
                                           Text.rich(

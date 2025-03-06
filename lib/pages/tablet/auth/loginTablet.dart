@@ -224,6 +224,7 @@ class _LoginTabState extends State<LoginTab> {
                                             hintText: S.of(context).hintPass,
                                             label: S.of(context).password,
                                             isPassword: true,
+                                            maxLines: 1,
                                           ),
                                           const SizedBox(height: 16),
                                           Text.rich(
