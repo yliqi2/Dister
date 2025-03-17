@@ -1,3 +1,5 @@
+import 'package:dister/model/categorie.dart';
+
 class Listing {
   String title;
   String desc;
@@ -7,12 +9,12 @@ class Listing {
   double originalPrice;
   double discountPrice;
   String storeName;
-  List<String> categories;
+  ProductCategory? categories;
   double likes;
   double? rating;
   List<String> images;
-  List<String> highlights;
-  String owner; //UID de firebase_auth
+  List<String>? highlights;
+  String owner;
 
   Listing({
     required this.title,
@@ -23,7 +25,7 @@ class Listing {
     required this.originalPrice,
     required this.discountPrice,
     required this.storeName,
-    required this.categories,
+    this.categories,
     required this.likes,
     this.rating,
     required this.images,

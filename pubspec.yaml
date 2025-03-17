@@ -48,6 +48,8 @@ dependencies:
   cloud_firestore: ^5.6.4
   auto_size_text: ^3.0.0
   step_progress_indicator: ^1.0.2
+  image_picker: ^1.1.2
+  flutter_datetime_picker_plus: ^2.2.0
 
 
 

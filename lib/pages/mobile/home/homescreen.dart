@@ -26,7 +26,6 @@ class _HomescreenState extends State<Homescreen> {
       originalPrice: 100.0 + index * 10,
       discountPrice: 80.0 + index * 8,
       storeName: "Tienda $index",
-      categories: ["Categoría 1", "Categoría 2"],
       likes: index * 1200,
       rating: (index % 5) + 1.0,
       images: ["https://via.placeholder.com/150"],

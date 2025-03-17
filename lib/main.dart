@@ -1,4 +1,5 @@
 import 'package:dister/controller/provider/authnotifier.dart';
+import 'package:dister/pages/mobile/nav/navbar.dart';
 
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: const Media(),
+      home: const Navbar(),
     );
   }
 }
