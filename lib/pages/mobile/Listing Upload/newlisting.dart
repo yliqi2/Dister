@@ -36,27 +36,6 @@ class _NewlistingState extends State<Newlisting> {
 
   final TextEditingController _dateController = TextEditingController();
 
-  // Función para abrir el DatePicker
-  void _selectDate(BuildContext context) {
-    Locale myLocale = Localizations.localeOf(context);
-    DateTime currentDate = DateTime.now();
-    DateTime maxDate =
-        DateTime(currentDate.year + 10, currentDate.month, currentDate.day);
-    DatePicker.showDatePicker(
-      context,
-      showTitleActions: true,
-      minTime: currentDate,
-      maxTime: maxDate,
-      onConfirm: (date) {
-        setState(() {
-          _dateController.text = "${date.year}-${date.month}-${date.day}";
-        });
-      },
-      currentTime: DateTime.now(),
-      locale: (myLocale.languageCode == 'es') ? LocaleType.es : LocaleType.en,
-    );
-  }
-
   Future<void> _pickImage(int index) async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
