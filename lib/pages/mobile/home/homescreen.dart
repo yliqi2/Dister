@@ -14,25 +14,6 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  // Lista de ofertas (ejemplo)
-  final List<Listing> offers = List.generate(
-    10,
-    (index) => Listing(
-      title: "Oferta $index",
-      desc: "Descripción de la oferta $index",
-      publishedAt: DateTime.now().subtract(Duration(hours: index * 8)),
-      link: "https://example.com",
-      expiresAt: DateTime.now().add(Duration(days: index)),
-      originalPrice: 100.0 + index * 10,
-      discountPrice: 80.0 + index * 8,
-      storeName: "Tienda $index",
-      likes: index * 1200,
-      rating: (index % 5) + 1.0,
-      images: ["https://via.placeholder.com/150"],
-      highlights: ["Envío gratis", "Descuento limitado"],
-      owner: "user_$index",
-    ),
-  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,69 +94,21 @@ class _HomescreenState extends State<Homescreen> {
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 250, // Altura del contenedor
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal, // Scroll horizontal
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 26, vertical: 10),
-                  itemCount: offers.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Listingtile(listing: offers[index]),
-                    );
-                  },
-                ),
               ),
             ),
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 250, // Altura del contenedor
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal, // Scroll horizontal
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 26, vertical: 10),
-                  itemCount: offers.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Listingtile(listing: offers[index]),
-                    );
-                  },
-                ),
               ),
             ),
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 250, // Altura del contenedor
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal, // Scroll horizontal
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 26, vertical: 10),
-                  itemCount: offers.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Listingtile(listing: offers[index]),
-                    );
-                  },
-                ),
               ),
             ),
             SliverToBoxAdapter(
               child: SizedBox(
                 height: 250, // Altura del contenedor
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal, // Scroll horizontal
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 26, vertical: 10),
-                  itemCount: offers.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: Listingtile(listing: offers[index]),
-                    );
-                  },
-                ),
               ),
             ),
             SliverToBoxAdapter(

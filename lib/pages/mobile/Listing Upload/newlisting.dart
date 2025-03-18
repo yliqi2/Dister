@@ -1,14 +1,15 @@
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:confirmation_success/confirmation_success.dart';
+import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/model/categorie.dart';
 import 'package:dister/model/highlight.dart';
 import 'package:dister/widgets/mydropdown.dart';
 import 'package:dister/widgets/mytextfield.dart';
 import 'package:dister/widgets/primarybtn.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter/material.dart';
 
 class Newlisting extends StatefulWidget {
   const Newlisting({super.key});
@@ -31,10 +32,12 @@ class _NewlistingState extends State<Newlisting> {
   String? _selectedCategory;
   String? _selectedSubCategory;
   final List<String> _selectedHighlights = [];
-  final List<File?> _selectedImages = [null, null, null];
+  final List<XFile?> _selectedImages = [null, null, null];
   final GlobalKey<FormState> _formkey2 = GlobalKey<FormState>();
 
   final TextEditingController _dateController = TextEditingController();
+
+  final FirebaseServices fs = FirebaseServices();
 
   Future<void> _pickImage(int index) async {
     final ImagePicker picker = ImagePicker();
@@ -43,7 +46,7 @@ class _NewlistingState extends State<Newlisting> {
 
     if (pickedFile != null) {
       setState(() {
-        _selectedImages[index] = File(pickedFile.path);
+        _selectedImages[index] = pickedFile;
       });
     }
   }
@@ -95,9 +98,7 @@ class _NewlistingState extends State<Newlisting> {
               children: [
                 firstPage(context),
                 secondPage(context),
-                Center(
-                  child: Text('3rd page'),
-                )
+                thirdPage(context),
               ],
             );
           },
@@ -300,7 +301,8 @@ class _NewlistingState extends State<Newlisting> {
                       color: Colors.grey[200],
                       image: _selectedImages[index] != null
                           ? DecorationImage(
-                              image: FileImage(_selectedImages[index]!),
+                              image:
+                                  FileImage(File(_selectedImages[index]!.path)),
                               fit: BoxFit.cover,
                             )
                           : null,
@@ -371,6 +373,7 @@ class _NewlistingState extends State<Newlisting> {
                     hintText: 'Select a date',
                     label: 'Deal expires at...',
                     isDateField: true,
+                    helptext: 'This camp is optional',
                   ),
                   const SizedBox(
                     height: 20, // Cambié el tamaño a 20 aquí
@@ -427,7 +430,9 @@ class _NewlistingState extends State<Newlisting> {
                       ),
                     ),
                     padding: const EdgeInsets.symmetric(
-                        vertical: 8.0, horizontal: 12.0),
+                      vertical: 8.0,
+                      horizontal: 12.0,
+                    ),
                     child: Text(
                       HighlightOptions.options[index],
                       style: TextStyle(
@@ -452,10 +457,55 @@ class _NewlistingState extends State<Newlisting> {
                       _validateForm();
                       if (_selectedHighlights.isNotEmpty) {
                         if (_formkey2.currentState?.validate() ?? false) {
-                          _pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeIn,
-                          );
+                          // Subir las imágenes primero
+                          fs
+                              .uploadImages(_selectedImages)
+                              .then((uploadedImagePaths) {
+                            if (uploadedImagePaths.isNotEmpty) {
+                              fs
+                                  .uploadListing(
+                                title: _titlecontroller.text,
+                                desc: _descriptioncontroller.text,
+                                expiresAtStr: _dateController.text,
+                                link: _linkcontroller.text,
+                                originalPrice:
+                                    double.tryParse(_originalcontroller.text) ??
+                                        0.0,
+                                discountPrice: double.tryParse(
+                                        _finalpricecontroller.text) ??
+                                    0.0,
+                                storeName: _shopcontroller.text,
+                                userId: 'user123',
+                                categories: _selectedCategory ?? '',
+                                subcategories: _selectedSubCategory ?? '',
+                                highlights: _selectedHighlights,
+                                selectedImages: _selectedImages,
+                              )
+                                  .then((success) {
+                                if (success) {
+                                  // Si la subida fue exitosa, navega a la siguiente página
+                                  _pageController.nextPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeIn,
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                          'Error uploading listing, please try again.'),
+                                    ),
+                                  );
+                                }
+                              });
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content:
+                                      Text('Please upload at least one image.'),
+                                ),
+                              );
+                            }
+                          });
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
@@ -468,7 +518,7 @@ class _NewlistingState extends State<Newlisting> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content:
-                                Text('Please select at least one Highlight.'),
+                                Text('Please select at least one highlight.'),
                           ),
                         );
                       }
@@ -484,10 +534,38 @@ class _NewlistingState extends State<Newlisting> {
                 );
               },
             ),
+
             const SizedBox(height: 24),
           ],
         ),
       ),
+    );
+  }
+
+  Widget thirdPage(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Expanded(
+          child: Center(
+            child: ConfirmationSuccess(
+              reactColor: Theme.of(context).colorScheme.primary,
+              child: Icon(
+                Icons.check,
+                size: 100,
+                color: Theme.of(context).colorScheme.onPrimary,
+              ),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 26.0),
+            child: primaryBtn(context: context, text: 'Volver al inicio'),
+          ),
+        ),
+      ],
     );
   }
 }

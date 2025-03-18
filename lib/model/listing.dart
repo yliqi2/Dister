@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/model/categorie.dart';
 
 class Listing {
+  String id;
   String title;
   String desc;
   DateTime publishedAt;
@@ -9,14 +11,16 @@ class Listing {
   double originalPrice;
   double discountPrice;
   String storeName;
-  ProductCategory? categories;
-  double likes;
+  String categories; // Category as a string (name of the category)
+  String subcategories; // List of subcategories
+  int likes;
   double? rating;
   List<String> images;
   List<String>? highlights;
   String owner;
 
   Listing({
+    this.id = '',
     required this.title,
     required this.desc,
     required this.publishedAt,
@@ -25,13 +29,58 @@ class Listing {
     required this.originalPrice,
     required this.discountPrice,
     required this.storeName,
-    this.categories,
+    required this.categories,
+    required this.subcategories,
     required this.likes,
     this.rating,
     required this.images,
     required this.highlights,
     required this.owner,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'desc': desc,
+      'publishedAt': Timestamp.fromDate(publishedAt),
+      'expiresAt': expiresAt != null ? Timestamp.fromDate(expiresAt!) : null,
+      'link': link,
+      'originalPrice': originalPrice,
+      'discountPrice': discountPrice,
+      'storeName': storeName,
+      'categories': categories, // Store category as string
+      'subcategories': subcategories, // Store subcategories as list of strings
+      'likes': likes,
+      'rating': rating,
+      'images': images,
+      'highlights': highlights,
+      'owner': owner,
+    };
+  }
+
+  factory Listing.fromMap(Map<String, dynamic> map, String documentId) {
+    return Listing(
+      id: documentId,
+      title: map['title'] ?? '',
+      desc: map['desc'] ?? '',
+      publishedAt: (map['publishedAt'] as Timestamp).toDate(),
+      expiresAt: map['expiresAt'] != null
+          ? (map['expiresAt'] as Timestamp).toDate()
+          : null,
+      link: map['link'] ?? '',
+      originalPrice: (map['originalPrice'] as num).toDouble(),
+      discountPrice: (map['discountPrice'] as num).toDouble(),
+      storeName: map['storeName'] ?? '',
+      categories: map['categories'] ?? '', 
+      subcategories: map['subcategories'] ?? '',
+      likes: (map['likes'] as num).toInt(),
+      rating: map['rating'] != null ? (map['rating'] as num).toDouble() : null,
+      images: List<String>.from(map['images'] ?? []),
+      highlights:
+          map['highlights'] != null ? List<String>.from(map['highlights']) : [],
+      owner: map['owner'] ?? '',
+    );
+  }
 
   String getTimeAgo() {
     Duration difference = DateTime.now().difference(publishedAt);
@@ -49,17 +98,12 @@ class Listing {
   String getFormattedLikes() {
     if (likes >= 1000000) {
       double m = likes / 1000000;
-      return m >= 10
-          ? "${m.toStringAsFixed(0)}M"
-          : "${m.toStringAsFixed(1)}M"; // Redondea a 1 decimales solo si es menos que 10M
+      return m >= 10 ? "${m.toStringAsFixed(0)}M" : "${m.toStringAsFixed(1)}M";
     } else if (likes >= 1000) {
       double k = likes / 1000;
-      return k >= 10
-          ? "${k.toStringAsFixed(0)}K"
-          : "${k.toStringAsFixed(1)}K"; // Redondea a 1 decimales solo si es menos que 10k
+      return k >= 10 ? "${k.toStringAsFixed(0)}K" : "${k.toStringAsFixed(1)}K";
     } else {
-      return likes
-          .toStringAsFixed(0); // Muestra el número tal cual si es menor a 1000
+      return likes.toString();
     }
   }
 }
