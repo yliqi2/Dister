@@ -49,7 +49,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       maxTime: maxDate,
       onConfirm: (date) {
         setState(() {
-          widget.controller.text = "${date.year}-${date.month}-${date.day}";
+          widget.controller.text =
+              "${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}";
         });
       },
       currentTime: DateTime.now(),

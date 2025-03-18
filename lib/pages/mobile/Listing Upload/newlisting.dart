@@ -39,6 +39,8 @@ class _NewlistingState extends State<Newlisting> {
 
   final FirebaseServices fs = FirebaseServices();
 
+  bool _isUploading = false; // Add a flag to track the uploading state
+
   Future<void> _pickImage(int index) async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
@@ -452,85 +454,85 @@ class _NewlistingState extends State<Newlisting> {
               valueListenable: _isFormValidNotifier,
               builder: (context, isFormValid, child) {
                 return GestureDetector(
-                  onTap: () {
-                    if (_selectedImages.any((image) => image != null)) {
-                      _validateForm();
-                      if (_selectedHighlights.isNotEmpty) {
-                        if (_formkey2.currentState?.validate() ?? false) {
-                          // Subir las imágenes primero
-                          fs
-                              .uploadImages(_selectedImages)
-                              .then((uploadedImagePaths) {
-                            if (uploadedImagePaths.isNotEmpty) {
-                              fs
-                                  .uploadListing(
-                                title: _titlecontroller.text,
-                                desc: _descriptioncontroller.text,
-                                expiresAtStr: _dateController.text,
-                                link: _linkcontroller.text,
-                                originalPrice:
-                                    double.tryParse(_originalcontroller.text) ??
-                                        0.0,
-                                discountPrice: double.tryParse(
-                                        _finalpricecontroller.text) ??
-                                    0.0,
-                                storeName: _shopcontroller.text,
-                                userId: 'user123',
-                                categories: _selectedCategory ?? '',
-                                subcategories: _selectedSubCategory ?? '',
-                                highlights: _selectedHighlights,
-                                selectedImages: _selectedImages,
-                              )
-                                  .then((success) {
-                                if (success) {
-                                  // Si la subida fue exitosa, navega a la siguiente página
-                                  _pageController.nextPage(
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeIn,
-                                  );
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text(
-                                          'Error uploading listing, please try again.'),
-                                    ),
-                                  );
-                                }
-                              });
+                  onTap: _isUploading
+                      ? null
+                      : () {
+                          if (_selectedImages.any((image) => image != null)) {
+                            _validateForm();
+                            if (_selectedHighlights.isNotEmpty) {
+                              if (_formkey2.currentState?.validate() ?? false) {
+                                setState(() {
+                                  _isUploading = true; // Set the flag to true
+                                });
+                                fs
+                                    .uploadListing(
+                                  title: _titlecontroller.text,
+                                  desc: _descriptioncontroller.text,
+                                  expiresAtStr: _dateController.text,
+                                  link: _linkcontroller.text,
+                                  originalPrice: double.tryParse(
+                                          _originalcontroller.text) ??
+                                      0.0,
+                                  discountPrice: double.tryParse(
+                                          _finalpricecontroller.text) ??
+                                      0.0,
+                                  storeName: _shopcontroller.text,
+                                  userId: 'user123',
+                                  categories: _selectedCategory ?? '',
+                                  subcategories: _selectedSubCategory ?? '',
+                                  highlights: _selectedHighlights,
+                                  selectedImages: _selectedImages,
+                                )
+                                    .then((success) {
+                                  setState(() {
+                                    _isUploading = false; // Reset the flag
+                                  });
+                                  if (success) {
+                                    _pageController.nextPage(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      curve: Curves.easeIn,
+                                    );
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            'Error uploading listing, please try again.'),
+                                      ),
+                                    );
+                                  }
+                                });
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                        'Please fill in all fields correctly.'),
+                                  ),
+                                );
+                              }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content:
-                                      Text('Please upload at least one image.'),
+                                  content: Text(
+                                      'Please select at least one highlight.'),
                                 ),
                               );
                             }
-                          });
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content:
-                                  Text('Please fill in all fields correctly.'),
-                            ),
-                          );
-                        }
-                      } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content:
-                                Text('Please select at least one highlight.'),
-                          ),
-                        );
-                      }
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please upload at least one image.'),
-                        ),
-                      );
-                    }
-                  },
-                  child: primaryBtn(text: "Continue", context: context),
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content:
+                                    Text('Please upload at least one image.'),
+                              ),
+                            );
+                          }
+                        },
+                  child: primaryBtn(
+                    text: _isUploading
+                        ? "Publishing..."
+                        : "Publish", // Update button text
+                    context: context,
+                  ),
                 );
               },
             ),

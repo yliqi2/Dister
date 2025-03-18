@@ -30,7 +30,7 @@ class FirebaseServices {
 
   // Función para convertir el texto de fecha en DateTime
   DateTime? convertStringToDateTime(String dateStr,
-      {String format = "dd/MM/yyyy"}) {
+      {String format = "yyyy-mm-dd"}) {
     try {
       final DateFormat formatter =
           DateFormat(format); // Define el formato de fecha
@@ -62,7 +62,6 @@ class FirebaseServices {
 
       // Si la fecha no se pudo convertir, podemos retornar un error
       if (expiresAt == null) {
-        print("Error: la fecha de expiración no tiene un formato válido.");
         return false;
       }
 
@@ -106,19 +105,23 @@ class FirebaseServices {
     List<String> imageUrls = [];
     try {
       for (var image in images) {
-        String fileName = image!.name;
-        firebase_storage.Reference ref = firebase_storage
-            .FirebaseStorage.instance
-            .ref()
-            .child('listings/images/$fileName');
-        firebase_storage.UploadTask uploadTask = ref.putFile(File(image.path));
+        if (image != null) {
+          // Comprobar si la imagen no es null
+          String fileName = image.name;
+          firebase_storage.Reference ref = firebase_storage
+              .FirebaseStorage.instance
+              .ref()
+              .child('listings/images/$fileName');
+          firebase_storage.UploadTask uploadTask =
+              ref.putFile(File(image.path));
 
-        // Esperar a que se complete la carga
-        await uploadTask.whenComplete(() async {
-          // Obtener la URL de la imagen cargada
-          String imageUrl = await ref.getDownloadURL();
-          imageUrls.add(imageUrl);
-        });
+          // Esperar a que se complete la carga
+          await uploadTask.whenComplete(() async {
+            // Obtener la URL de la imagen cargada
+            String imageUrl = await ref.getDownloadURL();
+            imageUrls.add(imageUrl);
+          });
+        }
       }
     } catch (e) {
       print("Error uploading images: $e");
