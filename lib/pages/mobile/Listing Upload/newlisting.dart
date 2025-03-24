@@ -39,7 +39,7 @@ class _NewlistingState extends State<Newlisting> {
 
   final FirebaseServices fs = FirebaseServices();
 
-  bool _isUploading = false; // Add a flag to track the uploading state
+  bool _isUploading = false;
 
   Future<void> _pickImage(int index) async {
     final ImagePicker picker = ImagePicker();
