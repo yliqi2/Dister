@@ -11,54 +11,62 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 
-class Media extends StatelessWidget {
+class Media extends StatefulWidget {
   const Media({super.key});
+
+  @override
+  State<Media> createState() => _MediaState();
+}
+
+class _MediaState extends State<Media> {
+  User? _user;
+  bool _isLoading = true;
+  bool _seenOnboarding = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeApp();
+  }
+
+  Future<void> _initializeApp() async {
+    final user = await Logged().checkUserLoggedIn();
+    final seenOnboarding = await Welcome().seenBoarding();
+
+    if (mounted) {
+      setState(() {
+        _user = user;
+        _seenOnboarding = seenOnboarding;
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     //screenWidth obtener el tamaño de la pantalla
     double screenWidth = MediaQuery.of(context).size.width;
 
+    if (_isLoading) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     if (screenWidth < 600) {
-      //Codicional donde comparar la pantalla si es de movil se mostrara la UI de movil
-
-      return FutureBuilder<User?>(
-        future: Logged().checkUserLoggedIn(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasData) {
-            return const Navbar();
-          } else {
-            return FutureBuilder<bool>(
-              future: Welcome().seenBoarding(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  final seenOnboarding = snapshot.data ?? false;
-                  return seenOnboarding ? const Login() : const Onboarding();
-                }
-              },
-            );
-          }
-        },
-      );
+      if (_user != null) {
+        return const Navbar();
+      } else {
+        return _seenOnboarding ? const Login() : const Onboarding();
+      }
     } else {
-      //En caso contrario la UI de Tablet
-
-      return FutureBuilder<User?>(
-        future: Logged().checkUserLoggedIn(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasData) {
-            return const HomeTablet();
-          } else {
-            return const LoginTab();
-          }
-        },
-      );
+      if (_user != null) {
+        return const HomeTablet();
+      } else {
+        return const LoginTab();
+      }
     }
   }
 }
