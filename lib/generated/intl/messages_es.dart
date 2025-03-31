@@ -35,6 +35,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "El usuario no puede contener espacios",
     ),
     "continues": MessageLookupByLibrary.simpleMessage("Comenzar"),
+    "descriptionerror": MessageLookupByLibrary.simpleMessage(
+      "Por favor introduce una descripción",
+    ),
+    "descriptionerror2": MessageLookupByLibrary.simpleMessage(
+      "La descripción no puede tener menos de 10 caracteres",
+    ),
+    "descriptionerror3": MessageLookupByLibrary.simpleMessage(
+      "La descripción no puede tener más de 200 caracteres",
+    ),
+    "descriptionhint": MessageLookupByLibrary.simpleMessage(
+      "Introduce una descripción para el producto",
+    ),
+    "descriptionlabel": MessageLookupByLibrary.simpleMessage("Descripción"),
     "emailInUse": MessageLookupByLibrary.simpleMessage(
       "El correo electrónico ya está en uso",
     ),
@@ -54,7 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Problema de red"),
     "errorUnknow": m0,
     "firstpage": MessageLookupByLibrary.simpleMessage(
-      "Comparte una oferta\n con millones de usuarios",
+      "Comparte una oferta\ncon millones de usuarios",
     ),
     "firstpagesubtitle": MessageLookupByLibrary.simpleMessage(
       "¡Alcanza a millones de personas y haz que su oferta destaque!",
@@ -80,6 +93,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "joinUs": MessageLookupByLibrary.simpleMessage("Unete"),
     "lenghtPassword": MessageLookupByLibrary.simpleMessage(
       "La contraseña debe tener al menos 8 caracteres",
+    ),
+    "linkempty": MessageLookupByLibrary.simpleMessage(
+      "Por favor introduce un enlace",
+    ),
+    "linkerror": MessageLookupByLibrary.simpleMessage(
+      "Por favor introduce un enlace válido",
+    ),
+    "linkhelptext": MessageLookupByLibrary.simpleMessage(
+      "Pega el enlace donde otros usuarios puedan encontrar la oferta",
     ),
     "login": MessageLookupByLibrary.simpleMessage("Inicia sesión"),
     "loginSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -132,6 +154,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Tu próxima gran oferta está\na solo una notificación de distancia.",
     ),
     "terms": MessageLookupByLibrary.simpleMessage("Terminos"),
+    "tiendaerror": MessageLookupByLibrary.simpleMessage(
+      "Por favor introduce el nombre de la tienda",
+    ),
+    "tiendahint": MessageLookupByLibrary.simpleMessage(
+      "Ej: Zalando, Amazon...",
+    ),
+    "tiendalabel": MessageLookupByLibrary.simpleMessage("Nombre de la tienda"),
     "title_onboarding": MessageLookupByLibrary.simpleMessage(
       "Encuentra lo que\nnecesitas y más",
     ),
@@ -141,6 +170,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "title_onboarding3": MessageLookupByLibrary.simpleMessage(
       "Nunca te lo pierdas",
     ),
+    "titleerror": MessageLookupByLibrary.simpleMessage(
+      "Por favor introduce un título",
+    ),
+    "titleerror2": MessageLookupByLibrary.simpleMessage(
+      "El título no puede tener menos de 3 caracteres",
+    ),
+    "titlehint": MessageLookupByLibrary.simpleMessage("Nombre del producto"),
+    "titlelabel": MessageLookupByLibrary.simpleMessage("Título"),
     "upload": MessageLookupByLibrary.simpleMessage("Subir"),
     "userLabel": MessageLookupByLibrary.simpleMessage("Usuario"),
     "usernameInUse": MessageLookupByLibrary.simpleMessage(

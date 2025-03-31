@@ -159,13 +159,13 @@ class _NewlistingState extends State<Newlisting> {
                     CustomTextField(
                       controller: _titlecontroller,
                       isPassword: false,
-                      hintText: 'Name of the deal, product...',
-                      label: 'Title',
+                      hintText: S.of(context).titlehint,
+                      label: S.of(context).titlelabel,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a title.';
+                          return S.of(context).titleerror;
                         } else if (value.length < 3) {
-                          return 'Title must be at least 3 characters long.';
+                          return S.of(context).titleerror2;
                         }
                         return null;
                       },
@@ -174,28 +174,28 @@ class _NewlistingState extends State<Newlisting> {
                     CustomTextField(
                       controller: _shopcontroller,
                       isPassword: false,
-                      hintText: "Eg: Zalando, Mediamarkt",
-                      label: 'Shop name',
+                      hintText: S.of(context).tiendahint,
+                      label: S.of(context).tiendalabel,
                       validator: (value) => value == null || value.isEmpty
-                          ? 'Please enter a shop.'
+                          ? S.of(context).tiendaerror
                           : null,
                     ),
                     const SizedBox(height: 15),
                     CustomTextField(
                       controller: _descriptioncontroller,
                       isPassword: false,
-                      hintText: 'Enter a description for the product',
-                      label: 'Description',
+                      hintText: S.of(context).descriptionhint,
+                      label: S.of(context).descriptionlabel,
                       maxLines: 5,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a description.';
+                          return S.of(context).descriptionerror;
                         }
                         if (value.length < 10) {
-                          return 'Description must be at least 10 characters long.';
+                          return S.of(context).descriptionerror2;
                         }
                         if (value.length > 200) {
-                          return 'Description cannot exceed 200 characters.';
+                          return S.of(context).descriptionerror3;
                         }
                         return null;
                       },

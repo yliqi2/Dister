@@ -33,6 +33,19 @@ class MessageLookup extends MessageLookupByLibrary {
       "Username cannot contain spaces",
     ),
     "continues": MessageLookupByLibrary.simpleMessage("Start Hunting"),
+    "descriptionerror": MessageLookupByLibrary.simpleMessage(
+      "Please enter a description",
+    ),
+    "descriptionerror2": MessageLookupByLibrary.simpleMessage(
+      "Description cannot be less than 10 characters",
+    ),
+    "descriptionerror3": MessageLookupByLibrary.simpleMessage(
+      "Description cannot be more than 200 characters",
+    ),
+    "descriptionhint": MessageLookupByLibrary.simpleMessage(
+      "Enter a description for the product",
+    ),
+    "descriptionlabel": MessageLookupByLibrary.simpleMessage("Description"),
     "emailInUse": MessageLookupByLibrary.simpleMessage("Email already in use"),
     "emptyConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
@@ -52,7 +65,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Network Problem"),
     "errorUnknow": m0,
     "firstpage": MessageLookupByLibrary.simpleMessage(
-      "Share a deal\n with millions of users",
+      "Share a deal\nwith millions of users",
     ),
     "firstpagesubtitle": MessageLookupByLibrary.simpleMessage(
       "Reach millions and make the offer stand out!",
@@ -141,6 +154,13 @@ class MessageLookup extends MessageLookupByLibrary {
       "Your next great deal is just\na notification away.",
     ),
     "terms": MessageLookupByLibrary.simpleMessage("Terms"),
+    "tiendaerror": MessageLookupByLibrary.simpleMessage(
+      "Please enter the store name",
+    ),
+    "tiendahint": MessageLookupByLibrary.simpleMessage(
+      "E.g.: Zalando, Amazon...",
+    ),
+    "tiendalabel": MessageLookupByLibrary.simpleMessage("Store name"),
     "title_onboarding": MessageLookupByLibrary.simpleMessage(
       "Find what\nyou need and more",
     ),
@@ -150,6 +170,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "title_onboarding3": MessageLookupByLibrary.simpleMessage(
       "Never\nMiss Out Again",
     ),
+    "titleerror": MessageLookupByLibrary.simpleMessage("Please enter a title"),
+    "titleerror2": MessageLookupByLibrary.simpleMessage(
+      "Title cannot be less than 3 characters",
+    ),
+    "titlehint": MessageLookupByLibrary.simpleMessage("Product name"),
+    "titlelabel": MessageLookupByLibrary.simpleMessage("Title"),
     "upload": MessageLookupByLibrary.simpleMessage("Upload"),
     "userLabel": MessageLookupByLibrary.simpleMessage("Username"),
     "usernameInUse": MessageLookupByLibrary.simpleMessage(

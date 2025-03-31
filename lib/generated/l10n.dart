@@ -520,10 +520,10 @@ class S {
     return Intl.message('Upload', name: 'upload', desc: '', args: []);
   }
 
-  /// `Share a deal\n with millions of users`
+  /// `Share a deal\nwith millions of users`
   String get firstpage {
     return Intl.message(
-      'Share a deal\n with millions of users',
+      'Share a deal\nwith millions of users',
       name: 'firstpage',
       desc: '',
       args: [],
@@ -565,6 +565,111 @@ class S {
     return Intl.message(
       'Please enter a valid link',
       name: 'linkerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product name`
+  String get titlehint {
+    return Intl.message('Product name', name: 'titlehint', desc: '', args: []);
+  }
+
+  /// `Title`
+  String get titlelabel {
+    return Intl.message('Title', name: 'titlelabel', desc: '', args: []);
+  }
+
+  /// `Please enter a title`
+  String get titleerror {
+    return Intl.message(
+      'Please enter a title',
+      name: 'titleerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title cannot be less than 3 characters`
+  String get titleerror2 {
+    return Intl.message(
+      'Title cannot be less than 3 characters',
+      name: 'titleerror2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `E.g.: Zalando, Amazon...`
+  String get tiendahint {
+    return Intl.message(
+      'E.g.: Zalando, Amazon...',
+      name: 'tiendahint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Store name`
+  String get tiendalabel {
+    return Intl.message('Store name', name: 'tiendalabel', desc: '', args: []);
+  }
+
+  /// `Please enter the store name`
+  String get tiendaerror {
+    return Intl.message(
+      'Please enter the store name',
+      name: 'tiendaerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a description for the product`
+  String get descriptionhint {
+    return Intl.message(
+      'Enter a description for the product',
+      name: 'descriptionhint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get descriptionlabel {
+    return Intl.message(
+      'Description',
+      name: 'descriptionlabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a description`
+  String get descriptionerror {
+    return Intl.message(
+      'Please enter a description',
+      name: 'descriptionerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description cannot be less than 10 characters`
+  String get descriptionerror2 {
+    return Intl.message(
+      'Description cannot be less than 10 characters',
+      name: 'descriptionerror2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description cannot be more than 200 characters`
+  String get descriptionerror3 {
+    return Intl.message(
+      'Description cannot be more than 200 characters',
+      name: 'descriptionerror3',
       desc: '',
       args: [],
     );

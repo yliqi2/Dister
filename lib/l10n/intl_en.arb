@@ -64,10 +64,25 @@
     "categories" : "Categories",
     "upload" : "Upload",
     
-    "firstpage" : "Share a deal\n with millions of users",
+    "firstpage" : "Share a deal\nwith millions of users",
     "firstpagesubtitle" : "Reach millions and make the offer stand out!",
-    
+
     "linkhelptext" : "Paste the link to where other users can find the deal",
     "linkempty" : "Please enter a link",
-    "linkerror" : "Please enter a valid link"
+    "linkerror" : "Please enter a valid link",
+
+    "titlehint" : "Product name",
+    "titlelabel" : "Title",
+    "titleerror" : "Please enter a title",
+    "titleerror2" : "Title cannot be less than 3 characters",
+
+    "tiendahint" : "E.g.: Zalando, Amazon...",
+    "tiendalabel" : "Store name",
+    "tiendaerror" : "Please enter the store name",
+
+    "descriptionhint" : "Enter a description for the product",
+    "descriptionlabel" : "Description",
+    "descriptionerror" : "Please enter a description",
+    "descriptionerror2" : "Description cannot be less than 10 characters",
+    "descriptionerror3" : "Description cannot be more than 200 characters"
 }

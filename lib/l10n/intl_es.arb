@@ -64,6 +64,25 @@
     "categories" : "Categorias",
     "upload" : "Subir",
     
-    "firstpage" : "Comparte una oferta\n con millones de usuarios",
-    "firstpagesubtitle" : "¡Alcanza a millones de personas y haz que su oferta destaque!"
+    "firstpage" : "Comparte una oferta\ncon millones de usuarios",
+    "firstpagesubtitle" : "¡Alcanza a millones de personas y haz que su oferta destaque!",
+
+    "linkhelptext" : "Pega el enlace donde otros usuarios puedan encontrar la oferta",
+    "linkempty" : "Por favor introduce un enlace",
+    "linkerror" : "Por favor introduce un enlace válido",
+
+    "titlehint" : "Nombre del producto",
+    "titlelabel" : "Título",
+    "titleerror" : "Por favor introduce un título",
+    "titleerror2" : "El título no puede tener menos de 3 caracteres",
+
+    "tiendahint" : "Ej: Zalando, Amazon...",
+    "tiendalabel" : "Nombre de la tienda",
+    "tiendaerror" : "Por favor introduce el nombre de la tienda",
+
+    "descriptionhint" : "Introduce una descripción para el producto",
+    "descriptionlabel" : "Descripción",
+    "descriptionerror" : "Por favor introduce una descripción",
+    "descriptionerror2" : "La descripción no puede tener menos de 10 caracteres",
+    "descriptionerror3" : "La descripción no puede tener más de 200 caracteres"
 }
