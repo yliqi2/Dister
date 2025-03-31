@@ -7,82 +7,80 @@ class ProductCategory {
 
 class ProductCategories {
   static final List<ProductCategory> _categories = [
-    ProductCategory(name: "Electrónica y Tecnología", subcategories: [
-      "Teléfonos móviles y accesorios",
-      "Computadoras y laptops",
-      "Televisores y entretenimiento",
-      "Electrodomésticos",
-      "Videoconsolas y videojuegos",
-      "Cámaras y fotografía",
-      "Smartwatches y wearables",
+    ProductCategory(name: "Electronics and Technology", subcategories: [
+      "Mobile phones and accessories",
+      "Computers and laptops",
+      "Televisions and entertainment",
+      "Home appliances",
+      "Game consoles and video games",
+      "Cameras and photography",
+      "Smartwatches and wearables",
     ]),
-    ProductCategory(name: "Moda y Accesorios", subcategories: [
-      "Ropa de hombre",
-      "Ropa de mujer",
-      "Ropa infantil",
-      "Zapatos y calzado",
-      "Bolsos y mochilas",
-      "Joyería y relojes",
-      "Gafas de sol y accesorios",
+    ProductCategory(name: "Fashion and Accessories", subcategories: [
+      "Men's clothing",
+      "Women's clothing",
+      "Children's clothing",
+      "Shoes and footwear",
+      "Bags and backpacks",
+      "Jewelry and watches",
+      "Sunglasses and accessories",
     ]),
-    ProductCategory(name: "Hogar y Muebles", subcategories: [
-      "Muebles",
-      "Decoración",
-      "Iluminación",
-      "Cama, baño y textiles",
-      "Cocina y comedor",
-      "Organización y almacenamiento",
-      "Electrodomésticos pequeños",
+    ProductCategory(name: "Home and Furniture", subcategories: [
+      "Furniture",
+      "Decoration",
+      "Lighting",
+      "Bed, bath, and textiles",
+      "Kitchen and dining",
+      "Organization and storage",
+      "Small appliances",
     ]),
-    ProductCategory(name: "Salud y Belleza", subcategories: [
-      "Cosméticos y maquillaje",
-      "Cuidado de la piel",
-      "Cuidado del cabello",
-      "Perfumes y fragancias",
-      "Nutrición y suplementos",
-      "Equipos de cuidado personal",
+    ProductCategory(name: "Health and Beauty", subcategories: [
+      "Cosmetics and makeup",
+      "Skin care",
+      "Hair care",
+      "Perfumes and fragrances",
+      "Nutrition and supplements",
+      "Personal care equipment",
     ]),
-    ProductCategory(name: "Deportes y Aire Libre", subcategories: [
-      "Ropa y calzado deportivo",
-      "Equipamiento de gimnasio",
-      "Bicicletas y accesorios",
-      "Camping y senderismo",
-      "Deportes acuáticos",
-      "Deportes de equipo",
+    ProductCategory(name: "Sports and Outdoors", subcategories: [
+      "Sportswear and footwear",
+      "Gym equipment",
+      "Bicycles and accessories",
+      "Camping and hiking",
+      "Water sports",
+      "Team sports",
     ]),
-    ProductCategory(name: "Automóviles y Motocicletas", subcategories: [
-      "Accesorios para coches",
-      "Accesorios para motos",
-      "Repuestos y herramientas",
-      "Seguridad vehicular",
+    ProductCategory(name: "Cars and Motorcycles", subcategories: [
+      "Car accessories",
+      "Motorcycle accessories",
+      "Spare parts and tools",
+      "Vehicle safety",
     ]),
-    ProductCategory(name: "Juguetes y Juegos", subcategories: [
-      "Juguetes para niños",
-      "Juegos de mesa",
-      "Figuras de colección",
-      "Juguetes educativos",
+    ProductCategory(name: "Toys and Games", subcategories: [
+      "Toys for children",
+      "Board games",
+      "Collectible figures",
+      "Educational toys",
     ]),
-    ProductCategory(name: "Alimentos y Bebidas", subcategories: [
-      "Productos gourmet",
-      "Bebidas alcohólicas",
-      "Productos orgánicos",
-      "Snacks y dulces",
+    ProductCategory(name: "Food and Beverages", subcategories: [
+      "Gourmet products",
+      "Alcoholic beverages",
+      "Organic products",
+      "Snacks and sweets",
     ]),
-    ProductCategory(name: "Libros, Música y Entretenimiento", subcategories: [
-      "Libros y revistas",
-      "Películas y series",
-      "Instrumentos musicales",
+    ProductCategory(name: "Books, Music, and Entertainment", subcategories: [
+      "Books and magazines",
+      "Movies and series",
+      "Musical instruments",
     ]),
   ];
 
   static List<ProductCategory> getCategories() => _categories;
 
-  // Método para obtener una categoría por nombre, con una opción por defecto si no se encuentra.
   static ProductCategory getCategoryByName(String name) {
     return _categories.firstWhere(
       (category) => category.name == name,
-      orElse: () => _categories
-          .first, // Devuelve la primera categoría si no encuentra coincidencias
+      orElse: () => _categories.first,
     );
   }
 }

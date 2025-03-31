@@ -61,5 +61,13 @@
     "searchHint2" : "Search for \"tech\"",
     "searchHint3" : "Search for \"furniture\"",
 
-    "categories" : "Categories"
+    "categories" : "Categories",
+    "upload" : "Upload",
+    
+    "firstpage" : "Share a deal\n with millions of users",
+    "firstpagesubtitle" : "Reach millions and make the offer stand out!",
+    
+    "linkhelptext" : "Paste the link to where other users can find the deal",
+    "linkempty" : "Please enter a link",
+    "linkerror" : "Please enter a valid link"
 }

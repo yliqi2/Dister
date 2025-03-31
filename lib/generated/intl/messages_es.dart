@@ -53,6 +53,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Problema de red"),
     "errorUnknow": m0,
+    "firstpage": MessageLookupByLibrary.simpleMessage(
+      "Comparte una oferta\n con millones de usuarios",
+    ),
+    "firstpagesubtitle": MessageLookupByLibrary.simpleMessage(
+      "¡Alcanza a millones de personas y haz que su oferta destaque!",
+    ),
     "forgotPassword": MessageLookupByLibrary.simpleMessage(
       "¿Has olvidado la contraseña? ",
     ),
@@ -135,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "title_onboarding3": MessageLookupByLibrary.simpleMessage(
       "Nunca te lo pierdas",
     ),
+    "upload": MessageLookupByLibrary.simpleMessage("Subir"),
     "userLabel": MessageLookupByLibrary.simpleMessage("Usuario"),
     "usernameInUse": MessageLookupByLibrary.simpleMessage(
       "El usuario ya esta en uso",

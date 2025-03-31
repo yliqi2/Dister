@@ -51,6 +51,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Network Problem"),
     "errorUnknow": m0,
+    "firstpage": MessageLookupByLibrary.simpleMessage(
+      "Share a deal\n with millions of users",
+    ),
+    "firstpagesubtitle": MessageLookupByLibrary.simpleMessage(
+      "Reach millions and make the offer stand out!",
+    ),
     "forgotPassword": MessageLookupByLibrary.simpleMessage(
       "Forgot your password? ",
     ),
@@ -72,6 +78,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "joinUs": MessageLookupByLibrary.simpleMessage("Join Us"),
     "lenghtPassword": MessageLookupByLibrary.simpleMessage(
       "Password must be a least 8 characters",
+    ),
+    "linkempty": MessageLookupByLibrary.simpleMessage("Please enter a link"),
+    "linkerror": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid link",
+    ),
+    "linkhelptext": MessageLookupByLibrary.simpleMessage(
+      "Paste the link to where other users can find the deal",
     ),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginSubtitle": MessageLookupByLibrary.simpleMessage(
@@ -137,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "title_onboarding3": MessageLookupByLibrary.simpleMessage(
       "Never\nMiss Out Again",
     ),
+    "upload": MessageLookupByLibrary.simpleMessage("Upload"),
     "userLabel": MessageLookupByLibrary.simpleMessage("Username"),
     "usernameInUse": MessageLookupByLibrary.simpleMessage(
       "Username already in use",

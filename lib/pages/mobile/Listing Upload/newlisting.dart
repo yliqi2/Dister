@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:confirmation_success/confirmation_success.dart';
 import 'package:dister/controller/firebase/services/firebase_services.dart';
+import 'package:dister/generated/l10n.dart';
 import 'package:dister/model/categorie.dart';
 import 'package:dister/model/highlight.dart';
 import 'package:dister/widgets/mydropdown.dart';
@@ -79,7 +80,7 @@ class _NewlistingState extends State<Newlisting> {
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12.0),
           child: Text(
-            'Upload',
+            S.of(context).upload,
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: Theme.of(context).colorScheme.secondary,
@@ -117,7 +118,7 @@ class _NewlistingState extends State<Newlisting> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AutoSizeText(
-              'Share a deal\nwith millions of users',
+              S.of(context).firstpage,
               minFontSize: 14,
               maxLines: 2,
               style: TextStyle(
@@ -126,9 +127,9 @@ class _NewlistingState extends State<Newlisting> {
                 color: Theme.of(context).colorScheme.secondary,
               ),
             ),
-            const Text(
-              'Reach millions and make the offer stand out!',
-              style: TextStyle(fontSize: 16),
+            Text(
+              S.of(context).firstpagesubtitle,
+              style: const TextStyle(fontSize: 16),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15.0),
@@ -141,16 +142,15 @@ class _NewlistingState extends State<Newlisting> {
                       isPassword: false,
                       hintText: "www.dister.com/example",
                       label: 'Link',
-                      helptext:
-                          'Paste the link to where other users can get more information on the deal',
+                      helptext: S.of(context).linkhelptext,
                       validator: (value) {
                         final RegExp urlPattern = RegExp(
                             r'^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(?:/[^\s]*)?$',
                             caseSensitive: false);
                         if (value == null || value.isEmpty) {
-                          return 'Please enter a link.';
+                          return S.of(context).linkempty;
                         } else if (!urlPattern.hasMatch(value)) {
-                          return 'Please enter a valid URL.';
+                          return S.of(context).linkerror;
                         }
                         return null;
                       },

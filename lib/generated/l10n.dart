@@ -514,6 +514,61 @@ class S {
   String get categories {
     return Intl.message('Categories', name: 'categories', desc: '', args: []);
   }
+
+  /// `Upload`
+  String get upload {
+    return Intl.message('Upload', name: 'upload', desc: '', args: []);
+  }
+
+  /// `Share a deal\n with millions of users`
+  String get firstpage {
+    return Intl.message(
+      'Share a deal\n with millions of users',
+      name: 'firstpage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reach millions and make the offer stand out!`
+  String get firstpagesubtitle {
+    return Intl.message(
+      'Reach millions and make the offer stand out!',
+      name: 'firstpagesubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paste the link to where other users can find the deal`
+  String get linkhelptext {
+    return Intl.message(
+      'Paste the link to where other users can find the deal',
+      name: 'linkhelptext',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a link`
+  String get linkempty {
+    return Intl.message(
+      'Please enter a link',
+      name: 'linkempty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid link`
+  String get linkerror {
+    return Intl.message(
+      'Please enter a valid link',
+      name: 'linkerror',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

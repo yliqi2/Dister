@@ -61,6 +61,9 @@
     "searchHint2" : "Buscar \"tecnología\"",
     "searchHint3" : "Buscar \"muebles\"",
 
-    "categories" : "Categorias"
-
+    "categories" : "Categorias",
+    "upload" : "Subir",
+    
+    "firstpage" : "Comparte una oferta\n con millones de usuarios",
+    "firstpagesubtitle" : "¡Alcanza a millones de personas y haz que su oferta destaque!"
 }
