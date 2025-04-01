@@ -2,10 +2,7 @@ class HighlightOptions {
   static const Map<String, Map<String, String>> options = {
     "free_shipping": {"en": "Free Shipping", "es": "Envío Gratis"},
     "free": {"en": "Free", "es": "Gratis"},
-    "limited_time": {
-      "en": "Limited Time Offer",
-      "es": "Oferta por Tiempo Limitado"
-    },
+    "limited_time": {"en": "Limited Time Offer", "es": "Tiempo Limitado"},
     "best_seller": {"en": "Best Seller", "es": "Más Vendido"},
     "special_discount": {"en": "Special Discount", "es": "Descuento Especial"},
     "flash_sale": {"en": "Flash Sale", "es": "Venta Flash"},
