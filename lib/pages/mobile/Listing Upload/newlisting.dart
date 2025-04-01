@@ -326,8 +326,10 @@ class _NewlistingState extends State<Newlisting> {
                     selectedValue: _selectedCategory,
                     hintText: S.of(context).categorydropdown,
                     label: S.of(context).categorylabel,
-                    items:
-                        _categories.map((category) => category.name).toList(),
+                    items: _categories
+                        .map((category) => category.getName(
+                            Localizations.localeOf(context).toString()))
+                        .toList(),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return S.of(context).categoryerror;
@@ -348,9 +350,12 @@ class _NewlistingState extends State<Newlisting> {
                       hintText: S.of(context).subcategorydropdown,
                       label: S.of(context).subcategorylabel,
                       items: _categories
-                          .firstWhere(
-                              (category) => category.name == _selectedCategory)
-                          .subcategories,
+                          .firstWhere((category) =>
+                              category.getName(
+                                  Localizations.localeOf(context).toString()) ==
+                              _selectedCategory)
+                          .getSubcategories(
+                              Localizations.localeOf(context).toString()),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return S.of(context).subcategoryerror;
@@ -405,26 +410,26 @@ class _NewlistingState extends State<Newlisting> {
                 return GestureDetector(
                   onTap: () {
                     setState(() {
-                      if (_selectedHighlights
-                          .contains(HighlightOptions.options[index])) {
-                        _selectedHighlights
-                            .remove(HighlightOptions.options[index]);
+                      if (_selectedHighlights.contains(
+                          HighlightOptions.options.keys.elementAt(index))) {
+                        _selectedHighlights.remove(
+                            HighlightOptions.options.keys.elementAt(index));
                       } else {
-                        _selectedHighlights
-                            .add(HighlightOptions.options[index]);
+                        _selectedHighlights.add(
+                            HighlightOptions.options.keys.elementAt(index));
                       }
                     });
                   },
                   child: Container(
                     decoration: BoxDecoration(
-                      color: _selectedHighlights
-                              .contains(HighlightOptions.options[index])
+                      color: _selectedHighlights.contains(
+                              HighlightOptions.options.keys.elementAt(index))
                           ? Theme.of(context).colorScheme.primary
                           : Colors.transparent,
                       borderRadius: BorderRadius.circular(5),
                       border: Border.all(
-                        color: _selectedHighlights
-                                .contains(HighlightOptions.options[index])
+                        color: _selectedHighlights.contains(
+                                HighlightOptions.options.keys.elementAt(index))
                             ? Theme.of(context).colorScheme.primary
                             : Colors.grey,
                       ),
@@ -434,10 +439,11 @@ class _NewlistingState extends State<Newlisting> {
                       horizontal: 12.0,
                     ),
                     child: Text(
-                      HighlightOptions.options[index],
+                      HighlightOptions.getLocalizedOptions(
+                          Localizations.localeOf(context).toString())[index],
                       style: TextStyle(
-                        color: _selectedHighlights
-                                .contains(HighlightOptions.options[index])
+                        color: _selectedHighlights.contains(
+                                HighlightOptions.options.keys.elementAt(index))
                             ? Colors.white
                             : Theme.of(context).colorScheme.secondary,
                         fontWeight: FontWeight.w500,

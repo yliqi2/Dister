@@ -164,7 +164,8 @@ class _LoginState extends State<Login> {
                                 showSnack(S.of(context).formError);
                               }
                             },
-                            child: primaryBtn(context: context, text: 'Login'),
+                            child: primaryBtn(
+                                context: context, text: S.of(context).loginbtn),
                           ),
                         ],
                       ),
