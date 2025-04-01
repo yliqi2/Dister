@@ -29,7 +29,7 @@
 
     "emptyPassword" : "Introduce tu contraseña",
     "lenghtPassword" : "La contraseña debe tener al menos 8 caracteres",
-    "segurityPassword" : "La contraseña debe tener al menos un numero",
+    "segurityPassword" : "La contraseña debe tener al menos un numero y una letra",
 
     "emptyConfirmPassword": "Por favor confirma tu contraseña",
     "segurityConfirmPassword": "Las contraseñas no coinciden",
@@ -119,5 +119,9 @@
     "publish" : "Publicar",
     "publishing" : "Publicando...",
 
+    "errorLoadingListings": "Error al cargar las ofertas. Por favor, inténtalo de nuevo.",
+    "noListingsAvailable": "No hay ofertas disponibles.",
+
     "goback" : "Volver al inicio"
+    
 }

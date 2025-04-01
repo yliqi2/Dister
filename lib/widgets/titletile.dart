@@ -25,15 +25,6 @@ class _TitletileState extends State<Titletile> {
                 color: Theme.of(context).colorScheme.secondary,
               ),
             ),
-            GestureDetector(
-              child: Text(
-                'See all',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
           ],
         ),
         Divider(

@@ -128,4 +128,11 @@ class FirebaseServices {
     }
     return imageUrls;
   }
+
+  Future<void> incrementUserListings(String userId) async {
+    final userDoc = FirebaseFirestore.instance.collection('users').doc(userId);
+    await userDoc.update({
+      'listings': FieldValue.increment(1),
+    });
+  }
 }

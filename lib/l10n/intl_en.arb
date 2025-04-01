@@ -120,6 +120,8 @@
     "publish" : "Publish",
     "publishing" : "Publishing...",
 
-    "goback" : "Go back to home"
+    "errorLoadingListings": "Error loading listings. Please try again.",
+    "noListingsAvailable": "No listings available.",
 
+    "goback" : "Go back to home"
 }

@@ -11,6 +11,7 @@ import 'package:dister/widgets/mytextfield.dart';
 import 'package:dister/widgets/primarybtn.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Newlisting extends StatefulWidget {
   const Newlisting({super.key});
@@ -77,6 +78,7 @@ class _NewlistingState extends State<Newlisting> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12.0),
           child: Text(
@@ -145,7 +147,7 @@ class _NewlistingState extends State<Newlisting> {
                       helptext: S.of(context).linkhelptext,
                       validator: (value) {
                         final RegExp urlPattern = RegExp(
-                            r'^(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}(?:/[^\s]*)?$',
+                            r'^(https?:\/\/)?(www\.)?[\w\-]+(\.[\w\-]+)+([\/?].*)?$',
                             caseSensitive: false);
                         if (value == null || value.isEmpty) {
                           return S.of(context).linkempty;
@@ -460,7 +462,7 @@ class _NewlistingState extends State<Newlisting> {
                 return GestureDetector(
                   onTap: _isUploading
                       ? null
-                      : () {
+                      : () async {
                           if (_selectedImages.any((image) => image != null)) {
                             _validateForm();
                             if (_selectedHighlights.isNotEmpty) {
@@ -468,6 +470,9 @@ class _NewlistingState extends State<Newlisting> {
                                 setState(() {
                                   _isUploading = true;
                                 });
+
+                                final user = FirebaseAuth.instance.currentUser;
+
                                 fs
                                     .uploadListing(
                                   title: _titlecontroller.text,
@@ -481,17 +486,20 @@ class _NewlistingState extends State<Newlisting> {
                                           _finalpricecontroller.text) ??
                                       0.0,
                                   storeName: _shopcontroller.text,
-                                  userId: 'user123',
+                                  userId: user!.uid,
                                   categories: _selectedCategory ?? '',
                                   subcategories: _selectedSubCategory ?? '',
                                   highlights: _selectedHighlights,
                                   selectedImages: _selectedImages,
                                 )
-                                    .then((success) {
+                                    .then((success) async {
                                   setState(() {
                                     _isUploading = false; // Reset the flag
                                   });
                                   if (success) {
+                                    // Increment the user's listings count
+                                    await fs.incrementUserListings(user.uid);
+
                                     _pageController.nextPage(
                                       duration:
                                           const Duration(milliseconds: 300),
@@ -516,9 +524,7 @@ class _NewlistingState extends State<Newlisting> {
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(S
-                                      .of(context)
-                                      .errorhighlight), // Use the correct error message
+                                  content: Text(S.of(context).errorhighlight),
                                 ),
                               );
                             }
@@ -531,9 +537,7 @@ class _NewlistingState extends State<Newlisting> {
                           }
                         },
                   child: primaryBtn(
-                    text: _isUploading
-                        ? "Publishing..."
-                        : "Publish", // Update button text
+                    text: _isUploading ? "Publishing..." : "Publish",
                     context: context,
                   ),
                 );

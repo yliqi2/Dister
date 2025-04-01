@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/model/categorie.dart';
 
 class Listing {
   String id;
@@ -11,8 +10,8 @@ class Listing {
   double originalPrice;
   double discountPrice;
   String storeName;
-  String categories; // Category as a string (name of the category)
-  String subcategories; // List of subcategories
+  String categories; // Category as a string (ID of the category)
+  String subcategories; // Subcategory as a string (name of the subcategory)
   int likes;
   double? rating;
   List<String> images;
@@ -49,7 +48,7 @@ class Listing {
       'discountPrice': discountPrice,
       'storeName': storeName,
       'categories': categories, // Store category as string
-      'subcategories': subcategories, // Store subcategories as list of strings
+      'subcategories': subcategories, // Store subcategory as string
       'likes': likes,
       'rating': rating,
       'images': images,
@@ -71,7 +70,7 @@ class Listing {
       originalPrice: (map['originalPrice'] as num).toDouble(),
       discountPrice: (map['discountPrice'] as num).toDouble(),
       storeName: map['storeName'] ?? '',
-      categories: map['categories'] ?? '', 
+      categories: map['categories'] ?? '',
       subcategories: map['subcategories'] ?? '',
       likes: (map['likes'] as num).toInt(),
       rating: map['rating'] != null ? (map['rating'] as num).toDouble() : null,
@@ -80,6 +79,17 @@ class Listing {
           map['highlights'] != null ? List<String>.from(map['highlights']) : [],
       owner: map['owner'] ?? '',
     );
+  }
+
+  factory Listing.fromFirestore(DocumentSnapshot doc) {
+    final map = doc.data() as Map<String, dynamic>;
+    return Listing.fromMap(map, doc.id);
+  }
+
+  static Future<List<Listing>> getListings() async {
+    final querySnapshot =
+        await FirebaseFirestore.instance.collection('listings').get();
+    return querySnapshot.docs.map((doc) => Listing.fromFirestore(doc)).toList();
   }
 
   String getTimeAgo() {
