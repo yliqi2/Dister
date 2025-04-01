@@ -506,9 +506,11 @@ class _NewlistingState extends State<Newlisting> {
                                       curve: Curves.easeIn,
                                     );
                                   } else {
+                                    // ignore: use_build_context_synchronously
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content:
+                                            // ignore: use_build_context_synchronously
                                             Text(S.of(context).erroruploading),
                                       ),
                                     );

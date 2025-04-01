@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/model/categorie.dart'; // Se importa la clase Category.
 import 'package:dister/model/listing.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dister/model/user.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:intl/intl.dart'; // Importa el paquete intl para manejar fechas.
+import 'package:intl/intl.dart';
 
 class FirebaseServices {
   final FirebaseFirestore _fs = FirebaseFirestore.instance;
@@ -36,7 +35,6 @@ class FirebaseServices {
           DateFormat(format); // Define el formato de fecha
       return formatter.parse(dateStr); // Convierte el texto a DateTime
     } catch (e) {
-      print("Error parsing date: $e");
       return null; // Si hay error en la conversión, retorna null
     }
   }
@@ -95,7 +93,6 @@ class FirebaseServices {
 
       return true; // Retornamos true si todo fue exitoso
     } catch (e) {
-      print('Error uploading listing: $e');
       return false; // Retornamos false si ocurrió un error
     }
   }
