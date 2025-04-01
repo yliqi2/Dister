@@ -111,6 +111,15 @@
     "datehintText" : "Select a date",
 
     "selecthighlights" : "Select highlights for the Deal",
-    "subtitlehigh" : "Choose any highlights that apply to your deal."
+    "subtitlehigh" : "Choose any highlights that apply to your deal.",
+    
+    "erroruploading" : "Error uploading listing, please try again.",
+    "errorhighlight" : "Please select at least one highlight.",
+    "errorimage" : "Please upload at least one image.",
+
+    "publish" : "Publish",
+    "publishing" : "Publishing...",
+
+    "goback" : "Go back to home"
 
 }

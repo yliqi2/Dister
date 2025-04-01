@@ -77,6 +77,15 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Network Problem"),
     "errorUnknow": m0,
+    "errorhighlight": MessageLookupByLibrary.simpleMessage(
+      "Please select at least one highlight.",
+    ),
+    "errorimage": MessageLookupByLibrary.simpleMessage(
+      "Please upload at least one image.",
+    ),
+    "erroruploading": MessageLookupByLibrary.simpleMessage(
+      "Error uploading listing, please try again.",
+    ),
     "finalpriceerror": MessageLookupByLibrary.simpleMessage(
       "Please enter a valid price",
     ),
@@ -94,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Forgot your password? ",
     ),
     "formError": MessageLookupByLibrary.simpleMessage("Fix the form"),
+    "goback": MessageLookupByLibrary.simpleMessage("Go back to home"),
     "hintConfirmPass": MessageLookupByLibrary.simpleMessage(
       "Confirm your password",
     ),
@@ -142,6 +152,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "privacy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+    "publish": MessageLookupByLibrary.simpleMessage("Publish"),
+    "publishing": MessageLookupByLibrary.simpleMessage("Publishing..."),
     "registerbtn": MessageLookupByLibrary.simpleMessage("Register"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Reset your password",

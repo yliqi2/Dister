@@ -110,5 +110,14 @@
     "datehintText" : "Selecciona una fecha",
 
     "selecthighlights" : "Selecciona los destacados para la oferta",
-    "subtitlehigh" : "Elige los destacados que apliquen a tu oferta."
+    "subtitlehigh" : "Elige los destacados que apliquen a tu oferta.",
+
+    "erroruploading" : "Error al subir la oferta, por favor inténtalo de nuevo.",
+    "errorhighlight" : "Por favor selecciona al menos un destacado.",
+    "errorimage" : "Por favor sube al menos una imagen.",
+
+    "publish" : "Publicar",
+    "publishing" : "Publicando...",
+
+    "goback" : "Volver al inicio"
 }

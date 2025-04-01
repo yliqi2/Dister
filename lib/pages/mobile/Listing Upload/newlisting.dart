@@ -246,14 +246,13 @@ class _NewlistingState extends State<Newlisting> {
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content:
-                                  Text(S.of(context).formError),
+                              content: Text(S.of(context).formError),
                             ),
                           );
                         }
                       },
-                      child: primaryBtn(text: 
-                      S.of(context).continuebtn, context: context),
+                      child: primaryBtn(
+                          text: S.of(context).continuebtn, context: context),
                     ),
                     const SizedBox(height: 24),
                   ],
@@ -274,7 +273,7 @@ class _NewlistingState extends State<Newlisting> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             AutoSizeText(
-              'Add Images for the Deal',
+              S.of(context).secondpagetitle,
               minFontSize: 14,
               maxLines: 1,
               style: TextStyle(
@@ -283,9 +282,9 @@ class _NewlistingState extends State<Newlisting> {
                 color: Theme.of(context).colorScheme.secondary,
               ),
             ),
-            const Text(
-              'You must upload at least one image to continue.',
-              style: TextStyle(
+            Text(
+              S.of(context).secondpagesubtitle,
+              style: const TextStyle(
                 fontSize: 14,
               ),
             ),
@@ -318,8 +317,7 @@ class _NewlistingState extends State<Newlisting> {
                 );
               }),
             ),
-            const SizedBox(height: 20), // Cambié el tamaño a 20 aquí
-            // Ahora envuelves el Form con su propia clave
+            const SizedBox(height: 20),
             Form(
               key: _formkey2,
               child: Column(
@@ -339,12 +337,11 @@ class _NewlistingState extends State<Newlisting> {
                     onChanged: (newValue) {
                       setState(() {
                         _selectedCategory = newValue;
-                        _selectedSubCategory =
-                            null; 
+                        _selectedSubCategory = null;
                       });
                     },
                   ),
-                  const SizedBox(height: 20), 
+                  const SizedBox(height: 20),
                   if (_selectedCategory != null) ...[
                     CustomDropdown(
                       selectedValue: _selectedSubCategory,
@@ -367,7 +364,7 @@ class _NewlistingState extends State<Newlisting> {
                       },
                     ),
                     const SizedBox(
-                      height: 20, 
+                      height: 20,
                     )
                   ],
                   CustomTextField(
@@ -450,7 +447,7 @@ class _NewlistingState extends State<Newlisting> {
                 );
               }),
             ),
-            const SizedBox(height: 20), // Cambié el tamaño a 20 aquí
+            const SizedBox(height: 20),
             ValueListenableBuilder<bool>(
               valueListenable: _isFormValidNotifier,
               builder: (context, isFormValid, child) {
@@ -463,7 +460,7 @@ class _NewlistingState extends State<Newlisting> {
                             if (_selectedHighlights.isNotEmpty) {
                               if (_formkey2.currentState?.validate() ?? false) {
                                 setState(() {
-                                  _isUploading = true; // Set the flag to true
+                                  _isUploading = true;
                                 });
                                 fs
                                     .uploadListing(
@@ -496,34 +493,33 @@ class _NewlistingState extends State<Newlisting> {
                                     );
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                            'Error uploading listing, please try again.'),
+                                      SnackBar(
+                                        content:
+                                            Text(S.of(context).erroruploading),
                                       ),
                                     );
                                   }
                                 });
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                        'Please fill in all fields correctly.'),
+                                  SnackBar(
+                                    content: Text(S.of(context).formError),
                                   ),
                                 );
                               }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                      'Please select at least one highlight.'),
+                                SnackBar(
+                                  content: Text(S
+                                      .of(context)
+                                      .errorhighlight), // Use the correct error message
                                 ),
                               );
                             }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content:
-                                    Text('Please upload at least one image.'),
+                              SnackBar(
+                                content: Text(S.of(context).errorimage),
                               ),
                             );
                           }
@@ -537,7 +533,6 @@ class _NewlistingState extends State<Newlisting> {
                 );
               },
             ),
-
             const SizedBox(height: 24),
           ],
         ),
@@ -565,7 +560,7 @@ class _NewlistingState extends State<Newlisting> {
           onTap: () {},
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 26.0),
-            child: primaryBtn(context: context, text: 'Volver al inicio'),
+            child: primaryBtn(context: context, text: S.of(context).goback),
           ),
         ),
       ],

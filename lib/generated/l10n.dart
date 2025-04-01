@@ -849,6 +849,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Error uploading listing, please try again.`
+  String get erroruploading {
+    return Intl.message(
+      'Error uploading listing, please try again.',
+      name: 'erroruploading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select at least one highlight.`
+  String get errorhighlight {
+    return Intl.message(
+      'Please select at least one highlight.',
+      name: 'errorhighlight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please upload at least one image.`
+  String get errorimage {
+    return Intl.message(
+      'Please upload at least one image.',
+      name: 'errorimage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Publish`
+  String get publish {
+    return Intl.message('Publish', name: 'publish', desc: '', args: []);
+  }
+
+  /// `Publishing...`
+  String get publishing {
+    return Intl.message(
+      'Publishing...',
+      name: 'publishing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go back to home`
+  String get goback {
+    return Intl.message('Go back to home', name: 'goback', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
