@@ -33,7 +33,7 @@
     "emptyConfirmPassword": "Please confirm your password",
     "segurityConfirmPassword": "Passwords do not match",
 
-    "formError" : "Fix the credentials",
+    "formError" : "Fix the form",
 
     "errorCredential" : "Incorrect credentials",
     "errorNetwork" : "Network Problem",
@@ -84,5 +84,33 @@
     "descriptionlabel" : "Description",
     "descriptionerror" : "Please enter a description",
     "descriptionerror2" : "Description cannot be less than 10 characters",
-    "descriptionerror3" : "Description cannot be more than 200 characters"
+    "descriptionerror3" : "Description cannot be more than 200 characters",
+
+    "originalprice" : "Original Price",
+    "originalpriceerror" : "Please enter a valid price",
+
+    "finalpricelabel" : "Final Price",
+    "finalpriceerror" : "Please enter a valid price",
+    "finalpriceerror2" : "Final price must be less than original price",
+
+    "continuebtn" : "Continue",
+    
+    "secondpagetitle" : "Add Images for the Deal",
+    "secondpagesubtitle" : "You must upload at least one image to continue.",
+
+    "categorydropdown" : "Select a category",
+    "categorylabel" : "Category",
+    "categoryerror" : "Please select a category",
+
+    "subcategorydropdown" : "Select a subcategory",
+    "subcategorylabel" : "Subcategory",
+    "subcategoryerror" : "Please select a subcategory",
+
+    "datelabel" : "Deal expires at...",
+    "datehelptext" : "This camp is optional",
+    "datehintText" : "Select a date",
+
+    "selecthighlights" : "Select highlights for the Deal",
+    "subtitlehigh" : "Choose any highlights that apply to your deal."
+
 }

@@ -28,13 +28,28 @@ class MessageLookup extends MessageLookupByLibrary {
       "¿Ya tienes una cuenta? ",
     ),
     "categories": MessageLookupByLibrary.simpleMessage("Categorias"),
+    "categorydropdown": MessageLookupByLibrary.simpleMessage(
+      "Selecciona una categoría",
+    ),
+    "categoryerror": MessageLookupByLibrary.simpleMessage(
+      "Por favor selecciona una categoría",
+    ),
+    "categorylabel": MessageLookupByLibrary.simpleMessage("Categoría"),
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Confirma tu contraseña",
     ),
     "containsSpace": MessageLookupByLibrary.simpleMessage(
       "El usuario no puede contener espacios",
     ),
+    "continuebtn": MessageLookupByLibrary.simpleMessage("Continuar"),
     "continues": MessageLookupByLibrary.simpleMessage("Comenzar"),
+    "datehelptext": MessageLookupByLibrary.simpleMessage(
+      "Este campo es opcional",
+    ),
+    "datehintText": MessageLookupByLibrary.simpleMessage(
+      "Selecciona una fecha",
+    ),
+    "datelabel": MessageLookupByLibrary.simpleMessage("La oferta expira el..."),
     "descriptionerror": MessageLookupByLibrary.simpleMessage(
       "Por favor introduce una descripción",
     ),
@@ -66,6 +81,13 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Problema de red"),
     "errorUnknow": m0,
+    "finalpriceerror": MessageLookupByLibrary.simpleMessage(
+      "Por favor introduce un precio válido",
+    ),
+    "finalpriceerror2": MessageLookupByLibrary.simpleMessage(
+      "El precio final debe ser menor que el precio original",
+    ),
+    "finalpricelabel": MessageLookupByLibrary.simpleMessage("Precio final"),
     "firstpage": MessageLookupByLibrary.simpleMessage(
       "Comparte una oferta\ncon millones de usuarios",
     ),
@@ -75,9 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "forgotPassword": MessageLookupByLibrary.simpleMessage(
       "¿Has olvidado la contraseña? ",
     ),
-    "formError": MessageLookupByLibrary.simpleMessage(
-      "Arregla tus credenciales",
-    ),
+    "formError": MessageLookupByLibrary.simpleMessage("Arregla el formulario"),
     "hintConfirmPass": MessageLookupByLibrary.simpleMessage(
       "Confirma tu contraseña",
     ),
@@ -118,6 +138,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "notValidDomainEmail": MessageLookupByLibrary.simpleMessage(
       "Tiene que terminar @gmail.com",
     ),
+    "originalprice": MessageLookupByLibrary.simpleMessage("Precio original"),
+    "originalpriceerror": MessageLookupByLibrary.simpleMessage(
+      "Por favor introduce un precio válido",
+    ),
     "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
     "privacy": MessageLookupByLibrary.simpleMessage("Política de privacidad"),
     "registerbtn": MessageLookupByLibrary.simpleMessage("Registrate"),
@@ -129,11 +153,20 @@ class MessageLookup extends MessageLookupByLibrary {
       "Buscar \"tecnología\"",
     ),
     "searchHint3": MessageLookupByLibrary.simpleMessage("Buscar \"muebles\""),
+    "secondpagesubtitle": MessageLookupByLibrary.simpleMessage(
+      "Debes subir al menos una imagen para continuar.",
+    ),
+    "secondpagetitle": MessageLookupByLibrary.simpleMessage(
+      "Añade imágenes para la oferta",
+    ),
     "segurityConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Las contraseñas no coinciden",
     ),
     "segurityPassword": MessageLookupByLibrary.simpleMessage(
       "La contraseña debe tener al menos un numero",
+    ),
+    "selecthighlights": MessageLookupByLibrary.simpleMessage(
+      "Selecciona los destacados para la oferta",
     ),
     "shortUsername": MessageLookupByLibrary.simpleMessage(
       "El usuario debe tener más de 5 caracteres",
@@ -144,6 +177,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "signTitle": MessageLookupByLibrary.simpleMessage(
       "Regístrate para desbloquear ofertas!",
     ),
+    "subcategorydropdown": MessageLookupByLibrary.simpleMessage(
+      "Selecciona una subcategoría",
+    ),
+    "subcategoryerror": MessageLookupByLibrary.simpleMessage(
+      "Por favor selecciona una subcategoría",
+    ),
+    "subcategorylabel": MessageLookupByLibrary.simpleMessage("Subcategoría"),
     "subtitle_onboarding": MessageLookupByLibrary.simpleMessage(
       "Descubre tesoros y grandes ofertas.\n¡Conéctate hoy!",
     ),
@@ -152,6 +192,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "subtitle_onboarding3": MessageLookupByLibrary.simpleMessage(
       "Tu próxima gran oferta está\na solo una notificación de distancia.",
+    ),
+    "subtitlehigh": MessageLookupByLibrary.simpleMessage(
+      "Elige los destacados que apliquen a tu oferta.",
     ),
     "terms": MessageLookupByLibrary.simpleMessage("Terminos"),
     "tiendaerror": MessageLookupByLibrary.simpleMessage(

@@ -310,14 +310,9 @@ class S {
     );
   }
 
-  /// `Fix the credentials`
+  /// `Fix the form`
   String get formError {
-    return Intl.message(
-      'Fix the credentials',
-      name: 'formError',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Fix the form', name: 'formError', desc: '', args: []);
   }
 
   /// `Incorrect credentials`
@@ -670,6 +665,186 @@ class S {
     return Intl.message(
       'Description cannot be more than 200 characters',
       name: 'descriptionerror3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Original Price`
+  String get originalprice {
+    return Intl.message(
+      'Original Price',
+      name: 'originalprice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid price`
+  String get originalpriceerror {
+    return Intl.message(
+      'Please enter a valid price',
+      name: 'originalpriceerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Final Price`
+  String get finalpricelabel {
+    return Intl.message(
+      'Final Price',
+      name: 'finalpricelabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid price`
+  String get finalpriceerror {
+    return Intl.message(
+      'Please enter a valid price',
+      name: 'finalpriceerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Final price must be less than original price`
+  String get finalpriceerror2 {
+    return Intl.message(
+      'Final price must be less than original price',
+      name: 'finalpriceerror2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get continuebtn {
+    return Intl.message('Continue', name: 'continuebtn', desc: '', args: []);
+  }
+
+  /// `Add Images for the Deal`
+  String get secondpagetitle {
+    return Intl.message(
+      'Add Images for the Deal',
+      name: 'secondpagetitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must upload at least one image to continue.`
+  String get secondpagesubtitle {
+    return Intl.message(
+      'You must upload at least one image to continue.',
+      name: 'secondpagesubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a category`
+  String get categorydropdown {
+    return Intl.message(
+      'Select a category',
+      name: 'categorydropdown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get categorylabel {
+    return Intl.message('Category', name: 'categorylabel', desc: '', args: []);
+  }
+
+  /// `Please select a category`
+  String get categoryerror {
+    return Intl.message(
+      'Please select a category',
+      name: 'categoryerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a subcategory`
+  String get subcategorydropdown {
+    return Intl.message(
+      'Select a subcategory',
+      name: 'subcategorydropdown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subcategory`
+  String get subcategorylabel {
+    return Intl.message(
+      'Subcategory',
+      name: 'subcategorylabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a subcategory`
+  String get subcategoryerror {
+    return Intl.message(
+      'Please select a subcategory',
+      name: 'subcategoryerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deal expires at...`
+  String get datelabel {
+    return Intl.message(
+      'Deal expires at...',
+      name: 'datelabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This camp is optional`
+  String get datehelptext {
+    return Intl.message(
+      'This camp is optional',
+      name: 'datehelptext',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a date`
+  String get datehintText {
+    return Intl.message(
+      'Select a date',
+      name: 'datehintText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select highlights for the Deal`
+  String get selecthighlights {
+    return Intl.message(
+      'Select highlights for the Deal',
+      name: 'selecthighlights',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose any highlights that apply to your deal.`
+  String get subtitlehigh {
+    return Intl.message(
+      'Choose any highlights that apply to your deal.',
+      name: 'subtitlehigh',
       desc: '',
       args: [],
     );

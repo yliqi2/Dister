@@ -205,12 +205,12 @@ class _NewlistingState extends State<Newlisting> {
                       controller: _originalcontroller,
                       isPassword: false,
                       hintText: '90',
-                      label: 'Original Price',
+                      label: S.of(context).originalprice,
                       validator: (value) {
                         final double? originalPrice =
                             double.tryParse(value ?? '');
                         if (originalPrice == null || originalPrice <= 0) {
-                          return 'Please enter a valid price.';
+                          return S.of(context).originalpriceerror;
                         }
                         return null;
                       },
@@ -220,16 +220,16 @@ class _NewlistingState extends State<Newlisting> {
                       controller: _finalpricecontroller,
                       isPassword: false,
                       hintText: '30',
-                      label: 'Final Price',
+                      label: S.of(context).finalpricelabel,
                       validator: (value) {
                         final double? finalPrice = double.tryParse(value ?? '');
                         final double originalPrice =
                             double.tryParse(_originalcontroller.text) ?? 0;
                         if (finalPrice == null || finalPrice < 0) {
-                          return 'Please enter a valid price.';
+                          return S.of(context).finalpriceerror;
                         }
                         if (finalPrice >= originalPrice) {
-                          return 'Final price must be less than original price.';
+                          return S.of(context).finalpriceerror2;
                         }
                         return null;
                       },
@@ -245,14 +245,15 @@ class _NewlistingState extends State<Newlisting> {
                           );
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
+                            SnackBar(
                               content:
-                                  Text('Please fill in all fields correctly.'),
+                                  Text(S.of(context).formError),
                             ),
                           );
                         }
                       },
-                      child: primaryBtn(text: "Continue", context: context),
+                      child: primaryBtn(text: 
+                      S.of(context).continuebtn, context: context),
                     ),
                     const SizedBox(height: 24),
                   ],
@@ -325,13 +326,13 @@ class _NewlistingState extends State<Newlisting> {
                 children: [
                   CustomDropdown(
                     selectedValue: _selectedCategory,
-                    hintText: 'Select Category',
-                    label: 'Category',
+                    hintText: S.of(context).categorydropdown,
+                    label: S.of(context).categorylabel,
                     items:
                         _categories.map((category) => category.name).toList(),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please select a category.';
+                        return S.of(context).categoryerror;
                       }
                       return null;
                     },
@@ -339,23 +340,23 @@ class _NewlistingState extends State<Newlisting> {
                       setState(() {
                         _selectedCategory = newValue;
                         _selectedSubCategory =
-                            null; // Reset the subcategory when the category changes
+                            null; 
                       });
                     },
                   ),
-                  const SizedBox(height: 20), // Cambié el tamaño a 20 aquí
+                  const SizedBox(height: 20), 
                   if (_selectedCategory != null) ...[
                     CustomDropdown(
                       selectedValue: _selectedSubCategory,
-                      hintText: 'Select Subcategory',
-                      label: 'Subcategory',
+                      hintText: S.of(context).subcategorydropdown,
+                      label: S.of(context).subcategorylabel,
                       items: _categories
                           .firstWhere(
                               (category) => category.name == _selectedCategory)
                           .subcategories,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please select a subcategory.';
+                          return S.of(context).subcategoryerror;
                         }
                         return null;
                       },
@@ -366,16 +367,16 @@ class _NewlistingState extends State<Newlisting> {
                       },
                     ),
                     const SizedBox(
-                      height: 20, // Cambié el tamaño a 20 aquí
+                      height: 20, 
                     )
                   ],
                   CustomTextField(
                     controller: _dateController,
                     isPassword: false,
-                    hintText: 'Select a date',
-                    label: 'Deal expires at...',
+                    hintText: S.of(context).datehintText,
+                    label: S.of(context).datelabel,
                     isDateField: true,
-                    helptext: 'This camp is optional',
+                    helptext: S.of(context).datehintText,
                   ),
                   const SizedBox(
                     height: 20, // Cambié el tamaño a 20 aquí
@@ -384,7 +385,7 @@ class _NewlistingState extends State<Newlisting> {
               ),
             ),
             AutoSizeText(
-              'Select Highlights for the Deal',
+              S.of(context).selecthighlights,
               minFontSize: 14,
               maxLines: 1,
               style: TextStyle(
@@ -393,9 +394,9 @@ class _NewlistingState extends State<Newlisting> {
                 color: Theme.of(context).colorScheme.secondary,
               ),
             ),
-            const Text(
-              'Choose any highlights that apply to your deal.',
-              style: TextStyle(
+            Text(
+              S.of(context).subtitlehigh,
+              style: const TextStyle(
                 fontSize: 14,
               ),
             ),

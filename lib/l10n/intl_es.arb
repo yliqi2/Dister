@@ -6,6 +6,7 @@
     "title_onboarding3": "Nunca te lo pierdas",
     "subtitle_onboarding3": "Tu próxima gran oferta está\na solo una notificación de distancia.",
     "continues" : "Comenzar",
+    "continuebtn" : "Continuar",
 
     "hintUser" : "Introduce tu usuario",
     "userLabel" : "Usuario",
@@ -33,7 +34,7 @@
     "emptyConfirmPassword": "Por favor confirma tu contraseña",
     "segurityConfirmPassword": "Las contraseñas no coinciden",
 
-    "formError" : "Arregla tus credenciales",
+    "formError" : "Arregla el formulario",
     
     "errorCredential" : "Datos incorrectos",
     "errorNetwork" : "Problema de red",
@@ -67,6 +68,9 @@
     "firstpage" : "Comparte una oferta\ncon millones de usuarios",
     "firstpagesubtitle" : "¡Alcanza a millones de personas y haz que su oferta destaque!",
 
+    "secondpagetitle" : "Añade imágenes para la oferta",
+    "secondpagesubtitle" : "Debes subir al menos una imagen para continuar.",
+
     "linkhelptext" : "Pega el enlace donde otros usuarios puedan encontrar la oferta",
     "linkempty" : "Por favor introduce un enlace",
     "linkerror" : "Por favor introduce un enlace válido",
@@ -84,5 +88,27 @@
     "descriptionlabel" : "Descripción",
     "descriptionerror" : "Por favor introduce una descripción",
     "descriptionerror2" : "La descripción no puede tener menos de 10 caracteres",
-    "descriptionerror3" : "La descripción no puede tener más de 200 caracteres"
+    "descriptionerror3" : "La descripción no puede tener más de 200 caracteres",
+
+    "originalprice" : "Precio original",
+    "originalpriceerror" : "Por favor introduce un precio válido",
+
+    "finalpricelabel" : "Precio final",
+    "finalpriceerror" : "Por favor introduce un precio válido",
+    "finalpriceerror2" : "El precio final debe ser menor que el precio original",
+
+    "categorydropdown" : "Selecciona una categoría",
+    "categorylabel" : "Categoría",
+    "categoryerror" : "Por favor selecciona una categoría",
+
+    "subcategorydropdown" : "Selecciona una subcategoría",
+    "subcategorylabel" : "Subcategoría",
+    "subcategoryerror" : "Por favor selecciona una subcategoría",
+
+    "datelabel" : "La oferta expira el...",
+    "datehelptext" : "Este campo es opcional",
+    "datehintText" : "Selecciona una fecha",
+
+    "selecthighlights" : "Selecciona los destacados para la oferta",
+    "subtitlehigh" : "Elige los destacados que apliquen a tu oferta."
 }
