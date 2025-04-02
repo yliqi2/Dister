@@ -71,7 +71,7 @@ class _ListingtileState extends State<Listingtile> {
                   ),
                   const SizedBox(width: 5),
                   Text(
-                    ownerName != null ? '@$ownerName' : '@owner',
+                    ownerName != null ? '@$ownerName' : '@Unknown',
                     maxLines: 1,
                     style: const TextStyle(
                         fontSize: 12, overflow: TextOverflow.ellipsis),

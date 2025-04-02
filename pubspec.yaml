@@ -52,6 +52,7 @@ dependencies:
   flutter_datetime_picker_plus: ^2.2.0
   confirmation_success: ^0.0.2
   firebase_storage: ^12.4.4
+  carousel_slider: ^5.0.0
 
 
 
