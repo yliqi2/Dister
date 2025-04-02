@@ -105,13 +105,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
             padding: const EdgeInsets.only(top: 20.0),
             child: Row(
               children: [
-                _buildButton('Change Plane', context),
-                const SizedBox(width: 20),
                 _buildButton('Edit Profile', context),
               ],
             ),
           ),
-          
         ],
       ),
     );
