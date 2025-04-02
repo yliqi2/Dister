@@ -18,13 +18,16 @@ class CustomFilterDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        color: colorScheme.surface.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: Colors.white.withOpacity(0.2),
+          color: colorScheme.onSurface.withOpacity(0.2),
           width: 1,
         ),
       ),
@@ -39,25 +42,24 @@ class CustomFilterDropdown extends StatelessWidget {
                 if (icon != null) ...[
                   Icon(
                     icon,
-                    color: Colors.white.withOpacity(0.7),
+                    color: colorScheme.onSurface.withOpacity(0.7),
                     size: 20,
                   ),
                   const SizedBox(width: 8),
                 ],
                 Text(
                   hint,
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(0.7),
-                    fontSize: 14,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: colorScheme.onSurface.withOpacity(0.7),
                   ),
                 ),
               ],
             ),
             icon: Icon(
               Icons.arrow_drop_down_rounded,
-              color: Colors.white.withOpacity(0.7),
+              color: colorScheme.onSurface.withOpacity(0.7),
             ),
-            dropdownColor: Theme.of(context).colorScheme.surface,
+            dropdownColor: colorScheme.surface,
             items: items.map((DropdownItem item) {
               return DropdownMenuItem<String>(
                 value: item.value,
@@ -66,16 +68,15 @@ class CustomFilterDropdown extends StatelessWidget {
                     if (item.icon != null) ...[
                       Icon(
                         item.icon,
-                        color: Colors.white.withOpacity(0.7),
+                        color: colorScheme.onSurface.withOpacity(0.7),
                         size: 20,
                       ),
                       const SizedBox(width: 8),
                     ],
                     Text(
                       item.label,
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.9),
-                        fontSize: 14,
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: colorScheme.onSurface.withOpacity(0.9),
                       ),
                     ),
                   ],

@@ -43,15 +43,21 @@ class _ListingtileState extends State<Listingtile> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Container(
       width: size.width * 0.45,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainer,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? colorScheme.surface
+            : colorScheme.surface.withOpacity(0.95),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: Theme.of(context).colorScheme.tertiary,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? colorScheme.outline
+              : colorScheme.outline.withOpacity(0.3),
         ),
       ),
       child: Column(
@@ -75,30 +81,24 @@ class _ListingtileState extends State<Listingtile> {
                   Text(
                     ownerName != null ? '@$ownerName' : '@Unknown',
                     maxLines: 1,
-                    style: const TextStyle(
-                        fontSize: 12, overflow: TextOverflow.ellipsis),
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  StreamBuilder<int>(
-                    stream: _likeService.watchLikesCount(widget.listing.id),
-                    builder: (context, snapshot) {
-                      final likes = snapshot.data ?? widget.listing.likes;
-                      return Text(
-                        "$likes Likes",
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                      );
-                    },
+                  Text(
+                    "${widget.listing.getFormattedLikes()} Likes",
+                    style: theme.textTheme.bodySmall?.copyWith(
+                      color: colorScheme.secondary,
+                    ),
                   ),
                   Text(
                     "${widget.listing.getTimeAgo()} ago",
-                    style: const TextStyle(fontSize: 10),
+                    style: theme.textTheme.bodySmall,
                   ),
                 ],
               ),
@@ -123,7 +123,9 @@ class _ListingtileState extends State<Listingtile> {
           // Title
           Text(
             widget.listing.title,
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: theme.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -136,19 +138,17 @@ class _ListingtileState extends State<Listingtile> {
                 children: [
                   Text(
                     "${widget.listing.discountPrice.toStringAsFixed(0)}€",
-                    style: const TextStyle(
-                      fontSize: 22,
+                    style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                      color: colorScheme.error,
                     ),
                   ),
                   const SizedBox(width: 5),
                   Text(
                     "${widget.listing.originalPrice.toStringAsFixed(0)}€",
-                    style: const TextStyle(
-                      fontSize: 12,
+                    style: theme.textTheme.bodySmall?.copyWith(
                       decoration: TextDecoration.lineThrough,
-                      color: Colors.grey,
+                      color: colorScheme.outline,
                     ),
                   ),
                 ],
@@ -163,13 +163,14 @@ class _ListingtileState extends State<Listingtile> {
                     child: Container(
                       width: 25,
                       height: 25,
-                      decoration: const BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      decoration: BoxDecoration(
+                        color: colorScheme.error,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                       child: Icon(
                         isLiked ? Icons.favorite : Icons.favorite_border,
-                        color: Colors.white,
+                        color: colorScheme.onError,
                         size: 20,
                       ),
                     ),

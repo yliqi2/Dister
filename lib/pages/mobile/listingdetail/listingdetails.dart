@@ -66,18 +66,22 @@ class _ListingdetailsState extends State<Listingdetails> {
   @override
   Widget build(BuildContext context) {
     List<String> images = widget.listing.images;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: colorScheme.background,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: colorScheme.background,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: colorScheme.onBackground),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           ownerName != null ? '@$ownerName' : '@Unknown',
-          style: const TextStyle(color: Colors.white),
+          style: theme.textTheme.titleMedium?.copyWith(
+            color: colorScheme.onBackground,
+          ),
         ),
         centerTitle: true,
         actions: [
@@ -88,7 +92,7 @@ class _ListingdetailsState extends State<Listingdetails> {
               return IconButton(
                 icon: Icon(
                   isLiked ? Icons.favorite : Icons.favorite_border,
-                  color: Colors.red,
+                  color: colorScheme.error,
                 ),
                 onPressed: () => _likeService.toggleLike(widget.listing.id),
               );
@@ -136,8 +140,8 @@ class _ListingdetailsState extends State<Listingdetails> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: _currentPage == index
-                                  ? Colors.white
-                                  : Colors.white.withOpacity(0.5),
+                                  ? colorScheme.onBackground
+                                  : colorScheme.onBackground.withOpacity(0.5),
                             ),
                           ),
                         ),
@@ -157,9 +161,8 @@ class _ListingdetailsState extends State<Listingdetails> {
                       Expanded(
                         child: Text(
                           widget.listing.title,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
+                          style: theme.textTheme.headlineSmall?.copyWith(
+                            color: colorScheme.onBackground,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -170,12 +173,19 @@ class _ListingdetailsState extends State<Listingdetails> {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.white24,
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? colorScheme.surfaceVariant
+                              : colorScheme.primary.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
                           '${(((widget.listing.originalPrice - widget.listing.discountPrice) / widget.listing.originalPrice) * 100).round()}% off',
-                          style: const TextStyle(color: Colors.white),
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? colorScheme.onSurfaceVariant
+                                    : colorScheme.primary,
+                          ),
                         ),
                       ),
                     ],
@@ -185,56 +195,58 @@ class _ListingdetailsState extends State<Listingdetails> {
                     children: [
                       Text(
                         '${widget.listing.discountPrice.toStringAsFixed(0)}€',
-                        style: const TextStyle(
-                          fontSize: 24,
+                        style: theme.textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: Colors.red,
+                          color: colorScheme.error,
                         ),
                       ),
                       const SizedBox(width: 8),
                       Text(
                         '${widget.listing.originalPrice.toStringAsFixed(0)}€',
-                        style: const TextStyle(
-                          fontSize: 18,
+                        style: theme.textTheme.titleMedium?.copyWith(
                           decoration: TextDecoration.lineThrough,
-                          color: Colors.grey,
+                          color: colorScheme.outline,
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 24),
-                  const Text(
+                  Text(
                     'Product Details',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      color: colorScheme.onBackground,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     widget.listing.desc,
-                    style: const TextStyle(color: Colors.grey),
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   const SizedBox(height: 24),
-                  const Text(
+                  Text(
                     'Shopping Details',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      color: colorScheme.onBackground,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     '• ${widget.listing.storeName}',
-                    style: const TextStyle(color: Colors.grey),
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   if (widget.listing.rating != null) ...[
                     const SizedBox(height: 4),
                     Text(
                       '• Rating: ${widget.listing.rating!.toStringAsFixed(1)} ⭐',
-                      style: const TextStyle(color: Colors.grey),
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ],
                   const SizedBox(height: 4),
@@ -244,20 +256,26 @@ class _ListingdetailsState extends State<Listingdetails> {
                       final likes = snapshot.data ?? widget.listing.likes;
                       return Text(
                         '• $likes Likes',
-                        style: const TextStyle(color: Colors.grey),
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
                       );
                     },
                   ),
                   const SizedBox(height: 4),
                   Text(
                     '• Posted ${widget.listing.getTimeAgo()} ago',
-                    style: const TextStyle(color: Colors.grey),
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
                   ),
                   if (widget.listing.expiresAt != null) ...[
                     const SizedBox(height: 4),
                     Text(
                       '• Expires on ${widget.listing.getFormattedExpiry()}',
-                      style: const TextStyle(color: Colors.grey),
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ],
                   const SizedBox(height: 16),
@@ -278,20 +296,16 @@ class _ListingdetailsState extends State<Listingdetails> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.red,
-        child: InkWell(
-          onTap: _launchURL,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              "Go for the discount",
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
+        color: colorScheme.error,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            "Go for the discount",
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: colorScheme.onError,
+              fontWeight: FontWeight.bold,
             ),
+            textAlign: TextAlign.center,
           ),
         ),
       ),
@@ -299,16 +313,23 @@ class _ListingdetailsState extends State<Listingdetails> {
   }
 
   Widget _categoryTag(String text) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       margin: const EdgeInsets.only(right: 8, bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.white24,
+        color: isDark
+            ? colorScheme.surfaceVariant
+            : colorScheme.primary.withOpacity(0.1),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
         text,
-        style: const TextStyle(color: Colors.white),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color:
+                  isDark ? colorScheme.onSurfaceVariant : colorScheme.primary,
+            ),
       ),
     );
   }
