@@ -1,6 +1,7 @@
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/model/categorie.dart';
 import 'package:dister/model/listing.dart';
+import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
 import 'package:dister/widgets/listingtile.dart';
 
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class _HomescreenState extends State<Homescreen> {
   String? categoryId;
   List<String> _subcategories = [];
 
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -38,10 +41,17 @@ class _HomescreenState extends State<Homescreen> {
       final matchesCategory = _selectedCategory.isEmpty ||
           listing.categories == _selectedCategory ||
           _selectedCategory == 'Todas las categorías';
+
       final matchesSubcategory = _selectedSubcategory.isEmpty ||
           listing.subcategories == _selectedSubcategory ||
           _selectedSubcategory == 'Todas las subcategorías';
-      return matchesCategory && matchesSubcategory;
+
+      final matchesSearch = _searchController.text.isEmpty ||
+          listing.title
+              .toLowerCase()
+              .contains(_searchController.text.toLowerCase());
+
+      return matchesCategory && matchesSubcategory && matchesSearch;
     }).toList();
   }
 
@@ -81,8 +91,10 @@ class _HomescreenState extends State<Homescreen> {
                 Padding(
                   padding: const EdgeInsets.only(right: 26.0, left: 20.0),
                   child: IconButton(
-                    icon: const Icon(Icons.chat_bubble_rounded,
-                        color: Colors.white),
+                    icon: const Icon(
+                      Icons.chat_bubble_rounded,
+                      color: Colors.white,
+                    ),
                     onPressed: () {},
                   ),
                 ),
@@ -95,7 +107,11 @@ class _HomescreenState extends State<Homescreen> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 26, vertical: 8),
                       child: AnimatedTextField(
+                        controller: _searchController,
                         animationType: Animationtype.typer,
+                        onChanged: (value) {
+                          setState(() {});
+                        },
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.search),
                           border: OutlineInputBorder(
@@ -239,11 +255,20 @@ class _HomescreenState extends State<Homescreen> {
                           crossAxisCount: crossAxisCount,
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
-                          childAspectRatio: 0.710,
+                          childAspectRatio: 0.675,
                         ),
                         itemCount: filteredListings.length,
                         itemBuilder: (context, index) {
-                          return Listingtile(listing: filteredListings[index]);
+                          return GestureDetector(
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Listingdetails(
+                                      listing: filteredListings[index]),
+                                )),
+                            child:
+                                Listingtile(listing: filteredListings[index]),
+                          );
                         },
                       ),
                     );

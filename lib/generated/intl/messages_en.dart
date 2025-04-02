@@ -75,6 +75,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorCredential": MessageLookupByLibrary.simpleMessage(
       "Incorrect credentials",
     ),
+    "errorLoadingListings": MessageLookupByLibrary.simpleMessage(
+      "Error loading listings. Please try again.",
+    ),
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Network Problem"),
     "errorUnknow": m0,
     "errorhighlight": MessageLookupByLibrary.simpleMessage(
@@ -142,6 +145,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "noAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account? ",
+    ),
+    "noListingsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No listings available.",
     ),
     "notValidDomainEmail": MessageLookupByLibrary.simpleMessage(
       "Email must end with @gmail.com",

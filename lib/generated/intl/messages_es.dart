@@ -81,15 +81,6 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Problema de red"),
     "errorUnknow": m0,
-    "errorhighlight": MessageLookupByLibrary.simpleMessage(
-      "Por favor selecciona al menos un destacado.",
-    ),
-    "errorimage": MessageLookupByLibrary.simpleMessage(
-      "Por favor sube al menos una imagen.",
-    ),
-    "erroruploading": MessageLookupByLibrary.simpleMessage(
-      "Error al subir la oferta, por favor inténtalo de nuevo.",
-    ),
     "finalpriceerror": MessageLookupByLibrary.simpleMessage(
       "Por favor introduce un precio válido",
     ),
@@ -107,7 +98,6 @@ class MessageLookup extends MessageLookupByLibrary {
       "¿Has olvidado la contraseña? ",
     ),
     "formError": MessageLookupByLibrary.simpleMessage("Arregla el formulario"),
-    "goback": MessageLookupByLibrary.simpleMessage("Volver al inicio"),
     "hintConfirmPass": MessageLookupByLibrary.simpleMessage(
       "Confirma tu contraseña",
     ),
@@ -154,8 +144,6 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
     "privacy": MessageLookupByLibrary.simpleMessage("Política de privacidad"),
-    "publish": MessageLookupByLibrary.simpleMessage("Publicar"),
-    "publishing": MessageLookupByLibrary.simpleMessage("Publicando..."),
     "registerbtn": MessageLookupByLibrary.simpleMessage("Registrate"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Restablecer contraseña",

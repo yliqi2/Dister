@@ -29,7 +29,7 @@
 
     "emptyPassword" : "Introduce tu contraseña",
     "lenghtPassword" : "La contraseña debe tener al menos 8 caracteres",
-    "segurityPassword" : "La contraseña debe tener al menos un numero y una letra",
+    "segurityPassword" : "La contraseña debe tener al menos un numero",
 
     "emptyConfirmPassword": "Por favor confirma tu contraseña",
     "segurityConfirmPassword": "Las contraseñas no coinciden",
@@ -110,18 +110,5 @@
     "datehintText" : "Selecciona una fecha",
 
     "selecthighlights" : "Selecciona los destacados para la oferta",
-    "subtitlehigh" : "Elige los destacados que apliquen a tu oferta.",
-
-    "erroruploading" : "Error al subir la oferta, por favor inténtalo de nuevo.",
-    "errorhighlight" : "Por favor selecciona al menos un destacado.",
-    "errorimage" : "Por favor sube al menos una imagen.",
-
-    "publish" : "Publicar",
-    "publishing" : "Publicando...",
-
-    "errorLoadingListings": "Error al cargar las ofertas. Por favor, inténtalo de nuevo.",
-    "noListingsAvailable": "No hay ofertas disponibles.",
-
-    "goback" : "Volver al inicio"
-    
+    "subtitlehigh" : "Elige los destacados que apliquen a tu oferta."
 }

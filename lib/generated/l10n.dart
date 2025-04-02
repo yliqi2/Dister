@@ -28,9 +28,10 @@ class S {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -894,9 +895,14 @@ class S {
     );
   }
 
-  /// `Go back to home`
-  String get goback {
-    return Intl.message('Go back to home', name: 'goback', desc: '', args: []);
+  /// `Error loading listings. Please try again.`
+  String get errorLoadingListings {
+    return Intl.message(
+      'Error loading listings. Please try again.',
+      name: 'errorLoadingListings',
+      desc: '',
+      args: [],
+    );
   }
 
   /// `No listings available.`
@@ -909,14 +915,9 @@ class S {
     );
   }
 
-  /// `Error loading listings. Please try again.`
-  String get errorLoadingListings {
-    return Intl.message(
-      'Error loading listings. Please try again.',
-      name: 'errorLoadingListings',
-      desc: '',
-      args: [],
-    );
+  /// `Go back to home`
+  String get goback {
+    return Intl.message('Go back to home', name: 'goback', desc: '', args: []);
   }
 }
 

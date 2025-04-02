@@ -40,10 +40,10 @@ class _ListingtileState extends State<Listingtile> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
 
     return Container(
-      width: width * 0.45,
+      width: size.width * 0.45,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surfaceContainer,
