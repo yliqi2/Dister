@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/model/listing.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Listingdetails extends StatefulWidget {
   final Listing listing;
   const Listingdetails({super.key, required this.listing});
+
   @override
   State<Listingdetails> createState() => _ListingdetailsState();
 }
@@ -42,6 +44,20 @@ class _ListingdetailsState extends State<Listingdetails> {
       }
     } catch (e) {
       // Manejo de errores
+    }
+  }
+
+  Future<void> _launchURL() async {
+    final url = widget.listing.link;
+    if (url.isNotEmpty) {
+      final uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No se pudo abrir el enlace')),
+        );
+      }
     }
   }
 
@@ -240,38 +256,6 @@ class _ListingdetailsState extends State<Listingdetails> {
                               .map((highlight) => _categoryTag(highlight)),
                       ],
                     ),
-                    if (widget.listing.link.isNotEmpty) ...[
-                      const SizedBox(height: 24),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.white24,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.link,
-                              color: Colors.white,
-                              size: 20,
-                            ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: Text(
-                                widget.listing.link,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
                   ],
                 ),
               ),
@@ -281,16 +265,19 @@ class _ListingdetailsState extends State<Listingdetails> {
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.red,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            "Go for the discount",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+        child: InkWell(
+          onTap: _launchURL,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Go for the discount",
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
         ),
       ),
