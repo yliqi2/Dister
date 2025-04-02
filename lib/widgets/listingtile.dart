@@ -67,25 +67,29 @@ class _ListingtileState extends State<Listingtile> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundImage:
-                        ownerPhoto != null && ownerPhoto!.startsWith('http')
-                            ? NetworkImage(ownerPhoto!)
-                            : const AssetImage('assets/images/default.png')
-                                as ImageProvider,
-                    radius: 15,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    ownerName != null ? '@$ownerName' : '@Unknown',
-                    maxLines: 1,
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      overflow: TextOverflow.ellipsis,
+              Expanded(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundImage:
+                          ownerPhoto != null && ownerPhoto!.startsWith('http')
+                              ? NetworkImage(ownerPhoto!)
+                              : const AssetImage('assets/images/default.png')
+                                  as ImageProvider,
+                      radius: 15,
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 5),
+                    Expanded(
+                      child: Text(
+                        ownerName != null ? '@$ownerName' : '@Unknown',
+                        maxLines: 1,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
