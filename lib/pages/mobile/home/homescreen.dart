@@ -87,15 +87,20 @@ class _HomescreenState extends State<Homescreen> {
               toolbarHeight: 90,
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.notifications, color: Colors.white),
+                  icon: Icon(Icons.notifications,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white),
                   onPressed: () {},
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 26.0, left: 20.0),
                   child: IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.chat_bubble_rounded,
-                      color: Colors.white,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? Colors.black
+                          : Colors.white,
                     ),
                     onPressed: () {},
                   ),
