@@ -48,16 +48,21 @@ class _ListingdetailsState extends State<Listingdetails> {
   @override
   Widget build(BuildContext context) {
     List<String> images = widget.listing.images;
-    final currencyFormat = NumberFormat.currency(symbol: '€');
 
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
+              backgroundColor: Colors.black,
               expandedHeight: 300,
               floating: false,
               pinned: true,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () => Navigator.pop(context),
+              ),
               flexibleSpace: FlexibleSpaceBar(
                 background: Stack(
                   children: [
@@ -77,29 +82,6 @@ class _ListingdetailsState extends State<Listingdetails> {
                         );
                       },
                     ),
-                    // Gradient overlay sin bloquear gestos
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      height: 300,
-                      child: IgnorePointer(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.black.withOpacity(0.5),
-                                Colors.transparent,
-                                Colors.black.withOpacity(0.5),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    // Indicador de página
                     if (images.length > 1)
                       Positioned(
                         bottom: 16,
@@ -128,20 +110,13 @@ class _ListingdetailsState extends State<Listingdetails> {
               ),
               title: Text(
                 ownerName != null ? '@$ownerName' : '@Unknown',
-                maxLines: 1,
                 style: const TextStyle(color: Colors.white),
               ),
               centerTitle: true,
               actions: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 26),
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.favorite_border,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {},
-                  ),
+                IconButton(
+                  icon: const Icon(Icons.favorite_border, color: Colors.white),
+                  onPressed: () {},
                 ),
               ],
             ),
@@ -151,159 +126,152 @@ class _ListingdetailsState extends State<Listingdetails> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Título y Precio
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: Text(
-                            widget.listing.title ?? 'Listing Title',
+                            widget.listing.title,
                             style: const TextStyle(
+                              color: Colors.white,
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              currencyFormat
-                                  .format(widget.listing.discountPrice),
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red,
-                              ),
-                            ),
-                            if (widget.listing.originalPrice >
-                                widget.listing.discountPrice)
-                              Text(
-                                currencyFormat
-                                    .format(widget.listing.originalPrice),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  decoration: TextDecoration.lineThrough,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                          ],
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.white24,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            '${(((widget.listing.originalPrice - widget.listing.discountPrice) / widget.listing.originalPrice) * 100).round()}% off',
+                            style: const TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    // Tienda y Categorías
+                    const SizedBox(height: 8),
                     Row(
                       children: [
-                        Icon(Icons.store, size: 16, color: Colors.grey[600]),
-                        const SizedBox(width: 4),
                         Text(
-                          widget.listing.storeName,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
+                          '${widget.listing.discountPrice.toStringAsFixed(0)}€',
+                          style: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
                           ),
                         ),
-                        const SizedBox(width: 16),
-                        Icon(Icons.category, size: 16, color: Colors.grey[600]),
-                        const SizedBox(width: 4),
+                        const SizedBox(width: 8),
                         Text(
-                          widget.listing.categories,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
+                          '${widget.listing.originalPrice.toStringAsFixed(0)}€',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            decoration: TextDecoration.lineThrough,
+                            color: Colors.grey,
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    // Descripción
-                    Text(
-                      'Descripción',
+                    const SizedBox(height: 24),
+                    const Text(
+                      'Product Details',
                       style: TextStyle(
+                        color: Colors.white,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
                       ),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      widget.listing.desc ?? 'No description available',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[700],
-                      ),
+                      widget.listing.desc,
+                      style: const TextStyle(color: Colors.grey),
                     ),
                     const SizedBox(height: 24),
-                    // Características
-                    if (widget.listing.highlights?.isNotEmpty ?? false) ...[
-                      Text(
-                        'Características',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[800],
-                        ),
+                    const Text(
+                      'Shopping Details',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children:
-                            (widget.listing.highlights ?? []).map((highlight) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '• ${widget.listing.storeName}',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    if (widget.listing.rating != null) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        '• Rating: ${widget.listing.rating!.toStringAsFixed(1)} ⭐',
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                    ],
+                    const SizedBox(height: 4),
+                    Text(
+                      '• ${widget.listing.getFormattedLikes()} Likes',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '• Posted ${widget.listing.getTimeAgo()} ago',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    if (widget.listing.expiresAt != null) ...[
+                      const SizedBox(height: 4),
+                      Text(
+                        '• Expires on ${widget.listing.getFormattedExpiry()}',
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                    ],
+                    const SizedBox(height: 16),
+                    Wrap(
+                      spacing: 8,
+                      children: [
+                        _categoryTag(widget.listing.categories),
+                        _categoryTag(widget.listing.storeName),
+                        if (widget.listing.highlights != null)
+                          ...widget.listing.highlights!
+                              .map((highlight) => _categoryTag(highlight)),
+                      ],
+                    ),
+                    if (widget.listing.link.isNotEmpty) ...[
+                      const SizedBox(height: 24),
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white24,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.link,
+                              color: Colors.white,
+                              size: 20,
                             ),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Text(
-                              highlight,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey[700],
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                widget.listing.link,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                          );
-                        }).toList(),
-                      ),
-                      const SizedBox(height: 24),
-                    ],
-                    // Información adicional
-                    Text(
-                      'Información adicional',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    _buildInfoRow('Publicado', widget.listing.getTimeAgo()),
-                    if (widget.listing.expiresAt != null)
-                      _buildInfoRow(
-                          'Expira', widget.listing.getFormattedExpiry()!),
-                    if (widget.listing.rating != null)
-                      _buildInfoRow('Valoración',
-                          '${widget.listing.rating!.toStringAsFixed(1)} ⭐'),
-                    _buildInfoRow('Likes', widget.listing.getFormattedLikes()),
-                    const SizedBox(height: 24),
-                    // Botón para ir a la tienda
-                    if (widget.listing.link.isNotEmpty)
-                      ElevatedButton(
-                        onPressed: () {
-                          // TODO: Implementar apertura del enlace
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
+                          ],
                         ),
-                        child: const Text('Ir a la tienda'),
                       ),
+                    ],
                   ],
                 ),
               ),
@@ -311,30 +279,35 @@ class _ListingdetailsState extends State<Listingdetails> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.red,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            "Go for the discount",
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
     );
   }
 
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
-            ),
-          ),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
+  Widget _categoryTag(String text) {
+    return Container(
+      margin: const EdgeInsets.only(right: 8, bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.white24,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }
