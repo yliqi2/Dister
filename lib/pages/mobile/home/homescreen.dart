@@ -1,8 +1,10 @@
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/model/categorie.dart';
+import 'package:dister/model/category_icons.dart';
 import 'package:dister/model/listing.dart';
 import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
 import 'package:dister/widgets/listingtile.dart';
+import 'package:dister/widgets/custom_dropdown.dart';
 
 import 'package:flutter/material.dart';
 import 'package:animated_hint_textfield/animated_hint_textfield.dart';
@@ -148,23 +150,26 @@ class _HomescreenState extends State<Homescreen> {
               sliver: SliverToBoxAdapter(
                 child: Column(
                   children: [
-                    DropdownButton<String>(
-                      isExpanded: true,
+                    CustomFilterDropdown(
                       value:
                           _selectedCategory.isEmpty ? null : _selectedCategory,
-                      hint: const Text("Selecciona una categoría"),
+                      hint: "Selecciona una categoría",
+                      icon: Icons.category_rounded,
                       items: [
-                        const DropdownMenuItem(
+                        const DropdownItem(
                           value: 'Todas las categorías',
-                          child: Text("Todas las categorías"),
+                          label: 'Todas las categorías',
+                          icon: Icons.all_inbox,
                         ),
                         ...ProductCategories.getCategories().map(
                           (category) {
                             final categoryName = category.getName(
                                 Localizations.localeOf(context).toString());
-                            return DropdownMenuItem(
+                            return DropdownItem(
                               value: categoryName,
-                              child: Text(categoryName),
+                              label: categoryName,
+                              icon:
+                                  CategoryIcons.getIconForCategory(category.id),
                             );
                           },
                         ),
@@ -186,30 +191,30 @@ class _HomescreenState extends State<Homescreen> {
                             orElse: () => ProductCategory(
                                 id: '', names: {}, subcategories: []),
                           );
-                          categoryId = selectedCategoryObj
-                              .id; // Guardamos el ID de la categoría
+                          categoryId = selectedCategoryObj.id;
                           _updateSubcategories(categoryId!);
                         });
                       },
                     ),
                     if (_subcategories.isNotEmpty)
-                      DropdownButton<String>(
-                        isExpanded: true,
+                      CustomFilterDropdown(
                         value: _selectedSubcategory.isEmpty
                             ? null
                             : _selectedSubcategory,
-                        hint: const Text("Selecciona una subcategoría"),
+                        hint: "Selecciona una subcategoría",
+                        icon: Icons.subdirectory_arrow_right_rounded,
                         items: [
-                          const DropdownMenuItem(
+                          const DropdownItem(
                             value: 'Todas las subcategorías',
-                            child: Text("Todas las subcategorías"),
+                            label: 'Todas las subcategorías',
+                            icon: Icons.all_inbox,
                           ),
-                          ..._subcategories.map((subcategory) {
-                            return DropdownMenuItem(
-                              value: subcategory,
-                              child: Text(subcategory),
-                            );
-                          }),
+                          ..._subcategories.map((subcategory) => DropdownItem(
+                                value: subcategory,
+                                label: subcategory,
+                                icon: CategoryIcons.getIconForSubcategory(
+                                    categoryId!, subcategory),
+                              )),
                         ],
                         onChanged: (value) {
                           setState(() {
