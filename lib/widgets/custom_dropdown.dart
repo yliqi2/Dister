@@ -24,10 +24,10 @@ class CustomFilterDropdown extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 8),
       decoration: BoxDecoration(
-        color: colorScheme.surface.withOpacity(0.1),
+        color: colorScheme.surface.withAlpha(26),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: colorScheme.onSurface.withOpacity(0.2),
+          color: colorScheme.onSurface.withAlpha(51),
           width: 1,
         ),
       ),
@@ -42,7 +42,7 @@ class CustomFilterDropdown extends StatelessWidget {
                 if (icon != null) ...[
                   Icon(
                     icon,
-                    color: colorScheme.onSurface.withOpacity(0.7),
+                    color: colorScheme.onSurface.withAlpha(179),
                     size: 20,
                   ),
                   const SizedBox(width: 8),
@@ -50,14 +50,14 @@ class CustomFilterDropdown extends StatelessWidget {
                 Text(
                   hint,
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurface.withOpacity(0.7),
+                    color: colorScheme.onSurface.withAlpha(179),
                   ),
                 ),
               ],
             ),
             icon: Icon(
               Icons.arrow_drop_down_rounded,
-              color: colorScheme.onSurface.withOpacity(0.7),
+              color: colorScheme.onSurface.withAlpha(179),
             ),
             dropdownColor: colorScheme.surface,
             items: items.map((DropdownItem item) {
@@ -68,7 +68,7 @@ class CustomFilterDropdown extends StatelessWidget {
                     if (item.icon != null) ...[
                       Icon(
                         item.icon,
-                        color: colorScheme.onSurface.withOpacity(0.7),
+                        color: colorScheme.onSurface.withAlpha(179),
                         size: 20,
                       ),
                       const SizedBox(width: 8),
@@ -76,7 +76,7 @@ class CustomFilterDropdown extends StatelessWidget {
                     Text(
                       item.label,
                       style: theme.textTheme.bodyMedium?.copyWith(
-                        color: colorScheme.onSurface.withOpacity(0.9),
+                        color: colorScheme.onSurface.withAlpha(230),
                       ),
                     ),
                   ],

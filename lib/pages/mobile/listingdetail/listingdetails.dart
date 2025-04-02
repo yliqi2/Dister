@@ -141,7 +141,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                               shape: BoxShape.circle,
                               color: _currentPage == index
                                   ? colorScheme.onBackground
-                                  : colorScheme.onBackground.withOpacity(0.5),
+                                  : colorScheme.onBackground.withAlpha(128),
                             ),
                           ),
                         ),
@@ -175,7 +175,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                         decoration: BoxDecoration(
                           color: Theme.of(context).brightness == Brightness.dark
                               ? colorScheme.surfaceVariant
-                              : colorScheme.primary.withOpacity(0.1),
+                              : colorScheme.primary.withAlpha(26),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
@@ -321,7 +321,7 @@ class _ListingdetailsState extends State<Listingdetails> {
       decoration: BoxDecoration(
         color: isDark
             ? colorScheme.surfaceVariant
-            : colorScheme.primary.withOpacity(0.1),
+            : colorScheme.primary.withAlpha(26),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(

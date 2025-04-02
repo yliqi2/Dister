@@ -52,12 +52,12 @@ class _ListingtileState extends State<Listingtile> {
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
             ? colorScheme.surface
-            : colorScheme.surface.withOpacity(0.95),
+            : colorScheme.surface.withAlpha(242),
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: Theme.of(context).brightness == Brightness.dark
               ? colorScheme.outline
-              : colorScheme.outline.withOpacity(0.3),
+              : colorScheme.outline.withAlpha(77),
         ),
       ),
       child: Column(
