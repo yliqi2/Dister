@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/model/listing.dart';
+import 'package:dister/services/like_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -17,6 +18,7 @@ class _ListingdetailsState extends State<Listingdetails> {
   String? ownerName;
   final PageController _pageController = PageController();
   int _currentPage = 0;
+  final LikeService _likeService = LikeService();
 
   @override
   void initState() {
@@ -79,9 +81,18 @@ class _ListingdetailsState extends State<Listingdetails> {
         ),
         centerTitle: true,
         actions: [
-          IconButton(
-            icon: const Icon(Icons.favorite_border, color: Colors.red),
-            onPressed: () {},
+          StreamBuilder<bool>(
+            stream: _likeService.watchLikeStatus(widget.listing.id),
+            builder: (context, snapshot) {
+              final bool isLiked = snapshot.data ?? false;
+              return IconButton(
+                icon: Icon(
+                  isLiked ? Icons.favorite : Icons.favorite_border,
+                  color: Colors.red,
+                ),
+                onPressed: () => _likeService.toggleLike(widget.listing.id),
+              );
+            },
           ),
         ],
       ),
@@ -227,9 +238,15 @@ class _ListingdetailsState extends State<Listingdetails> {
                     ),
                   ],
                   const SizedBox(height: 4),
-                  Text(
-                    '• ${widget.listing.getFormattedLikes()} Likes',
-                    style: const TextStyle(color: Colors.grey),
+                  StreamBuilder<int>(
+                    stream: _likeService.watchLikesCount(widget.listing.id),
+                    builder: (context, snapshot) {
+                      final likes = snapshot.data ?? widget.listing.likes;
+                      return Text(
+                        '• $likes Likes',
+                        style: const TextStyle(color: Colors.grey),
+                      );
+                    },
                   ),
                   const SizedBox(height: 4),
                   Text(

@@ -1,4 +1,5 @@
 import 'package:dister/model/listing.dart';
+import 'package:dister/services/like_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -14,6 +15,7 @@ class Listingtile extends StatefulWidget {
 class _ListingtileState extends State<Listingtile> {
   String? ownerPhoto;
   String? ownerName;
+  final LikeService _likeService = LikeService();
 
   @override
   void initState() {
@@ -81,11 +83,18 @@ class _ListingtileState extends State<Listingtile> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    "${widget.listing.getFormattedLikes()} Likes",
-                    style: TextStyle(
-                        fontSize: 10,
-                        color: Theme.of(context).colorScheme.secondary),
+                  StreamBuilder<int>(
+                    stream: _likeService.watchLikesCount(widget.listing.id),
+                    builder: (context, snapshot) {
+                      final likes = snapshot.data ?? widget.listing.likes;
+                      return Text(
+                        "$likes Likes",
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                      );
+                    },
                   ),
                   Text(
                     "${widget.listing.getTimeAgo()} ago",
@@ -145,18 +154,27 @@ class _ListingtileState extends State<Listingtile> {
                 ],
               ),
               // Favorite button with border
-              Container(
-                width: 25,
-                height: 25,
-                decoration: const BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                ),
-                child: const Icon(
-                  Icons.favorite_border,
-                  color: Colors.white,
-                  size: 20,
-                ),
+              StreamBuilder<bool>(
+                stream: _likeService.watchLikeStatus(widget.listing.id),
+                builder: (context, snapshot) {
+                  final bool isLiked = snapshot.data ?? false;
+                  return GestureDetector(
+                    onTap: () => _likeService.toggleLike(widget.listing.id),
+                    child: Container(
+                      width: 25,
+                      height: 25,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.all(Radius.circular(50)),
+                      ),
+                      child: Icon(
+                        isLiked ? Icons.favorite : Icons.favorite_border,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),
