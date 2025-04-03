@@ -85,7 +85,7 @@ class _ListingdetailsState extends State<Listingdetails> {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: colorScheme.background,
+      backgroundColor: colorScheme.surfaceContainer,
       appBar: AppBar(
         backgroundColor: colorScheme.surface,
         leading: IconButton(
