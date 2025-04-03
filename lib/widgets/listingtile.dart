@@ -74,9 +74,15 @@ class _ListingtileState extends State<Listingtile> {
                       backgroundImage:
                           ownerPhoto != null && ownerPhoto!.startsWith('http')
                               ? NetworkImage(ownerPhoto!)
-                              : const AssetImage('assets/images/default.png')
-                                  as ImageProvider,
+                              : null,
                       radius: 15,
+                      child:
+                          ownerPhoto == null || !ownerPhoto!.startsWith('http')
+                              ? Image.asset(
+                                  'assets/images/default.png',
+                                  color: Colors.white,
+                                )
+                              : null,
                     ),
                     const SizedBox(width: 5),
                     Expanded(
