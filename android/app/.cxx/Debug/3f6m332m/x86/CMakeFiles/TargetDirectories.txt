@@ -1,0 +1,2 @@
+C:/Users/march/Documents/GitHub/Dister/android/app/.cxx/Debug/3f6m332m/x86/CMakeFiles/edit_cache.dir
+C:/Users/march/Documents/GitHub/Dister/android/app/.cxx/Debug/3f6m332m/x86/CMakeFiles/rebuild_cache.dir

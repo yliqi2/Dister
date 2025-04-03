@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/model/listing.dart';
+import 'package:dister/services/like_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Listingdetails extends StatefulWidget {
   final Listing listing;
   const Listingdetails({super.key, required this.listing});
+
   @override
   State<Listingdetails> createState() => _ListingdetailsState();
 }
@@ -15,6 +18,7 @@ class _ListingdetailsState extends State<Listingdetails> {
   String? ownerName;
   final PageController _pageController = PageController();
   int _currentPage = 0;
+  final LikeService _likeService = LikeService();
 
   @override
   void initState() {
@@ -45,301 +49,287 @@ class _ListingdetailsState extends State<Listingdetails> {
     }
   }
 
+  Future<void> _launchURL() async {
+    final url = widget.listing.link;
+    if (url.isNotEmpty) {
+      final uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('No se pudo abrir el enlace')),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> images = widget.listing.images;
-    final currencyFormat = NumberFormat.currency(symbol: '€');
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              expandedHeight: 300,
-              floating: true,
-              pinned: false,
-              flexibleSpace: FlexibleSpaceBar(
-                background: Stack(
-                  children: [
-                    PageView.builder(
-                      controller: _pageController,
-                      itemCount: images.length,
-                      onPageChanged: (index) {
-                        setState(() {
-                          _currentPage = index;
-                        });
-                      },
-                      itemBuilder: (context, index) {
-                        return Image.network(
-                          images[index],
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                        );
-                      },
-                    ),
-                    // Gradient overlay sin bloquear gestos
+      backgroundColor: colorScheme.background,
+      appBar: AppBar(
+        backgroundColor: colorScheme.background,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: colorScheme.onBackground),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: Text(
+          ownerName != null ? '@$ownerName' : '@Unknown',
+          style: theme.textTheme.titleMedium?.copyWith(
+            color: colorScheme.onBackground,
+          ),
+        ),
+        centerTitle: true,
+        actions: [
+          StreamBuilder<bool>(
+            stream: _likeService.watchLikeStatus(widget.listing.id),
+            builder: (context, snapshot) {
+              final bool isLiked = snapshot.data ?? false;
+              return IconButton(
+                icon: Icon(
+                  isLiked ? Icons.favorite : Icons.favorite_border,
+                  color: colorScheme.error,
+                ),
+                onPressed: () => _likeService.toggleLike(widget.listing.id),
+              );
+            },
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 300,
+              child: Stack(
+                children: [
+                  PageView.builder(
+                    controller: _pageController,
+                    itemCount: images.length,
+                    onPageChanged: (index) {
+                      setState(() {
+                        _currentPage = index;
+                      });
+                    },
+                    itemBuilder: (context, index) {
+                      return Image.network(
+                        images[index],
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                      );
+                    },
+                  ),
+                  if (images.length > 1)
                     Positioned(
-                      top: 0,
+                      bottom: 16,
                       left: 0,
                       right: 0,
-                      height: 300,
-                      child: IgnorePointer(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.black.withOpacity(0.5),
-                                Colors.transparent,
-                                Colors.black.withOpacity(0.5),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    // Indicador de página
-                    if (images.length > 1)
-                      Positioned(
-                        bottom: 16,
-                        left: 0,
-                        right: 0,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                            images.length,
-                            (index) => Container(
-                              width: 8,
-                              height: 8,
-                              margin: const EdgeInsets.symmetric(horizontal: 4),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: _currentPage == index
-                                    ? Colors.white
-                                    : Colors.white.withOpacity(0.5),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-              title: Text(
-                ownerName != null ? '@$ownerName' : '@Unknown',
-                maxLines: 1,
-                style: const TextStyle(color: Colors.white),
-              ),
-              centerTitle: true,
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 26),
-                  child: IconButton(
-                    icon: const Icon(
-                      Icons.favorite_border,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-              ],
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      
-                    ),
-                    // Título y Precio
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            widget.listing.title,
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              currencyFormat
-                                  .format(widget.listing.discountPrice),
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.red,
-                              ),
-                            ),
-                            if (widget.listing.originalPrice >
-                                widget.listing.discountPrice)
-                              Text(
-                                currencyFormat
-                                    .format(widget.listing.originalPrice),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  decoration: TextDecoration.lineThrough,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    // Tienda y Categorías
-                    Row(
-                      children: [
-                        Icon(Icons.store, size: 16, color: Colors.grey[600]),
-                        const SizedBox(width: 4),
-                        Text(
-                          widget.listing.storeName,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Icon(Icons.category, size: 16, color: Colors.grey[600]),
-                        const SizedBox(width: 4),
-                        Text(
-                          widget.listing.categories,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey[600],
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    // Descripción
-                    Text(
-                      'Descripción',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      widget.listing.desc ?? 'No description available',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey[700],
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    // Características
-                    if (widget.listing.highlights?.isNotEmpty ?? false) ...[
-                      Text(
-                        'Características',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.grey[800],
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children:
-                            (widget.listing.highlights ?? []).map((highlight) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 6,
-                            ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          images.length,
+                          (index) => Container(
+                            width: 8,
+                            height: 8,
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
                             decoration: BoxDecoration(
-                              color: Colors.grey[200],
-                              borderRadius: BorderRadius.circular(20),
+                              shape: BoxShape.circle,
+                              color: _currentPage == index
+                                  ? colorScheme.onBackground
+                                  : colorScheme.onBackground.withAlpha(128),
                             ),
-                            child: Text(
-                              highlight,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.grey[700],
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                      ),
-                      const SizedBox(height: 24),
-                    ],
-                    // Información adicional
-                    Text(
-                      'Información adicional',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
+                          ),
+                        ),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    _buildInfoRow('Publicado', widget.listing.getTimeAgo()),
-                    if (widget.listing.expiresAt != null)
-                      _buildInfoRow(
-                          'Expira', widget.listing.getFormattedExpiry()!),
-                    if (widget.listing.rating != null)
-                      _buildInfoRow('Valoración',
-                          '${widget.listing.rating!.toStringAsFixed(1)} ⭐'),
-                    _buildInfoRow('Likes', widget.listing.getFormattedLikes()),
-                    const SizedBox(height: 24),
-                    // Botón para ir a la tienda
-                    if (widget.listing.link.isNotEmpty)
-                      ElevatedButton(
-                        onPressed: () {
-                          // TODO: Implementar apertura del enlace
-                        },
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 50),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.listing.title,
+                          style: theme.textTheme.headlineSmall?.copyWith(
+                            color: colorScheme.onBackground,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                        child: const Text('Ir a la tienda'),
                       ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? colorScheme.surfaceVariant
+                              : colorScheme.primary.withAlpha(26),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Text(
+                          '${(((widget.listing.originalPrice - widget.listing.discountPrice) / widget.listing.originalPrice) * 100).round()}% off',
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? colorScheme.onSurfaceVariant
+                                    : colorScheme.primary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Text(
+                        '${widget.listing.discountPrice.toStringAsFixed(0)}€',
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.error,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        '${widget.listing.originalPrice.toStringAsFixed(0)}€',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          decoration: TextDecoration.lineThrough,
+                          color: colorScheme.outline,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Product Details',
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      color: colorScheme.onBackground,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    widget.listing.desc,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Text(
+                    'Shopping Details',
+                    style: theme.textTheme.titleLarge?.copyWith(
+                      color: colorScheme.onBackground,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '• ${widget.listing.storeName}',
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  if (widget.listing.rating != null) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      '• Rating: ${widget.listing.rating!.toStringAsFixed(1)} ⭐',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
                   ],
-                ),
+                  const SizedBox(height: 4),
+                  StreamBuilder<int>(
+                    stream: _likeService.watchLikesCount(widget.listing.id),
+                    builder: (context, snapshot) {
+                      final likes = snapshot.data ?? widget.listing.likes;
+                      return Text(
+                        '• $likes Likes',
+                        style: theme.textTheme.bodyLarge?.copyWith(
+                          color: colorScheme.onSurfaceVariant,
+                        ),
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    '• Posted ${widget.listing.getTimeAgo()} ago',
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                  if (widget.listing.expiresAt != null) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      '• Expires on ${widget.listing.getFormattedExpiry()}',
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 16),
+                  Wrap(
+                    spacing: 8,
+                    children: [
+                      _categoryTag(widget.listing.categories),
+                      _categoryTag(widget.listing.storeName),
+                      if (widget.listing.highlights != null)
+                        ...widget.listing.highlights!
+                            .map((highlight) => _categoryTag(highlight)),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
         ),
       ),
+      bottomNavigationBar: BottomAppBar(
+        color: colorScheme.error,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            "Go for the discount",
+            style: theme.textTheme.titleLarge?.copyWith(
+              color: colorScheme.onError,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
     );
   }
 
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
+  Widget _categoryTag(String text) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return Container(
+      margin: const EdgeInsets.only(right: 8, bottom: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: isDark
+            ? colorScheme.surfaceVariant
+            : colorScheme.primary.withAlpha(26),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              color:
+                  isDark ? colorScheme.onSurfaceVariant : colorScheme.primary,
             ),
-          ),
-          Text(
-            value,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ],
       ),
     );
   }
