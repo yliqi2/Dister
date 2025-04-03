@@ -51,7 +51,11 @@ class _ListingdetailsState extends State<Listingdetails> {
   Future<void> _launchURL() async {
     final url = widget.listing.link;
     if (url.isNotEmpty) {
-      final uri = Uri.parse(url);
+      String formattedUrl = url;
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        formattedUrl = 'https://$url';
+      }
+      final uri = Uri.parse(formattedUrl);
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri);
       } else if (mounted) {
