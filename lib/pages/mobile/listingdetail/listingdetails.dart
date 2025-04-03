@@ -297,15 +297,18 @@ class _ListingdetailsState extends State<Listingdetails> {
       ),
       bottomNavigationBar: BottomAppBar(
         color: colorScheme.error,
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            "Go for the discount",
-            style: theme.textTheme.titleLarge?.copyWith(
-              color: colorScheme.onError,
-              fontWeight: FontWeight.bold,
+        child: InkWell(
+          onTap: _launchURL,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Go for the discount",
+              style: theme.textTheme.titleLarge?.copyWith(
+                color: colorScheme.onError,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
           ),
         ),
       ),
