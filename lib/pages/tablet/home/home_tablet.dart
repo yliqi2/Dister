@@ -16,8 +16,8 @@ class _HomeTabletState extends State<HomeTablet> {
     //calcular una tercera parte de la pantalla
     double tamanoCuadrante = width / 3;
 
-    double SizedLateralBar = tamanoCuadrante;
-    double SizedHome = tamanoCuadrante * 2;
+    double sizedLateralBar = tamanoCuadrante;
+    double sizedHome = tamanoCuadrante * 2;
 
     return Scaffold(
       body: SizedBox(
@@ -29,7 +29,7 @@ class _HomeTabletState extends State<HomeTablet> {
           children: [
             Expanded(
               child: Container(
-                width: SizedLateralBar,
+                width: sizedLateralBar,
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 108, 101, 209),
                 ),
@@ -40,7 +40,7 @@ class _HomeTabletState extends State<HomeTablet> {
                 decoration: const BoxDecoration(
                   color: Colors.red,
                 ),
-                width: SizedHome,
+                width: sizedHome,
               ),
             ),
           ],
