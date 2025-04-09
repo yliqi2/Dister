@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/model/listing.dart';
-import 'package:dister/services/like_service.dart';
+import 'package:dister/controller/like_service/like_service.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
