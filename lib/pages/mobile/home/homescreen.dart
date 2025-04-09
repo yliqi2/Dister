@@ -5,6 +5,7 @@ import 'package:dister/model/listing.dart';
 import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
 import 'package:dister/widgets/listingtile.dart';
 import 'package:dister/widgets/custom_dropdown.dart';
+import 'package:dister/pages/mobile/home/following_list_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:animated_hint_textfield/animated_hint_textfield.dart';
@@ -102,7 +103,13 @@ class _HomescreenState extends State<Homescreen> {
                           ? Colors.black
                           : Colors.white,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const FollowingListPage(),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],

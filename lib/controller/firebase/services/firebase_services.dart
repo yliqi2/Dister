@@ -219,4 +219,25 @@ class FirebaseServices {
     final followingList = currentUserDoc.data()?['following'] as List<dynamic>?;
     return followingList != null && followingList.contains(targetUserId);
   }
+
+  Future<List<Map<String, dynamic>>> getFollowingUsers() async {
+    final currentUser = getCurrentUser();
+    final userDoc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser)
+        .get();
+
+    final followingIds = List<String>.from(userDoc['following'] ?? []);
+    final users = await Future.wait(followingIds.map((id) async {
+      final userSnapshot =
+          await FirebaseFirestore.instance.collection('users').doc(id).get();
+      return {
+        'username': userSnapshot['username'],
+        'photo': userSnapshot['photo'] ?? 'assets/images/default.png',
+        'uid': userSnapshot['uid'],
+      };
+    }));
+
+    return users;
+  }
 }
