@@ -4,7 +4,9 @@ import 'package:dister/model/user.dart';
 
 class UserProfileWidget extends StatefulWidget {
   final Users user;
-  const UserProfileWidget({super.key, required this.user});
+  final bool isCurrentUser; // New parameter to indicate ownership
+  const UserProfileWidget(
+      {super.key, required this.user, required this.isCurrentUser});
 
   @override
   State<UserProfileWidget> createState() => _UserProfileWidgetState();
@@ -104,9 +106,13 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
           Padding(
             padding: const EdgeInsets.only(top: 20.0),
             child: Row(
-              children: [
-                _buildButton('Edit Profile', context),
-              ],
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: widget.isCurrentUser
+                  ? [_buildButton('Edit Profile', context)]
+                  : [
+                      _buildButton('Follow', context),
+                      _buildButton('Send Message', context),
+                    ],
             ),
           ),
         ],

@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/model/listing.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dister/model/user.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:intl/intl.dart';
@@ -131,5 +132,13 @@ class FirebaseServices {
     await userDoc.update({
       'listings': FieldValue.increment(1),
     });
+  }
+
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut(); // Cierra la sesión del usuario actual
+    } catch (e) {
+      debugPrint("Error during sign out: $e"); // Manejo de errores
+    }
   }
 }

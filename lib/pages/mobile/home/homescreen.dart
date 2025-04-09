@@ -269,15 +269,15 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                         itemCount: filteredListings.length,
                         itemBuilder: (context, index) {
-                          return GestureDetector(
+                          return Listingtile(
+                            listing: filteredListings[index],
                             onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Listingdetails(
-                                      listing: filteredListings[index]),
-                                )),
-                            child:
-                                Listingtile(listing: filteredListings[index]),
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Listingdetails(
+                                    listing: filteredListings[index]),
+                              ),
+                            ),
                           );
                         },
                       ),
