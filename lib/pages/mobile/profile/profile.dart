@@ -1,6 +1,7 @@
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/model/user.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
+import 'package:dister/pages/mobile/profile/user_list_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -134,13 +135,36 @@ class _ProfileState extends State<Profile> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 _buildStatColumn(
-                                    user.listings, 'Listing', context),
+                                  user.listings,
+                                  'Listing',
+                                  context,
+                                ),
                                 const SizedBox(width: 20),
-                                _buildStatColumn(user.followers.length,
-                                    'Followers', context),
+                                _buildStatColumn(
+                                    user.followers.length, 'Followers', context,
+                                    onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => UserListPage(
+                                        title: 'Followers',
+                                        userIds: user.followers,
+                                      ),
+                                    ),
+                                  );
+                                }),
                                 const SizedBox(width: 20),
-                                _buildStatColumn(user.following.length,
-                                    'Following', context),
+                                _buildStatColumn(
+                                    user.following.length, 'Following', context,
+                                    onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => UserListPage(
+                                        title: 'Following',
+                                        userIds: user.following,
+                                      ),
+                                    ),
+                                  );
+                                }),
                               ],
                             ),
                           ],
@@ -258,16 +282,20 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _buildStatColumn(int count, String label, BuildContext context) {
+  Widget _buildStatColumn(int count, String label, BuildContext context,
+      {VoidCallback? onTap}) {
     TextStyle style = TextStyle(
       color: Theme.of(context).colorScheme.secondary,
       fontWeight: FontWeight.w800,
     );
-    return Column(
-      children: [
-        Text(count.toString(), style: style),
-        Text(label, style: style),
-      ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Text(count.toString(), style: style),
+          Text(label, style: style),
+        ],
+      ),
     );
   }
 
