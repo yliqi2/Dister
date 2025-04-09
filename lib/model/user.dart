@@ -2,8 +2,8 @@ class Users {
   String uid;
   String username;
   String photo;
-  int followers;
-  int following;
+  List<String> followers;
+  List<String> following;
   int listings;
   String? desc;
 
@@ -22,8 +22,8 @@ class Users {
       uid: map['uid'] ?? '', // Provide default values if the field is missing
       username: map['username'] ?? '',
       photo: map['photo'] ?? '',
-      followers: map['followers'] ?? 0,
-      following: map['following'] ?? 0,
+      followers: List<String>.from(map['followers'] ?? []),
+      following: List<String>.from(map['following'] ?? []),
       listings: map['listings'] ?? 0,
       desc: map['desc'] ?? '',
     );

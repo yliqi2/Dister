@@ -568,13 +568,6 @@ class _NewlistingState extends State<Newlisting> {
             ),
           ),
         ),
-        GestureDetector(
-          onTap: () {},
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 26.0),
-            child: primaryBtn(context: context, text: S.of(context).goback),
-          ),
-        ),
       ],
     );
   }

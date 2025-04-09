@@ -40,8 +40,8 @@ class AuthService {
         uid: uid,
         username: username,
         photo: 'assets/images/default.png', // Foto vacía inicialmente
-        followers: 0, // Inicializamos seguidores en 0
-        following: 0, // Inicializamos siguiendo en 0
+        followers: [], // Inicializamos seguidores como lista vacía
+        following: [], // Inicializamos siguiendo como lista vacía
         listings: 0, // Inicializamos publicaciones en 0
         desc: '',
       );
@@ -51,8 +51,8 @@ class AuthService {
         'uid': uid,
         'username': newUser.username,
         'photo': newUser.photo,
-        'followers': newUser.followers,
-        'following': newUser.following,
+        'followers': newUser.followers, // Lista vacía
+        'following': newUser.following, // Lista vacía
         'listings': newUser.listings,
         'desc': newUser.desc,
       });

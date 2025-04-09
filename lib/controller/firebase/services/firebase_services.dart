@@ -142,4 +142,81 @@ class FirebaseServices {
       debugPrint("Error during sign out: $e"); // Manejo de errores
     }
   }
+
+  // Seguir a un usuario
+  Future<void> followUser(String currentUserId, String targetUserId) async {
+    final currentUserDoc = _fs.collection('users').doc(currentUserId);
+    final targetUserDoc = _fs.collection('users').doc(targetUserId);
+
+    await _fs.runTransaction((transaction) async {
+      final currentUserSnapshot = await transaction.get(currentUserDoc);
+      final targetUserSnapshot = await transaction.get(targetUserDoc);
+
+      if (!currentUserSnapshot.exists || !targetUserSnapshot.exists) {
+        throw Exception('Uno de los usuarios no existe.');
+      }
+
+      // Agregar el targetUserId a la lista de seguidos del usuario actual
+      transaction.update(currentUserDoc, {
+        'following': FieldValue.arrayUnion([targetUserId]),
+      });
+
+      // Agregar el currentUserId a la lista de seguidores del usuario objetivo
+      transaction.update(targetUserDoc, {
+        'followers': FieldValue.arrayUnion([currentUserId]),
+      });
+    });
+  }
+
+  // Dejar de seguir a un usuario
+  Future<void> unfollowUser(String currentUserId, String targetUserId) async {
+    final currentUserDoc = _fs.collection('users').doc(currentUserId);
+    final targetUserDoc = _fs.collection('users').doc(targetUserId);
+
+    await _fs.runTransaction((transaction) async {
+      final currentUserSnapshot = await transaction.get(currentUserDoc);
+      final targetUserSnapshot = await transaction.get(targetUserDoc);
+
+      if (!currentUserSnapshot.exists || !targetUserSnapshot.exists) {
+        throw Exception('Uno de los usuarios no existe.');
+      }
+
+      // Remover el targetUserId de la lista de seguidos del usuario actual
+      transaction.update(currentUserDoc, {
+        'following': FieldValue.arrayRemove([targetUserId]),
+      });
+
+      // Remover el currentUserId de la lista de seguidores del usuario objetivo
+      transaction.update(targetUserDoc, {
+        'followers': FieldValue.arrayRemove([currentUserId]),
+      });
+    });
+  }
+
+  // Verificar si un usuario ya dejó de seguir a otro
+  Future<bool> hasUnfollowed(String currentUserId, String targetUserId) async {
+    final currentUserDoc =
+        await _fs.collection('users').doc(currentUserId).get();
+
+    if (!currentUserDoc.exists) {
+      throw Exception('El usuario actual no existe.');
+    }
+
+    final unfollowedList =
+        currentUserDoc.data()?['unfollowed'] as List<dynamic>?;
+    return unfollowedList != null && unfollowedList.contains(targetUserId);
+  }
+
+  // Verificar si un usuario está siguiendo a otro
+  Future<bool> isFollowing(String currentUserId, String targetUserId) async {
+    final currentUserDoc =
+        await _fs.collection('users').doc(currentUserId).get();
+
+    if (!currentUserDoc.exists) {
+      throw Exception('El usuario actual no existe.');
+    }
+
+    final followingList = currentUserDoc.data()?['following'] as List<dynamic>?;
+    return followingList != null && followingList.contains(targetUserId);
+  }
 }
