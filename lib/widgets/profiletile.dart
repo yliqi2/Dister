@@ -2,9 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:dister/model/user.dart';
 
+
 class UserProfileWidget extends StatefulWidget {
   final Users user;
-  final bool isCurrentUser; // New parameter to indicate ownership
+  final bool isCurrentUser; 
   const UserProfileWidget(
       {super.key, required this.user, required this.isCurrentUser});
 
@@ -110,7 +111,14 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
               children: widget.isCurrentUser
                   ? [_buildButton('Edit Profile', context)]
                   : [
-                      _buildButton('Follow', context),
+                      GestureDetector(
+                        onTap: () {},
+                        child: _buildButton(
+                          'Follow',
+                          context,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
                       _buildButton('Send Message', context),
                     ],
             ),

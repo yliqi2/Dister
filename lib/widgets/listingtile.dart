@@ -72,38 +72,43 @@ class _ListingtileState extends State<Listingtile> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  Profile(userId: widget.listing.owner),
-                            ),
-                          );
-                        },
-                        child: CircleAvatar(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              Profile(userId: widget.listing.owner),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        CircleAvatar(
                           backgroundImage: ownerPhoto != null &&
                                   ownerPhoto!.startsWith('http')
                               ? NetworkImage(ownerPhoto!)
-                              : const AssetImage('assets/images/default.png')
-                                  as ImageProvider,
+                              : null,
                           radius: 15,
+                          child: ownerPhoto == null ||
+                                  !ownerPhoto!.startsWith('http')
+                              ? Image.asset(
+                                  'assets/images/default.png',
+                                  color: Colors.white,
+                                )
+                              : null,
                         ),
-                      ),
-                      const SizedBox(width: 5),
-                      Expanded(
-                        child: Text(
-                          ownerName != null ? '@$ownerName' : '@Unknown',
-                          maxLines: 1,
-                          style: theme.textTheme.bodySmall?.copyWith(
-                            overflow: TextOverflow.ellipsis,
+                        const SizedBox(width: 5),
+                        Expanded(
+                          child: Text(
+                            ownerName != null ? '@$ownerName' : '@Unknown',
+                            maxLines: 1,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Column(

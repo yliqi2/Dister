@@ -36,7 +36,15 @@ class _NavbarState extends State<Navbar> {
     return Scaffold(
       body: _screens[_selectedIndex],
       bottomNavigationBar: Container(
-        color: Theme.of(context).buttonTheme.colorScheme!.surface,
+        decoration: BoxDecoration(
+          color: Theme.of(context).buttonTheme.colorScheme!.surface,
+          border: const Border(
+            top: BorderSide(
+              color: Color.fromARGB(255, 107, 107, 107),
+              width: 1.0, // Grosor del borde
+            ),
+          ),
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 26.0),
         child: CrystalNavigationBar(
           splashColor: Colors.transparent,
