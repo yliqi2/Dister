@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/model/listing.dart';
 import 'package:dister/services/like_service.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Listingdetails extends StatefulWidget {
@@ -52,12 +51,28 @@ class _ListingdetailsState extends State<Listingdetails> {
   Future<void> _launchURL() async {
     final url = widget.listing.link;
     if (url.isNotEmpty) {
-      final uri = Uri.parse(url);
+      String formattedUrl = url;
+      if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        formattedUrl = 'https://$url';
+      }
+      final uri = Uri.parse(formattedUrl);
       if (await canLaunchUrl(uri)) {
         await launchUrl(uri);
-      } else {
+      } else if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('No se pudo abrir el enlace')),
+          SnackBar(
+            content: Text(
+              'No se pudo abrir el enlace',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onError,
+                  ),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.error,
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
         );
       }
     }
@@ -70,17 +85,17 @@ class _ListingdetailsState extends State<Listingdetails> {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
-      backgroundColor: colorScheme.background,
+      backgroundColor: colorScheme.surfaceContainer,
       appBar: AppBar(
-        backgroundColor: colorScheme.background,
+        backgroundColor: colorScheme.surface,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: colorScheme.onBackground),
+          icon: Icon(Icons.arrow_back, color: colorScheme.onSurface),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           ownerName != null ? '@$ownerName' : '@Unknown',
           style: theme.textTheme.titleMedium?.copyWith(
-            color: colorScheme.onBackground,
+            color: colorScheme.onSurface,
           ),
         ),
         centerTitle: true,
@@ -140,8 +155,8 @@ class _ListingdetailsState extends State<Listingdetails> {
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               color: _currentPage == index
-                                  ? colorScheme.onBackground
-                                  : colorScheme.onBackground.withAlpha(128),
+                                  ? colorScheme.onSurface
+                                  : colorScheme.onSurface.withAlpha(128),
                             ),
                           ),
                         ),
@@ -162,7 +177,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                         child: Text(
                           widget.listing.title,
                           style: theme.textTheme.headlineSmall?.copyWith(
-                            color: colorScheme.onBackground,
+                            color: colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -174,7 +189,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                         ),
                         decoration: BoxDecoration(
                           color: Theme.of(context).brightness == Brightness.dark
-                              ? colorScheme.surfaceVariant
+                              ? colorScheme.surfaceContainerHighest
                               : colorScheme.primary.withAlpha(26),
                           borderRadius: BorderRadius.circular(12),
                         ),
@@ -214,7 +229,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                   Text(
                     'Product Details',
                     style: theme.textTheme.titleLarge?.copyWith(
-                      color: colorScheme.onBackground,
+                      color: colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -229,7 +244,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                   Text(
                     'Shopping Details',
                     style: theme.textTheme.titleLarge?.copyWith(
-                      color: colorScheme.onBackground,
+                      color: colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -323,7 +338,7 @@ class _ListingdetailsState extends State<Listingdetails> {
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
         color: isDark
-            ? colorScheme.surfaceVariant
+            ? colorScheme.surfaceContainerHighest
             : colorScheme.primary.withAlpha(26),
         borderRadius: BorderRadius.circular(20),
       ),
