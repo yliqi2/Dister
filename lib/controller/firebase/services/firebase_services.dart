@@ -240,4 +240,34 @@ class FirebaseServices {
 
     return users;
   }
+
+  // Subir una foto de perfil a Firebase Storage y obtener la URL
+  Future<String> uploadProfilePicture(String userId, File image) async {
+    try {
+      String fileName =
+          'profile_pictures/$userId/${DateTime.now().millisecondsSinceEpoch}.jpg';
+      firebase_storage.Reference ref =
+          firebase_storage.FirebaseStorage.instance.ref().child(fileName);
+      firebase_storage.UploadTask uploadTask = ref.putFile(image);
+
+      // Esperar a que se complete la carga
+      await uploadTask.whenComplete(() {});
+
+      // Obtener la URL de descarga
+      return await ref.getDownloadURL();
+    } catch (e) {
+      debugPrint("Error uploading profile picture: $e");
+      throw Exception("Error uploading profile picture");
+    }
+  }
+
+  // Actualizar la foto de perfil del usuario en Firestore
+  Future<void> updateUserPhoto(String userId, String photoUrl) async {
+    try {
+      await _fs.collection('users').doc(userId).update({'photo': photoUrl});
+    } catch (e) {
+      debugPrint("Error updating user photo: $e");
+      throw Exception("Error updating user photo");
+    }
+  }
 }

@@ -25,6 +25,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(
           create: (context) => LoginAuthErrorNotifier(),
+          
         ),
         ChangeNotifierProvider(
           create: (context) => RegisterErrorNotifier(),

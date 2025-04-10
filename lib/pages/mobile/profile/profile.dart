@@ -4,6 +4,8 @@ import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/profile/user_list_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class Profile extends StatefulWidget {
   final String? userId; // ID del usuario cuyo perfil se desea visualizar
@@ -16,6 +18,39 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   bool _isExpanded = false;
+  File? _selectedImage;
+
+  Future<void> _pickAndUploadImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _selectedImage = File(pickedFile.path);
+      });
+
+      try {
+        FirebaseServices firebaseServices = FirebaseServices();
+        String downloadUrl = await firebaseServices.uploadProfilePicture(
+          firebaseServices.getCurrentUser(),
+          _selectedImage!,
+        );
+
+        await firebaseServices.updateUserPhoto(
+            firebaseServices.getCurrentUser(), downloadUrl);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Profile picture updated successfully.')),
+        );
+      } catch (e) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error uploading image: $e')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -121,13 +156,18 @@ class _ProfileState extends State<Profile> {
                                   width: 2,
                                 ),
                               ),
-                              child: CircleAvatar(
-                                radius:
-                                    MediaQuery.of(context).size.width * 0.095,
-                                child: Image.asset(
-                                  user.photo,
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
+                              child: GestureDetector(
+                                onTap:
+                                    isCurrentUser ? _pickAndUploadImage : null,
+                                child: CircleAvatar(
+                                  radius:
+                                      MediaQuery.of(context).size.width * 0.095,
+                                  backgroundImage: _selectedImage != null
+                                      ? FileImage(_selectedImage!)
+                                      : (user.photo.startsWith('assets/')
+                                              ? AssetImage(user.photo)
+                                              : NetworkImage(user.photo))
+                                          as ImageProvider,
                                 ),
                               ),
                             ),
