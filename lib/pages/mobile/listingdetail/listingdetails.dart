@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/model/listing.dart';
 import 'package:dister/controller/like_service/like_service.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Listingdetails extends StatefulWidget {
@@ -146,20 +147,19 @@ class _ListingdetailsState extends State<Listingdetails> {
                       right: 0,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(
-                          images.length,
-                          (index) => Container(
-                            width: 8,
-                            height: 8,
-                            margin: const EdgeInsets.symmetric(horizontal: 4),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: _currentPage == index
-                                  ? colorScheme.onSurface
-                                  : colorScheme.onSurface.withAlpha(128),
+                        children: [
+                          SmoothPageIndicator(
+                            controller: _pageController,
+                            count: images.length,
+                            effect: WormEffect(
+                              dotHeight: 16,
+                              dotWidth: 16,
+                              dotColor: Colors.grey,
+                              activeDotColor:
+                                  Theme.of(context).colorScheme.primary,
                             ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                 ],
