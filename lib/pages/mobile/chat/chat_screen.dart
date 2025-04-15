@@ -2,6 +2,7 @@ import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../model/chat.dart'; // Asegúrate de importar el modelo de Chat
+import 'package:dister/generated/l10n.dart'; // Importar para internacionalización
 
 class ChatScreen extends StatefulWidget {
   final String recipientId;
@@ -87,7 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat con ${widget.recipientName}'),
+        title: Text(S.of(context).chatWith(widget.recipientName)),
         centerTitle: true,
       ),
       body: Column(
@@ -106,7 +107,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 }
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return const Center(child: Text('No hay mensajes aún.'));
+                  return Center(child: Text(S.of(context).noMessages));
                 }
 
                 final messages = snapshot.data!.docs;
@@ -158,7 +159,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   chat.message,
                                   style: const TextStyle(fontSize: 16),
                                 ),
-                                const SizedBox(height: 2),
+                                const SizedBox(height: 5),
                                 Text(
                                   _formatDate(chat.sentDate),
                                   style: TextStyle(
@@ -185,7 +186,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: TextField(
                     controller: _messageController,
                     decoration: InputDecoration(
-                      hintText: 'Escribe un mensaje...',
+                      hintText: S.of(context).typeMessage,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
@@ -211,11 +212,15 @@ class _ChatScreenState extends State<ChatScreen> {
   String _formatDate(DateTime date) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
+    final yesterday = DateTime(now.year, now.month, now.day - 1);
     final messageDate = DateTime(date.year, date.month, date.day);
 
     if (messageDate == today) {
       // Hoy, mostrar solo la hora
-      return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+      return '${S.of(context).today} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+    } else if (messageDate == yesterday) {
+      // Ayer
+      return '${S.of(context).yesterday} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
     } else {
       // Otro día, mostrar fecha y hora
       return '${date.day}/${date.month} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';

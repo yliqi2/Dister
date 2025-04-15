@@ -123,5 +123,15 @@
     "errorLoadingListings": "Error loading listings. Please try again.",
     "noListingsAvailable": "No listings available.",
 
-    "goback" : "Go back to home"
+    "goback" : "Go back to home",
+
+    "chatWith": "Chat with {name}",
+    "noMessages": "No messages yet.",
+    "typeMessage": "Type a message...",
+    "translate": "Translate",
+    "translating": "Translating...",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "originalMessage": "Original message",
+    "translatedMessage": "Translated message"
 }

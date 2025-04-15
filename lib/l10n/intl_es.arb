@@ -110,5 +110,27 @@
     "datehintText" : "Selecciona una fecha",
 
     "selecthighlights" : "Selecciona los destacados para la oferta",
-    "subtitlehigh" : "Elige los destacados que apliquen a tu oferta."
+    "subtitlehigh" : "Elige los destacados que apliquen a tu oferta.",
+
+    "erroruploading" : "Error al subir el anuncio, por favor inténtalo de nuevo.",
+    "errorhighlight" : "Por favor selecciona al menos un destacado.",
+    "errorimage" : "Por favor sube al menos una imagen.",
+
+    "publish" : "Publicar",
+    "publishing" : "Publicando...",
+
+    "errorLoadingListings": "Error al cargar los anuncios. Inténtalo de nuevo.",
+    "noListingsAvailable": "No hay anuncios disponibles.",
+
+    "goback" : "Volver al inicio",
+
+    "chatWith": "Chat con {name}",
+    "noMessages": "No hay mensajes aún.",
+    "typeMessage": "Escribe un mensaje...",
+    "translate": "Traducir",
+    "translating": "Traduciendo...",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "originalMessage": "Mensaje original",
+    "translatedMessage": "Mensaje traducido"
 }

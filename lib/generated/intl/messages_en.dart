@@ -20,7 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(message) => "Unexpected error: ${message}";
+  static String m0(name) => "Chat with ${name}";
+
+  static String m1(message) => "Unexpected error: ${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -35,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please select a category",
     ),
     "categorylabel": MessageLookupByLibrary.simpleMessage("Category"),
+    "chatWith": m0,
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "containsSpace": MessageLookupByLibrary.simpleMessage(
       "Username cannot contain spaces",
@@ -79,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Error loading listings. Please try again.",
     ),
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Network Problem"),
-    "errorUnknow": m0,
+    "errorUnknow": m1,
     "errorhighlight": MessageLookupByLibrary.simpleMessage(
       "Please select at least one highlight.",
     ),
@@ -149,9 +152,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "noListingsAvailable": MessageLookupByLibrary.simpleMessage(
       "No listings available.",
     ),
+    "noMessages": MessageLookupByLibrary.simpleMessage("No messages yet."),
     "notValidDomainEmail": MessageLookupByLibrary.simpleMessage(
       "Email must end with @gmail.com",
     ),
+    "originalMessage": MessageLookupByLibrary.simpleMessage("Original message"),
     "originalprice": MessageLookupByLibrary.simpleMessage("Original Price"),
     "originalpriceerror": MessageLookupByLibrary.simpleMessage(
       "Please enter a valid price",
@@ -237,10 +242,18 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "titlehint": MessageLookupByLibrary.simpleMessage("Product name"),
     "titlelabel": MessageLookupByLibrary.simpleMessage("Title"),
+    "today": MessageLookupByLibrary.simpleMessage("Today"),
+    "translate": MessageLookupByLibrary.simpleMessage("Translate"),
+    "translatedMessage": MessageLookupByLibrary.simpleMessage(
+      "Translated message",
+    ),
+    "translating": MessageLookupByLibrary.simpleMessage("Translating..."),
+    "typeMessage": MessageLookupByLibrary.simpleMessage("Type a message..."),
     "upload": MessageLookupByLibrary.simpleMessage("Upload"),
     "userLabel": MessageLookupByLibrary.simpleMessage("Username"),
     "usernameInUse": MessageLookupByLibrary.simpleMessage(
       "Username already in use",
     ),
+    "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
   };
 }

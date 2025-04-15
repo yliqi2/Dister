@@ -919,6 +919,81 @@ class S {
   String get goback {
     return Intl.message('Go back to home', name: 'goback', desc: '', args: []);
   }
+
+  /// `Chat with {name}`
+  String chatWith(Object name) {
+    return Intl.message(
+      'Chat with $name',
+      name: 'chatWith',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `No messages yet.`
+  String get noMessages {
+    return Intl.message(
+      'No messages yet.',
+      name: 'noMessages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type a message...`
+  String get typeMessage {
+    return Intl.message(
+      'Type a message...',
+      name: 'typeMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Translate`
+  String get translate {
+    return Intl.message('Translate', name: 'translate', desc: '', args: []);
+  }
+
+  /// `Translating...`
+  String get translating {
+    return Intl.message(
+      'Translating...',
+      name: 'translating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get today {
+    return Intl.message('Today', name: 'today', desc: '', args: []);
+  }
+
+  /// `Yesterday`
+  String get yesterday {
+    return Intl.message('Yesterday', name: 'yesterday', desc: '', args: []);
+  }
+
+  /// `Original message`
+  String get originalMessage {
+    return Intl.message(
+      'Original message',
+      name: 'originalMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Translated message`
+  String get translatedMessage {
+    return Intl.message(
+      'Translated message',
+      name: 'translatedMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

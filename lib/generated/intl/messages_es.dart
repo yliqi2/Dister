@@ -20,7 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'es';
 
-  static String m0(message) => "Error inesperado: ${message}";
+  static String m0(name) => "Chat con ${name}";
+
+  static String m1(message) => "Error inesperado: ${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -35,6 +37,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Por favor selecciona una categoría",
     ),
     "categorylabel": MessageLookupByLibrary.simpleMessage("Categoría"),
+    "chatWith": m0,
     "confirmPassword": MessageLookupByLibrary.simpleMessage(
       "Confirma tu contraseña",
     ),
@@ -79,8 +82,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorCredential": MessageLookupByLibrary.simpleMessage(
       "Datos incorrectos",
     ),
+    "errorLoadingListings": MessageLookupByLibrary.simpleMessage(
+      "Error al cargar los anuncios. Inténtalo de nuevo.",
+    ),
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Problema de red"),
-    "errorUnknow": m0,
+    "errorUnknow": m1,
+    "errorhighlight": MessageLookupByLibrary.simpleMessage(
+      "Por favor selecciona al menos un destacado.",
+    ),
+    "errorimage": MessageLookupByLibrary.simpleMessage(
+      "Por favor sube al menos una imagen.",
+    ),
+    "erroruploading": MessageLookupByLibrary.simpleMessage(
+      "Error al subir el anuncio, por favor inténtalo de nuevo.",
+    ),
     "finalpriceerror": MessageLookupByLibrary.simpleMessage(
       "Por favor introduce un precio válido",
     ),
@@ -98,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "¿Has olvidado la contraseña? ",
     ),
     "formError": MessageLookupByLibrary.simpleMessage("Arregla el formulario"),
+    "goback": MessageLookupByLibrary.simpleMessage("Volver al inicio"),
     "hintConfirmPass": MessageLookupByLibrary.simpleMessage(
       "Confirma tu contraseña",
     ),
@@ -135,15 +151,22 @@ class MessageLookup extends MessageLookupByLibrary {
       "El usuario no debe tener más de 15 caracteres",
     ),
     "noAccount": MessageLookupByLibrary.simpleMessage("¿No tienes cuenta? "),
+    "noListingsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No hay anuncios disponibles.",
+    ),
+    "noMessages": MessageLookupByLibrary.simpleMessage("No hay mensajes aún."),
     "notValidDomainEmail": MessageLookupByLibrary.simpleMessage(
       "Tiene que terminar @gmail.com",
     ),
+    "originalMessage": MessageLookupByLibrary.simpleMessage("Mensaje original"),
     "originalprice": MessageLookupByLibrary.simpleMessage("Precio original"),
     "originalpriceerror": MessageLookupByLibrary.simpleMessage(
       "Por favor introduce un precio válido",
     ),
     "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
     "privacy": MessageLookupByLibrary.simpleMessage("Política de privacidad"),
+    "publish": MessageLookupByLibrary.simpleMessage("Publicar"),
+    "publishing": MessageLookupByLibrary.simpleMessage("Publicando..."),
     "registerbtn": MessageLookupByLibrary.simpleMessage("Registrate"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Restablecer contraseña",
@@ -221,10 +244,20 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "titlehint": MessageLookupByLibrary.simpleMessage("Nombre del producto"),
     "titlelabel": MessageLookupByLibrary.simpleMessage("Título"),
+    "today": MessageLookupByLibrary.simpleMessage("Hoy"),
+    "translate": MessageLookupByLibrary.simpleMessage("Traducir"),
+    "translatedMessage": MessageLookupByLibrary.simpleMessage(
+      "Mensaje traducido",
+    ),
+    "translating": MessageLookupByLibrary.simpleMessage("Traduciendo..."),
+    "typeMessage": MessageLookupByLibrary.simpleMessage(
+      "Escribe un mensaje...",
+    ),
     "upload": MessageLookupByLibrary.simpleMessage("Subir"),
     "userLabel": MessageLookupByLibrary.simpleMessage("Usuario"),
     "usernameInUse": MessageLookupByLibrary.simpleMessage(
       "El usuario ya esta en uso",
     ),
+    "yesterday": MessageLookupByLibrary.simpleMessage("Ayer"),
   };
 }
