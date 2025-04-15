@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Chat {
   final String sender; // Quien envía el mensaje
   final String receiver; // Quien recibe el mensaje
@@ -17,17 +19,28 @@ class Chat {
       'sender': sender,
       'receiver': receiver,
       'message': message,
-      'sentDate': sentDate.toIso8601String(),
+      'sentDate': Timestamp.fromDate(sentDate),
     };
   }
 
   // Método para crear una instancia de Chat desde un mapa (útil para JSON)
   factory Chat.fromMap(Map<String, dynamic> map) {
+    // Manejo de diferentes tipos de timestamp que pueden venir de Firestore
+    DateTime parseDate(dynamic date) {
+      if (date is Timestamp) {
+        return date.toDate();
+      } else if (date is String) {
+        return DateTime.parse(date);
+      } else {
+        return DateTime.now(); // Fallback, no debería ocurrir
+      }
+    }
+
     return Chat(
       sender: map['sender'],
       receiver: map['receiver'],
       message: map['message'],
-      sentDate: DateTime.parse(map['sentDate']),
+      sentDate: parseDate(map['sentDate']),
     );
   }
 }

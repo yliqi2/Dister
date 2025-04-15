@@ -21,6 +21,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController _messageController = TextEditingController();
   final FirebaseServices _firebaseServices = FirebaseServices();
+  final ScrollController _scrollController = ScrollController();
   String currentUserId = '';
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   String chatId = '';
@@ -46,32 +47,47 @@ class _ChatScreenState extends State<ChatScreen> {
     if (_messageController.text.trim().isEmpty) return;
 
     final message = _messageController.text.trim();
-    final chat = Chat(
-      sender: currentUserId,
-      receiver: widget.recipientId,
-      message: message,
-      sentDate: DateTime.now(),
-    );
 
     // Crear el documento del chat si no existe y agregar el mensaje a la subcolección "messages"
     final chatDoc = _firestore.collection('chats').doc(chatId);
     await chatDoc.set({
       'users': [currentUserId, widget.recipientId],
       'lastMessage': message,
-      'lastUpdated': DateTime.now().toIso8601String(),
+      'lastUpdated': FieldValue.serverTimestamp(),
     }, SetOptions(merge: true));
 
-    await chatDoc.collection('messages').add(chat.toMap());
+    // Crear mensaje usando serverTimestamp
+    await chatDoc.collection('messages').add({
+      'sender': currentUserId,
+      'receiver': widget.recipientId,
+      'message': message,
+      'sentDate': FieldValue.serverTimestamp(),
+    });
 
     // Limpiar el campo de texto
     _messageController.clear();
+
+    // Scroll al final después de enviar el mensaje
+    Future.delayed(const Duration(milliseconds: 300), () {
+      _scrollToBottom();
+    });
+  }
+
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Chat with ${widget.recipientName}'),
+        title: Text('Chat con ${widget.recipientName}'),
         centerTitle: true,
       ),
       body: Column(
@@ -82,7 +98,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   .collection('chats')
                   .doc(chatId)
                   .collection('messages')
-                  .orderBy('sentDate', descending: true)
+                  .orderBy('sentDate', descending: false)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -90,32 +106,70 @@ class _ChatScreenState extends State<ChatScreen> {
                 }
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return const Center(child: Text('No messages yet.'));
+                  return const Center(child: Text('No hay mensajes aún.'));
                 }
 
                 final messages = snapshot.data!.docs;
 
+                // Desplazar al final después de que se carguen los mensajes
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (messages.isNotEmpty) {
+                    _scrollToBottom();
+                  }
+                });
+
                 return ListView.builder(
-                  reverse: true,
+                  controller: _scrollController,
+                  reverse: false,
                   itemCount: messages.length,
                   itemBuilder: (context, index) {
                     final data = messages[index].data() as Map<String, dynamic>;
-                    final chat = Chat.fromMap(data);
 
+                    // Si el mensaje tiene un timestamp pendiente (null), lo saltamos
+                    if (data['sentDate'] == null) {
+                      return const SizedBox.shrink();
+                    }
+
+                    final chat = Chat.fromMap(data);
                     final isMe = chat.sender == currentUserId;
 
-                    return Align(
-                      alignment:
-                          isMe ? Alignment.centerRight : Alignment.centerLeft,
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10),
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: isMe ? Colors.blue[100] : Colors.grey[300],
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Text(chat.message),
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 2, horizontal: 8),
+                      child: Row(
+                        mainAxisAlignment: isMe
+                            ? MainAxisAlignment.end
+                            : MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            constraints: BoxConstraints(
+                              maxWidth: MediaQuery.of(context).size.width * 0.7,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 12),
+                            decoration: BoxDecoration(
+                              color: isMe ? Colors.blue[100] : Colors.grey[300],
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  chat.message,
+                                  style: const TextStyle(fontSize: 16),
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  _formatDate(chat.sentDate),
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey[600],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                     );
                   },
@@ -131,15 +185,19 @@ class _ChatScreenState extends State<ChatScreen> {
                   child: TextField(
                     controller: _messageController,
                     decoration: InputDecoration(
-                      hintText: 'Type a message...',
+                      hintText: 'Escribe un mensaje...',
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(15),
                       ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
                     ),
+                    textInputAction: TextInputAction.send,
+                    onSubmitted: (_) => _sendMessage(),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.send),
+                  icon: const Icon(Icons.send, color: Colors.blue),
                   onPressed: _sendMessage,
                 ),
               ],
@@ -148,5 +206,19 @@ class _ChatScreenState extends State<ChatScreen> {
         ],
       ),
     );
+  }
+
+  String _formatDate(DateTime date) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final messageDate = DateTime(date.year, date.month, date.day);
+
+    if (messageDate == today) {
+      // Hoy, mostrar solo la hora
+      return '${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+    } else {
+      // Otro día, mostrar fecha y hora
+      return '${date.day}/${date.month} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+    }
   }
 }
