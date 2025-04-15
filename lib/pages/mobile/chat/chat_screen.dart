@@ -99,7 +99,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   .collection('chats')
                   .doc(chatId)
                   .collection('messages')
-                  .orderBy('sentDate', descending: false)
+                  .orderBy('sentDate', descending: true)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -121,8 +121,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
                 return ListView.builder(
                   controller: _scrollController,
-                  reverse: false,
                   itemCount: messages.length,
+                  physics: const ClampingScrollPhysics(),
                   itemBuilder: (context, index) {
                     final data = messages[index].data() as Map<String, dynamic>;
 
