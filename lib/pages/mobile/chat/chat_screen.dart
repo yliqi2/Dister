@@ -99,7 +99,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   .collection('chats')
                   .doc(chatId)
                   .collection('messages')
-                  .orderBy('sentDate', descending: true)
+                  .orderBy('sentDate', descending: false)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
