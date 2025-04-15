@@ -20,7 +20,9 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(message) => "Unexpected error: ${message}";
+  static String m0(name) => "Chat with ${name}";
+
+  static String m1(message) => "Unexpected error: ${message}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -28,11 +30,38 @@ class MessageLookup extends MessageLookupByLibrary {
       "Already have an account? ",
     ),
     "categories": MessageLookupByLibrary.simpleMessage("Categories"),
+    "categorydropdown": MessageLookupByLibrary.simpleMessage(
+      "Select a category",
+    ),
+    "categoryerror": MessageLookupByLibrary.simpleMessage(
+      "Please select a category",
+    ),
+    "categorylabel": MessageLookupByLibrary.simpleMessage("Category"),
+    "chatWith": m0,
     "confirmPassword": MessageLookupByLibrary.simpleMessage("Confirm Password"),
     "containsSpace": MessageLookupByLibrary.simpleMessage(
       "Username cannot contain spaces",
     ),
+    "continuebtn": MessageLookupByLibrary.simpleMessage("Continue"),
     "continues": MessageLookupByLibrary.simpleMessage("Start Hunting"),
+    "datehelptext": MessageLookupByLibrary.simpleMessage(
+      "This camp is optional",
+    ),
+    "datehintText": MessageLookupByLibrary.simpleMessage("Select a date"),
+    "datelabel": MessageLookupByLibrary.simpleMessage("Deal expires at..."),
+    "descriptionerror": MessageLookupByLibrary.simpleMessage(
+      "Please enter a description",
+    ),
+    "descriptionerror2": MessageLookupByLibrary.simpleMessage(
+      "Description cannot be less than 10 characters",
+    ),
+    "descriptionerror3": MessageLookupByLibrary.simpleMessage(
+      "Description cannot be more than 200 characters",
+    ),
+    "descriptionhint": MessageLookupByLibrary.simpleMessage(
+      "Enter a description for the product",
+    ),
+    "descriptionlabel": MessageLookupByLibrary.simpleMessage("Description"),
     "emailInUse": MessageLookupByLibrary.simpleMessage("Email already in use"),
     "emptyConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Please confirm your password",
@@ -49,12 +78,38 @@ class MessageLookup extends MessageLookupByLibrary {
     "errorCredential": MessageLookupByLibrary.simpleMessage(
       "Incorrect credentials",
     ),
+    "errorLoadingListings": MessageLookupByLibrary.simpleMessage(
+      "Error loading listings. Please try again.",
+    ),
     "errorNetwork": MessageLookupByLibrary.simpleMessage("Network Problem"),
-    "errorUnknow": m0,
+    "errorUnknow": m1,
+    "errorhighlight": MessageLookupByLibrary.simpleMessage(
+      "Please select at least one highlight.",
+    ),
+    "errorimage": MessageLookupByLibrary.simpleMessage(
+      "Please upload at least one image.",
+    ),
+    "erroruploading": MessageLookupByLibrary.simpleMessage(
+      "Error uploading listing, please try again.",
+    ),
+    "finalpriceerror": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid price",
+    ),
+    "finalpriceerror2": MessageLookupByLibrary.simpleMessage(
+      "Final price must be less than original price",
+    ),
+    "finalpricelabel": MessageLookupByLibrary.simpleMessage("Final Price"),
+    "firstpage": MessageLookupByLibrary.simpleMessage(
+      "Share a deal\nwith millions of users",
+    ),
+    "firstpagesubtitle": MessageLookupByLibrary.simpleMessage(
+      "Reach millions and make the offer stand out!",
+    ),
     "forgotPassword": MessageLookupByLibrary.simpleMessage(
       "Forgot your password? ",
     ),
-    "formError": MessageLookupByLibrary.simpleMessage("Fix the credentials"),
+    "formError": MessageLookupByLibrary.simpleMessage("Fix the form"),
+    "goback": MessageLookupByLibrary.simpleMessage("Go back to home"),
     "hintConfirmPass": MessageLookupByLibrary.simpleMessage(
       "Confirm your password",
     ),
@@ -73,6 +128,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "lenghtPassword": MessageLookupByLibrary.simpleMessage(
       "Password must be a least 8 characters",
     ),
+    "linkempty": MessageLookupByLibrary.simpleMessage("Please enter a link"),
+    "linkerror": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid link",
+    ),
+    "linkhelptext": MessageLookupByLibrary.simpleMessage(
+      "Paste the link to where other users can find the deal",
+    ),
     "login": MessageLookupByLibrary.simpleMessage("Login"),
     "loginSubtitle": MessageLookupByLibrary.simpleMessage(
       "Enter your details to start saving and\n shopping smarter!",
@@ -87,11 +149,22 @@ class MessageLookup extends MessageLookupByLibrary {
     "noAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account? ",
     ),
+    "noListingsAvailable": MessageLookupByLibrary.simpleMessage(
+      "No listings available.",
+    ),
+    "noMessages": MessageLookupByLibrary.simpleMessage("No messages yet."),
     "notValidDomainEmail": MessageLookupByLibrary.simpleMessage(
       "Email must end with @gmail.com",
     ),
+    "originalMessage": MessageLookupByLibrary.simpleMessage("Original message"),
+    "originalprice": MessageLookupByLibrary.simpleMessage("Original Price"),
+    "originalpriceerror": MessageLookupByLibrary.simpleMessage(
+      "Please enter a valid price",
+    ),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "privacy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
+    "publish": MessageLookupByLibrary.simpleMessage("Publish"),
+    "publishing": MessageLookupByLibrary.simpleMessage("Publishing..."),
     "registerbtn": MessageLookupByLibrary.simpleMessage("Register"),
     "resetPassword": MessageLookupByLibrary.simpleMessage(
       "Reset your password",
@@ -103,11 +176,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "searchHint3": MessageLookupByLibrary.simpleMessage(
       "Search for \"furniture\"",
     ),
+    "secondpagesubtitle": MessageLookupByLibrary.simpleMessage(
+      "You must upload at least one image to continue.",
+    ),
+    "secondpagetitle": MessageLookupByLibrary.simpleMessage(
+      "Add Images for the Deal",
+    ),
     "segurityConfirmPassword": MessageLookupByLibrary.simpleMessage(
       "Passwords do not match",
     ),
     "segurityPassword": MessageLookupByLibrary.simpleMessage(
       "Password must include letters and numbers",
+    ),
+    "selecthighlights": MessageLookupByLibrary.simpleMessage(
+      "Select highlights for the Deal",
     ),
     "shortUsername": MessageLookupByLibrary.simpleMessage(
       "Username must be more than 5 characters",
@@ -118,6 +200,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "signTitle": MessageLookupByLibrary.simpleMessage(
       "Sign up, to unlock deals!",
     ),
+    "subcategorydropdown": MessageLookupByLibrary.simpleMessage(
+      "Select a subcategory",
+    ),
+    "subcategoryerror": MessageLookupByLibrary.simpleMessage(
+      "Please select a subcategory",
+    ),
+    "subcategorylabel": MessageLookupByLibrary.simpleMessage("Subcategory"),
     "subtitle_onboarding": MessageLookupByLibrary.simpleMessage(
       "Discover treasures and great deals.\nConnect today!",
     ),
@@ -127,7 +216,17 @@ class MessageLookup extends MessageLookupByLibrary {
     "subtitle_onboarding3": MessageLookupByLibrary.simpleMessage(
       "Your next great deal is just\na notification away.",
     ),
+    "subtitlehigh": MessageLookupByLibrary.simpleMessage(
+      "Choose any highlights that apply to your deal.",
+    ),
     "terms": MessageLookupByLibrary.simpleMessage("Terms"),
+    "tiendaerror": MessageLookupByLibrary.simpleMessage(
+      "Please enter the store name",
+    ),
+    "tiendahint": MessageLookupByLibrary.simpleMessage(
+      "E.g.: Zalando, Amazon...",
+    ),
+    "tiendalabel": MessageLookupByLibrary.simpleMessage("Store name"),
     "title_onboarding": MessageLookupByLibrary.simpleMessage(
       "Find what\nyou need and more",
     ),
@@ -137,6 +236,24 @@ class MessageLookup extends MessageLookupByLibrary {
     "title_onboarding3": MessageLookupByLibrary.simpleMessage(
       "Never\nMiss Out Again",
     ),
+    "titleerror": MessageLookupByLibrary.simpleMessage("Please enter a title"),
+    "titleerror2": MessageLookupByLibrary.simpleMessage(
+      "Title cannot be less than 3 characters",
+    ),
+    "titlehint": MessageLookupByLibrary.simpleMessage("Product name"),
+    "titlelabel": MessageLookupByLibrary.simpleMessage("Title"),
+    "today": MessageLookupByLibrary.simpleMessage("Today"),
+    "translate": MessageLookupByLibrary.simpleMessage("Translate"),
+    "translatedMessage": MessageLookupByLibrary.simpleMessage(
+      "Translated message",
+    ),
+    "translating": MessageLookupByLibrary.simpleMessage("Translating..."),
+    "typeMessage": MessageLookupByLibrary.simpleMessage("Type a message..."),
+    "upload": MessageLookupByLibrary.simpleMessage("Upload"),
     "userLabel": MessageLookupByLibrary.simpleMessage("Username"),
+    "usernameInUse": MessageLookupByLibrary.simpleMessage(
+      "Username already in use",
+    ),
+    "yesterday": MessageLookupByLibrary.simpleMessage("Yesterday"),
   };
 }

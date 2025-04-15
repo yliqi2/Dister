@@ -1,6 +1,9 @@
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
+import 'package:dister/pages/mobile/Listing%20Upload/newlisting.dart';
+import 'package:dister/pages/mobile/Save%20Listing/savelisting.dart';
 import 'package:dister/pages/mobile/home/homescreen.dart';
 import 'package:dister/pages/mobile/profile/profile.dart';
+import 'package:dister/pages/mobile/real_time/realtime.dart';
 
 import 'package:flutter/material.dart';
 
@@ -16,6 +19,9 @@ class _NavbarState extends State<Navbar> {
 
   final List<Widget> _screens = [
     const Homescreen(),
+    const Realtime(),
+    const Newlisting(),
+    const Savelisting(),
     const Profile(),
   ];
 
@@ -30,7 +36,15 @@ class _NavbarState extends State<Navbar> {
     return Scaffold(
       body: _screens[_selectedIndex],
       bottomNavigationBar: Container(
-        color: Theme.of(context).buttonTheme.colorScheme!.surface,
+        decoration: BoxDecoration(
+          color: Theme.of(context).buttonTheme.colorScheme!.surface,
+          border: const Border(
+            top: BorderSide(
+              color: Color.fromARGB(255, 107, 107, 107),
+              width: 1.0, // Grosor del borde
+            ),
+          ),
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 26.0),
         child: CrystalNavigationBar(
           splashColor: Colors.transparent,
@@ -40,9 +54,9 @@ class _NavbarState extends State<Navbar> {
           enableFloatingNavBar: false,
           items: [
             CrystalNavigationBarItem(icon: Icons.home),
-            CrystalNavigationBarItem(icon: Icons.person),
-            CrystalNavigationBarItem(icon: Icons.person),
-            CrystalNavigationBarItem(icon: Icons.person),
+            CrystalNavigationBarItem(icon: Icons.travel_explore),
+            CrystalNavigationBarItem(icon: Icons.add),
+            CrystalNavigationBarItem(icon: Icons.favorite),
             CrystalNavigationBarItem(icon: Icons.person),
           ],
         ),

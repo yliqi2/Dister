@@ -310,14 +310,9 @@ class S {
     );
   }
 
-  /// `Fix the credentials`
+  /// `Fix the form`
   String get formError {
-    return Intl.message(
-      'Fix the credentials',
-      name: 'formError',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Fix the form', name: 'formError', desc: '', args: []);
   }
 
   /// `Incorrect credentials`
@@ -347,6 +342,16 @@ class S {
       name: 'errorUnknow',
       desc: '',
       args: [message],
+    );
+  }
+
+  /// `Username already in use`
+  String get usernameInUse {
+    return Intl.message(
+      'Username already in use',
+      name: 'usernameInUse',
+      desc: '',
+      args: [],
     );
   }
 
@@ -503,6 +508,491 @@ class S {
   /// `Categories`
   String get categories {
     return Intl.message('Categories', name: 'categories', desc: '', args: []);
+  }
+
+  /// `Upload`
+  String get upload {
+    return Intl.message('Upload', name: 'upload', desc: '', args: []);
+  }
+
+  /// `Share a deal\nwith millions of users`
+  String get firstpage {
+    return Intl.message(
+      'Share a deal\nwith millions of users',
+      name: 'firstpage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reach millions and make the offer stand out!`
+  String get firstpagesubtitle {
+    return Intl.message(
+      'Reach millions and make the offer stand out!',
+      name: 'firstpagesubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Paste the link to where other users can find the deal`
+  String get linkhelptext {
+    return Intl.message(
+      'Paste the link to where other users can find the deal',
+      name: 'linkhelptext',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a link`
+  String get linkempty {
+    return Intl.message(
+      'Please enter a link',
+      name: 'linkempty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid link`
+  String get linkerror {
+    return Intl.message(
+      'Please enter a valid link',
+      name: 'linkerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product name`
+  String get titlehint {
+    return Intl.message('Product name', name: 'titlehint', desc: '', args: []);
+  }
+
+  /// `Title`
+  String get titlelabel {
+    return Intl.message('Title', name: 'titlelabel', desc: '', args: []);
+  }
+
+  /// `Please enter a title`
+  String get titleerror {
+    return Intl.message(
+      'Please enter a title',
+      name: 'titleerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title cannot be less than 3 characters`
+  String get titleerror2 {
+    return Intl.message(
+      'Title cannot be less than 3 characters',
+      name: 'titleerror2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `E.g.: Zalando, Amazon...`
+  String get tiendahint {
+    return Intl.message(
+      'E.g.: Zalando, Amazon...',
+      name: 'tiendahint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Store name`
+  String get tiendalabel {
+    return Intl.message('Store name', name: 'tiendalabel', desc: '', args: []);
+  }
+
+  /// `Please enter the store name`
+  String get tiendaerror {
+    return Intl.message(
+      'Please enter the store name',
+      name: 'tiendaerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a description for the product`
+  String get descriptionhint {
+    return Intl.message(
+      'Enter a description for the product',
+      name: 'descriptionhint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get descriptionlabel {
+    return Intl.message(
+      'Description',
+      name: 'descriptionlabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a description`
+  String get descriptionerror {
+    return Intl.message(
+      'Please enter a description',
+      name: 'descriptionerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description cannot be less than 10 characters`
+  String get descriptionerror2 {
+    return Intl.message(
+      'Description cannot be less than 10 characters',
+      name: 'descriptionerror2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description cannot be more than 200 characters`
+  String get descriptionerror3 {
+    return Intl.message(
+      'Description cannot be more than 200 characters',
+      name: 'descriptionerror3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Original Price`
+  String get originalprice {
+    return Intl.message(
+      'Original Price',
+      name: 'originalprice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid price`
+  String get originalpriceerror {
+    return Intl.message(
+      'Please enter a valid price',
+      name: 'originalpriceerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Final Price`
+  String get finalpricelabel {
+    return Intl.message(
+      'Final Price',
+      name: 'finalpricelabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter a valid price`
+  String get finalpriceerror {
+    return Intl.message(
+      'Please enter a valid price',
+      name: 'finalpriceerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Final price must be less than original price`
+  String get finalpriceerror2 {
+    return Intl.message(
+      'Final price must be less than original price',
+      name: 'finalpriceerror2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Continue`
+  String get continuebtn {
+    return Intl.message('Continue', name: 'continuebtn', desc: '', args: []);
+  }
+
+  /// `Add Images for the Deal`
+  String get secondpagetitle {
+    return Intl.message(
+      'Add Images for the Deal',
+      name: 'secondpagetitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You must upload at least one image to continue.`
+  String get secondpagesubtitle {
+    return Intl.message(
+      'You must upload at least one image to continue.',
+      name: 'secondpagesubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a category`
+  String get categorydropdown {
+    return Intl.message(
+      'Select a category',
+      name: 'categorydropdown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Category`
+  String get categorylabel {
+    return Intl.message('Category', name: 'categorylabel', desc: '', args: []);
+  }
+
+  /// `Please select a category`
+  String get categoryerror {
+    return Intl.message(
+      'Please select a category',
+      name: 'categoryerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a subcategory`
+  String get subcategorydropdown {
+    return Intl.message(
+      'Select a subcategory',
+      name: 'subcategorydropdown',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subcategory`
+  String get subcategorylabel {
+    return Intl.message(
+      'Subcategory',
+      name: 'subcategorylabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select a subcategory`
+  String get subcategoryerror {
+    return Intl.message(
+      'Please select a subcategory',
+      name: 'subcategoryerror',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Deal expires at...`
+  String get datelabel {
+    return Intl.message(
+      'Deal expires at...',
+      name: 'datelabel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This camp is optional`
+  String get datehelptext {
+    return Intl.message(
+      'This camp is optional',
+      name: 'datehelptext',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a date`
+  String get datehintText {
+    return Intl.message(
+      'Select a date',
+      name: 'datehintText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select highlights for the Deal`
+  String get selecthighlights {
+    return Intl.message(
+      'Select highlights for the Deal',
+      name: 'selecthighlights',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Choose any highlights that apply to your deal.`
+  String get subtitlehigh {
+    return Intl.message(
+      'Choose any highlights that apply to your deal.',
+      name: 'subtitlehigh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error uploading listing, please try again.`
+  String get erroruploading {
+    return Intl.message(
+      'Error uploading listing, please try again.',
+      name: 'erroruploading',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select at least one highlight.`
+  String get errorhighlight {
+    return Intl.message(
+      'Please select at least one highlight.',
+      name: 'errorhighlight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please upload at least one image.`
+  String get errorimage {
+    return Intl.message(
+      'Please upload at least one image.',
+      name: 'errorimage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Publish`
+  String get publish {
+    return Intl.message('Publish', name: 'publish', desc: '', args: []);
+  }
+
+  /// `Publishing...`
+  String get publishing {
+    return Intl.message(
+      'Publishing...',
+      name: 'publishing',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error loading listings. Please try again.`
+  String get errorLoadingListings {
+    return Intl.message(
+      'Error loading listings. Please try again.',
+      name: 'errorLoadingListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No listings available.`
+  String get noListingsAvailable {
+    return Intl.message(
+      'No listings available.',
+      name: 'noListingsAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go back to home`
+  String get goback {
+    return Intl.message('Go back to home', name: 'goback', desc: '', args: []);
+  }
+
+  /// `Chat with {name}`
+  String chatWith(Object name) {
+    return Intl.message(
+      'Chat with $name',
+      name: 'chatWith',
+      desc: '',
+      args: [name],
+    );
+  }
+
+  /// `No messages yet.`
+  String get noMessages {
+    return Intl.message(
+      'No messages yet.',
+      name: 'noMessages',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type a message...`
+  String get typeMessage {
+    return Intl.message(
+      'Type a message...',
+      name: 'typeMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Translate`
+  String get translate {
+    return Intl.message('Translate', name: 'translate', desc: '', args: []);
+  }
+
+  /// `Translating...`
+  String get translating {
+    return Intl.message(
+      'Translating...',
+      name: 'translating',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Today`
+  String get today {
+    return Intl.message('Today', name: 'today', desc: '', args: []);
+  }
+
+  /// `Yesterday`
+  String get yesterday {
+    return Intl.message('Yesterday', name: 'yesterday', desc: '', args: []);
+  }
+
+  /// `Original message`
+  String get originalMessage {
+    return Intl.message(
+      'Original message',
+      name: 'originalMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Translated message`
+  String get translatedMessage {
+    return Intl.message(
+      'Translated message',
+      name: 'translatedMessage',
+      desc: '',
+      args: [],
+    );
   }
 }
 

@@ -2,9 +2,9 @@ import 'package:dister/controller/firebase/auth/form_validator.dart';
 import 'package:dister/controller/provider/authnotifier.dart';
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
-import 'package:dister/pages/mobile/auth/mytextfield.dart';
-import 'package:dister/pages/mobile/auth/primarybtn.dart';
-import 'package:dister/pages/mobile/home/homescreen.dart';
+import 'package:dister/widgets/mytextfield.dart';
+import 'package:dister/widgets/primarybtn.dart';
+import 'package:dister/pages/mobile/nav/navbar.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:dister/controller/firebase/auth/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -46,7 +46,7 @@ class _RegisterState extends State<Register> {
   }
 
   // Función para registrar al usuario
-  void register(AuthErrorNotifier errorNotifier) async {
+  void register(RegisterErrorNotifier errorNotifier) async {
     User? user = await _auth.register(_emailController.text.toLowerCase(),
         _passwordController.text, _usernameController.text, errorNotifier);
     setState(() {
@@ -58,7 +58,7 @@ class _RegisterState extends State<Register> {
         // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
-          builder: (context) => const Homescreen(),
+          builder: (context) => const Navbar(),
         ),
       );
     }
@@ -68,7 +68,7 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Consumer<AuthErrorNotifier>(
+      body: Consumer<RegisterErrorNotifier>(
         builder: (context, errorNotifier, child) {
           if (errorNotifier.error != null) {
             switch (errorNotifier.error) {
@@ -77,9 +77,9 @@ class _RegisterState extends State<Register> {
                   showSnack(S.of(context).emailInUse);
                 });
                 break;
-              default:
+              case 'username-already-in-use':
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                  showSnack(S.of(context).errorUnknow(errorNotifier.error!));
+                  showSnack(S.of(context).usernameInUse);
                 });
                 break;
             }
@@ -144,6 +144,7 @@ class _RegisterState extends State<Register> {
                               isPassword: true,
                               hintText: S.of(context).hintPass,
                               label: S.of(context).password,
+                              maxLines: 1,
                               validator: (value) {
                                 return FormValidator.passwordValidator(
                                     value, context);
@@ -155,6 +156,7 @@ class _RegisterState extends State<Register> {
                               isPassword: true,
                               hintText: S.of(context).hintConfirmPass,
                               label: S.of(context).confirmPassword,
+                              maxLines: 1,
                               validator: (value) {
                                 return FormValidator.confirmPassValidator(
                                     value, _passwordController.text, context);

@@ -24,7 +24,11 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => AuthErrorNotifier(),
+          create: (context) => LoginAuthErrorNotifier(),
+          
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RegisterErrorNotifier(),
         ),
       ],
       child: const MyApp(),

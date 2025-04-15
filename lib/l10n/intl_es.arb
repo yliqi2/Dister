@@ -6,6 +6,7 @@
     "title_onboarding3": "Nunca te lo pierdas",
     "subtitle_onboarding3": "Tu próxima gran oferta está\na solo una notificación de distancia.",
     "continues" : "Comenzar",
+    "continuebtn" : "Continuar",
 
     "hintUser" : "Introduce tu usuario",
     "userLabel" : "Usuario",
@@ -33,12 +34,13 @@
     "emptyConfirmPassword": "Por favor confirma tu contraseña",
     "segurityConfirmPassword": "Las contraseñas no coinciden",
 
-    "formError" : "Arregla tus credenciales",
+    "formError" : "Arregla el formulario",
     
     "errorCredential" : "Datos incorrectos",
     "errorNetwork" : "Problema de red",
     "errorUnknow" : "Error inesperado: {message}",
 
+    "usernameInUse" : "El usuario ya esta en uso",
     "emailInUse" : "El correo electrónico ya está en uso",
 
     "signTitle" : "Regístrate para desbloquear ofertas!",
@@ -60,6 +62,75 @@
     "searchHint2" : "Buscar \"tecnología\"",
     "searchHint3" : "Buscar \"muebles\"",
 
-    "categories" : "Categorias"
+    "categories" : "Categorias",
+    "upload" : "Subir",
+    
+    "firstpage" : "Comparte una oferta\ncon millones de usuarios",
+    "firstpagesubtitle" : "¡Alcanza a millones de personas y haz que su oferta destaque!",
 
+    "secondpagetitle" : "Añade imágenes para la oferta",
+    "secondpagesubtitle" : "Debes subir al menos una imagen para continuar.",
+
+    "linkhelptext" : "Pega el enlace donde otros usuarios puedan encontrar la oferta",
+    "linkempty" : "Por favor introduce un enlace",
+    "linkerror" : "Por favor introduce un enlace válido",
+
+    "titlehint" : "Nombre del producto",
+    "titlelabel" : "Título",
+    "titleerror" : "Por favor introduce un título",
+    "titleerror2" : "El título no puede tener menos de 3 caracteres",
+
+    "tiendahint" : "Ej: Zalando, Amazon...",
+    "tiendalabel" : "Nombre de la tienda",
+    "tiendaerror" : "Por favor introduce el nombre de la tienda",
+
+    "descriptionhint" : "Introduce una descripción para el producto",
+    "descriptionlabel" : "Descripción",
+    "descriptionerror" : "Por favor introduce una descripción",
+    "descriptionerror2" : "La descripción no puede tener menos de 10 caracteres",
+    "descriptionerror3" : "La descripción no puede tener más de 200 caracteres",
+
+    "originalprice" : "Precio original",
+    "originalpriceerror" : "Por favor introduce un precio válido",
+
+    "finalpricelabel" : "Precio final",
+    "finalpriceerror" : "Por favor introduce un precio válido",
+    "finalpriceerror2" : "El precio final debe ser menor que el precio original",
+
+    "categorydropdown" : "Selecciona una categoría",
+    "categorylabel" : "Categoría",
+    "categoryerror" : "Por favor selecciona una categoría",
+
+    "subcategorydropdown" : "Selecciona una subcategoría",
+    "subcategorylabel" : "Subcategoría",
+    "subcategoryerror" : "Por favor selecciona una subcategoría",
+
+    "datelabel" : "La oferta expira el...",
+    "datehelptext" : "Este campo es opcional",
+    "datehintText" : "Selecciona una fecha",
+
+    "selecthighlights" : "Selecciona los destacados para la oferta",
+    "subtitlehigh" : "Elige los destacados que apliquen a tu oferta.",
+
+    "erroruploading" : "Error al subir el anuncio, por favor inténtalo de nuevo.",
+    "errorhighlight" : "Por favor selecciona al menos un destacado.",
+    "errorimage" : "Por favor sube al menos una imagen.",
+
+    "publish" : "Publicar",
+    "publishing" : "Publicando...",
+
+    "errorLoadingListings": "Error al cargar los anuncios. Inténtalo de nuevo.",
+    "noListingsAvailable": "No hay anuncios disponibles.",
+
+    "goback" : "Volver al inicio",
+
+    "chatWith": "Chat con {name}",
+    "noMessages": "No hay mensajes aún.",
+    "typeMessage": "Escribe un mensaje...",
+    "translate": "Traducir",
+    "translating": "Traduciendo...",
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "originalMessage": "Mensaje original",
+    "translatedMessage": "Mensaje traducido"
 }
