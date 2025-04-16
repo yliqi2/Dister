@@ -1,6 +1,7 @@
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/pages/mobile/profile/profile.dart';
 import 'package:flutter/material.dart';
+import 'package:dister/generated/l10n.dart';
 
 class UserListPage extends StatelessWidget {
   final String title;
@@ -24,16 +25,17 @@ class UserListPage extends StatelessWidget {
             future: firebaseServices.getCredentialsUser(userIds[index]),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const ListTile(
-                  title: Text('Loading...'),
+                return ListTile(
+                  title: Text(S.of(context).loading),
                 );
               } else if (snapshot.hasError) {
                 return ListTile(
-                  title: Text('Error: ${snapshot.error}'),
+                  title: Text(
+                      S.of(context).errorGeneric(snapshot.error.toString())),
                 );
               } else if (!snapshot.hasData) {
-                return const ListTile(
-                  title: Text('User not found'),
+                return ListTile(
+                  title: Text(S.of(context).userNotFound),
                 );
               } else {
                 var user = snapshot.data!;

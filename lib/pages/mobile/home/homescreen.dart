@@ -42,7 +42,7 @@ class _HomescreenState extends State<Homescreen> {
   List<Listing> _filterListings(List<Listing> listings) {
     return listings.where((listing) {
       final matchesCategory = _selectedCategory.isEmpty ||
-          _selectedCategory == 'Todas las categorías';
+          _selectedCategory == S.of(context).allCategoriesFilter;
 
       // Intenta hacer coincidir tanto por ID de categoría como por nombre localizado
       final categoryMatch = matchesCategory ||
@@ -74,7 +74,7 @@ class _HomescreenState extends State<Homescreen> {
 
       final matchesSubcategory = _selectedSubcategory.isEmpty ||
           listing.subcategories == _selectedSubcategory ||
-          _selectedSubcategory == 'Todas las subcategorías';
+          _selectedSubcategory == S.of(context).allSubcategoriesFilter;
 
       final matchesSearch = _searchController.text.isEmpty ||
           listing.title
@@ -192,12 +192,12 @@ class _HomescreenState extends State<Homescreen> {
                     CustomFilterDropdown(
                       value:
                           _selectedCategory.isEmpty ? null : _selectedCategory,
-                      hint: "Selecciona una categoría",
+                      hint: S.of(context).selectCategoryFilter,
                       icon: Icons.category_rounded,
                       items: [
-                        const DropdownItem(
-                          value: 'Todas las categorías',
-                          label: 'Todas las categorías',
+                        DropdownItem(
+                          value: S.of(context).allCategoriesFilter,
+                          label: S.of(context).allCategoriesFilter,
                           icon: Icons.all_inbox,
                         ),
                         ...ProductCategories.getCategories().map(
@@ -216,7 +216,8 @@ class _HomescreenState extends State<Homescreen> {
                       onChanged: (value) {
                         setState(() {
                           _selectedCategory = value ?? '';
-                          if (_selectedCategory == 'Todas las categorías') {
+                          if (_selectedCategory ==
+                              S.of(context).allCategoriesFilter) {
                             _selectedSubcategory = '';
                             _subcategories = [];
                             return;
@@ -240,12 +241,12 @@ class _HomescreenState extends State<Homescreen> {
                         value: _selectedSubcategory.isEmpty
                             ? null
                             : _selectedSubcategory,
-                        hint: "Selecciona una subcategoría",
+                        hint: S.of(context).selectSubcategoryFilter,
                         icon: Icons.subdirectory_arrow_right_rounded,
                         items: [
-                          const DropdownItem(
-                            value: 'Todas las subcategorías',
-                            label: 'Todas las subcategorías',
+                          DropdownItem(
+                            value: S.of(context).allSubcategoriesFilter,
+                            label: S.of(context).allSubcategoriesFilter,
                             icon: Icons.all_inbox,
                           ),
                           ..._subcategories.map((subcategory) => DropdownItem(

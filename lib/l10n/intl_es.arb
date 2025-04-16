@@ -132,5 +132,53 @@
     "today": "Hoy",
     "yesterday": "Ayer",
     "originalMessage": "Mensaje original",
-    "translatedMessage": "Mensaje traducido"
+    "translatedMessage": "Mensaje traducido",
+    
+    "cannotOpenLink": "No se pudo abrir el enlace",
+    "productDetails": "Detalles del producto",
+    "shoppingDetails": "Detalles de compra",
+    "ratingWithStars": "• Valoración: {rating} ⭐",
+    "likesCount": "• {count} Me gusta",
+    "postedTimeAgo": "• Publicado hace {time}",
+    "expiresOn": "• Expira el {date}",
+    "goForDiscount": "Obtener descuento",
+
+    "profileUpdated": "Foto de perfil actualizada correctamente.",
+    "errorUploadingImage": "Error al subir la imagen: {error}",
+    "errorGeneric": "Error: {error}",
+    "noUserData": "No hay datos de usuario disponibles",
+    "errorDuringLogout": "Error durante el cierre de sesión: {error}",
+    "noDescription": "No se ha añadido ninguna descripción.",
+    "readLess": " Leer menos",
+    "readMore": " Leer más",
+    "cannotFollowAgain": "No puedes volver a seguir a este usuario.",
+    "follow": "Seguir",
+    "unfollow": "Dejar de seguir",
+    "sendMessage": "Enviar mensaje",
+    "editProfile": "Editar perfil",
+    "followers": "Seguidores",
+    "following": "Siguiendo",
+    "listings": "Anuncios",
+    
+    "loading": "Cargando...",
+    "userNotFound": "Usuario no encontrado",
+    
+    "exampleUrl": "www.dister.com/ejemplo",
+    "link": "Enlace",
+    
+    "messages": "Mensajes",
+    
+    "percentOff": "{percent}% descuento",
+    
+    "storePrefix": "• {name}",
+    
+    "timeAgo": "hace {time}",
+    "likesText": "{count} Me gusta",
+    "timeDay": "d",
+    "timeHour": "h",
+    "timeMinute": "min.",
+    "selectCategoryFilter": "Selecciona una categoría",
+    "allCategoriesFilter": "Todas las categorías",
+    "selectSubcategoryFilter": "Selecciona una subcategoría",
+    "allSubcategoriesFilter": "Todas las subcategorías"
 }

@@ -142,8 +142,8 @@ class _NewlistingState extends State<Newlisting> {
                     CustomTextField(
                       controller: _linkcontroller,
                       isPassword: false,
-                      hintText: "www.dister.com/example",
-                      label: 'Link',
+                      hintText: S.of(context).exampleUrl,
+                      label: S.of(context).link,
                       helptext: S.of(context).linkhelptext,
                       validator: (value) {
                         final RegExp urlPattern = RegExp(
@@ -539,7 +539,9 @@ class _NewlistingState extends State<Newlisting> {
                           }
                         },
                   child: primaryBtn(
-                    text: _isUploading ? "Publishing..." : "Publish",
+                    text: _isUploading
+                        ? S.of(context).publishing
+                        : S.of(context).publish,
                     context: context,
                   ),
                 );

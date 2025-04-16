@@ -6,6 +6,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:dister/generated/l10n.dart';
 
 class Profile extends StatefulWidget {
   final String? userId; // ID del usuario cuyo perfil se desea visualizar
@@ -40,13 +41,13 @@ class _ProfileState extends State<Profile> {
             firebaseServices.getCurrentUser(), downloadUrl);
 
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-              content: Text('Profile picture updated successfully.')),
+          SnackBar(content: Text(S.of(context).profileUpdated)),
         );
       } catch (e) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error uploading image: $e')),
+          SnackBar(
+              content: Text(S.of(context).errorUploadingImage(e.toString()))),
         );
       }
     }
@@ -65,9 +66,11 @@ class _ProfileState extends State<Profile> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(
+              child:
+                  Text(S.of(context).errorGeneric(snapshot.error.toString())));
         } else if (!snapshot.hasData) {
-          return const Center(child: Text('No user data available'));
+          return Center(child: Text(S.of(context).noUserData));
         } else {
           Users user = snapshot.data!;
           bool isCurrentUser = widget.userId == null ||
@@ -127,8 +130,9 @@ class _ProfileState extends State<Profile> {
                                 } catch (e) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                        content:
-                                            Text('Error during logout: $e')),
+                                        content: Text(S
+                                            .of(context)
+                                            .errorDuringLogout(e.toString()))),
                                   );
                                 }
                               },
@@ -176,17 +180,18 @@ class _ProfileState extends State<Profile> {
                               children: [
                                 _buildStatColumn(
                                   user.listings,
-                                  'Listing',
+                                  S.of(context).listings,
                                   context,
                                 ),
                                 const SizedBox(width: 20),
                                 _buildStatColumn(
-                                    user.followers.length, 'Followers', context,
-                                    onTap: () {
+                                    user.followers.length,
+                                    S.of(context).followers,
+                                    context, onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => UserListPage(
-                                        title: 'Followers',
+                                        title: S.of(context).followers,
                                         userIds: user.followers,
                                       ),
                                     ),
@@ -194,12 +199,13 @@ class _ProfileState extends State<Profile> {
                                 }),
                                 const SizedBox(width: 20),
                                 _buildStatColumn(
-                                    user.following.length, 'Following', context,
-                                    onTap: () {
+                                    user.following.length,
+                                    S.of(context).following,
+                                    context, onTap: () {
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => UserListPage(
-                                        title: 'Following',
+                                        title: S.of(context).following,
                                         userIds: user.following,
                                       ),
                                     ),
@@ -225,7 +231,7 @@ class _ProfileState extends State<Profile> {
                                                 : user.desc!.length > 50
                                                     ? '${user.desc!.substring(0, 50)}...'
                                                     : user.desc!)
-                                            : 'No se ha añadido ninguna descripción.',
+                                            : S.of(context).noDescription,
                                         style: TextStyle(
                                           color: Theme.of(context)
                                               .colorScheme
@@ -238,8 +244,8 @@ class _ProfileState extends State<Profile> {
                                           user.desc!.length > 50)
                                         TextSpan(
                                           text: _isExpanded
-                                              ? ' Read Less'
-                                              : ' Read More',
+                                              ? S.of(context).readLess
+                                              : S.of(context).readMore,
                                           style: TextStyle(
                                             color: Theme.of(context)
                                                 .colorScheme
@@ -266,7 +272,10 @@ class _ProfileState extends State<Profile> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: isCurrentUser
-                                ? [_buildButton('Edit Profile', context)]
+                                ? [
+                                    _buildButton(
+                                        S.of(context).editProfile, context)
+                                  ]
                                 : [
                                     GestureDetector(
                                       onTap: () async {
@@ -291,9 +300,10 @@ class _ProfileState extends State<Profile> {
                                           } else {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
-                                              const SnackBar(
-                                                content: Text(
-                                                    'No puedes volver a seguir a este usuario.'),
+                                              SnackBar(
+                                                content: Text(S
+                                                    .of(context)
+                                                    .cannotFollowAgain),
                                               ),
                                             );
                                           }
@@ -301,12 +311,15 @@ class _ProfileState extends State<Profile> {
                                         setState(() {});
                                       },
                                       child: _buildButton(
-                                        isFollowing ? 'Unfollow' : 'Follow',
+                                        isFollowing
+                                            ? S.of(context).unfollow
+                                            : S.of(context).follow,
                                         context,
                                       ),
                                     ),
                                     const SizedBox(width: 10),
-                                    _buildButton('Send Message', context),
+                                    _buildButton(
+                                        S.of(context).sendMessage, context),
                                   ],
                           ),
                         ),

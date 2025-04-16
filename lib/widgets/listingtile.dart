@@ -3,6 +3,7 @@ import 'package:dister/pages/mobile/profile/profile.dart';
 import 'package:dister/controller/like_service/like_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dister/generated/l10n.dart';
 
 class Listingtile extends StatefulWidget {
   final Listing listing;
@@ -115,13 +116,30 @@ class _ListingtileState extends State<Listingtile> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "${widget.listing.getFormattedLikes()} Likes",
+                      S
+                          .of(context)
+                          .likesText(widget.listing.getFormattedLikes()),
                       style: theme.textTheme.bodySmall?.copyWith(
                         color: colorScheme.secondary,
                       ),
                     ),
                     Text(
-                      "${widget.listing.getTimeAgo()} ago",
+                      (() {
+                        final timeData = widget.listing.getTimeData();
+                        final String unitKey = timeData["unit"];
+                        final String timeValue = timeData["value"];
+                        String timeUnit;
+
+                        if (unitKey == "timeDay") {
+                          timeUnit = S.of(context).timeDay;
+                        } else if (unitKey == "timeHour") {
+                          timeUnit = S.of(context).timeHour;
+                        } else {
+                          timeUnit = S.of(context).timeMinute;
+                        }
+
+                        return S.of(context).timeAgo("$timeValue $timeUnit");
+                      })(),
                       style: theme.textTheme.bodySmall,
                     ),
                   ],

@@ -4,6 +4,9 @@ import 'package:dister/controller/like_service/like_service.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:dister/generated/l10n.dart';
+import 'package:dister/model/categorie.dart';
+import 'package:dister/model/highlight.dart';
 
 class Listingdetails extends StatefulWidget {
   final Listing listing;
@@ -63,7 +66,7 @@ class _ListingdetailsState extends State<Listingdetails> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(
-              'No se pudo abrir el enlace',
+              S.of(context).cannotOpenLink,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context).colorScheme.onError,
                   ),
@@ -194,7 +197,12 @@ class _ListingdetailsState extends State<Listingdetails> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(
-                          '${(((widget.listing.originalPrice - widget.listing.discountPrice) / widget.listing.originalPrice) * 100).round()}% off',
+                          S.of(context).percentOff(
+                              (((widget.listing.originalPrice -
+                                              widget.listing.discountPrice) /
+                                          widget.listing.originalPrice) *
+                                      100)
+                                  .round()),
                           style: theme.textTheme.bodyMedium?.copyWith(
                             color:
                                 Theme.of(context).brightness == Brightness.dark
@@ -227,7 +235,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'Product Details',
+                    S.of(context).productDetails,
                     style: theme.textTheme.titleLarge?.copyWith(
                       color: colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
@@ -242,7 +250,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'Shopping Details',
+                    S.of(context).shoppingDetails,
                     style: theme.textTheme.titleLarge?.copyWith(
                       color: colorScheme.onSurface,
                       fontWeight: FontWeight.bold,
@@ -250,7 +258,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    '• ${widget.listing.storeName}',
+                    S.of(context).storePrefix(widget.listing.storeName),
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
@@ -258,7 +266,8 @@ class _ListingdetailsState extends State<Listingdetails> {
                   if (widget.listing.rating != null) ...[
                     const SizedBox(height: 4),
                     Text(
-                      '• Rating: ${widget.listing.rating!.toStringAsFixed(1)} ⭐',
+                      S.of(context).ratingWithStars(
+                          widget.listing.rating!.toStringAsFixed(1)),
                       style: theme.textTheme.bodyLarge?.copyWith(
                         color: colorScheme.onSurfaceVariant,
                       ),
@@ -270,7 +279,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                     builder: (context, snapshot) {
                       final likes = snapshot.data ?? widget.listing.likes;
                       return Text(
-                        '• $likes Likes',
+                        S.of(context).likesCount(likes),
                         style: theme.textTheme.bodyLarge?.copyWith(
                           color: colorScheme.onSurfaceVariant,
                         ),
@@ -279,7 +288,24 @@ class _ListingdetailsState extends State<Listingdetails> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    '• Posted ${widget.listing.getTimeAgo()} ago',
+                    (() {
+                      final timeData = widget.listing.getTimeData();
+                      final String unitKey = timeData["unit"];
+                      final String timeValue = timeData["value"];
+                      String timeUnit;
+
+                      if (unitKey == "timeDay") {
+                        timeUnit = S.of(context).timeDay;
+                      } else if (unitKey == "timeHour") {
+                        timeUnit = S.of(context).timeHour;
+                      } else {
+                        timeUnit = S.of(context).timeMinute;
+                      }
+
+                      return S
+                          .of(context)
+                          .postedTimeAgo("$timeValue $timeUnit");
+                    })(),
                     style: theme.textTheme.bodyLarge?.copyWith(
                       color: colorScheme.onSurfaceVariant,
                     ),
@@ -287,7 +313,9 @@ class _ListingdetailsState extends State<Listingdetails> {
                   if (widget.listing.expiresAt != null) ...[
                     const SizedBox(height: 4),
                     Text(
-                      '• Expires on ${widget.listing.getFormattedExpiry()}',
+                      S
+                          .of(context)
+                          .expiresOn(widget.listing.getFormattedExpiry() ?? ''),
                       style: theme.textTheme.bodyLarge?.copyWith(
                         color: colorScheme.onSurfaceVariant,
                       ),
@@ -317,7 +345,7 @@ class _ListingdetailsState extends State<Listingdetails> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              "Go for the discount",
+              S.of(context).goForDiscount,
               style: theme.textTheme.titleLarge?.copyWith(
                 color: colorScheme.onError,
                 fontWeight: FontWeight.bold,
@@ -333,6 +361,43 @@ class _ListingdetailsState extends State<Listingdetails> {
   Widget _categoryTag(String text) {
     final colorScheme = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // Traducir categorías y highlights
+    String translatedText = text;
+    final locale = Localizations.localeOf(context).toString();
+
+    // Buscar si es una categoría y traducirla
+    for (var category in ProductCategories.getCategories()) {
+      if (text == category.id ||
+          text == category.names["en"] ||
+          text == category.names["es"]) {
+        translatedText = category.getName(locale);
+        break;
+      }
+
+      // Buscar si es una subcategoría
+      for (var subcat in category.subcategories) {
+        if (text == subcat["en"] || text == subcat["es"]) {
+          final lang = locale.split('_')[0];
+          translatedText = subcat[lang] ?? subcat["en"] ?? text;
+          break;
+        }
+      }
+    }
+
+    // Buscar si es un highlight
+    for (var highlightKey in HighlightOptions.options.keys) {
+      if (text == highlightKey ||
+          text == HighlightOptions.options[highlightKey]!["en"] ||
+          text == HighlightOptions.options[highlightKey]!["es"]) {
+        final lang = locale.split('_')[0];
+        translatedText = HighlightOptions.options[highlightKey]![lang] ??
+            HighlightOptions.options[highlightKey]!["en"] ??
+            text;
+        break;
+      }
+    }
+
     return Container(
       margin: const EdgeInsets.only(right: 8, bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
@@ -343,7 +408,7 @@ class _ListingdetailsState extends State<Listingdetails> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
-        text,
+        translatedText,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color:
                   isDark ? colorScheme.onSurfaceVariant : colorScheme.primary,

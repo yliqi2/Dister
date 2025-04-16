@@ -92,12 +92,23 @@ class Listing {
     return querySnapshot.docs.map((doc) => Listing.fromFirestore(doc)).toList();
   }
 
-  String getTimeAgo() {
+  Map<String, dynamic> getTimeData() {
     Duration difference = DateTime.now().difference(publishedAt);
-    if (difference.inMinutes == 0) return "1 min.";
-    if (difference.inDays > 0) return "${difference.inDays} d";
-    if (difference.inHours > 0) return "${difference.inHours} H";
-    return "${difference.inMinutes} min.";
+    if (difference.inMinutes == 0) {
+      return {"value": "1", "unit": "timeMinute"};
+    }
+    if (difference.inDays > 0) {
+      return {"value": difference.inDays.toString(), "unit": "timeDay"};
+    }
+    if (difference.inHours > 0) {
+      return {"value": difference.inHours.toString(), "unit": "timeHour"};
+    }
+    return {"value": difference.inMinutes.toString(), "unit": "timeMinute"};
+  }
+
+  String getTimeAgo() {
+    final timeData = getTimeData();
+    return "${timeData["value"]} ${timeData["unit"]}";
   }
 
   String? getFormattedExpiry() {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dister/generated/l10n.dart';
 
 class FollowingListPage extends StatelessWidget {
   const FollowingListPage({super.key});
@@ -8,7 +9,7 @@ class FollowingListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mensajes'),
+        title: Text(S.of(context).messages),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('users').snapshots(),
@@ -37,7 +38,7 @@ class FollowingListPage extends StatelessWidget {
                   onPressed: () {
                     // Placeholder for send message functionality
                   },
-                  child: const Text('Send Message'),
+                  child: Text(S.of(context).sendMessage),
                 ),
               );
             },

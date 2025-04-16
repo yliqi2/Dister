@@ -133,5 +133,53 @@
     "today": "Today",
     "yesterday": "Yesterday",
     "originalMessage": "Original message",
-    "translatedMessage": "Translated message"
+    "translatedMessage": "Translated message",
+
+    "cannotOpenLink": "Cannot open the link",
+    "productDetails": "Product Details",
+    "shoppingDetails": "Shopping Details",
+    "ratingWithStars": "• Rating: {rating} ⭐",
+    "likesCount": "• {count} Likes",
+    "postedTimeAgo": "• Posted {time} ago",
+    "expiresOn": "• Expires on {date}",
+    "goForDiscount": "Go for the discount",
+
+    "profileUpdated": "Profile picture updated successfully.",
+    "errorUploadingImage": "Error uploading image: {error}",
+    "errorGeneric": "Error: {error}",
+    "noUserData": "No user data available",
+    "errorDuringLogout": "Error during logout: {error}",
+    "noDescription": "No description has been added.",
+    "readLess": " Read Less",
+    "readMore": " Read More",
+    "cannotFollowAgain": "You cannot follow this user again.",
+    "follow": "Follow",
+    "unfollow": "Unfollow",
+    "sendMessage": "Send Message",
+    "editProfile": "Edit Profile",
+    "followers": "Followers",
+    "following": "Following",
+    "listings": "Listings",
+    
+    "loading": "Loading...",
+    "userNotFound": "User not found",
+    
+    "exampleUrl": "www.dister.com/example",
+    "link": "Link",
+    
+    "messages": "Messages",
+    
+    "percentOff": "{percent}% off",
+    
+    "storePrefix": "• {name}",
+    
+    "timeAgo": "{time} ago",
+    "likesText": "{count} Likes",
+    "timeDay": "d",
+    "timeHour": "H",
+    "timeMinute": "min.",
+    "selectCategoryFilter": "Select a category",
+    "allCategoriesFilter": "All categories",
+    "selectSubcategoryFilter": "Select a subcategory",
+    "allSubcategoriesFilter": "All subcategories"
 }

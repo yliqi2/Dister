@@ -994,6 +994,331 @@ class S {
       args: [],
     );
   }
+
+  /// `Cannot open the link`
+  String get cannotOpenLink {
+    return Intl.message(
+      'Cannot open the link',
+      name: 'cannotOpenLink',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Product Details`
+  String get productDetails {
+    return Intl.message(
+      'Product Details',
+      name: 'productDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Shopping Details`
+  String get shoppingDetails {
+    return Intl.message(
+      'Shopping Details',
+      name: 'shoppingDetails',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `• Rating: {rating} ⭐`
+  String ratingWithStars(Object rating) {
+    return Intl.message(
+      '• Rating: $rating ⭐',
+      name: 'ratingWithStars',
+      desc: '',
+      args: [rating],
+    );
+  }
+
+  /// `• {count} Likes`
+  String likesCount(Object count) {
+    return Intl.message(
+      '• $count Likes',
+      name: 'likesCount',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `• Posted {time} ago`
+  String postedTimeAgo(Object time) {
+    return Intl.message(
+      '• Posted $time ago',
+      name: 'postedTimeAgo',
+      desc: '',
+      args: [time],
+    );
+  }
+
+  /// `• Expires on {date}`
+  String expiresOn(Object date) {
+    return Intl.message(
+      '• Expires on $date',
+      name: 'expiresOn',
+      desc: '',
+      args: [date],
+    );
+  }
+
+  /// `Go for the discount`
+  String get goForDiscount {
+    return Intl.message(
+      'Go for the discount',
+      name: 'goForDiscount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile picture updated successfully.`
+  String get profileUpdated {
+    return Intl.message(
+      'Profile picture updated successfully.',
+      name: 'profileUpdated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error uploading image: {error}`
+  String errorUploadingImage(Object error) {
+    return Intl.message(
+      'Error uploading image: $error',
+      name: 'errorUploadingImage',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Error: {error}`
+  String errorGeneric(Object error) {
+    return Intl.message(
+      'Error: $error',
+      name: 'errorGeneric',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `No user data available`
+  String get noUserData {
+    return Intl.message(
+      'No user data available',
+      name: 'noUserData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error during logout: {error}`
+  String errorDuringLogout(Object error) {
+    return Intl.message(
+      'Error during logout: $error',
+      name: 'errorDuringLogout',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `No description has been added.`
+  String get noDescription {
+    return Intl.message(
+      'No description has been added.',
+      name: 'noDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` Read Less`
+  String get readLess {
+    return Intl.message(' Read Less', name: 'readLess', desc: '', args: []);
+  }
+
+  /// ` Read More`
+  String get readMore {
+    return Intl.message(' Read More', name: 'readMore', desc: '', args: []);
+  }
+
+  /// `You cannot follow this user again.`
+  String get cannotFollowAgain {
+    return Intl.message(
+      'You cannot follow this user again.',
+      name: 'cannotFollowAgain',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Follow`
+  String get follow {
+    return Intl.message('Follow', name: 'follow', desc: '', args: []);
+  }
+
+  /// `Unfollow`
+  String get unfollow {
+    return Intl.message('Unfollow', name: 'unfollow', desc: '', args: []);
+  }
+
+  /// `Send Message`
+  String get sendMessage {
+    return Intl.message(
+      'Send Message',
+      name: 'sendMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Profile`
+  String get editProfile {
+    return Intl.message(
+      'Edit Profile',
+      name: 'editProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Followers`
+  String get followers {
+    return Intl.message('Followers', name: 'followers', desc: '', args: []);
+  }
+
+  /// `Following`
+  String get following {
+    return Intl.message('Following', name: 'following', desc: '', args: []);
+  }
+
+  /// `Listings`
+  String get listings {
+    return Intl.message('Listings', name: 'listings', desc: '', args: []);
+  }
+
+  /// `Loading...`
+  String get loading {
+    return Intl.message('Loading...', name: 'loading', desc: '', args: []);
+  }
+
+  /// `User not found`
+  String get userNotFound {
+    return Intl.message(
+      'User not found',
+      name: 'userNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `www.dister.com/example`
+  String get exampleUrl {
+    return Intl.message(
+      'www.dister.com/example',
+      name: 'exampleUrl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Link`
+  String get link {
+    return Intl.message('Link', name: 'link', desc: '', args: []);
+  }
+
+  /// `Messages`
+  String get messages {
+    return Intl.message('Messages', name: 'messages', desc: '', args: []);
+  }
+
+  /// `{percent}% off`
+  String percentOff(Object percent) {
+    return Intl.message(
+      '$percent% off',
+      name: 'percentOff',
+      desc: '',
+      args: [percent],
+    );
+  }
+
+  /// `• {name}`
+  String storePrefix(Object name) {
+    return Intl.message('• $name', name: 'storePrefix', desc: '', args: [name]);
+  }
+
+  /// `{time} ago`
+  String timeAgo(Object time) {
+    return Intl.message('$time ago', name: 'timeAgo', desc: '', args: [time]);
+  }
+
+  /// `{count} Likes`
+  String likesText(Object count) {
+    return Intl.message(
+      '$count Likes',
+      name: 'likesText',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `d`
+  String get timeDay {
+    return Intl.message('d', name: 'timeDay', desc: '', args: []);
+  }
+
+  /// `H`
+  String get timeHour {
+    return Intl.message('H', name: 'timeHour', desc: '', args: []);
+  }
+
+  /// `min.`
+  String get timeMinute {
+    return Intl.message('min.', name: 'timeMinute', desc: '', args: []);
+  }
+
+  /// `Select a category`
+  String get selectCategoryFilter {
+    return Intl.message(
+      'Select a category',
+      name: 'selectCategoryFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All categories`
+  String get allCategoriesFilter {
+    return Intl.message(
+      'All categories',
+      name: 'allCategoriesFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select a subcategory`
+  String get selectSubcategoryFilter {
+    return Intl.message(
+      'Select a subcategory',
+      name: 'selectSubcategoryFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `All subcategories`
+  String get allSubcategoriesFilter {
+    return Intl.message(
+      'All subcategories',
+      name: 'allSubcategoriesFilter',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
