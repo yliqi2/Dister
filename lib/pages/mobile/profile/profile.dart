@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:dister/generated/l10n.dart';
+import 'package:dister/pages/mobile/chat/chat_screen.dart';
 
 class Profile extends StatefulWidget {
   final String? userId; // ID del usuario cuyo perfil se desea visualizar
@@ -277,53 +278,81 @@ class _ProfileState extends State<Profile> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: isCurrentUser
                                 ? [
-                                    _buildButton(
-                                        S.of(context).editProfile, context)
+                                    Expanded(
+                                      child: _buildButton(
+                                          S.of(context).editProfile, context),
+                                    )
                                   ]
                                 : [
-                                    GestureDetector(
-                                      onTap: () async {
-                                        if (isFollowing) {
-                                          await firebaseServices.unfollowUser(
-                                            firebaseServices.getCurrentUser(),
-                                            user.uid,
-                                          );
-                                        } else {
-                                          bool hasUnfollowed =
-                                              await firebaseServices
-                                                  .hasUnfollowed(
-                                            firebaseServices.getCurrentUser(),
-                                            user.uid,
-                                          );
-
-                                          if (!hasUnfollowed) {
-                                            await firebaseServices.followUser(
+                                    Expanded(
+                                      flex: 2,
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          if (isFollowing) {
+                                            await firebaseServices.unfollowUser(
                                               firebaseServices.getCurrentUser(),
                                               user.uid,
                                             );
                                           } else {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                content: Text(S
-                                                    .of(context)
-                                                    .cannotFollowAgain),
-                                              ),
+                                            bool hasUnfollowed =
+                                                await firebaseServices
+                                                    .hasUnfollowed(
+                                              firebaseServices.getCurrentUser(),
+                                              user.uid,
                                             );
+
+                                            if (!hasUnfollowed) {
+                                              await firebaseServices.followUser(
+                                                firebaseServices
+                                                    .getCurrentUser(),
+                                                user.uid,
+                                              );
+                                            } else {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(S
+                                                      .of(context)
+                                                      .cannotFollowAgain),
+                                                ),
+                                              );
+                                            }
                                           }
-                                        }
-                                        setState(() {});
-                                      },
-                                      child: _buildButton(
-                                        isFollowing
-                                            ? S.of(context).unfollow
-                                            : S.of(context).follow,
-                                        context,
+                                          setState(() {});
+                                        },
+                                        child: _buildButton(
+                                          isFollowing
+                                              ? S.of(context).unfollow
+                                              : S.of(context).follow,
+                                          context,
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(width: 10),
-                                    _buildButton(
-                                        S.of(context).sendMessage, context),
+                                    Expanded(
+                                      flex: 3,
+                                      child: GestureDetector(
+                                        onTap: isFollowing
+                                            ? () {
+                                                Navigator.of(context).push(
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ChatScreen(
+                                                      recipientId: user.uid,
+                                                      recipientName:
+                                                          user.username,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                            : null,
+                                        child: _buildButton(
+                                          S.of(context).sendMessage,
+                                          context,
+                                          isDisabled: !isFollowing,
+                                        ),
+                                      ),
+                                    ),
                                   ],
                           ),
                         ),
@@ -366,22 +395,26 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _buildButton(String text, BuildContext context) {
-    return Expanded(
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Theme.of(context).colorScheme.secondary,
-          ),
+  Widget _buildButton(String text, BuildContext context,
+      {bool isDisabled = false}) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isDisabled
+              ? Theme.of(context).colorScheme.secondary.withOpacity(0.3)
+              : Theme.of(context).colorScheme.secondary,
         ),
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.secondary,
-            ),
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: TextStyle(
+            color: isDisabled
+                ? Theme.of(context).colorScheme.secondary.withOpacity(0.3)
+                : Theme.of(context).colorScheme.secondary,
           ),
         ),
       ),
