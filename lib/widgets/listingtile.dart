@@ -73,6 +73,7 @@ class _ListingtileState extends State<Listingtile> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
+                  flex: 3,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(
@@ -112,37 +113,48 @@ class _ListingtileState extends State<Listingtile> {
                     ),
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      S
-                          .of(context)
-                          .likesText(widget.listing.getFormattedLikes()),
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: colorScheme.secondary,
+                Expanded(
+                  flex: 2,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          S
+                              .of(context)
+                              .likesText(widget.listing.getFormattedLikes()),
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: colorScheme.secondary,
+                          ),
+                        ),
                       ),
-                    ),
-                    Text(
-                      (() {
-                        final timeData = widget.listing.getTimeData();
-                        final String unitKey = timeData["unit"];
-                        final String timeValue = timeData["value"];
-                        String timeUnit;
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          (() {
+                            final timeData = widget.listing.getTimeData();
+                            final String unitKey = timeData["unit"];
+                            final String timeValue = timeData["value"];
+                            String timeUnit;
 
-                        if (unitKey == "timeDay") {
-                          timeUnit = S.of(context).timeDay;
-                        } else if (unitKey == "timeHour") {
-                          timeUnit = S.of(context).timeHour;
-                        } else {
-                          timeUnit = S.of(context).timeMinute;
-                        }
+                            if (unitKey == "timeDay") {
+                              timeUnit = S.of(context).timeDay;
+                            } else if (unitKey == "timeHour") {
+                              timeUnit = S.of(context).timeHour;
+                            } else {
+                              timeUnit = S.of(context).timeMinute;
+                            }
 
-                        return S.of(context).timeAgo("$timeValue $timeUnit");
-                      })(),
-                      style: theme.textTheme.bodySmall,
-                    ),
-                  ],
+                            return S
+                                .of(context)
+                                .timeAgo("$timeValue $timeUnit");
+                          })(),
+                          style: theme.textTheme.bodySmall,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -153,7 +165,7 @@ class _ListingtileState extends State<Listingtile> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: AspectRatio(
-                  aspectRatio: 1.25, // Adjusted aspect ratio for smaller image
+                  aspectRatio: 1.25,
                   child: Image.network(
                     widget.listing.images.first,
                     fit: BoxFit.cover,

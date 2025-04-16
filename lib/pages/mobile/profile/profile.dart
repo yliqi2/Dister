@@ -175,43 +175,47 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                _buildStatColumn(
-                                  user.listings,
-                                  S.of(context).listings,
-                                  context,
-                                ),
-                                const SizedBox(width: 20),
-                                _buildStatColumn(
-                                    user.followers.length,
-                                    S.of(context).followers,
-                                    context, onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => UserListPage(
-                                        title: S.of(context).followers,
-                                        userIds: user.followers,
+                            const SizedBox(width: 20),
+                            Expanded(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  _buildStatColumn(
+                                    user.listings,
+                                    S.of(context).listings,
+                                    context,
+                                  ),
+                                  const SizedBox(width: 10),
+                                  _buildStatColumn(
+                                      user.followers.length,
+                                      S.of(context).followers,
+                                      context, onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => UserListPage(
+                                          title: S.of(context).followers,
+                                          userIds: user.followers,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }),
-                                const SizedBox(width: 20),
-                                _buildStatColumn(
-                                    user.following.length,
-                                    S.of(context).following,
-                                    context, onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) => UserListPage(
-                                        title: S.of(context).following,
-                                        userIds: user.following,
+                                    );
+                                  }),
+                                  const SizedBox(width: 10),
+                                  _buildStatColumn(
+                                      user.following.length,
+                                      S.of(context).following,
+                                      context, onTap: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) => UserListPage(
+                                          title: S.of(context).following,
+                                          userIds: user.following,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }),
-                              ],
+                                    );
+                                  }),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -337,16 +341,26 @@ class _ProfileState extends State<Profile> {
 
   Widget _buildStatColumn(int count, String label, BuildContext context,
       {VoidCallback? onTap}) {
-    TextStyle style = TextStyle(
-      color: Theme.of(context).colorScheme.secondary,
-      fontWeight: FontWeight.w800,
-    );
     return GestureDetector(
       onTap: onTap,
       child: Column(
         children: [
-          Text(count.toString(), style: style),
-          Text(label, style: style),
+          Text(
+            count.toString(),
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.secondary,
+              fontWeight: FontWeight.w800,
+              fontSize: 20,
+            ),
+          ),
+          Text(
+            label,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.secondary,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ),
         ],
       ),
     );
