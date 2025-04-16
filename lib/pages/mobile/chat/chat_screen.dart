@@ -90,6 +90,16 @@ class _ChatScreenState extends State<ChatScreen> {
       appBar: AppBar(
         title: Text(S.of(context).chatWith(widget.recipientName)),
         centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        elevation: 0,
+        titleTextStyle: TextStyle(
+          color: Theme.of(context).colorScheme.secondary,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+        iconTheme: IconThemeData(
+          color: Theme.of(context).colorScheme.secondary,
+        ),
       ),
       body: Column(
         children: [
@@ -149,22 +159,50 @@ class _ChatScreenState extends State<ChatScreen> {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 8, horizontal: 12),
                             decoration: BoxDecoration(
-                              color: isMe ? Colors.blue[100] : Colors.grey[300],
+                              color: Theme.of(context).brightness ==
+                                      Brightness.light
+                                  ? Theme.of(context)
+                                      .colorScheme
+                                      .surfaceContainer
+                                      .withOpacity(0.8)
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .surfaceContainer,
                               borderRadius: BorderRadius.circular(15),
+                              border: Theme.of(context).brightness ==
+                                      Brightness.light
+                                  ? Border.all(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface
+                                          .withOpacity(0.1),
+                                      width: 0.5,
+                                    )
+                                  : null,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   chat.message,
-                                  style: const TextStyle(fontSize: 16),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: isMe
+                                        ? Theme.of(context)
+                                            .colorScheme
+                                            .secondary
+                                        : Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                  ),
                                 ),
                                 const SizedBox(height: 5),
                                 Text(
                                   _formatDate(chat.sentDate),
                                   style: TextStyle(
                                     fontSize: 10,
-                                    color: Colors.grey[600],
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
                                   ),
                                 ),
                               ],
@@ -187,18 +225,35 @@ class _ChatScreenState extends State<ChatScreen> {
                     controller: _messageController,
                     decoration: InputDecoration(
                       hintText: S.of(context).typeMessage,
+                      hintStyle: TextStyle(
+                          color: Theme.of(context).colorScheme.tertiary),
+                      filled: true,
+                      fillColor: Theme.of(context).colorScheme.surfaceContainer,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 1.5,
+                        ),
                       ),
                       contentPadding: const EdgeInsets.symmetric(
                           horizontal: 15, vertical: 10),
                     ),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary),
                     textInputAction: TextInputAction.send,
                     onSubmitted: (_) => _sendMessage(),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.send, color: Colors.blue),
+                  icon: Icon(
+                    Icons.send,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                   onPressed: _sendMessage,
                 ),
               ],
