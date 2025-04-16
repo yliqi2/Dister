@@ -42,8 +42,13 @@ class _HomescreenState extends State<Homescreen> {
   List<Listing> _filterListings(List<Listing> listings) {
     return listings.where((listing) {
       final matchesCategory = _selectedCategory.isEmpty ||
-          listing.categories == _selectedCategory ||
           _selectedCategory == 'Todas las categorías';
+
+      final categoryMatch = matchesCategory ||
+          ProductCategories.getCategories().any((category) =>
+              category.getName(Localizations.localeOf(context).toString()) ==
+                  _selectedCategory &&
+              category.id == listing.categories);
 
       final matchesSubcategory = _selectedSubcategory.isEmpty ||
           listing.subcategories == _selectedSubcategory ||
@@ -54,7 +59,7 @@ class _HomescreenState extends State<Homescreen> {
               .toLowerCase()
               .contains(_searchController.text.toLowerCase());
 
-      return matchesCategory && matchesSubcategory && matchesSearch;
+      return categoryMatch && matchesSubcategory && matchesSearch;
     }).toList();
   }
 

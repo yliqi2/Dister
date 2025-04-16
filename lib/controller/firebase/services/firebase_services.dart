@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:intl/intl.dart';
+import 'package:dister/model/categorie.dart';
 
 class FirebaseServices {
   final FirebaseFirestore _fs = FirebaseFirestore.instance;
@@ -51,8 +52,10 @@ class FirebaseServices {
     required double discountPrice,
     required String storeName,
     required String userId,
-    required String categories,
-    required String subcategories,
+    required String
+        categories, // Ahora recibe el nombre localizado de la categoría
+    required String
+        subcategories, // Ahora recibe el nombre localizado de la subcategoría
     required List<String> highlights,
     required List<XFile?> selectedImages, // Cambiado a List<XFile?>
   }) async {
@@ -65,6 +68,9 @@ class FirebaseServices {
         return false;
       }
 
+      // Obtener el ID de la categoría a partir del nombre localizado
+      final categoryId = _getCategoryIdFromName(categories);
+
       // Crear el objeto Listing
       Listing listing = Listing(
         title: title,
@@ -75,8 +81,9 @@ class FirebaseServices {
         originalPrice: originalPrice,
         discountPrice: discountPrice,
         storeName: storeName,
-        categories: categories,
-        subcategories: subcategories,
+        categories: categoryId, // Guardar el ID de la categoría
+        subcategories:
+            subcategories, // Seguimos guardando el nombre de la subcategoría
         likes: 0,
         images: [], // Inicialmente vacío
         highlights: highlights.isNotEmpty ? highlights : [],
@@ -97,6 +104,17 @@ class FirebaseServices {
     } catch (e) {
       return false; // Retornamos false si ocurrió un error
     }
+  }
+
+  // Método para obtener el ID de la categoría a partir del nombre localizado
+  String _getCategoryIdFromName(String categoryName) {
+    final categories = ProductCategories.getCategories();
+    for (var category in categories) {
+      if (category.names.values.any((name) => name == categoryName)) {
+        return category.id;
+      }
+    }
+    return ""; // Si no encuentra la categoría, retorna un string vacío
   }
 
   // Subir imágenes a Firebase Storage y obtener las URLs
