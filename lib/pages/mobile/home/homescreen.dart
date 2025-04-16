@@ -44,11 +44,33 @@ class _HomescreenState extends State<Homescreen> {
       final matchesCategory = _selectedCategory.isEmpty ||
           _selectedCategory == 'Todas las categorías';
 
+      // Intenta hacer coincidir tanto por ID de categoría como por nombre localizado
       final categoryMatch = matchesCategory ||
-          ProductCategories.getCategories().any((category) =>
-              category.getName(Localizations.localeOf(context).toString()) ==
-                  _selectedCategory &&
-              category.id == listing.categories);
+          ProductCategories.getCategories().any((category) {
+            // Coincidencia por ID (nuevos productos)
+            if (category.getName(Localizations.localeOf(context).toString()) ==
+                    _selectedCategory &&
+                category.id == listing.categories) {
+              return true;
+            }
+
+            // Coincidencia por nombre localizado (productos antiguos)
+            if (category.getName(Localizations.localeOf(context).toString()) ==
+                    _selectedCategory &&
+                category.getName(Localizations.localeOf(context).toString()) ==
+                    listing.categories) {
+              return true;
+            }
+
+            // Coincidencia por cualquier nombre localizado en otro idioma
+            if (category.getName(Localizations.localeOf(context).toString()) ==
+                    _selectedCategory &&
+                category.names.values.contains(listing.categories)) {
+              return true;
+            }
+
+            return false;
+          });
 
       final matchesSubcategory = _selectedSubcategory.isEmpty ||
           listing.subcategories == _selectedSubcategory ||
