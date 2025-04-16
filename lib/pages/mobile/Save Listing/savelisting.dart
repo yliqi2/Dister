@@ -102,6 +102,7 @@ class _SavelistingState extends State<Savelisting> {
                     : 'Fecha desconocida';
 
                 return Card(
+                  color: Theme.of(context).colorScheme.surfaceContainer,
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   child: ListTile(

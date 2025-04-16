@@ -8,8 +8,10 @@ import 'package:dister/generated/l10n.dart';
 class Listingtile extends StatefulWidget {
   final Listing listing;
   final VoidCallback? onTap;
+  final bool colorChange;
 
-  const Listingtile({super.key, required this.listing, this.onTap});
+  const Listingtile(
+      {super.key, required this.listing, this.onTap, this.colorChange = false});
 
   @override
   State<Listingtile> createState() => _ListingtileState();
@@ -56,12 +58,14 @@ class _ListingtileState extends State<Listingtile> {
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Theme.of(context).brightness == Brightness.dark
-              ? colorScheme.surface
-              : colorScheme.surface.withAlpha(242),
+              ? widget.colorChange
+                  ? colorScheme.surface
+                  : colorScheme.surfaceContainer
+              : colorScheme.surfaceContainer.withAlpha(242),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: Theme.of(context).brightness == Brightness.dark
-                ? colorScheme.outline
+                ? colorScheme.outline.withAlpha(50)
                 : colorScheme.outline.withAlpha(77),
           ),
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 // Colores personalizados
-Color background = const Color(0xFF212020);
+Color background = const Color.fromARGB(255, 198, 84, 84);
 Color highLight = const Color(0xFFB8261B);
 Color text = const Color(0xFFFFFFFF);
 Color subtitle = const Color.fromRGBO(255, 255, 255, 0.65);
