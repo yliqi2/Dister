@@ -288,4 +288,22 @@ class FirebaseServices {
       throw Exception("Error updating user photo");
     }
   }
+
+  Future<void> deleteAccount() async {
+    try {
+      String userId = getCurrentUser();
+
+      // Delete user data from Firestore
+      await _fs.collection('users').doc(userId).delete();
+
+      // Delete user authentication account
+      User? user = _auth.currentUser;
+      if (user != null) {
+        await user.delete();
+      }
+    } catch (e) {
+      debugPrint("Error deleting account: $e");
+      throw Exception("Error deleting account");
+    }
+  }
 }

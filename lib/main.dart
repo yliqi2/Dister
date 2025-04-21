@@ -46,6 +46,7 @@ class MyApp extends StatelessWidget {
       title: 'Dister',
       theme: lightMode,
       darkTheme: netflix,
+      navigatorKey: GlobalKey<NavigatorState>(), // Add navigatorKey
       localizationsDelegates: const [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

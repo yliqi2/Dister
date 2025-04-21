@@ -182,5 +182,18 @@
     "selectSubcategoryFilter": "Selecciona una subcategoría",
     "allSubcategoriesFilter": "Todas las subcategorías",
     "description": "Descripción",
-    "saveChanges": "Guardar cambios"
+    "saveChanges": "Guardar cambios",
+    "themes": "Temas",
+    "changeLanguage": "Cambiar idioma",
+    "logout": "Cerrar sesión",
+    "saveSessionData": "Guardar datos de sesión",
+    "deleteAccount": "Borrar cuenta",
+    "selectTheme": "Selecciona un tema",
+    "lightTheme": "Claro",
+    "darkTheme": "Oscuro",
+    "selectLanguage": "Selecciona un idioma",
+    "confirmDeleteAccount": "¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "errorDeletingAccount": "Error al eliminar la cuenta: {error}"
 }

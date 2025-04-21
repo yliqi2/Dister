@@ -3,6 +3,7 @@ import 'package:dister/model/listing.dart';
 import 'package:dister/model/user.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
+import 'package:dister/pages/mobile/profile/settings_page.dart';
 import 'package:dister/pages/mobile/profile/user_list_page.dart';
 import 'package:dister/widgets/listingtile.dart';
 import 'package:flutter/gestures.dart';
@@ -137,28 +138,14 @@ class _ProfileState extends State<Profile> {
                           Padding(
                             padding: const EdgeInsets.only(right: 20.0),
                             child: IconButton(
-                              onPressed: () async {
-                                try {
-                                  FirebaseServices firebaseServices =
-                                      FirebaseServices();
-                                  await firebaseServices.signOut();
-                                  if (context.mounted) {
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                          builder: (context) => const Login()),
-                                      (route) => false,
-                                    );
-                                  }
-                                } catch (e) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(S
-                                            .of(context)
-                                            .errorDuringLogout(e.toString()))),
-                                  );
-                                }
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => const SettingsPage(),
+                                  ),
+                                );
                               },
-                              icon: const Icon(Icons.logout),
+                              icon: const Icon(Icons.more_horiz_outlined),
                             ),
                           ),
                         ]

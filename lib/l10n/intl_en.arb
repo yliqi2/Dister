@@ -183,5 +183,18 @@
     "selectSubcategoryFilter": "Select a subcategory",
     "allSubcategoriesFilter": "All subcategories",
     "description": "Description",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "themes": "Themes",
+    "changeLanguage": "Change Language",
+    "logout": "Logout",
+    "saveSessionData": "Save Session Data",
+    "deleteAccount": "Delete Account",
+    "selectTheme": "Select a theme",
+    "lightTheme": "Light",
+    "darkTheme": "Dark",
+    "selectLanguage": "Select a language",
+    "confirmDeleteAccount": "Are you sure you want to delete your account? This action cannot be undone.",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "errorDeletingAccount": "Error deleting account: {error}"
 }

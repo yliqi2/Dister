@@ -1338,6 +1338,85 @@ class S {
       args: [],
     );
   }
+
+  String get themes => Intl.message(
+        'Themes',
+        name: 'themes',
+        desc: 'Option to change themes',
+      );
+
+  String get changeLanguage => Intl.message(
+        'Change Language',
+        name: 'changeLanguage',
+        desc: 'Option to change the app language',
+      );
+
+  String get saveSessionData => Intl.message(
+        'Save Session Data',
+        name: 'saveSessionData',
+        desc: 'Option to save session data',
+      );
+
+  String get deleteAccount => Intl.message(
+        'Delete Account',
+        name: 'deleteAccount',
+        desc: 'Option to delete the user account',
+      );
+
+  String get logout => Intl.message(
+        'Logout',
+        name: 'logout',
+        desc: 'Option to log out of the application',
+      );
+
+  String get selectTheme => Intl.message(
+        'Select a theme',
+        name: 'selectTheme',
+        desc: 'Prompt to select a theme',
+      );
+
+  String get lightTheme => Intl.message(
+        'Light',
+        name: 'lightTheme',
+        desc: 'Light theme option',
+      );
+
+  String get darkTheme => Intl.message(
+        'Dark',
+        name: 'darkTheme',
+        desc: 'Dark theme option',
+      );
+
+  String get selectLanguage => Intl.message(
+        'Select a language',
+        name: 'selectLanguage',
+        desc: 'Prompt to select a language',
+      );
+
+  String get confirmDeleteAccount => Intl.message(
+        'Are you sure you want to delete your account? This action cannot be undone.',
+        name: 'confirmDeleteAccount',
+        desc: 'Confirmation message for account deletion',
+      );
+
+  String get cancel => Intl.message(
+        'Cancel',
+        name: 'cancel',
+        desc: 'Cancel button text',
+      );
+
+  String get confirm => Intl.message(
+        'Confirm',
+        name: 'confirm',
+        desc: 'Confirm button text',
+      );
+
+  String errorDeletingAccount(String error) => Intl.message(
+        'Error deleting account: $error',
+        name: 'errorDeletingAccount',
+        args: [error],
+        desc: 'Error message for account deletion failure',
+      );
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
