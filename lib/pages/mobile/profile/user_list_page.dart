@@ -7,8 +7,7 @@ class UserListPage extends StatelessWidget {
   final String title;
   final List<String> userIds;
 
-  const UserListPage({Key? key, required this.title, required this.userIds})
-      : super(key: key);
+  const UserListPage({super.key, required this.title, required this.userIds});
 
   @override
   Widget build(BuildContext context) {

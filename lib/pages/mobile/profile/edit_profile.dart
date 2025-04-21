@@ -29,12 +29,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
           .doc(widget.userId)
           .get();
 
-      if (userDoc.exists) {
+      if (userDoc.exists && mounted) {
         setState(() {
           _descController.text = userDoc['desc'] ?? '';
         });
       }
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).errorGeneric(e.toString()))),
       );

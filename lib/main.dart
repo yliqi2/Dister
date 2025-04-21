@@ -9,8 +9,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:dister/controller/media/media.dart';
-import 'package:dister/controller/provider/theme_notifier.dart';
-import 'package:dister/controller/provider/language_notifier.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dister/controller/blocs/app_state_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -56,12 +54,6 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => RegisterErrorNotifier(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ThemeNotifier(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => LanguageNotifier(),
         ),
       ],
       child: const MyApp(),
@@ -131,21 +123,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     // Usar el AppStateBloc para manejar el estado de la app
     return BlocBuilder<AppStateBloc, AppState>(
       builder: (context, appState) {
-        // Asegurarse de que los notifiers estén sincronizados con el bloc
-        final themeNotifier =
-            Provider.of<ThemeNotifier>(context, listen: false);
-        final languageNotifier =
-            Provider.of<LanguageNotifier>(context, listen: false);
-
-        // Sincronizar el estado del bloc con los notifiers
-        if (themeNotifier.isDarkTheme != appState.isDarkTheme) {
-          themeNotifier.toggleTheme(appState.isDarkTheme);
-        }
-
-        if (languageNotifier.locale.languageCode != appState.languageCode) {
-          languageNotifier.changeLanguage(Locale(appState.languageCode));
-        }
-
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Dister',

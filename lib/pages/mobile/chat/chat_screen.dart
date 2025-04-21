@@ -164,7 +164,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ? Theme.of(context)
                                       .colorScheme
                                       .surfaceContainer
-                                      .withOpacity(0.8)
+                                      .withAlpha(204) // 0.8 * 255 = 204
                                   : Theme.of(context)
                                       .colorScheme
                                       .surfaceContainer,
@@ -175,7 +175,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       color: Theme.of(context)
                                           .colorScheme
                                           .onSurface
-                                          .withOpacity(0.1),
+                                          .withAlpha(25),
                                       width: 0.5,
                                     )
                                   : null,

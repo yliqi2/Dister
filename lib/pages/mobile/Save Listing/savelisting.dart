@@ -67,6 +67,7 @@ class _SavelistingState extends State<Savelisting> {
     setState(() {
       _favoriteListingsFuture = _getFavoriteListings(userId);
     });
+    if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(S.of(context).removedFromFavorites),
@@ -91,7 +92,7 @@ class _SavelistingState extends State<Savelisting> {
           } else if (snapshot.hasError) {
             return Center(
                 child: Text(S.of(context).error(snapshot.error.toString())));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          } else if (snapshot.data == null || snapshot.data!.isEmpty) {
             return Center(child: Text(S.of(context).noFavoritesYet));
           } else {
             final favoriteListings = snapshot.data!;
@@ -99,9 +100,8 @@ class _SavelistingState extends State<Savelisting> {
               itemCount: favoriteListings.length,
               itemBuilder: (context, index) {
                 final listing = favoriteListings[index];
-                final createdAt = listing.publishedAt != null
-                    ? DateFormat('dd/MM/yyyy HH:mm').format(listing.publishedAt)
-                    : 'Fecha desconocida';
+                final createdAt =
+                    DateFormat('dd/MM/yyyy HH:mm').format(listing.publishedAt);
 
                 return Card(
                   color: Theme.of(context).colorScheme.surfaceContainer,

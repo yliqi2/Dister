@@ -20,7 +20,6 @@ class _ListingdetailsState extends State<Listingdetails> {
   String? ownerPhoto;
   String? ownerName;
   final PageController _pageController = PageController();
-  int _currentPage = 0;
   final LikeService _likeService = LikeService();
 
   @override
@@ -131,9 +130,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                     controller: _pageController,
                     itemCount: images.length,
                     onPageChanged: (index) {
-                      setState(() {
-                        _currentPage = index;
-                      });
+                      // Se eliminó _currentPage ya que no se usa en ningún otro lugar
                     },
                     itemBuilder: (context, index) {
                       return Image.network(

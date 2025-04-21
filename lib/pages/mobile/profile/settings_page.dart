@@ -1,15 +1,9 @@
-import 'package:dister/pages/mobile/nav/navbar.dart';
-import 'package:dister/theme/dark_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/generated/l10n.dart';
-import 'package:provider/provider.dart';
-import 'package:dister/controller/provider/theme_notifier.dart';
-import 'package:dister/controller/provider/language_notifier.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dister/controller/blocs/app_state_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -19,22 +13,7 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  void _toggleDarkTheme(bool value) async {
-    // Actualizar el tema
-    context.read<AppStateBloc>().add(ThemeChanged(value));
-
-    // Verificar si es necesario desactivar el uso del tema del sistema
-    final brightness =
-        WidgetsBinding.instance.platformDispatcher.platformBrightness;
-    final systemIsDark = brightness == Brightness.dark;
-
-    // Solo desactivar si el valor elegido es diferente al del sistema
-    if (value != systemIsDark) {
-      context.read<AppStateBloc>().add(UseSystemTheme(false));
-    }
-  }
-
-  void _toggleUseSystemTheme(bool value) async {
+  void _toggleUseSystemTheme(bool value) {
     context.read<AppStateBloc>().add(UseSystemTheme(value));
 
     // Si habilitamos el uso del tema del sistema, actualizar inmediatamente
@@ -46,7 +25,7 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
-  void _toggleUseSystemLanguage(bool value) async {
+  void _toggleUseSystemLanguage(bool value) {
     context.read<AppStateBloc>().add(UseSystemLanguage(value));
 
     // Si habilitamos el uso del idioma del sistema, actualizar inmediatamente
@@ -73,7 +52,7 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
-  void _changeLanguage(BuildContext context, Locale locale) async {
+  Future<void> _changeLanguage(BuildContext context, Locale locale) async {
     // Verificar si es necesario desactivar el uso del idioma del sistema
     final systemLocale = WidgetsBinding.instance.platformDispatcher.locale;
 
@@ -103,7 +82,7 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               Text(
                 S.of(context).selectTheme,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
@@ -113,8 +92,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: const Icon(Icons.wb_sunny),
                 title: Text(S.of(context).lightTheme),
                 trailing: !currentIsDark
-                    ? Icon(Icons.check,
-                        color: Theme.of(context).colorScheme.primary)
+                    ? Icon(
+                        Icons.check,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
                     : null,
                 onTap: () {
                   _selectTheme(false);
@@ -126,8 +107,10 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: const Icon(Icons.nightlight_round),
                 title: Text(S.of(context).darkTheme),
                 trailing: currentIsDark
-                    ? Icon(Icons.check,
-                        color: Theme.of(context).colorScheme.primary)
+                    ? Icon(
+                        Icons.check,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
                     : null,
                 onTap: () {
                   _selectTheme(true);
@@ -154,10 +137,13 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               // Sección de tema
               ListTile(
-                title: Text(S.of(context).themeOptions,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary)),
+                title: Text(
+                  S.of(context).themeOptions,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
               ),
               SwitchListTile(
                 title: Text(S.of(context).useSystemTheme),
@@ -176,16 +162,19 @@ class _SettingsPageState extends State<SettingsPage> {
                     ? S.of(context).darkThemeOption
                     : S.of(context).lightThemeOption),
                 onTap: () => _showThemeSelector(context, appState.isDarkTheme),
-                trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               ),
               const Divider(),
 
               // Sección de idioma
               ListTile(
-                title: Text(S.of(context).languageOptions,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary)),
+                title: Text(
+                  S.of(context).languageOptions,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
               ),
               SwitchListTile(
                 title: Text(S.of(context).useSystemLanguage),
@@ -201,7 +190,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 subtitle: Text(appState.languageCode == 'en'
                     ? S.of(context).languageEnglish
                     : S.of(context).languageSpanish),
-                trailing: Icon(Icons.arrow_forward_ios, size: 16),
+                trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                 onTap: () {
                   showModalBottomSheet(
                     context: context,
@@ -218,7 +207,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           children: [
                             Text(
                               S.of(context).selectLanguage,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
@@ -228,9 +217,11 @@ class _SettingsPageState extends State<SettingsPage> {
                               leading: const Icon(Icons.language),
                               title: Text(S.of(context).languageEnglish),
                               trailing: appState.languageCode == 'en'
-                                  ? Icon(Icons.check,
+                                  ? Icon(
+                                      Icons.check,
                                       color:
-                                          Theme.of(context).colorScheme.primary)
+                                          Theme.of(context).colorScheme.primary,
+                                    )
                                   : null,
                               onTap: () {
                                 _changeLanguage(context, const Locale('en'));
@@ -242,9 +233,11 @@ class _SettingsPageState extends State<SettingsPage> {
                               leading: const Icon(Icons.language),
                               title: Text(S.of(context).languageSpanish),
                               trailing: appState.languageCode == 'es'
-                                  ? Icon(Icons.check,
+                                  ? Icon(
+                                      Icons.check,
                                       color:
-                                          Theme.of(context).colorScheme.primary)
+                                          Theme.of(context).colorScheme.primary,
+                                    )
                                   : null,
                               onTap: () {
                                 _changeLanguage(context, const Locale('es'));
@@ -262,10 +255,13 @@ class _SettingsPageState extends State<SettingsPage> {
 
               // Otras opciones de la app
               ListTile(
-                title: Text(S.of(context).otherOptions,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.primary)),
+                title: Text(
+                  S.of(context).otherOptions,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
               ),
               ListTile(
                 leading: const Icon(Icons.save),
@@ -278,7 +274,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: const Icon(Icons.delete_forever),
                 title: Text(S.of(context).deleteAccount),
                 onTap: () async {
-                  bool confirm = await showDialog(
+                  bool? confirm = await showDialog<bool>(
                     context: context,
                     builder: (context) {
                       return AlertDialog(
@@ -297,24 +293,28 @@ class _SettingsPageState extends State<SettingsPage> {
                       );
                     },
                   );
-                  if (confirm) {
+                  if (confirm == true) {
                     try {
                       FirebaseServices firebaseServices = FirebaseServices();
                       await firebaseServices.deleteAccount();
                       if (context.mounted) {
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => const Login()),
+                            builder: (context) => const Login(),
+                          ),
                           (route) => false,
                         );
                       }
                     } catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                              S.of(context).errorDeletingAccount(e.toString())),
-                        ),
-                      );
+                      if (context.mounted) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              S.of(context).errorDeletingAccount(e.toString()),
+                            ),
+                          ),
+                        );
+                      }
                     }
                   }
                 },
@@ -328,17 +328,22 @@ class _SettingsPageState extends State<SettingsPage> {
                     await firebaseServices.signOut();
                     if (context.mounted) {
                       Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) => const Login()),
+                        MaterialPageRoute(
+                          builder: (context) => const Login(),
+                        ),
                         (route) => false,
                       );
                     }
                   } catch (e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content:
-                            Text(S.of(context).errorDuringLogout(e.toString())),
-                      ),
-                    );
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            S.of(context).errorDuringLogout(e.toString()),
+                          ),
+                        ),
+                      );
+                    }
                   }
                 },
               ),

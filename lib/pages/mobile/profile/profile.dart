@@ -1,7 +1,6 @@
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/model/listing.dart';
 import 'package:dister/model/user.dart';
-import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
 import 'package:dister/pages/mobile/profile/settings_page.dart';
 import 'package:dister/pages/mobile/profile/user_list_page.dart';
@@ -47,6 +46,7 @@ class _ProfileState extends State<Profile> {
         await firebaseServices.updateUserPhoto(
             firebaseServices.getCurrentUser(), downloadUrl);
 
+        if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(S.of(context).profileUpdated)),
         );
@@ -345,14 +345,17 @@ class _ProfileState extends State<Profile> {
                                                     user.uid,
                                                   );
                                                 } else {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(S
-                                                          .of(context)
-                                                          .cannotFollowAgain),
-                                                    ),
-                                                  );
+                                                  if (context.mounted) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(S
+                                                            .of(context)
+                                                            .cannotFollowAgain),
+                                                      ),
+                                                    );
+                                                  }
                                                 }
                                               }
                                               setState(() {});
@@ -584,7 +587,7 @@ class _ProfileState extends State<Profile> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: isDisabled
-              ? Theme.of(context).colorScheme.secondary.withOpacity(0.3)
+              ? Theme.of(context).colorScheme.secondary.withAlpha(77)
               : Theme.of(context).colorScheme.secondary,
         ),
       ),
@@ -593,7 +596,7 @@ class _ProfileState extends State<Profile> {
           text,
           style: TextStyle(
             color: isDisabled
-                ? Theme.of(context).colorScheme.secondary.withOpacity(0.3)
+                ? Theme.of(context).colorScheme.secondary.withAlpha(77)
                 : Theme.of(context).colorScheme.secondary,
           ),
         ),

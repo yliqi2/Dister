@@ -32,7 +32,10 @@ class UpdateFromSystem extends AppStateEvent {
   UpdateFromSystem(this.systemBrightness, this.systemLocale);
 }
 
-class InitializeState extends AppStateEvent {}
+class InitializeState extends AppStateEvent {
+  final AppState initialState;
+  InitializeState({required this.initialState});
+}
 
 // Estado del AppState
 class AppState {
@@ -113,8 +116,8 @@ class AppStateBloc extends Bloc<AppStateEvent, AppState> {
                 WidgetsBinding.instance.platformDispatcher.locale.languageCode,
             useSystemTheme: true,
             useSystemLanguage: true)) {
-    // Inicializar cargando desde preferencias
-    _initFromPrefs();
+    // Inicializar desde SharedPreferences
+    _loadInitialState();
 
     on<ThemeChanged>((event, emit) {
       final newState = state.copyWith(isDarkTheme: event.isDarkTheme);
@@ -179,13 +182,12 @@ class AppStateBloc extends Bloc<AppStateEvent, AppState> {
     });
 
     on<InitializeState>((event, emit) async {
-      final initialState = await AppState.loadFromPrefs();
-      emit(initialState);
+      emit(event.initialState);
     });
   }
 
-  Future<void> _initFromPrefs() async {
+  void _loadInitialState() async {
     final initialState = await AppState.loadFromPrefs();
-    emit(initialState);
+    add(InitializeState(initialState: initialState));
   }
 }

@@ -30,7 +30,7 @@ class FollowingListPage extends StatelessWidget {
                   backgroundImage:
                       user['photoUrl'] != null && user['photoUrl'].isNotEmpty
                           ? NetworkImage(user['photoUrl'])
-                          : AssetImage("assets/images/default.png")
+                          : const AssetImage("assets/images/default.png")
                               as ImageProvider,
                 ),
                 title: Text(user['username']),
