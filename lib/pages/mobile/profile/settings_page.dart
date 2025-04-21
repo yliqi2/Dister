@@ -1,3 +1,5 @@
+import 'package:dister/pages/mobile/nav/navbar.dart';
+import 'package:dister/theme/dark_mode.dart';
 import 'package:flutter/material.dart';
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
@@ -65,6 +67,12 @@ class _SettingsPageState extends State<SettingsPage> {
                           title: const Text('English'),
                           onTap: () {
                             _changeLanguage(context, const Locale('en'));
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Navbar(),
+                                ));
                           },
                         ),
                         const Divider(),
@@ -73,6 +81,12 @@ class _SettingsPageState extends State<SettingsPage> {
                           title: const Text('Español'),
                           onTap: () {
                             _changeLanguage(context, const Locale('es'));
+                            Navigator.pop(context);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Navbar(),
+                                ));
                           },
                         ),
                       ],
@@ -80,29 +94,6 @@ class _SettingsPageState extends State<SettingsPage> {
                   );
                 },
               );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: Text(S.of(context).logout),
-            onTap: () async {
-              try {
-                FirebaseServices firebaseServices = FirebaseServices();
-                await firebaseServices.signOut();
-                if (context.mounted) {
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const Login()),
-                    (route) => false,
-                  );
-                }
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content:
-                        Text(S.of(context).errorDuringLogout(e.toString())),
-                  ),
-                );
-              }
             },
           ),
           ListTile(
@@ -153,6 +144,29 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   );
                 }
+              }
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: Text(S.of(context).logout),
+            onTap: () async {
+              try {
+                FirebaseServices firebaseServices = FirebaseServices();
+                await firebaseServices.signOut();
+                if (context.mounted) {
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => const Login()),
+                    (route) => false,
+                  );
+                }
+              } catch (e) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content:
+                        Text(S.of(context).errorDuringLogout(e.toString())),
+                  ),
+                );
               }
             },
           ),

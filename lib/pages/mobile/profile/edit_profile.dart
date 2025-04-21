@@ -50,7 +50,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(widget.userId)
-          .update({'desc': _descController.text});
+          .update({'desc': _descController.text.trim()});
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).profileUpdated)),
