@@ -181,5 +181,7 @@
     "selectCategoryFilter": "Select a category",
     "allCategoriesFilter": "All categories",
     "selectSubcategoryFilter": "Select a subcategory",
-    "allSubcategoriesFilter": "All subcategories"
+    "allSubcategoriesFilter": "All subcategories",
+    "description": "Description",
+    "saveChanges": "Save Changes"
 }

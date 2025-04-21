@@ -143,7 +143,7 @@
     "expiresOn": "• Expira el {date}",
     "goForDiscount": "Obtener descuento",
 
-    "profileUpdated": "Foto de perfil actualizada correctamente.",
+    "profileUpdated": "Perfil actualizado correctamente.",
     "errorUploadingImage": "Error al subir la imagen: {error}",
     "errorGeneric": "Error: {error}",
     "noUserData": "No hay datos de usuario disponibles",
@@ -180,5 +180,7 @@
     "selectCategoryFilter": "Selecciona una categoría",
     "allCategoriesFilter": "Todas las categorías",
     "selectSubcategoryFilter": "Selecciona una subcategoría",
-    "allSubcategoriesFilter": "Todas las subcategorías"
+    "allSubcategoriesFilter": "Todas las subcategorías",
+    "description": "Descripción",
+    "saveChanges": "Guardar cambios"
 }

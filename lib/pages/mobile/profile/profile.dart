@@ -12,6 +12,7 @@ import 'dart:io';
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/pages/mobile/chat/chat_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dister/pages/mobile/profile/edit_profile.dart';
 
 class Profile extends StatefulWidget {
   final String? userId; // ID del usuario cuyo perfil se desea visualizar
@@ -305,9 +306,26 @@ class _ProfileState extends State<Profile> {
                                 children: isCurrentUser
                                     ? [
                                         Expanded(
-                                          child: _buildButton(
-                                              S.of(context).editProfile,
-                                              context),
+                                          child: GestureDetector(
+                                            onTap: () async {
+                                              final result =
+                                                  await Navigator.of(context)
+                                                      .push(
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      EditProfilePage(
+                                                          userId: user.uid),
+                                                ),
+                                              );
+                                              if (result == true) {
+                                                setState(
+                                                    () {}); // Fuerza la actualización de la pantalla
+                                              }
+                                            },
+                                            child: _buildButton(
+                                                S.of(context).editProfile,
+                                                context),
+                                          ),
                                         )
                                       ]
                                     : [

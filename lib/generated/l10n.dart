@@ -28,10 +28,9 @@ class S {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name =
-        (locale.countryCode?.isEmpty ?? false)
-            ? locale.languageCode
-            : locale.toString();
+    final name = (locale.countryCode?.isEmpty ?? false)
+        ? locale.languageCode
+        : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -1078,7 +1077,7 @@ class S {
   /// `Profile picture updated successfully.`
   String get profileUpdated {
     return Intl.message(
-      'Profile picture updated successfully.',
+      'Profile updated successfully.',
       name: 'profileUpdated',
       desc: '',
       args: [],
@@ -1315,6 +1314,26 @@ class S {
     return Intl.message(
       'All subcategories',
       name: 'allSubcategoriesFilter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save Changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save Changes',
+      name: 'saveChanges',
       desc: '',
       args: [],
     );
