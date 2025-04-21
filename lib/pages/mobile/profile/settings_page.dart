@@ -3,18 +3,31 @@ import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/generated/l10n.dart';
 import 'package:provider/provider.dart';
+import 'package:dister/controller/provider/theme_notifier.dart';
+import 'package:dister/controller/provider/language_notifier.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  void _toggleDarkTheme(bool value) {
+    Provider.of<ThemeNotifier>(context, listen: false).toggleTheme(value);
+  }
+
   void _changeLanguage(BuildContext context, Locale locale) {
-    S.load(locale); // Load the selected locale
-    Navigator.pop(context); // Close the dialog
-    (context as Element).markNeedsBuild(); // Rebuild the widget tree
+    Provider.of<LanguageNotifier>(context, listen: false)
+        .changeLanguage(locale);
   }
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Provider.of<ThemeNotifier>(context).isDarkTheme;
+    final currentLocale = Provider.of<LanguageNotifier>(context).locale;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Settings'),
@@ -24,8 +37,8 @@ class SettingsPage extends StatelessWidget {
           SwitchListTile(
             title: Text(S.of(context).darkTheme),
             secondary: const Icon(Icons.dark_mode),
-            value: true,
-            onChanged: (bool value) {},
+            value: isDarkTheme,
+            onChanged: _toggleDarkTheme,
           ),
           ListTile(
             leading: const Icon(Icons.language),
