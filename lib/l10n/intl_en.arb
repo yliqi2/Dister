@@ -196,5 +196,36 @@
     "confirmDeleteAccount": "Are you sure you want to delete your account? This action cannot be undone.",
     "cancel": "Cancel",
     "confirm": "Confirm",
-    "errorDeletingAccount": "Error deleting account: {error}"
+    "errorDeletingAccount": "Error deleting account: {error}",
+    
+    "settings": "Settings",
+    "themeOptions": "Theme Options",
+    "useSystemTheme": "Use system theme",
+    "systemThemeDescription": "The app theme will adjust to your device theme",
+    "selectThemeOption": "Select theme",
+    "lightThemeOption": "Light theme",
+    "darkThemeOption": "Dark theme",
+    
+    "languageOptions": "Language Options",
+    "useSystemLanguage": "Use system language",
+    "systemLanguageDescription": "The app language will adjust to your device language",
+    
+    "otherOptions": "Other Options",
+    
+    "favorites": "Favorites",
+    "removedFromFavorites": "Removed from favorites",
+    "error": "Error: {error}",
+    "noFavoritesYet": "No favorites yet.",
+    "publishedOn": "Published on: {date}",
+    
+    "loadingChats": "Loading...",
+    "errorLoadingMessage": "Error loading message.",
+    "noFollowingUsersFound": "No following users found.",
+    "incompleteUserData": "User data is incomplete.",
+    
+    "languageEnglish": "English",
+    "languageSpanish": "Spanish",
+    "shareYourListings": "Share your listings!",
+    "noListingsToShow": "There are no listings to show",
+    "lastMessage": "{message}\n{date}"
 }

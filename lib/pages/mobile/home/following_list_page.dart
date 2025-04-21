@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dister/pages/mobile/chat/chat_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dister/generated/l10n.dart';
 
 class FollowingListPage extends StatelessWidget {
   const FollowingListPage({super.key});
@@ -35,7 +36,7 @@ class FollowingListPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mensajes'),
+        title: Text(S.of(context).messages),
         centerTitle: true,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
@@ -44,9 +45,10 @@ class FollowingListPage extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(
+                child: Text(S.of(context).error(snapshot.error.toString())));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No following users found.'));
+            return Center(child: Text(S.of(context).noFollowingUsersFound));
           } else {
             final followingUsers = snapshot.data!;
             return ListView.builder(
@@ -60,13 +62,13 @@ class FollowingListPage extends StatelessWidget {
                   builder: (context, messageSnapshot) {
                     if (messageSnapshot.connectionState ==
                         ConnectionState.waiting) {
-                      return const ListTile(
-                        title: Text('Cargando...'),
+                      return ListTile(
+                        title: Text(S.of(context).loadingChats),
                       );
                     } else if (messageSnapshot.hasError) {
                       return ListTile(
                         title: Text(user['username']),
-                        subtitle: const Text('Error al cargar el mensaje.'),
+                        subtitle: Text(S.of(context).errorLoadingMessage),
                       );
                     } else {
                       final lastMessageData = messageSnapshot.data;
@@ -86,7 +88,10 @@ class FollowingListPage extends StatelessWidget {
                         ),
                         title: Text(user['username']),
                         subtitle: lastMessage.isNotEmpty
-                            ? Text('$lastMessage\n$lastMessageDate',
+                            ? Text(
+                                S
+                                    .of(context)
+                                    .lastMessage(lastMessage, lastMessageDate),
                                 style: const TextStyle(fontSize: 12))
                             : null, // Mostrar solo si hay mensaje.
                         trailing: IconButton(
@@ -104,8 +109,9 @@ class FollowingListPage extends StatelessWidget {
                               );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('User data is incomplete.')),
+                                SnackBar(
+                                    content:
+                                        Text(S.of(context).incompleteUserData)),
                               );
                             }
                           },

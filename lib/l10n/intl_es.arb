@@ -195,5 +195,36 @@
     "confirmDeleteAccount": "¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.",
     "cancel": "Cancelar",
     "confirm": "Confirmar",
-    "errorDeletingAccount": "Error al eliminar la cuenta: {error}"
+    "errorDeletingAccount": "Error al eliminar la cuenta: {error}",
+    
+    "settings": "Ajustes",
+    "themeOptions": "Opciones de tema",
+    "useSystemTheme": "Usar tema del sistema",
+    "systemThemeDescription": "El tema de la app se ajustará al tema de tu dispositivo",
+    "selectThemeOption": "Seleccionar tema",
+    "lightThemeOption": "Tema claro",
+    "darkThemeOption": "Tema oscuro",
+    
+    "languageOptions": "Opciones de idioma",
+    "useSystemLanguage": "Usar idioma del sistema",
+    "systemLanguageDescription": "El idioma de la app se ajustará al idioma de tu dispositivo",
+    
+    "otherOptions": "Otras opciones",
+    
+    "favorites": "Favoritos",
+    "removedFromFavorites": "Eliminado de favoritos",
+    "error": "Error: {error}",
+    "noFavoritesYet": "No tienes favoritos aún.",
+    "publishedOn": "Publicado el: {date}",
+    
+    "loadingChats": "Cargando...",
+    "errorLoadingMessage": "Error al cargar el mensaje.",
+    "noFollowingUsersFound": "No sigues a ningún usuario.",
+    "incompleteUserData": "Los datos del usuario están incompletos.",
+    
+    "languageEnglish": "Inglés",
+    "languageSpanish": "Español",
+    "shareYourListings": "¡Comparte tus anuncios!",
+    "noListingsToShow": "No hay anuncios para mostrar",
+    "lastMessage": "{message}\n{date}"
 }

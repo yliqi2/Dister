@@ -28,9 +28,10 @@ class S {
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
   static Future<S> load(Locale locale) {
-    final name = (locale.countryCode?.isEmpty ?? false)
-        ? locale.languageCode
-        : locale.toString();
+    final name =
+        (locale.countryCode?.isEmpty ?? false)
+            ? locale.languageCode
+            : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
@@ -1077,7 +1078,7 @@ class S {
   /// `Profile picture updated successfully.`
   String get profileUpdated {
     return Intl.message(
-      'Profile updated successfully.',
+      'Profile picture updated successfully.',
       name: 'profileUpdated',
       desc: '',
       args: [],
@@ -1321,12 +1322,7 @@ class S {
 
   /// `Description`
   String get description {
-    return Intl.message(
-      'Description',
-      name: 'description',
-      desc: '',
-      args: [],
-    );
+    return Intl.message('Description', name: 'description', desc: '', args: []);
   }
 
   /// `Save Changes`
@@ -1339,84 +1335,330 @@ class S {
     );
   }
 
-  String get themes => Intl.message(
-        'Themes',
-        name: 'themes',
-        desc: 'Option to change themes',
-      );
+  /// `Themes`
+  String get themes {
+    return Intl.message('Themes', name: 'themes', desc: '', args: []);
+  }
 
-  String get changeLanguage => Intl.message(
-        'Change Language',
-        name: 'changeLanguage',
-        desc: 'Option to change the app language',
-      );
+  /// `Change Language`
+  String get changeLanguage {
+    return Intl.message(
+      'Change Language',
+      name: 'changeLanguage',
+      desc: '',
+      args: [],
+    );
+  }
 
-  String get saveSessionData => Intl.message(
-        'Save Session Data',
-        name: 'saveSessionData',
-        desc: 'Option to save session data',
-      );
+  /// `Logout`
+  String get logout {
+    return Intl.message('Logout', name: 'logout', desc: '', args: []);
+  }
 
-  String get deleteAccount => Intl.message(
-        'Delete Account',
-        name: 'deleteAccount',
-        desc: 'Option to delete the user account',
-      );
+  /// `Save Session Data`
+  String get saveSessionData {
+    return Intl.message(
+      'Save Session Data',
+      name: 'saveSessionData',
+      desc: '',
+      args: [],
+    );
+  }
 
-  String get logout => Intl.message(
-        'Logout',
-        name: 'logout',
-        desc: 'Option to log out of the application',
-      );
+  /// `Delete Account`
+  String get deleteAccount {
+    return Intl.message(
+      'Delete Account',
+      name: 'deleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
 
-  String get selectTheme => Intl.message(
-        'Select a theme',
-        name: 'selectTheme',
-        desc: 'Prompt to select a theme',
-      );
+  /// `Select a theme`
+  String get selectTheme {
+    return Intl.message(
+      'Select a theme',
+      name: 'selectTheme',
+      desc: '',
+      args: [],
+    );
+  }
 
-  String get lightTheme => Intl.message(
-        'Light',
-        name: 'lightTheme',
-        desc: 'Light theme option',
-      );
+  /// `Light`
+  String get lightTheme {
+    return Intl.message('Light', name: 'lightTheme', desc: '', args: []);
+  }
 
-  String get darkTheme => Intl.message(
-        'Dark',
-        name: 'darkTheme',
-        desc: 'Dark theme option',
-      );
+  /// `Dark`
+  String get darkTheme {
+    return Intl.message('Dark', name: 'darkTheme', desc: '', args: []);
+  }
 
-  String get selectLanguage => Intl.message(
-        'Select a language',
-        name: 'selectLanguage',
-        desc: 'Prompt to select a language',
-      );
+  /// `Select a language`
+  String get selectLanguage {
+    return Intl.message(
+      'Select a language',
+      name: 'selectLanguage',
+      desc: '',
+      args: [],
+    );
+  }
 
-  String get confirmDeleteAccount => Intl.message(
-        'Are you sure you want to delete your account? This action cannot be undone.',
-        name: 'confirmDeleteAccount',
-        desc: 'Confirmation message for account deletion',
-      );
+  /// `Are you sure you want to delete your account? This action cannot be undone.`
+  String get confirmDeleteAccount {
+    return Intl.message(
+      'Are you sure you want to delete your account? This action cannot be undone.',
+      name: 'confirmDeleteAccount',
+      desc: '',
+      args: [],
+    );
+  }
 
-  String get cancel => Intl.message(
-        'Cancel',
-        name: 'cancel',
-        desc: 'Cancel button text',
-      );
+  /// `Cancel`
+  String get cancel {
+    return Intl.message('Cancel', name: 'cancel', desc: '', args: []);
+  }
 
-  String get confirm => Intl.message(
-        'Confirm',
-        name: 'confirm',
-        desc: 'Confirm button text',
-      );
+  /// `Confirm`
+  String get confirm {
+    return Intl.message('Confirm', name: 'confirm', desc: '', args: []);
+  }
 
-  String errorDeletingAccount(String error) => Intl.message(
-        'Error deleting account: $error',
-        name: 'errorDeletingAccount',
-        args: [error],
-        desc: 'Error message for account deletion failure',
-      );
+  /// `Error deleting account: {error}`
+  String errorDeletingAccount(Object error) {
+    return Intl.message(
+      'Error deleting account: $error',
+      name: 'errorDeletingAccount',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message('Settings', name: 'settings', desc: '', args: []);
+  }
+
+  /// `Theme Options`
+  String get themeOptions {
+    return Intl.message(
+      'Theme Options',
+      name: 'themeOptions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use system theme`
+  String get useSystemTheme {
+    return Intl.message(
+      'Use system theme',
+      name: 'useSystemTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The app theme will adjust to your device theme`
+  String get systemThemeDescription {
+    return Intl.message(
+      'The app theme will adjust to your device theme',
+      name: 'systemThemeDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select theme`
+  String get selectThemeOption {
+    return Intl.message(
+      'Select theme',
+      name: 'selectThemeOption',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light theme`
+  String get lightThemeOption {
+    return Intl.message(
+      'Light theme',
+      name: 'lightThemeOption',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark theme`
+  String get darkThemeOption {
+    return Intl.message(
+      'Dark theme',
+      name: 'darkThemeOption',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language Options`
+  String get languageOptions {
+    return Intl.message(
+      'Language Options',
+      name: 'languageOptions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use system language`
+  String get useSystemLanguage {
+    return Intl.message(
+      'Use system language',
+      name: 'useSystemLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The app language will adjust to your device language`
+  String get systemLanguageDescription {
+    return Intl.message(
+      'The app language will adjust to your device language',
+      name: 'systemLanguageDescription',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other Options`
+  String get otherOptions {
+    return Intl.message(
+      'Other Options',
+      name: 'otherOptions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorites`
+  String get favorites {
+    return Intl.message('Favorites', name: 'favorites', desc: '', args: []);
+  }
+
+  /// `Removed from favorites`
+  String get removedFromFavorites {
+    return Intl.message(
+      'Removed from favorites',
+      name: 'removedFromFavorites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Error: {error}`
+  String error(Object error) {
+    return Intl.message(
+      'Error: $error',
+      name: 'error',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `No favorites yet.`
+  String get noFavoritesYet {
+    return Intl.message(
+      'No favorites yet.',
+      name: 'noFavoritesYet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Published on: {date}`
+  String publishedOn(Object date) {
+    return Intl.message(
+      'Published on: $date',
+      name: 'publishedOn',
+      desc: '',
+      args: [date],
+    );
+  }
+
+  /// `Loading...`
+  String get loadingChats {
+    return Intl.message('Loading...', name: 'loadingChats', desc: '', args: []);
+  }
+
+  /// `Error loading message.`
+  String get errorLoadingMessage {
+    return Intl.message(
+      'Error loading message.',
+      name: 'errorLoadingMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No following users found.`
+  String get noFollowingUsersFound {
+    return Intl.message(
+      'No following users found.',
+      name: 'noFollowingUsersFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User data is incomplete.`
+  String get incompleteUserData {
+    return Intl.message(
+      'User data is incomplete.',
+      name: 'incompleteUserData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get languageEnglish {
+    return Intl.message('English', name: 'languageEnglish', desc: '', args: []);
+  }
+
+  /// `Spanish`
+  String get languageSpanish {
+    return Intl.message('Spanish', name: 'languageSpanish', desc: '', args: []);
+  }
+
+  /// `Share your listings!`
+  String get shareYourListings {
+    return Intl.message(
+      'Share your listings!',
+      name: 'shareYourListings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are no listings to show`
+  String get noListingsToShow {
+    return Intl.message(
+      'There are no listings to show',
+      name: 'noListingsToShow',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{message}\n{date}`
+  String lastMessage(Object message, Object date) {
+    return Intl.message(
+      '$message\n$date',
+      name: 'lastMessage',
+      desc: '',
+      args: [message, date],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

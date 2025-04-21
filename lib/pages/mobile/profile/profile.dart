@@ -142,6 +142,7 @@ class _ProfileState extends State<Profile> {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (context) => const SettingsPage(),
+                                    maintainState: true,
                                   ),
                                 );
                               },
@@ -406,7 +407,9 @@ class _ProfileState extends State<Profile> {
                                   child: CircularProgressIndicator());
                             } else if (snapshot.hasError) {
                               return Center(
-                                child: Text('Error: ${snapshot.error}'),
+                                child: Text(S
+                                    .of(context)
+                                    .error(snapshot.error.toString())),
                               );
                             } else if (!snapshot.hasData ||
                                 snapshot.data!.isEmpty) {
@@ -438,7 +441,7 @@ class _ProfileState extends State<Profile> {
                                     const SizedBox(height: 20),
                                     isCurrentUser
                                         ? Text(
-                                            'Share your listings!',
+                                            S.of(context).shareYourListings,
                                             style: TextStyle(
                                               color: Theme.of(context)
                                                   .colorScheme
@@ -448,7 +451,7 @@ class _ProfileState extends State<Profile> {
                                             ),
                                           )
                                         : Text(
-                                            'There are no listings to show',
+                                            S.of(context).noListingsToShow,
                                             style: TextStyle(
                                               color: Theme.of(context)
                                                   .colorScheme

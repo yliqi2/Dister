@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dister/controller/firebase/services/firebase_services.dart'; // Importa FirebaseServices
 import 'package:dister/model/listing.dart'; // Importa el modelo Listing
+import 'package:dister/generated/l10n.dart';
 
 class Savelisting extends StatefulWidget {
   const Savelisting({super.key});
@@ -67,8 +68,8 @@ class _SavelistingState extends State<Savelisting> {
       _favoriteListingsFuture = _getFavoriteListings(userId);
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Eliminado de favoritos'),
+      SnackBar(
+        content: Text(S.of(context).removedFromFavorites),
       ),
     );
   }
@@ -79,7 +80,7 @@ class _SavelistingState extends State<Savelisting> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favoritos'),
+        title: Text(S.of(context).favorites),
         centerTitle: true,
       ),
       body: FutureBuilder<List<Listing>>(
@@ -88,9 +89,10 @@ class _SavelistingState extends State<Savelisting> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(
+                child: Text(S.of(context).error(snapshot.error.toString())));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No tienes favoritos aún.'));
+            return Center(child: Text(S.of(context).noFavoritesYet));
           } else {
             final favoriteListings = snapshot.data!;
             return ListView.builder(
@@ -115,7 +117,7 @@ class _SavelistingState extends State<Savelisting> {
                           )
                         : const Icon(Icons.image_not_supported),
                     title: Text(listing.title),
-                    subtitle: Text('Publicado el: $createdAt'),
+                    subtitle: Text(S.of(context).publishedOn(createdAt)),
                     trailing: IconButton(
                       icon: const Icon(Icons.favorite, color: Colors.red),
                       onPressed: () {
