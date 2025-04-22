@@ -38,9 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(message, date) => "${message}\n${date}";
 
-  static String m9(count) => "• ${count} Me gusta";
+  static String m9(count) => "• ${count} Favoritos";
 
-  static String m10(count) => "${count} Me gusta";
+  static String m10(count) => "${count} Favoritos";
 
   static String m11(percent) => "${percent}% descuento";
 

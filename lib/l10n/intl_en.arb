@@ -139,7 +139,7 @@
     "productDetails": "Product Details",
     "shoppingDetails": "Shopping Details",
     "ratingWithStars": "• Rating: {rating} ⭐",
-    "likesCount": "• {count} Likes",
+    "likesCount": "• {count} Favorites",
     "postedTimeAgo": "• Posted {time} ago",
     "expiresOn": "• Expires on {date}",
     "goForDiscount": "Go for the discount",
@@ -174,7 +174,7 @@
     "storePrefix": "• {name}",
     
     "timeAgo": "{time} ago",
-    "likesText": "{count} Likes",
+    "likesText": "{count} Favorites",
     "timeDay": "d",
     "timeHour": "H",
     "timeMinute": "min.",

@@ -1035,10 +1035,10 @@ class S {
     );
   }
 
-  /// `• {count} Likes`
+  /// `• {count} Favorites`
   String likesCount(Object count) {
     return Intl.message(
-      '• $count Likes',
+      '• $count Favorites',
       name: 'likesCount',
       desc: '',
       args: [count],
@@ -1255,10 +1255,10 @@ class S {
     return Intl.message('$time ago', name: 'timeAgo', desc: '', args: [time]);
   }
 
-  /// `{count} Likes`
+  /// `{count} Favorites`
   String likesText(Object count) {
     return Intl.message(
-      '$count Likes',
+      '$count Favorites',
       name: 'likesText',
       desc: '',
       args: [count],
