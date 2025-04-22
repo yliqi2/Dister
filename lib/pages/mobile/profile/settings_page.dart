@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/pages/mobile/auth/login.dart';
 import 'package:dister/generated/l10n.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dister/controller/blocs/app_state_bloc.dart';
+import 'package:provider/provider.dart';
+import 'package:dister/controller/provider/app_state_provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -14,57 +14,48 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   void _toggleUseSystemTheme(bool value) {
-    context.read<AppStateBloc>().add(UseSystemTheme(value));
+    final appState = Provider.of<AppStateProvider>(context, listen: false);
+    appState.toggleUseSystemTheme(value);
 
-    // Si habilitamos el uso del tema del sistema, actualizar inmediatamente
     if (value) {
-      final brightness =
-          WidgetsBinding.instance.platformDispatcher.platformBrightness;
-      final locale = WidgetsBinding.instance.platformDispatcher.locale;
-      context.read<AppStateBloc>().add(UpdateFromSystem(brightness, locale));
+      appState.updateFromSystem();
     }
   }
 
   void _toggleUseSystemLanguage(bool value) {
-    context.read<AppStateBloc>().add(UseSystemLanguage(value));
+    final appState = Provider.of<AppStateProvider>(context, listen: false);
+    appState.toggleUseSystemLanguage(value);
 
-    // Si habilitamos el uso del idioma del sistema, actualizar inmediatamente
     if (value) {
-      final brightness =
-          WidgetsBinding.instance.platformDispatcher.platformBrightness;
-      final locale = WidgetsBinding.instance.platformDispatcher.locale;
-      context.read<AppStateBloc>().add(UpdateFromSystem(brightness, locale));
+      appState.updateFromSystem();
     }
   }
 
   void _selectTheme(bool isDarkTheme) {
-    // Actualizar el tema
-    context.read<AppStateBloc>().add(ThemeChanged(isDarkTheme));
+    final appState = Provider.of<AppStateProvider>(context, listen: false);
+    appState.toggleTheme(isDarkTheme);
 
-    // Verificar si es necesario desactivar el uso del tema del sistema
     final brightness =
         WidgetsBinding.instance.platformDispatcher.platformBrightness;
     final systemIsDark = brightness == Brightness.dark;
 
-    // Solo desactivar si el valor elegido es diferente al del sistema
     if (isDarkTheme != systemIsDark) {
-      context.read<AppStateBloc>().add(UseSystemTheme(false));
+      appState.toggleUseSystemTheme(false);
     }
   }
 
   Future<void> _changeLanguage(BuildContext context, Locale locale) async {
-    // Verificar si es necesario desactivar el uso del idioma del sistema
+    final appState = Provider.of<AppStateProvider>(context, listen: false);
+
     final systemLocale = WidgetsBinding.instance.platformDispatcher.locale;
 
-    // Solo desactivar si el idioma elegido es diferente al del sistema
     if (locale.languageCode != systemLocale.languageCode) {
-      context.read<AppStateBloc>().add(UseSystemLanguage(false));
+      appState.toggleUseSystemLanguage(false);
     }
 
-    // Actualizar el idioma
-    context.read<AppStateBloc>().add(LanguageChanged(locale.languageCode));
+    appState.changeLanguage(locale);
     await S.load(locale);
-    setState(() {}); // Forzar la reconstrucción de esta pantalla
+    setState(() {});
   }
 
   void _showThemeSelector(BuildContext context, bool currentIsDark) {
@@ -126,9 +117,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Usar el BlocBuilder para reconstruir la interfaz cuando cambie el estado
-    return BlocBuilder<AppStateBloc, AppState>(
-      builder: (context, appState) {
+    return Consumer<AppStateProvider>(
+      builder: (context, appState, _) {
         return Scaffold(
           appBar: AppBar(
             title: Text(S.of(context).settings),
@@ -295,10 +285,11 @@ class _SettingsPageState extends State<SettingsPage> {
                   );
                   if (confirm == true) {
                     try {
-                      FirebaseServices firebaseServices = FirebaseServices();
+                      final firebaseServices = FirebaseServices();
                       await firebaseServices.deleteAccount();
-                      if (context.mounted) {
-                        Navigator.of(context).pushAndRemoveUntil(
+                      if (mounted) {
+                        Navigator.pushAndRemoveUntil(
+                          context,
                           MaterialPageRoute(
                             builder: (context) => const Login(),
                           ),
@@ -306,12 +297,11 @@ class _SettingsPageState extends State<SettingsPage> {
                         );
                       }
                     } catch (e) {
-                      if (context.mounted) {
+                      if (mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(
-                              S.of(context).errorDeletingAccount(e.toString()),
-                            ),
+                            content:
+                                Text(S.of(context).errorDeletingAccount(e)),
                           ),
                         );
                       }
@@ -323,27 +313,16 @@ class _SettingsPageState extends State<SettingsPage> {
                 leading: const Icon(Icons.logout),
                 title: Text(S.of(context).logout),
                 onTap: () async {
-                  try {
-                    FirebaseServices firebaseServices = FirebaseServices();
-                    await firebaseServices.signOut();
-                    if (context.mounted) {
-                      Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                          builder: (context) => const Login(),
-                        ),
-                        (route) => false,
-                      );
-                    }
-                  } catch (e) {
-                    if (context.mounted) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            S.of(context).errorDuringLogout(e.toString()),
-                          ),
-                        ),
-                      );
-                    }
+                  final firebaseServices = FirebaseServices();
+                  final navigator = Navigator.of(context, rootNavigator: true);
+                  await firebaseServices.signOut();
+                  if (mounted) {
+                    navigator.pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => const Login(),
+                      ),
+                      (route) => false,
+                    );
                   }
                 },
               ),
