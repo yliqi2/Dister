@@ -4,7 +4,7 @@ import 'package:dister/model/user.dart';
 import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
 import 'package:dister/pages/mobile/profile/settings_page.dart';
 import 'package:dister/pages/mobile/profile/user_list_page.dart';
-import 'package:dister/widgets/listingtile.dart';
+import 'package:dister/widgets/profile_listing_tile.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -472,6 +472,9 @@ class _ProfileState extends State<Profile> {
                               return Container(
                                 width: double.infinity,
                                 margin: const EdgeInsets.only(top: 5),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal:
+                                        26.0), // Mismo padding que el encabezado del perfil
                                 decoration: BoxDecoration(
                                   color: Theme.of(context)
                                       .colorScheme
@@ -504,20 +507,19 @@ class _ProfileState extends State<Profile> {
                                     ),
                                     GridView.builder(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 16, vertical: 10),
+                                          vertical: 10),
                                       gridDelegate:
                                           const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount:
-                                            2, // Muestra dos elementos por fila
-                                        crossAxisSpacing: 10,
-                                        mainAxisSpacing: 10,
-                                        childAspectRatio: 0.72,
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 12,
+                                        mainAxisSpacing: 12,
+                                        childAspectRatio:
+                                            0.7, // Ajustado para el nuevo tamaño
                                       ),
                                       itemCount: userListings.length,
                                       itemBuilder: (context, index) {
                                         final listing = userListings[index];
-                                        return Listingtile(
-                                          colorChange: true,
+                                        return ProfileListingTile(
                                           listing: listing,
                                           onTap: () {
                                             // Navegar a la página de detalles de la publicación

@@ -107,22 +107,56 @@ class _SavelistingState extends State<Savelisting> {
                   color: Theme.of(context).colorScheme.surfaceContainer,
                   margin:
                       const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  elevation: 1,
                   child: ListTile(
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                     leading: listing.images.isNotEmpty
-                        ? Image.network(
-                            listing.images[0],
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Image.network(
+                              listing.images[0],
+                              width: 50,
+                              height: 50,
+                              fit: BoxFit.cover,
+                            ),
                           )
                         : const Icon(Icons.image_not_supported),
-                    title: Text(listing.title),
-                    subtitle: Text(S.of(context).publishedOn(createdAt)),
-                    trailing: IconButton(
-                      icon: const Icon(Icons.favorite, color: Colors.red),
-                      onPressed: () {
+                    title: Text(
+                      listing.title,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      S.of(context).publishedOn(createdAt),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.outline,
+                          ),
+                    ),
+                    trailing: GestureDetector(
+                      onTap: () {
                         _removeListingFromFavorites(currentUserId, listing);
                       },
+                      child: Container(
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.error,
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(50)),
+                        ),
+                        child: Icon(
+                          Icons.favorite,
+                          color: Theme.of(context).colorScheme.onError,
+                          size: 18,
+                        ),
+                      ),
                     ),
                     onTap: () {
                       // Navegar a la página de detalles pasando el objeto listing
