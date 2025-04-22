@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Titletile extends StatefulWidget {
+class TitleTile extends StatefulWidget {
   final String text;
 
-  const Titletile({super.key, required this.text});
+  const TitleTile({super.key, required this.text});
 
   @override
-  State<Titletile> createState() => _TitletileState();
+  State<TitleTile> createState() => _TitleTileState();
 }
 
-class _TitletileState extends State<Titletile> {
+class _TitleTileState extends State<TitleTile> {
   @override
   Widget build(BuildContext context) {
     return Column(

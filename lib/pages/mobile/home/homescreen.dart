@@ -3,7 +3,7 @@ import 'package:dister/model/categorie.dart';
 import 'package:dister/model/category_icons.dart';
 import 'package:dister/model/listing.dart';
 import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
-import 'package:dister/widgets/listingtile.dart';
+import 'package:dister/widgets/listing_tile.dart';
 import 'package:dister/widgets/custom_dropdown.dart';
 import 'package:dister/pages/mobile/home/following_list_page.dart';
 
@@ -304,7 +304,7 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                         itemCount: filteredListings.length,
                         itemBuilder: (context, index) {
-                          return Listingtile(
+                          return ListingTile(
                             listing: filteredListings[index],
                             onTap: () => Navigator.push(
                               context,

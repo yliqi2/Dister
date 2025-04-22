@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/generated/l10n.dart';
 
-class Listingtile extends StatefulWidget {
+class ListingTile extends StatefulWidget {
   final Listing listing;
   final VoidCallback? onTap;
   final bool colorChange;
 
-  const Listingtile(
+  const ListingTile(
       {super.key, required this.listing, this.onTap, this.colorChange = false});
 
   @override
-  State<Listingtile> createState() => _ListingtileState();
+  State<ListingTile> createState() => _ListingTileState();
 }
 
-class _ListingtileState extends State<Listingtile> {
+class _ListingTileState extends State<ListingTile> {
   String? ownerPhoto;
   String? ownerName;
   final LikeService _likeService = LikeService();
