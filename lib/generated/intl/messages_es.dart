@@ -103,7 +103,14 @@ class MessageLookup extends MessageLookupByLibrary {
       "Selecciona una fecha",
     ),
     "datelabel": MessageLookupByLibrary.simpleMessage("La oferta expira el..."),
+    "delete": MessageLookupByLibrary.simpleMessage("Eliminar"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("Borrar cuenta"),
+    "deleteConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Confirmar eliminación",
+    ),
+    "deleteListingWarning": MessageLookupByLibrary.simpleMessage(
+      "¿Estás seguro de que quieres eliminar este anuncio? Esta acción no se puede deshacer.",
+    ),
     "description": MessageLookupByLibrary.simpleMessage("Descripción"),
     "descriptionerror": MessageLookupByLibrary.simpleMessage(
       "Por favor introduce una descripción",
@@ -222,6 +229,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "linkhelptext": MessageLookupByLibrary.simpleMessage(
       "Pega el enlace donde otros usuarios puedan encontrar la oferta",
+    ),
+    "listingDeleted": MessageLookupByLibrary.simpleMessage(
+      "Anuncio eliminado correctamente",
     ),
     "listings": MessageLookupByLibrary.simpleMessage("Anuncios"),
     "loading": MessageLookupByLibrary.simpleMessage("Cargando..."),

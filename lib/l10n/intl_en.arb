@@ -227,5 +227,10 @@
     "languageSpanish": "Spanish",
     "shareYourListings": "Share your listings!",
     "noListingsToShow": "There are no listings to show",
-    "lastMessage": "{message}\n{date}"
+    "lastMessage": "{message}\n{date}",
+
+    "delete": "Delete",
+    "deleteConfirmation": "Delete Confirmation",
+    "deleteListingWarning": "Are you sure you want to delete this listing? This action cannot be undone.",
+    "listingDeleted": "Listing deleted successfully"
 }

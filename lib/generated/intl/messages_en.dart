@@ -99,7 +99,14 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "datehintText": MessageLookupByLibrary.simpleMessage("Select a date"),
     "datelabel": MessageLookupByLibrary.simpleMessage("Deal expires at..."),
+    "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
+    "deleteConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Delete Confirmation",
+    ),
+    "deleteListingWarning": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this listing? This action cannot be undone.",
+    ),
     "description": MessageLookupByLibrary.simpleMessage("Description"),
     "descriptionerror": MessageLookupByLibrary.simpleMessage(
       "Please enter a description",
@@ -218,6 +225,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "linkhelptext": MessageLookupByLibrary.simpleMessage(
       "Paste the link to where other users can find the deal",
+    ),
+    "listingDeleted": MessageLookupByLibrary.simpleMessage(
+      "Listing deleted successfully",
     ),
     "listings": MessageLookupByLibrary.simpleMessage("Listings"),
     "loading": MessageLookupByLibrary.simpleMessage("Loading..."),

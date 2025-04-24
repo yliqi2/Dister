@@ -226,5 +226,10 @@
     "languageSpanish": "Español",
     "shareYourListings": "¡Comparte tus anuncios!",
     "noListingsToShow": "No hay anuncios para mostrar",
-    "lastMessage": "{message}\n{date}"
+    "lastMessage": "{message}\n{date}",
+
+    "delete": "Eliminar",
+    "deleteConfirmation": "Confirmar eliminación",
+    "deleteListingWarning": "¿Estás seguro de que quieres eliminar este anuncio? Esta acción no se puede deshacer.",
+    "listingDeleted": "Anuncio eliminado correctamente"
 }

@@ -1659,6 +1659,41 @@ class S {
       args: [message, date],
     );
   }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
+  /// `Delete Confirmation`
+  String get deleteConfirmation {
+    return Intl.message(
+      'Delete Confirmation',
+      name: 'deleteConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this listing? This action cannot be undone.`
+  String get deleteListingWarning {
+    return Intl.message(
+      'Are you sure you want to delete this listing? This action cannot be undone.',
+      name: 'deleteListingWarning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Listing deleted successfully`
+  String get listingDeleted {
+    return Intl.message(
+      'Listing deleted successfully',
+      name: 'listingDeleted',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

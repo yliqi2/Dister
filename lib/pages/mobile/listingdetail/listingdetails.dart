@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/model/categorie.dart';
 import 'package:dister/model/highlight.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Listingdetails extends StatefulWidget {
   final Listing listing;
@@ -21,6 +22,7 @@ class _ListingdetailsState extends State<Listingdetails> {
   String? ownerName;
   final PageController _pageController = PageController();
   final LikeService _likeService = LikeService();
+  final User? _currentUser = FirebaseAuth.instance.currentUser;
 
   @override
   void initState() {
@@ -81,6 +83,54 @@ class _ListingdetailsState extends State<Listingdetails> {
     }
   }
 
+  Future<void> _deleteListing() async {
+    final bool confirmDelete = await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(S.of(context).deleteConfirmation),
+            content: Text(S.of(context).deleteListingWarning),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(S.of(context).cancel),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text(
+                  S.of(context).delete,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+
+    if (confirmDelete) {
+      try {
+        await FirebaseFirestore.instance
+            .collection('listings')
+            .doc(widget.listing.id)
+            .delete();
+
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(S.of(context).listingDeleted)),
+        );
+        Navigator.of(context).pop();
+      } catch (e) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(S.of(context).errorGeneric(e.toString()))),
+        );
+      }
+    }
+  }
+
+  bool _isOwner() {
+    return _currentUser?.uid == widget.listing.owner;
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> images = widget.listing.images;
@@ -103,6 +153,15 @@ class _ListingdetailsState extends State<Listingdetails> {
         ),
         centerTitle: true,
         actions: [
+          if (_isOwner())
+            IconButton(
+              icon: Icon(
+                Icons.delete,
+                color: colorScheme.error,
+              ),
+              onPressed: _deleteListing,
+              tooltip: S.of(context).delete,
+            ),
           StreamBuilder<bool>(
             stream: _likeService.watchLikeStatus(widget.listing.id),
             builder: (context, snapshot) {
