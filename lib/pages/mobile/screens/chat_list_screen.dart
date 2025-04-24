@@ -1,6 +1,6 @@
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:flutter/material.dart';
-import 'package:dister/pages/mobile/chat/chat_screen.dart';
+import 'package:dister/pages/mobile/screens/chat_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/generated/l10n.dart';

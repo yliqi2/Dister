@@ -1,16 +1,16 @@
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/model/post.dart';
 import 'package:dister/model/user.dart';
-import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
-import 'package:dister/pages/mobile/profile/settings_page.dart';
-import 'package:dister/pages/mobile/profile/user_list_page.dart';
-import 'package:dister/widgets/profile_listing_tile.dart';
+import 'package:dister/pages/mobile/posts_details/posts_details.dart';
+import 'package:dister/pages/mobile/screens/settings_screen.dart';
+import 'package:dister/pages/mobile/screens/followers_screen.dart';
+import 'package:dister/widgets/profile_post_container.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:dister/generated/l10n.dart';
-import 'package:dister/pages/mobile/chat/chat_screen.dart';
+import 'package:dister/pages/mobile/screens/chat_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/pages/mobile/profile/edit_profile.dart';
+import 'package:dister/pages/mobile/screens/edit_profile_screen.dart';
 
 class Profile extends StatefulWidget {
   final String? userId;
@@ -166,7 +166,8 @@ class _ProfileState extends State<Profile> {
                                           context, onTap: () {
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
-                                            builder: (context) => UserListPage(
+                                            builder: (context) =>
+                                                FollowersScreen(
                                               title: S.of(context).followers,
                                               userIds: user.followers,
                                             ),
@@ -180,7 +181,8 @@ class _ProfileState extends State<Profile> {
                                           context, onTap: () {
                                         Navigator.of(context).push(
                                           MaterialPageRoute(
-                                            builder: (context) => UserListPage(
+                                            builder: (context) =>
+                                                FollowersScreen(
                                               title: S.of(context).following,
                                               userIds: user.following,
                                             ),
@@ -479,7 +481,7 @@ class _ProfileState extends State<Profile> {
                                             Navigator.of(context).push(
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Listingdetails(
+                                                    PostsDetails(
                                                   listing: listing,
                                                 ),
                                               ),

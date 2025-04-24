@@ -1,13 +1,14 @@
 import 'package:dister/controller/firebase/services/firebase_services.dart';
-import 'package:dister/pages/mobile/profile/profile.dart';
+import 'package:dister/pages/mobile/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dister/generated/l10n.dart';
 
-class UserListPage extends StatelessWidget {
+class FollowersScreen extends StatelessWidget {
   final String title;
   final List<String> userIds;
 
-  const UserListPage({super.key, required this.title, required this.userIds});
+  const FollowersScreen(
+      {super.key, required this.title, required this.userIds});
 
   @override
   Widget build(BuildContext context) {

@@ -1,19 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
+import 'package:dister/pages/mobile/posts_details/posts_details.dart';
+import 'package:dister/pages/mobile/posts_details/api_posts_details.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:dister/model/post.dart';
 import 'package:dister/generated/l10n.dart';
 
-class FavoritePosts extends StatefulWidget {
-  const FavoritePosts({super.key});
+class FavoritePostsScreen extends StatefulWidget {
+  const FavoritePostsScreen({super.key});
 
   @override
-  State<FavoritePosts> createState() => _FavoritePostsState();
+  State<FavoritePostsScreen> createState() => _FavoritePostsScreenState();
 }
 
-class _FavoritePostsState extends State<FavoritePosts> {
+class _FavoritePostsScreenState extends State<FavoritePostsScreen> {
   late Future<List<Post>> _favoriteListingsFuture;
   final FirebaseServices firebaseServices = FirebaseServices();
 
@@ -21,16 +22,23 @@ class _FavoritePostsState extends State<FavoritePosts> {
   void initState() {
     super.initState();
     final String currentUserId = firebaseServices.getCurrentUser();
-    _favoriteListingsFuture = _getFavoriteListings(currentUserId);
+    _favoriteListingsFuture = _getAllFavoriteListings(currentUserId);
   }
 
-  Future<List<Post>> _getFavoriteListings(String userId) async {
-    final likesCollection = FirebaseFirestore.instance.collection('likes');
-    final querySnapshot =
-        await likesCollection.where('userId', isEqualTo: userId).get();
+  Future<List<Post>> _getAllFavoriteListings(String userId) async {
+    List<Post> allFavorites = [];
 
-    List<Post> favoriteListings = [];
-    for (var doc in querySnapshot.docs) {
+    final likesCollection = FirebaseFirestore.instance.collection('likes');
+    final apiFavoritesCollection = FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('api_favorites');
+
+    final normalLikesSnapshot =
+        await likesCollection.where('userId', isEqualTo: userId).get();
+    final apiFavoritesSnapshot = await apiFavoritesCollection.get();
+
+    for (var doc in normalLikesSnapshot.docs) {
       final data = doc.data();
       final listingId = data['listingId'];
 
@@ -41,41 +49,73 @@ class _FavoritePostsState extends State<FavoritePosts> {
 
       if (listingSnapshot.exists) {
         final listing = Post.fromFirestore(listingSnapshot);
-        favoriteListings.add(listing);
+        allFavorites.add(listing);
       }
     }
 
-    return favoriteListings;
+    for (var doc in apiFavoritesSnapshot.docs) {
+      final data = doc.data();
+      final listing = Post(
+        id: doc.id,
+        title: data['title'] ?? '',
+        desc: data['desc'] ?? '',
+        link: data['link'] ?? '',
+        originalPrice: (data['originalPrice'] ?? 0.0).toDouble(),
+        discountPrice: (data['discountPrice'] ?? 0.0).toDouble(),
+        storeName: data['storeName'] ?? '',
+        images: List<String>.from(data['images'] ?? []),
+        rating: data['rating']?.toDouble(),
+        categories: '',
+        subcategories: '',
+        likes: 0,
+        highlights: [],
+        owner: 'api',
+        publishedAt:
+            (data['savedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      );
+      allFavorites.add(listing);
+    }
+
+    allFavorites.sort((a, b) => b.publishedAt.compareTo(a.publishedAt));
+    return allFavorites;
   }
 
-  Future<void> _removeLike(String userId, String listingId) async {
-    final likesCollection = FirebaseFirestore.instance.collection('likes');
-    final querySnapshot = await likesCollection
-        .where('userId', isEqualTo: userId)
-        .where('listingId', isEqualTo: listingId)
-        .get();
+  Future<void> _removeFavorite(String userId, Post listing) async {
+    if (listing.owner == 'api') {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .collection('api_favorites')
+          .doc(listing.id)
+          .delete();
+    } else {
+      final likesCollection = FirebaseFirestore.instance.collection('likes');
+      final querySnapshot = await likesCollection
+          .where('userId', isEqualTo: userId)
+          .where('listingId', isEqualTo: listing.id)
+          .get();
 
-    for (var doc in querySnapshot.docs) {
-      await doc.reference.delete();
+      for (var doc in querySnapshot.docs) {
+        await doc.reference.delete();
+      }
     }
   }
 
   void _removeListingFromFavorites(String userId, Post listing) async {
-    await _removeLike(userId, listing.id);
+    await _removeFavorite(userId, listing);
     setState(() {
-      _favoriteListingsFuture = _getFavoriteListings(userId);
+      _favoriteListingsFuture = _getAllFavoriteListings(userId);
     });
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(S.of(context).removedFromFavorites),
-      ),
+      SnackBar(content: Text(S.of(context).removedFromFavorites)),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final String currentUserId = firebaseServices.getCurrentUser();
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return Scaffold(
       appBar: AppBar(
@@ -141,27 +181,18 @@ class _FavoritePostsState extends State<FavoritePosts> {
                       onTap: () {
                         _removeListingFromFavorites(currentUserId, listing);
                       },
-                      child: Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.error,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(50)),
-                        ),
-                        child: Icon(
-                          Icons.favorite,
-                          color: Theme.of(context).colorScheme.onError,
-                          size: 18,
-                        ),
+                      child: Icon(
+                        Icons.favorite,
+                        color: colorScheme.error,
+                        size: 22,
                       ),
                     ),
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => Listingdetails(
-                            listing: listing,
-                          ),
+                          builder: (context) => listing.owner == 'api'
+                              ? ApiPostsDetails(product: listing)
+                              : PostsDetails(listing: listing),
                         ),
                       );
                     },

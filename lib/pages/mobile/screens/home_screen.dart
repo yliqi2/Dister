@@ -2,10 +2,10 @@ import 'package:dister/generated/l10n.dart';
 import 'package:dister/model/categorie.dart';
 import 'package:dister/model/category_icons.dart';
 import 'package:dister/model/post.dart';
-import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
-import 'package:dister/widgets/listing_tile.dart';
+import 'package:dister/pages/mobile/posts_details/posts_details.dart';
+import 'package:dister/widgets/post_container.dart';
 import 'package:dister/widgets/custom_dropdown.dart';
-import 'package:dister/pages/mobile/home/following_list_page.dart';
+import 'package:dister/pages/mobile/screens/chat_list_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:animated_hint_textfield/animated_hint_textfield.dart';
@@ -303,12 +303,12 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                         itemCount: filteredListings.length,
                         itemBuilder: (context, index) {
-                          return ListingTile(
+                          return PostContainer(
                             listing: filteredListings[index],
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Listingdetails(
+                                builder: (context) => PostsDetails(
                                     listing: filteredListings[index]),
                               ),
                             ),

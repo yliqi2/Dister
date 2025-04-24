@@ -13,14 +13,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class NewPost extends StatefulWidget {
-  const NewPost({super.key});
+class NewPostScreen extends StatefulWidget {
+  const NewPostScreen({super.key});
 
   @override
-  State<NewPost> createState() => _NewPostState();
+  State<NewPostScreen> createState() => _NewPostScreenState();
 }
 
-class _NewPostState extends State<NewPost> {
+class _NewPostScreenState extends State<NewPostScreen> {
   final _linkcontroller = TextEditingController();
   final _titlecontroller = TextEditingController();
   final _shopcontroller = TextEditingController();

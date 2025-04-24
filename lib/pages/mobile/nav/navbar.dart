@@ -1,9 +1,9 @@
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
-import 'package:dister/pages/mobile/Posts%20Upload/new_post.dart';
-import 'package:dister/pages/mobile/Favorite%20Posts/favorite_posts.dart';
-import 'package:dister/pages/mobile/home/homescreen.dart';
-import 'package:dister/pages/mobile/profile/profile.dart';
-import 'package:dister/pages/mobile/API%20posts/api_posts.dart';
+import 'package:dister/pages/mobile/screens/new_post_screen.dart';
+import 'package:dister/pages/mobile/screens/favorite_posts_screen.dart';
+import 'package:dister/pages/mobile/screens/home_screen.dart';
+import 'package:dister/pages/mobile/screens/profile_screen.dart';
+import 'package:dister/pages/mobile/screens/api_posts_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -19,9 +19,9 @@ class _NavbarState extends State<Navbar> {
 
   final List<Widget> _screens = [
     const Homescreen(),
-    const Realtime(),
-    const NewPost(),
-    const FavoritePosts(),
+    const APIposts(),
+    const NewPostScreen(),
+    const FavoritePostsScreen(),
     const Profile(),
   ];
 

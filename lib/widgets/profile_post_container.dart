@@ -1,23 +1,25 @@
 import 'package:dister/model/post.dart';
-import 'package:dister/pages/mobile/profile/profile.dart';
+import 'package:dister/pages/mobile/screens/profile_screen.dart';
 import 'package:dister/controller/like_service/like_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/generated/l10n.dart';
 
-class ListingTile extends StatefulWidget {
+class ProfileListingTile extends StatefulWidget {
   final Post listing;
   final VoidCallback? onTap;
-  final bool colorChange;
 
-  const ListingTile(
-      {super.key, required this.listing, this.onTap, this.colorChange = false});
+  const ProfileListingTile({
+    super.key,
+    required this.listing,
+    this.onTap,
+  });
 
   @override
-  State<ListingTile> createState() => _ListingTileState();
+  State<ProfileListingTile> createState() => _ProfileListingTileState();
 }
 
-class _ListingTileState extends State<ListingTile> {
+class _ProfileListingTileState extends State<ProfileListingTile> {
   String? ownerPhoto;
   String? ownerName;
   final LikeService _likeService = LikeService();
@@ -34,7 +36,7 @@ class _ListingTileState extends State<ListingTile> {
           .collection('users')
           .doc(widget.listing.owner)
           .get();
-      if (doc.exists) {
+      if (doc.exists && mounted) {
         setState(() {
           ownerPhoto = doc['photo'];
           ownerName = doc['username'];
@@ -47,20 +49,19 @@ class _ListingTileState extends State<ListingTile> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        width: size.width * 0.45,
+        constraints: BoxConstraints(
+          maxWidth: MediaQuery.of(context).size.width * 0.50,
+        ),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Theme.of(context).brightness == Brightness.dark
-              ? widget.colorChange
-                  ? colorScheme.surface
-                  : colorScheme.surfaceContainer
+              ? colorScheme.surface
               : colorScheme.surfaceContainer.withAlpha(242),
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
@@ -93,12 +94,14 @@ class _ListingTileState extends State<ListingTile> {
                                   ownerPhoto!.startsWith('http')
                               ? NetworkImage(ownerPhoto!)
                               : null,
-                          radius: 15,
+                          radius: 10,
                           child: ownerPhoto == null ||
                                   !ownerPhoto!.startsWith('http')
                               ? Image.asset(
                                   'assets/images/default.png',
                                   color: Colors.white,
+                                  width: 14,
+                                  height: 14,
                                 )
                               : null,
                         ),
@@ -178,6 +181,7 @@ class _ListingTileState extends State<ListingTile> {
               widget.listing.title,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
+                fontSize: 14,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -192,6 +196,7 @@ class _ListingTileState extends State<ListingTile> {
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: colorScheme.error,
+                        fontSize: 16,
                       ),
                     ),
                     const SizedBox(width: 5),
@@ -210,19 +215,11 @@ class _ListingTileState extends State<ListingTile> {
                     final bool isLiked = snapshot.data ?? false;
                     return GestureDetector(
                       onTap: () => _likeService.toggleLike(widget.listing.id),
-                      child: Container(
-                        width: 25,
-                        height: 25,
-                        decoration: BoxDecoration(
-                          color: colorScheme.error,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(50)),
-                        ),
-                        child: Icon(
-                          isLiked ? Icons.favorite : Icons.favorite_border,
-                          color: colorScheme.onError,
-                          size: 20,
-                        ),
+                      child: Icon(
+                        isLiked ? Icons.favorite : Icons.favorite_border,
+                        color:
+                            isLiked ? colorScheme.error : colorScheme.outline,
+                        size: 22,
                       ),
                     );
                   },

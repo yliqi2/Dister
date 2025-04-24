@@ -12,15 +12,15 @@ import 'package:dister/model/comment.dart';
 import 'package:dister/controller/comment_service/comment_service.dart';
 import 'package:dister/widgets/comment_card.dart';
 
-class Listingdetails extends StatefulWidget {
+class PostsDetails extends StatefulWidget {
   final Post listing;
-  const Listingdetails({super.key, required this.listing});
+  const PostsDetails({super.key, required this.listing});
 
   @override
-  State<Listingdetails> createState() => _ListingdetailsState();
+  State<PostsDetails> createState() => _PostsDetailsState();
 }
 
-class _ListingdetailsState extends State<Listingdetails> {
+class _PostsDetailsState extends State<PostsDetails> {
   String? ownerPhoto;
   String? ownerName;
   final PageController _pageController = PageController();
