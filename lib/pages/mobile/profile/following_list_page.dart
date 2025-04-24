@@ -35,9 +35,7 @@ class FollowingListPage extends StatelessWidget {
                 ),
                 title: Text(user['username']),
                 trailing: ElevatedButton(
-                  onPressed: () {
-                    // Placeholder for send message functionality
-                  },
+                  onPressed: () {},
                   child: Text(S.of(context).sendMessage),
                 ),
               );

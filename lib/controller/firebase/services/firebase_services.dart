@@ -14,13 +14,11 @@ class FirebaseServices {
   final FirebaseFirestore _fs = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // Obtener el UID del usuario actual
   String getCurrentUser() {
     User? user = _auth.currentUser;
     return user?.uid ?? 'error';
   }
 
-  // Obtener las credenciales del usuario por su UID
   Future<Users?> getCredentialsUser(String uid) async {
     DocumentSnapshot dn = await _fs.collection('users').doc(uid).get();
 
@@ -30,48 +28,39 @@ class FirebaseServices {
     return null;
   }
 
-  // Función para convertir el texto de fecha en DateTime
   DateTime? convertStringToDateTime(String dateStr,
       {String format = "yyyy-mm-dd"}) {
     try {
-      final DateFormat formatter =
-          DateFormat(format); // Define el formato de fecha
-      return formatter.parse(dateStr); // Convierte el texto a DateTime
+      final DateFormat formatter = DateFormat(format);
+      return formatter.parse(dateStr);
     } catch (e) {
-      return null; // Si hay error en la conversión, retorna null
+      return null;
     }
   }
 
-  // Subir un nuevo Listing a Firestore
   Future<bool> uploadListing({
     required String title,
     required String desc,
-    required String expiresAtStr, // Recibimos la fecha como un String
+    required String expiresAtStr,
     required String link,
     required double originalPrice,
     required double discountPrice,
     required String storeName,
     required String userId,
-    required String
-        categories, // Ahora recibe el nombre localizado de la categoría
-    required String
-        subcategories, // Ahora recibe el nombre localizado de la subcategoría
+    required String categories,
+    required String subcategories,
     required List<String> highlights,
-    required List<XFile?> selectedImages, // Cambiado a List<XFile?>
+    required List<XFile?> selectedImages,
   }) async {
     try {
-      // Convertir el texto de la fecha a DateTime
       DateTime? expiresAt = convertStringToDateTime(expiresAtStr);
 
-      // Si la fecha no se pudo convertir, podemos retornar un error
       if (expiresAt == null) {
         return false;
       }
 
-      // Obtener el ID de la categoría a partir del nombre localizado
       final categoryId = _getCategoryIdFromName(categories);
 
-      // Crear el objeto Listing
       Listing listing = Listing(
         title: title,
         desc: desc,
@@ -81,32 +70,28 @@ class FirebaseServices {
         originalPrice: originalPrice,
         discountPrice: discountPrice,
         storeName: storeName,
-        categories: categoryId, // Guardar el ID de la categoría
-        subcategories:
-            subcategories, // Seguimos guardando el nombre de la subcategoría
+        categories: categoryId,
+        subcategories: subcategories,
         likes: 0,
-        images: [], // Inicialmente vacío
+        images: [],
         highlights: highlights.isNotEmpty ? highlights : [],
         owner: userId,
       );
 
-      // Subir las imágenes a Firebase Storage
       List<String> imageUrls = [];
       if (selectedImages.isNotEmpty) {
         imageUrls = await uploadImages(selectedImages);
         listing.images = imageUrls;
       }
 
-      // Guardar el Listing en Firestore
       await _fs.collection('listings').add(listing.toMap());
 
-      return true; // Retornamos true si todo fue exitoso
+      return true;
     } catch (e) {
-      return false; // Retornamos false si ocurrió un error
+      return false;
     }
   }
 
-  // Método para obtener el ID de la categoría a partir del nombre localizado
   String _getCategoryIdFromName(String categoryName) {
     final categories = ProductCategories.getCategories();
     for (var category in categories) {
@@ -114,16 +99,14 @@ class FirebaseServices {
         return category.id;
       }
     }
-    return ""; // Si no encuentra la categoría, retorna un string vacío
+    return "";
   }
 
-  // Subir imágenes a Firebase Storage y obtener las URLs
   Future<List<String>> uploadImages(List<XFile?> images) async {
     List<String> imageUrls = [];
     try {
       for (var image in images) {
         if (image != null) {
-          // Comprobar si la imagen no es null
           String fileName = image.name;
           firebase_storage.Reference ref = firebase_storage
               .FirebaseStorage.instance
@@ -132,9 +115,7 @@ class FirebaseServices {
           firebase_storage.UploadTask uploadTask =
               ref.putFile(File(image.path));
 
-          // Esperar a que se complete la carga
           await uploadTask.whenComplete(() async {
-            // Obtener la URL de la imagen cargada
             String imageUrl = await ref.getDownloadURL();
             imageUrls.add(imageUrl);
           });
@@ -155,13 +136,12 @@ class FirebaseServices {
 
   Future<void> signOut() async {
     try {
-      await _auth.signOut(); // Cierra la sesión del usuario actual
+      await _auth.signOut();
     } catch (e) {
-      debugPrint("Error during sign out: $e"); // Manejo de errores
+      debugPrint("Error during sign out: $e");
     }
   }
 
-  // Seguir a un usuario
   Future<void> followUser(String currentUserId, String targetUserId) async {
     final currentUserDoc = _fs.collection('users').doc(currentUserId);
     final targetUserDoc = _fs.collection('users').doc(targetUserId);
@@ -174,19 +154,16 @@ class FirebaseServices {
         throw Exception('Uno de los usuarios no existe.');
       }
 
-      // Agregar el targetUserId a la lista de seguidos del usuario actual
       transaction.update(currentUserDoc, {
         'following': FieldValue.arrayUnion([targetUserId]),
       });
 
-      // Agregar el currentUserId a la lista de seguidores del usuario objetivo
       transaction.update(targetUserDoc, {
         'followers': FieldValue.arrayUnion([currentUserId]),
       });
     });
   }
 
-  // Dejar de seguir a un usuario
   Future<void> unfollowUser(String currentUserId, String targetUserId) async {
     final currentUserDoc = _fs.collection('users').doc(currentUserId);
     final targetUserDoc = _fs.collection('users').doc(targetUserId);
@@ -199,19 +176,16 @@ class FirebaseServices {
         throw Exception('Uno de los usuarios no existe.');
       }
 
-      // Remover el targetUserId de la lista de seguidos del usuario actual
       transaction.update(currentUserDoc, {
         'following': FieldValue.arrayRemove([targetUserId]),
       });
 
-      // Remover el currentUserId de la lista de seguidores del usuario objetivo
       transaction.update(targetUserDoc, {
         'followers': FieldValue.arrayRemove([currentUserId]),
       });
     });
   }
 
-  // Verificar si un usuario ya dejó de seguir a otro
   Future<bool> hasUnfollowed(String currentUserId, String targetUserId) async {
     final currentUserDoc =
         await _fs.collection('users').doc(currentUserId).get();
@@ -225,7 +199,6 @@ class FirebaseServices {
     return unfollowedList != null && unfollowedList.contains(targetUserId);
   }
 
-  // Verificar si un usuario está siguiendo a otro
   Future<bool> isFollowing(String currentUserId, String targetUserId) async {
     final currentUserDoc =
         await _fs.collection('users').doc(currentUserId).get();
@@ -259,7 +232,6 @@ class FirebaseServices {
     return users;
   }
 
-  // Subir una foto de perfil a Firebase Storage y obtener la URL
   Future<String> uploadProfilePicture(String userId, File image) async {
     try {
       String fileName =
@@ -268,10 +240,8 @@ class FirebaseServices {
           firebase_storage.FirebaseStorage.instance.ref().child(fileName);
       firebase_storage.UploadTask uploadTask = ref.putFile(image);
 
-      // Esperar a que se complete la carga
       await uploadTask.whenComplete(() {});
 
-      // Obtener la URL de descarga
       return await ref.getDownloadURL();
     } catch (e) {
       debugPrint("Error uploading profile picture: $e");
@@ -279,7 +249,6 @@ class FirebaseServices {
     }
   }
 
-  // Actualizar la foto de perfil del usuario en Firestore
   Future<void> updateUserPhoto(String userId, String photoUrl) async {
     try {
       await _fs.collection('users').doc(userId).update({'photo': photoUrl});
@@ -293,10 +262,8 @@ class FirebaseServices {
     try {
       String userId = getCurrentUser();
 
-      // Delete user data from Firestore
       await _fs.collection('users').doc(userId).delete();
 
-      // Delete user authentication account
       User? user = _auth.currentUser;
       if (user != null) {
         await user.delete();

@@ -1,8 +1,7 @@
-// firebase_options.dart
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
-import 'package:flutter_dotenv/flutter_dotenv.dart'; // Import dotenv
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
@@ -32,7 +31,7 @@ class DefaultFirebaseOptions {
 
   static FirebaseOptions get web {
     return FirebaseOptions(
-      apiKey: dotenv.env['FIREBASE_API_KEY_WEB'] ?? '', // Use dotenv
+      apiKey: dotenv.env['FIREBASE_API_KEY_WEB'] ?? '',
       appId: dotenv.env['FIREBASE_APP_ID_WEB'] ?? '',
       messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID'] ?? '',
       projectId: dotenv.env['FIREBASE_PROJECT_ID'] ?? '',
@@ -46,8 +45,7 @@ class DefaultFirebaseOptions {
     return FirebaseOptions(
       apiKey: dotenv.env['FIREBASE_API_KEY_ANDROID'] ?? '',
       appId: dotenv.env['FIREBASE_APP_ID_ANDROID'] ?? '',
-      messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID'] ??
-          '', // Use the same sender ID
+      messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID'] ?? '',
       projectId: dotenv.env['FIREBASE_PROJECT_ID'] ?? '',
       storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET'] ?? '',
     );
@@ -65,7 +63,6 @@ class DefaultFirebaseOptions {
   }
 
   static FirebaseOptions get macos {
-    // Corrected macos section
     return FirebaseOptions(
       apiKey: dotenv.env['FIREBASE_API_KEY_MACOS'] ?? '',
       appId: dotenv.env['FIREBASE_APP_ID_MACOS'] ?? '',

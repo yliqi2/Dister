@@ -47,7 +47,6 @@ class _HomescreenState extends State<Homescreen> {
       // Intenta hacer coincidir tanto por ID de categoría como por nombre localizado
       final categoryMatch = matchesCategory ||
           ProductCategories.getCategories().any((category) {
-            // Coincidencia por ID (nuevos productos)
             if (category.getName(Localizations.localeOf(context).toString()) ==
                     _selectedCategory &&
                 category.id == listing.categories) {

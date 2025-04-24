@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:dister/controller/firebase/services/firebase_services.dart'; // Importa FirebaseServices
-import 'package:dister/model/listing.dart'; // Importa el modelo Listing
+import 'package:dister/controller/firebase/services/firebase_services.dart';
+import 'package:dister/model/listing.dart';
 import 'package:dister/generated/l10n.dart';
 
 class Savelisting extends StatefulWidget {
@@ -34,14 +34,12 @@ class _SavelistingState extends State<Savelisting> {
       final data = doc.data();
       final listingId = data['listingId'];
 
-      // Fetch the listing details from the listings collection
       final listingSnapshot = await FirebaseFirestore.instance
           .collection('listings')
           .doc(listingId)
           .get();
 
       if (listingSnapshot.exists) {
-        // Convert the Firestore document into a Listing object
         final listing = Listing.fromFirestore(listingSnapshot);
         favoriteListings.add(listing);
       }
@@ -58,7 +56,7 @@ class _SavelistingState extends State<Savelisting> {
         .get();
 
     for (var doc in querySnapshot.docs) {
-      await doc.reference.delete(); // Elimina el documento del like
+      await doc.reference.delete();
     }
   }
 
@@ -159,11 +157,10 @@ class _SavelistingState extends State<Savelisting> {
                       ),
                     ),
                     onTap: () {
-                      // Navegar a la página de detalles pasando el objeto listing
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => Listingdetails(
-                            listing: listing, // Pasar el objeto completo
+                            listing: listing,
                           ),
                         ),
                       );

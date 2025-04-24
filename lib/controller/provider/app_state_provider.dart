@@ -7,6 +7,9 @@ class AppStateProvider extends ChangeNotifier {
   String _languageCode = 'en';
   bool _useSystemTheme = true;
   bool _useSystemLanguage = true;
+  bool _saveCredentials = false;
+  String? _savedEmail;
+  String? _savedPassword;
 
   AppStateProvider() {
     _loadInitialState();
@@ -16,19 +19,25 @@ class AppStateProvider extends ChangeNotifier {
   String get languageCode => _languageCode;
   bool get useSystemTheme => _useSystemTheme;
   bool get useSystemLanguage => _useSystemLanguage;
+  bool get saveCredentials => _saveCredentials;
+  String? get savedEmail => _savedEmail;
+  String? get savedPassword => _savedPassword;
 
   Future<void> _loadInitialState() async {
     final prefs = await SharedPreferences.getInstance();
 
     _useSystemTheme = prefs.getBool('useSystemTheme') ?? true;
     _useSystemLanguage = prefs.getBool('useSystemLanguage') ?? true;
+    _saveCredentials = prefs.getBool('saveCredentials') ?? false;
+
+    _savedEmail = prefs.getString('savedEmail');
+    _savedPassword = prefs.getString('savedPassword');
 
     // Obtener el tema del sistema
     final brightness =
         WidgetsBinding.instance.platformDispatcher.platformBrightness;
     final systemIsDark = brightness == Brightness.dark;
 
-    // Decidir qué tema usar
     _isDarkTheme = _useSystemTheme
         ? systemIsDark
         : (prefs.getBool('isDarkTheme') ?? false);
@@ -49,6 +58,7 @@ class AppStateProvider extends ChangeNotifier {
     await prefs.setString('languageCode', _languageCode);
     await prefs.setBool('useSystemTheme', _useSystemTheme);
     await prefs.setBool('useSystemLanguage', _useSystemLanguage);
+    await prefs.setBool('saveCredentials', _saveCredentials);
   }
 
   void toggleTheme(bool isDark) async {
@@ -121,5 +131,33 @@ class AppStateProvider extends ChangeNotifier {
       _saveToPrefs();
       notifyListeners();
     }
+  }
+
+  void toggleSaveCredentials(bool value) async {
+    if (_saveCredentials != value) {
+      _saveCredentials = value;
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('saveCredentials', value);
+
+      notifyListeners();
+    }
+  }
+
+  void saveUserCredentials(String email, String password) async {
+    _savedEmail = email;
+    _savedPassword = password;
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('savedEmail', email);
+    await prefs.setString('savedPassword', password);
+
+    notifyListeners();
+  }
+
+  void clearSavedCredentials() async {
+    _savedEmail = null;
+    _savedPassword = null;
+    await _saveToPrefs();
   }
 }

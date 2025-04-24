@@ -9,7 +9,7 @@ class CustomTextField extends StatefulWidget {
   final String? Function(String?)? validator;
   final String? helptext;
   final int? maxLines;
-  final bool isDateField; // Nuevo parámetro para permitir el DatePicker
+  final bool isDateField;
 
   const CustomTextField({
     super.key,
@@ -20,7 +20,7 @@ class CustomTextField extends StatefulWidget {
     this.validator,
     this.helptext,
     this.maxLines,
-    this.isDateField = false, // Por defecto, no es un campo de fecha
+    this.isDateField = false,
   });
 
   @override
@@ -61,12 +61,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.isDateField
-          ? () => _selectDate(context)
-          : null, // Abrir el DatePicker automáticamente al tocar el campo
+      onTap: widget.isDateField ? () => _selectDate(context) : null,
       child: widget.isDateField
           ? AbsorbPointer(
-              // Deshabilita la edición solo si es un campo de fecha
               child: TextFormField(
                 controller: widget.controller,
                 maxLines: widget.maxLines,
@@ -119,7 +116,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   ),
                 ),
                 validator: widget.validator,
-                readOnly: widget.isDateField, // Deshabilita la edición
+                readOnly: widget.isDateField,
               ),
             )
           : TextFormField(

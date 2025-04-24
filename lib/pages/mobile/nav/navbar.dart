@@ -41,7 +41,7 @@ class _NavbarState extends State<Navbar> {
           border: const Border(
             top: BorderSide(
               color: Color.fromARGB(255, 107, 107, 107),
-              width: 1.0, // Grosor del borde
+              width: 1.0,
             ),
           ),
         ),

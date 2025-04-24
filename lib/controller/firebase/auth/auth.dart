@@ -22,11 +22,9 @@ class AuthService {
           .get();
 
       if (userDoc.docs.isNotEmpty) {
-        // Si el nombre de usuario ya está en uso, lanzamos un error
         errorNotifier.error = 'username-already-in-use';
         return null;
       }
-      // Si no existe, creamos un nuevo usuario en Firebase Authentication
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -35,29 +33,27 @@ class AuthService {
 
       String uid = userCredential.user!.uid;
 
-      // Creamos un objeto `Users` con los datos por defecto
       Users newUser = Users(
         uid: uid,
         username: username,
-        photo: 'assets/images/default.png', // Foto vacía inicialmente
-        followers: [], // Inicializamos seguidores como lista vacía
-        following: [], // Inicializamos siguiendo como lista vacía
-        listings: 0, // Inicializamos publicaciones en 0
+        photo: 'assets/images/default.png',
+        followers: [],
+        following: [],
+        listings: 0,
         desc: '',
       );
 
-      // Almacenamos el nuevo usuario en Firestore
       await _firestore.collection('users').doc(uid).set({
         'uid': uid,
         'username': newUser.username,
         'photo': newUser.photo,
-        'followers': newUser.followers, // Lista vacía
-        'following': newUser.following, // Lista vacía
+        'followers': newUser.followers,
+        'following': newUser.following,
         'listings': newUser.listings,
         'desc': newUser.desc,
       });
 
-      return userCredential.user; // Devolvemos el usuario registrado
+      return userCredential.user;
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'email-already-in-use':
@@ -67,7 +63,7 @@ class AuthService {
           errorNotifier.error = 'default';
           break;
       }
-      return null; // Si ocurre un error, devolvemos null
+      return null;
     }
   }
 

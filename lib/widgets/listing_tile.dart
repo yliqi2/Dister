@@ -41,7 +41,7 @@ class _ListingTileState extends State<ListingTile> {
         });
       }
     } catch (e) {
-      // Handle errors if necessary
+      debugPrint('Error fetching owner details: ${e.toString()}');
     }
   }
 
@@ -72,7 +72,6 @@ class _ListingTileState extends State<ListingTile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header with avatar, username, likes, and time ago
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -163,8 +162,6 @@ class _ListingTileState extends State<ListingTile> {
               ],
             ),
             const SizedBox(height: 10),
-
-            // Main image
             if (widget.listing.images.isNotEmpty)
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
@@ -177,8 +174,6 @@ class _ListingTileState extends State<ListingTile> {
                 ),
               ),
             const SizedBox(height: 10),
-
-            // Title
             Text(
               widget.listing.title,
               style: theme.textTheme.titleMedium?.copyWith(
@@ -187,8 +182,6 @@ class _ListingTileState extends State<ListingTile> {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-
-            // Prices and Favorite button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -211,7 +204,6 @@ class _ListingTileState extends State<ListingTile> {
                     ),
                   ],
                 ),
-                // Favorite button with border
                 StreamBuilder<bool>(
                   stream: _likeService.watchLikeStatus(widget.listing.id),
                   builder: (context, snapshot) {

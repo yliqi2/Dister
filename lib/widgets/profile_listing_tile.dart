@@ -43,7 +43,7 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
         });
       }
     } catch (e) {
-      // Handle errors if necessary
+      debugPrint('Error fetching owner details: ${e.toString()}');
     }
   }
 
@@ -55,10 +55,8 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
     return GestureDetector(
       onTap: widget.onTap,
       child: Container(
-        // Usar un ancho fijo calculado para asegurar que no haya overflow
         constraints: BoxConstraints(
-          maxWidth: MediaQuery.of(context).size.width *
-              0.50, // Reducido para asegurar que respete los márgenes
+          maxWidth: MediaQuery.of(context).size.width * 0.50,
         ),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -75,7 +73,6 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Header with avatar, username, likes, and time ago
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -97,13 +94,13 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
                                   ownerPhoto!.startsWith('http')
                               ? NetworkImage(ownerPhoto!)
                               : null,
-                          radius: 10, // Más pequeño para el espacio disponible
+                          radius: 10,
                           child: ownerPhoto == null ||
                                   !ownerPhoto!.startsWith('http')
                               ? Image.asset(
                                   'assets/images/default.png',
                                   color: Colors.white,
-                                  width: 14, // Ajustado al tamaño del círculo
+                                  width: 14,
                                   height: 14,
                                 )
                               : null,
@@ -168,8 +165,6 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
               ],
             ),
             const SizedBox(height: 10),
-
-            // Main image
             if (widget.listing.images.isNotEmpty)
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
@@ -182,19 +177,15 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
                 ),
               ),
             const SizedBox(height: 10),
-
-            // Title
             Text(
               widget.listing.title,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
-                fontSize: 14, // Ligeramente más pequeño para evitar overflow
+                fontSize: 14,
               ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-
-            // Prices and Favorite button
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -205,7 +196,7 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
                       style: theme.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: colorScheme.error,
-                        fontSize: 16, // Ajustado para evitar overflow
+                        fontSize: 16,
                       ),
                     ),
                     const SizedBox(width: 5),
@@ -218,7 +209,6 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
                     ),
                   ],
                 ),
-                // Favorite button with border
                 StreamBuilder<bool>(
                   stream: _likeService.watchLikeStatus(widget.listing.id),
                   builder: (context, snapshot) {
@@ -226,8 +216,8 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
                     return GestureDetector(
                       onTap: () => _likeService.toggleLike(widget.listing.id),
                       child: Container(
-                        width: 22, // Ligeramente más pequeño
-                        height: 22, // Ligeramente más pequeño
+                        width: 22,
+                        height: 22,
                         decoration: BoxDecoration(
                           color: colorScheme.error,
                           borderRadius:
@@ -236,7 +226,7 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
                         child: Icon(
                           isLiked ? Icons.favorite : Icons.favorite_border,
                           color: colorScheme.onError,
-                          size: 16, // Ajustado para el tamaño del contenedor
+                          size: 16,
                         ),
                       ),
                     );

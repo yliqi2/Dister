@@ -45,7 +45,6 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  // Función para registrar al usuario
   void register(RegisterErrorNotifier errorNotifier) async {
     User? user = await _auth.register(_emailController.text.toLowerCase(),
         _passwordController.text, _usernameController.text, errorNotifier);
@@ -53,9 +52,8 @@ class _RegisterState extends State<Register> {
       _user = user;
     });
 
-    if (_user != null) {
+    if (_user != null && mounted) {
       Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
           builder: (context) => const Navbar(),

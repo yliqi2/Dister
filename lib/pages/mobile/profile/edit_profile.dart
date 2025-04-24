@@ -57,8 +57,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         SnackBar(content: Text(S.of(context).profileUpdated)),
       );
       if (!mounted) return;
-      Navigator.of(context)
-          .pop(true); // Devuelve 'true' indicando que hubo cambios
+      Navigator.of(context).pop(true);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(S.of(context).errorGeneric(e.toString()))),

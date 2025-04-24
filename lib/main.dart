@@ -45,7 +45,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
-    // Actualizar con el tema y el idioma del sistema al inicio
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final appState = Provider.of<AppStateProvider>(context, listen: false);
       appState.updateFromSystem();

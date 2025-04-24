@@ -15,7 +15,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/pages/mobile/profile/edit_profile.dart';
 
 class Profile extends StatefulWidget {
-  final String? userId; // ID del usuario cuyo perfil se desea visualizar
+  final String? userId;
 
   const Profile({super.key, this.userId});
 
@@ -64,10 +64,9 @@ class _ProfileState extends State<Profile> {
     try {
       final querySnapshot = await FirebaseFirestore.instance
           .collection('listings')
-          .where('owner', isEqualTo: userId) // Filtra por el campo 'owner'
+          .where('owner', isEqualTo: userId)
           .get();
 
-      // Convierte los documentos en objetos del modelo Listing
       return querySnapshot.docs
           .map((doc) => Listing.fromFirestore(doc))
           .toList();
@@ -119,8 +118,7 @@ class _ProfileState extends State<Profile> {
 
               return Scaffold(
                 appBar: AppBar(
-                  automaticallyImplyLeading:
-                      widget.userId != null, // True if accessed via post
+                  automaticallyImplyLeading: widget.userId != null,
                   title: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 12.0),
                     child: Text(
@@ -150,7 +148,7 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                         ]
-                      : null, // No logout button for other users' profiles
+                      : null,
                 ),
                 body: SafeArea(
                   child: Column(
@@ -306,8 +304,7 @@ class _ProfileState extends State<Profile> {
                                                 ),
                                               );
                                               if (result == true) {
-                                                setState(
-                                                    () {}); // Fuerza la actualización de la pantalla
+                                                setState(() {});
                                               }
                                             },
                                             child: _buildButton(
@@ -401,8 +398,7 @@ class _ProfileState extends State<Profile> {
                       ),
                       Expanded(
                         child: FutureBuilder<List<Listing>>(
-                          future: _getUserListings(user
-                              .uid), // Llama a la función para obtener los posts
+                          future: _getUserListings(user.uid),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
@@ -428,8 +424,8 @@ class _ProfileState extends State<Profile> {
                                       color: Theme.of(context)
                                           .colorScheme
                                           .outline
-                                          .withAlpha(100), // Color del borde
-                                      width: 1.0, // Ancho del borde
+                                          .withAlpha(100),
+                                      width: 1.0,
                                     ),
                                   ),
                                 ),
@@ -473,8 +469,7 @@ class _ProfileState extends State<Profile> {
                                 width: double.infinity,
                                 margin: const EdgeInsets.only(top: 5),
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal:
-                                        26.0), // Mismo padding que el encabezado del perfil
+                                    horizontal: 26.0),
                                 decoration: BoxDecoration(
                                   color: Theme.of(context)
                                       .colorScheme
@@ -485,8 +480,8 @@ class _ProfileState extends State<Profile> {
                                       color: Theme.of(context)
                                           .colorScheme
                                           .outline
-                                          .withAlpha(100), // Color del borde
-                                      width: 1.0, // Ancho del borde
+                                          .withAlpha(100),
+                                      width: 1.0,
                                     ),
                                   ),
                                 ),
@@ -513,8 +508,7 @@ class _ProfileState extends State<Profile> {
                                         crossAxisCount: 2,
                                         crossAxisSpacing: 12,
                                         mainAxisSpacing: 12,
-                                        childAspectRatio:
-                                            0.7, // Ajustado para el nuevo tamaño
+                                        childAspectRatio: 0.7,
                                       ),
                                       itemCount: userListings.length,
                                       itemBuilder: (context, index) {
@@ -522,7 +516,6 @@ class _ProfileState extends State<Profile> {
                                         return ProfileListingTile(
                                           listing: listing,
                                           onTap: () {
-                                            // Navegar a la página de detalles de la publicación
                                             Navigator.of(context).push(
                                               MaterialPageRoute(
                                                 builder: (context) =>

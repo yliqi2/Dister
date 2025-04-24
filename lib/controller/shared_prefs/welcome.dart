@@ -12,4 +12,3 @@ class Welcome {
     prefs.setBool("onboarding", true);
   }
 }
-

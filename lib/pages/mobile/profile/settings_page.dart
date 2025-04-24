@@ -125,7 +125,6 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
           body: ListView(
             children: [
-              // Sección de tema
               ListTile(
                 title: Text(
                   S.of(context).themeOptions,
@@ -143,7 +142,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 onChanged: _toggleUseSystemTheme,
               ),
               ListTile(
-                // Siempre habilitado
                 leading: appState.isDarkTheme
                     ? const Icon(Icons.nightlight_round)
                     : const Icon(Icons.wb_sunny),
@@ -155,8 +153,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 trailing: const Icon(Icons.arrow_forward_ios, size: 16),
               ),
               const Divider(),
-
-              // Sección de idioma
               ListTile(
                 title: Text(
                   S.of(context).languageOptions,
@@ -174,7 +170,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 onChanged: _toggleUseSystemLanguage,
               ),
               ListTile(
-                // Siempre habilitado
                 leading: const Icon(Icons.language),
                 title: Text(S.of(context).changeLanguage),
                 subtitle: Text(appState.languageCode == 'en'
@@ -242,8 +237,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 },
               ),
               const Divider(),
-
-              // Otras opciones de la app
               ListTile(
                 title: Text(
                   S.of(context).otherOptions,
@@ -253,11 +246,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                 ),
               ),
-              ListTile(
-                leading: const Icon(Icons.save),
+              SwitchListTile(
                 title: Text(S.of(context).saveSessionData),
-                onTap: () {
-                  // Handle session data saving
+                secondary: const Icon(Icons.save),
+                value: appState.saveCredentials,
+                onChanged: (value) {
+                  appState.toggleSaveCredentials(value);
+                  if (!value) {
+                    appState.clearSavedCredentials();
+                  }
                 },
               ),
               ListTile(
@@ -315,6 +312,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 onTap: () async {
                   final firebaseServices = FirebaseServices();
                   final navigator = Navigator.of(context, rootNavigator: true);
+
                   await firebaseServices.signOut();
                   if (mounted) {
                     navigator.pushAndRemoveUntil(

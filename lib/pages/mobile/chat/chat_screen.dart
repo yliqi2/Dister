@@ -1,8 +1,8 @@
 import 'package:dister/controller/firebase/services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../model/chat.dart'; // Asegúrate de importar el modelo de Chat
-import 'package:dister/generated/l10n.dart'; // Importar para internacionalización
+import '../../../model/chat.dart';
+import 'package:dister/generated/l10n.dart';
 
 class ChatScreen extends StatefulWidget {
   final String recipientId;
@@ -65,7 +65,6 @@ class _ChatScreenState extends State<ChatScreen> {
       'sentDate': FieldValue.serverTimestamp(),
     });
 
-    // Limpiar el campo de texto
     _messageController.clear();
 
     // Scroll al final después de enviar el mensaje
@@ -122,7 +121,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
                 final messages = snapshot.data!.docs;
 
-                // Desplazar al final después de que se carguen los mensajes
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   if (messages.isNotEmpty) {
                     _scrollToBottom();
@@ -164,7 +162,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                   ? Theme.of(context)
                                       .colorScheme
                                       .surfaceContainer
-                                      .withAlpha(204) // 0.8 * 255 = 204
+                                      .withAlpha(204)
                                   : Theme.of(context)
                                       .colorScheme
                                       .surfaceContainer,
@@ -271,13 +269,10 @@ class _ChatScreenState extends State<ChatScreen> {
     final messageDate = DateTime(date.year, date.month, date.day);
 
     if (messageDate == today) {
-      // Hoy, mostrar solo la hora
       return '${S.of(context).today} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
     } else if (messageDate == yesterday) {
-      // Ayer
       return '${S.of(context).yesterday} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
     } else {
-      // Otro día, mostrar fecha y hora
       return '${date.day}/${date.month} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
     }
   }

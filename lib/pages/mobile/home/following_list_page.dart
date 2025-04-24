@@ -93,7 +93,7 @@ class FollowingListPage extends StatelessWidget {
                                     .of(context)
                                     .lastMessage(lastMessage, lastMessageDate),
                                 style: const TextStyle(fontSize: 12))
-                            : null, // Mostrar solo si hay mensaje.
+                            : null,
                         trailing: IconButton(
                           icon: const Icon(Icons.send_rounded),
                           onPressed: () {

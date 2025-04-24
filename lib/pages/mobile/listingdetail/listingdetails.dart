@@ -47,7 +47,7 @@ class _ListingdetailsState extends State<Listingdetails> {
         });
       }
     } catch (e) {
-      // Manejo de errores
+      debugPrint(e.toString());
     }
   }
 
@@ -129,9 +129,7 @@ class _ListingdetailsState extends State<Listingdetails> {
                   PageView.builder(
                     controller: _pageController,
                     itemCount: images.length,
-                    onPageChanged: (index) {
-                      // Se eliminó _currentPage ya que no se usa en ningún otro lugar
-                    },
+                    onPageChanged: (index) {},
                     itemBuilder: (context, index) {
                       return Image.network(
                         images[index],
@@ -359,11 +357,9 @@ class _ListingdetailsState extends State<Listingdetails> {
     final colorScheme = Theme.of(context).colorScheme;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    // Traducir categorías y highlights
     String translatedText = text;
     final locale = Localizations.localeOf(context).toString();
 
-    // Buscar si es una categoría y traducirla
     for (var category in ProductCategories.getCategories()) {
       if (text == category.id ||
           text == category.names["en"] ||
@@ -372,7 +368,6 @@ class _ListingdetailsState extends State<Listingdetails> {
         break;
       }
 
-      // Buscar si es una subcategoría
       for (var subcat in category.subcategories) {
         if (text == subcat["en"] || text == subcat["es"]) {
           final lang = locale.split('_')[0];
@@ -382,7 +377,6 @@ class _ListingdetailsState extends State<Listingdetails> {
       }
     }
 
-    // Buscar si es un highlight
     for (var highlightKey in HighlightOptions.options.keys) {
       if (text == highlightKey ||
           text == HighlightOptions.options[highlightKey]!["en"] ||

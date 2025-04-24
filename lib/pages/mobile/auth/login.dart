@@ -1,16 +1,17 @@
 import 'package:dister/controller/firebase/auth/form_validator.dart';
 import 'package:dister/controller/provider/authnotifier.dart';
+import 'package:dister/controller/provider/app_state_provider.dart';
 import 'package:dister/pages/mobile/nav/navbar.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart'; // Importar provider
-import 'package:dister/controller/firebase/auth/auth.dart'; // Importar AuthService
+import 'package:provider/provider.dart';
+import 'package:dister/controller/firebase/auth/auth.dart';
 
-import 'package:dister/pages/mobile/auth/register.dart'; // Pantalla de registro
-import 'package:dister/widgets/primarybtn.dart'; // El widget de botón de login
-import 'package:dister/widgets/mytextfield.dart'; // El widget de campo de texto personalizado
-import 'package:dister/generated/l10n.dart'; // Soporte para internacionalización (localización)
+import 'package:dister/pages/mobile/auth/register.dart';
+import 'package:dister/widgets/primarybtn.dart';
+import 'package:dister/widgets/mytextfield.dart';
+import 'package:dister/generated/l10n.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -24,6 +25,20 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final appState = Provider.of<AppStateProvider>(context, listen: false);
+      if (appState.saveCredentials &&
+          appState.savedEmail != null &&
+          appState.savedPassword != null) {
+        _emailController.text = appState.savedEmail!;
+        _passwordController.text = appState.savedPassword!;
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -45,9 +60,14 @@ class _LoginState extends State<Login> {
       _passwordController.text,
       errorNotifier,
     );
-    if (user != null) {
+    if (user != null && mounted) {
+      final appState = Provider.of<AppStateProvider>(context, listen: false);
+      appState.saveUserCredentials(
+        _emailController.text.toLowerCase(),
+        _passwordController.text,
+      );
+
       Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
           builder: (context) => const Navbar(),
@@ -154,8 +174,6 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           const SizedBox(height: 24),
-
-                          // Botón de login
                           GestureDetector(
                             onTap: () {
                               if (_formKey.currentState?.validate() ?? false) {
@@ -170,8 +188,6 @@ class _LoginState extends State<Login> {
                         ],
                       ),
                     ),
-
-                    // Enlace a la pantalla de registro
                     const SizedBox(height: 24),
                     Center(
                       child: GestureDetector(
