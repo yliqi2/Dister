@@ -19,7 +19,7 @@ A Flutter application.
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone <[repository-url](https://github.com/yliqi2/Dister)>
    ```
 2. Navigate to the project directory:
    ```bash
