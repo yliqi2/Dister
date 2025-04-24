@@ -17,6 +17,7 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final TextEditingController _descController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
   bool _isLoading = false;
   String? _userPhoto;
   File? _selectedImage;
@@ -38,6 +39,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       if (userDoc.exists && mounted) {
         setState(() {
           _descController.text = userDoc['desc'] ?? '';
+          _usernameController.text = userDoc['username'] ?? '';
           _userPhoto = userDoc['photo'];
         });
       }
@@ -69,7 +71,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(widget.userId)
-          .update({'desc': _descController.text.trim()});
+          .update({
+        'desc': _descController.text.trim(),
+        'username': _usernameController.text.trim(),
+      });
 
       if (_selectedImage != null) {
         String downloadUrl = await _firebaseServices.uploadProfilePicture(
@@ -145,6 +150,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
             const SizedBox(height: 24),
             CustomTextField(
+              controller: _usernameController,
+              isPassword: false,
+              hintText: S.of(context).hintUser,
+              label: S.of(context).userLabel,
+            ),
+            const SizedBox(height: 16),
+            CustomTextField(
               controller: _descController,
               isPassword: false,
               hintText: S.of(context).description,
@@ -156,6 +168,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: _saveChanges,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
                     child: Text(S.of(context).saveChanges),
                   ),
           ],
@@ -167,6 +188,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   void dispose() {
     _descController.dispose();
+    _usernameController.dispose();
     super.dispose();
   }
 }
