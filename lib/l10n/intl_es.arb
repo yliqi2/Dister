@@ -231,5 +231,16 @@
     "delete": "Eliminar",
     "deleteConfirmation": "Confirmar eliminación",
     "deleteListingWarning": "¿Estás seguro de que quieres eliminar este anuncio? Esta acción no se puede deshacer.",
-    "listingDeleted": "Anuncio eliminado correctamente"
+    "listingDeleted": "Anuncio eliminado correctamente",
+
+    "comments": "Comentarios",
+    "addComment": "Añadir un comentario",
+    "postComment": "Publicar",
+    "noComments": "Aún no hay comentarios. ¡Sé el primero en comentar!",
+    "deleteCommentConfirmation": "¿Eliminar comentario?",
+    "deleteCommentWarning": "¿Estás seguro de que quieres eliminar este comentario?",
+    "commentDeleted": "Comentario eliminado correctamente",
+    "commentAdded": "Comentario añadido correctamente",
+    "enterComment": "Escribe tu comentario aquí...",
+    "justNow": "Ahora mismo"
 }

@@ -59,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "AlreadyAccount": MessageLookupByLibrary.simpleMessage(
       "Already have an account? ",
     ),
+    "addComment": MessageLookupByLibrary.simpleMessage("Add a comment"),
     "allCategoriesFilter": MessageLookupByLibrary.simpleMessage(
       "All categories",
     ),
@@ -82,6 +83,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "categorylabel": MessageLookupByLibrary.simpleMessage("Category"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("Change Language"),
     "chatWith": m0,
+    "commentAdded": MessageLookupByLibrary.simpleMessage(
+      "Comment added successfully",
+    ),
+    "commentDeleted": MessageLookupByLibrary.simpleMessage(
+      "Comment deleted successfully",
+    ),
+    "comments": MessageLookupByLibrary.simpleMessage("Comments"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
     "confirmDeleteAccount": MessageLookupByLibrary.simpleMessage(
       "Are you sure you want to delete your account? This action cannot be undone.",
@@ -101,6 +109,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "datelabel": MessageLookupByLibrary.simpleMessage("Deal expires at..."),
     "delete": MessageLookupByLibrary.simpleMessage("Delete"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("Delete Account"),
+    "deleteCommentConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Delete Comment?",
+    ),
+    "deleteCommentWarning": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to delete this comment?",
+    ),
     "deleteConfirmation": MessageLookupByLibrary.simpleMessage(
       "Delete Confirmation",
     ),
@@ -134,6 +148,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "emptyUsername": MessageLookupByLibrary.simpleMessage(
       "Please enter your username",
+    ),
+    "enterComment": MessageLookupByLibrary.simpleMessage(
+      "Type your comment here...",
     ),
     "error": m1,
     "errorCredential": MessageLookupByLibrary.simpleMessage(
@@ -207,6 +224,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Please enter a valid email address",
     ),
     "joinUs": MessageLookupByLibrary.simpleMessage("Join Us"),
+    "justNow": MessageLookupByLibrary.simpleMessage("Just now"),
     "languageEnglish": MessageLookupByLibrary.simpleMessage("English"),
     "languageOptions": MessageLookupByLibrary.simpleMessage("Language Options"),
     "languageSpanish": MessageLookupByLibrary.simpleMessage("Spanish"),
@@ -248,6 +266,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "noAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account? ",
     ),
+    "noComments": MessageLookupByLibrary.simpleMessage(
+      "No comments yet. Be the first to comment!",
+    ),
     "noDescription": MessageLookupByLibrary.simpleMessage(
       "No description has been added.",
     ),
@@ -276,6 +297,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "otherOptions": MessageLookupByLibrary.simpleMessage("Other Options"),
     "password": MessageLookupByLibrary.simpleMessage("Password"),
     "percentOff": m11,
+    "postComment": MessageLookupByLibrary.simpleMessage("Post"),
     "postedTimeAgo": m12,
     "privacy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
     "productDetails": MessageLookupByLibrary.simpleMessage("Product Details"),

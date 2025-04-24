@@ -1694,6 +1694,91 @@ class S {
       args: [],
     );
   }
+
+  /// `Comments`
+  String get comments {
+    return Intl.message('Comments', name: 'comments', desc: '', args: []);
+  }
+
+  /// `Add a comment`
+  String get addComment {
+    return Intl.message(
+      'Add a comment',
+      name: 'addComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Post`
+  String get postComment {
+    return Intl.message('Post', name: 'postComment', desc: '', args: []);
+  }
+
+  /// `No comments yet. Be the first to comment!`
+  String get noComments {
+    return Intl.message(
+      'No comments yet. Be the first to comment!',
+      name: 'noComments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Comment?`
+  String get deleteCommentConfirmation {
+    return Intl.message(
+      'Delete Comment?',
+      name: 'deleteCommentConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this comment?`
+  String get deleteCommentWarning {
+    return Intl.message(
+      'Are you sure you want to delete this comment?',
+      name: 'deleteCommentWarning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comment deleted successfully`
+  String get commentDeleted {
+    return Intl.message(
+      'Comment deleted successfully',
+      name: 'commentDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comment added successfully`
+  String get commentAdded {
+    return Intl.message(
+      'Comment added successfully',
+      name: 'commentAdded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your comment here...`
+  String get enterComment {
+    return Intl.message(
+      'Type your comment here...',
+      name: 'enterComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Just now`
+  String get justNow {
+    return Intl.message('Just now', name: 'justNow', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

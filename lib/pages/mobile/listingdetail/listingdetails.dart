@@ -8,6 +8,9 @@ import 'package:dister/generated/l10n.dart';
 import 'package:dister/model/categorie.dart';
 import 'package:dister/model/highlight.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dister/model/comment.dart';
+import 'package:dister/controller/comment_service/comment_service.dart';
+import 'package:dister/widgets/comment_card.dart';
 
 class Listingdetails extends StatefulWidget {
   final Listing listing;
@@ -23,6 +26,9 @@ class _ListingdetailsState extends State<Listingdetails> {
   final PageController _pageController = PageController();
   final LikeService _likeService = LikeService();
   final User? _currentUser = FirebaseAuth.instance.currentUser;
+  final CommentService _commentService = CommentService();
+  final TextEditingController _commentController = TextEditingController();
+  bool _isPostingComment = false;
 
   @override
   void initState() {
@@ -33,6 +39,7 @@ class _ListingdetailsState extends State<Listingdetails> {
   @override
   void dispose() {
     _pageController.dispose();
+    _commentController.dispose();
     super.dispose();
   }
 
@@ -131,6 +138,24 @@ class _ListingdetailsState extends State<Listingdetails> {
     return _currentUser?.uid == widget.listing.owner;
   }
 
+  Future<void> _addComment() async {
+    if (_commentController.text.trim().isEmpty) return;
+
+    setState(() {
+      _isPostingComment = true;
+    });
+
+    await _commentService.addComment(
+      widget.listing.id,
+      _commentController.text.trim(),
+    );
+
+    setState(() {
+      _isPostingComment = false;
+      _commentController.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> images = widget.listing.images;
@@ -177,220 +202,406 @@ class _ListingdetailsState extends State<Listingdetails> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 300,
-              child: Stack(
-                children: [
-                  PageView.builder(
-                    controller: _pageController,
-                    itemCount: images.length,
-                    onPageChanged: (index) {},
-                    itemBuilder: (context, index) {
-                      return Image.network(
-                        images[index],
-                        fit: BoxFit.cover,
-                        width: double.infinity,
-                      );
-                    },
-                  ),
-                  if (images.length > 1)
-                    Positioned(
-                      bottom: 16,
-                      left: 0,
-                      right: 0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SmoothPageIndicator(
-                            controller: _pageController,
-                            count: images.length,
-                            effect: WormEffect(
-                              dotHeight: 16,
-                              dotWidth: 16,
-                              dotColor: Colors.grey,
-                              activeDotColor:
-                                  Theme.of(context).colorScheme.primary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          widget.listing.title,
-                          style: theme.textTheme.headlineSmall?.copyWith(
+                  SizedBox(
+                    height: 300,
+                    child: Stack(
+                      children: [
+                        PageView.builder(
+                          controller: _pageController,
+                          itemCount: images.length,
+                          onPageChanged: (index) {},
+                          itemBuilder: (context, index) {
+                            return Image.network(
+                              images[index],
+                              fit: BoxFit.cover,
+                              width: double.infinity,
+                            );
+                          },
+                        ),
+                        if (images.length > 1)
+                          Positioned(
+                            bottom: 16,
+                            left: 0,
+                            right: 0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SmoothPageIndicator(
+                                  controller: _pageController,
+                                  count: images.length,
+                                  effect: WormEffect(
+                                    dotHeight: 16,
+                                    dotWidth: 16,
+                                    dotColor: Colors.grey,
+                                    activeDotColor:
+                                        Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                widget.listing.title,
+                                style: theme.textTheme.headlineSmall?.copyWith(
+                                  color: colorScheme.onSurface,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? colorScheme.surfaceContainerHighest
+                                    : colorScheme.primary.withAlpha(26),
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: Text(
+                                S.of(context).percentOff((((widget
+                                                    .listing.originalPrice -
+                                                widget.listing.discountPrice) /
+                                            widget.listing.originalPrice) *
+                                        100)
+                                    .round()),
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? colorScheme.onSurfaceVariant
+                                      : colorScheme.primary,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Text(
+                              '${widget.listing.discountPrice.toStringAsFixed(0)}€',
+                              style: theme.textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: colorScheme.error,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              '${widget.listing.originalPrice.toStringAsFixed(0)}€',
+                              style: theme.textTheme.titleMedium?.copyWith(
+                                decoration: TextDecoration.lineThrough,
+                                color: colorScheme.outline,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 24),
+                        Text(
+                          S.of(context).productDetails,
+                          style: theme.textTheme.titleLarge?.copyWith(
                             color: colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 8,
-                          vertical: 4,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? colorScheme.surfaceContainerHighest
-                              : colorScheme.primary.withAlpha(26),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Text(
-                          S.of(context).percentOff(
-                              (((widget.listing.originalPrice -
-                                              widget.listing.discountPrice) /
-                                          widget.listing.originalPrice) *
-                                      100)
-                                  .round()),
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? colorScheme.onSurfaceVariant
-                                    : colorScheme.primary,
+                        const SizedBox(height: 8),
+                        Text(
+                          widget.listing.desc,
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: colorScheme.onSurfaceVariant.withAlpha(128),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      Text(
-                        '${widget.listing.discountPrice.toStringAsFixed(0)}€',
-                        style: theme.textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: colorScheme.error,
+                        const SizedBox(height: 24),
+                        Text(
+                          S.of(context).shoppingDetails,
+                          style: theme.textTheme.titleLarge?.copyWith(
+                            color: colorScheme.onSurface,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        '${widget.listing.originalPrice.toStringAsFixed(0)}€',
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          decoration: TextDecoration.lineThrough,
-                          color: colorScheme.outline,
+                        const SizedBox(height: 8),
+                        Text(
+                          S.of(context).storePrefix(widget.listing.storeName),
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: colorScheme.onSurfaceVariant.withAlpha(128),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    S.of(context).productDetails,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: colorScheme.onSurface,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    widget.listing.desc,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    S.of(context).shoppingDetails,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: colorScheme.onSurface,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    S.of(context).storePrefix(widget.listing.storeName),
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
-                    ),
-                  ),
-                  if (widget.listing.rating != null) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      S.of(context).ratingWithStars(
-                          widget.listing.rating!.toStringAsFixed(1)),
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: 4),
-                  StreamBuilder<int>(
-                    stream: _likeService.watchLikesCount(widget.listing.id),
-                    builder: (context, snapshot) {
-                      final likes = snapshot.data ?? widget.listing.likes;
-                      return Text(
-                        S.of(context).likesCount(likes),
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: colorScheme.onSurfaceVariant,
+                        if (widget.listing.rating != null) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            S.of(context).ratingWithStars(
+                                widget.listing.rating!.toStringAsFixed(1)),
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              color:
+                                  colorScheme.onSurfaceVariant.withAlpha(128),
+                            ),
+                          ),
+                        ],
+                        const SizedBox(height: 4),
+                        StreamBuilder<int>(
+                          stream:
+                              _likeService.watchLikesCount(widget.listing.id),
+                          builder: (context, snapshot) {
+                            final likes = snapshot.data ?? widget.listing.likes;
+                            return Text(
+                              S.of(context).likesCount(likes),
+                              style: theme.textTheme.bodyLarge?.copyWith(
+                                color:
+                                    colorScheme.onSurfaceVariant.withAlpha(128),
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    (() {
-                      final timeData = widget.listing.getTimeData();
-                      final String unitKey = timeData["unit"];
-                      final String timeValue = timeData["value"];
-                      String timeUnit;
+                        const SizedBox(height: 4),
+                        Text(
+                          (() {
+                            final timeData = widget.listing.getTimeData();
+                            final String unitKey = timeData["unit"];
+                            final String timeValue = timeData["value"];
+                            String timeUnit;
 
-                      if (unitKey == "timeDay") {
-                        timeUnit = S.of(context).timeDay;
-                      } else if (unitKey == "timeHour") {
-                        timeUnit = S.of(context).timeHour;
-                      } else {
-                        timeUnit = S.of(context).timeMinute;
-                      }
+                            if (unitKey == "timeDay") {
+                              timeUnit = S.of(context).timeDay;
+                            } else if (unitKey == "timeHour") {
+                              timeUnit = S.of(context).timeHour;
+                            } else {
+                              timeUnit = S.of(context).timeMinute;
+                            }
 
-                      return S
-                          .of(context)
-                          .postedTimeAgo("$timeValue $timeUnit");
-                    })(),
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: colorScheme.onSurfaceVariant,
+                            return S
+                                .of(context)
+                                .postedTimeAgo("$timeValue $timeUnit");
+                          })(),
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: colorScheme.onSurfaceVariant.withAlpha(128),
+                          ),
+                        ),
+                        if (widget.listing.expiresAt != null) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            S.of(context).expiresOn(
+                                widget.listing.getFormattedExpiry() ?? ''),
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              color:
+                                  colorScheme.onSurfaceVariant.withAlpha(128),
+                            ),
+                          ),
+                        ],
+                        const SizedBox(height: 16),
+                        Wrap(
+                          spacing: 8,
+                          children: [
+                            _categoryTag(widget.listing.categories),
+                            _categoryTag(widget.listing.storeName),
+                            if (widget.listing.highlights != null)
+                              ...widget.listing.highlights!
+                                  .map((highlight) => _categoryTag(highlight)),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  if (widget.listing.expiresAt != null) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      S
-                          .of(context)
-                          .expiresOn(widget.listing.getFormattedExpiry() ?? ''),
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: colorScheme.onSurfaceVariant,
-                      ),
+
+                  // Sección de comentarios
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              S.of(context).comments,
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                color: colorScheme.onSurface,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: colorScheme.primary,
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: StreamBuilder<List<Comment>>(
+                                stream: _commentService
+                                    .getCommentsStream(widget.listing.id),
+                                builder: (context, snapshot) {
+                                  return Text(
+                                    '${snapshot.data?.length ?? 0}',
+                                    style: TextStyle(
+                                      color: colorScheme.onPrimary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        Container(
+                          height: 2,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                colorScheme.primary,
+                                colorScheme.primary.withAlpha(26),
+                              ],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        StreamBuilder<List<Comment>>(
+                          stream: _commentService
+                              .getCommentsStream(widget.listing.id),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  color: colorScheme.primary,
+                                ),
+                              );
+                            }
+
+                            if (snapshot.hasError) {
+                              return Center(
+                                child: Column(
+                                  children: [
+                                    Icon(Icons.error_outline,
+                                        color: colorScheme.error),
+                                    Text(snapshot.error.toString()),
+                                  ],
+                                ),
+                              );
+                            }
+
+                            final comments = snapshot.data ?? [];
+
+                            if (comments.isEmpty) {
+                              return Center(
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.chat_bubble_outline,
+                                      color: colorScheme.onSurfaceVariant
+                                          .withAlpha(128),
+                                    ),
+                                    Text(S.of(context).noComments),
+                                  ],
+                                ),
+                              );
+                            }
+
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: comments.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                  child: CommentCard(
+                                    comment: comments[index],
+                                    commentService: _commentService,
+                                    onDeleted: () {},
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                  const SizedBox(height: 16),
-                  Wrap(
-                    spacing: 8,
-                    children: [
-                      _categoryTag(widget.listing.categories),
-                      _categoryTag(widget.listing.storeName),
-                      if (widget.listing.highlights != null)
-                        ...widget.listing.highlights!
-                            .map((highlight) => _categoryTag(highlight)),
-                    ],
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+          if (_currentUser != null)
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              color: colorScheme.surface,
+              child: Row(
+                children: [
+                  StreamBuilder<DocumentSnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('users')
+                        .doc(_currentUser.uid)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      final photoUrl = snapshot.data?.get('photo') as String?;
+                      return CircleAvatar(
+                        backgroundImage:
+                            photoUrl != null && !photoUrl.startsWith('assets/')
+                                ? NetworkImage(photoUrl)
+                                : const AssetImage('assets/images/default.png')
+                                    as ImageProvider,
+                      );
+                    },
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: TextField(
+                      controller: _commentController,
+                      decoration: InputDecoration(
+                        hintText: S.of(context).enterComment,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(24),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: colorScheme.surfaceContainer,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  ElevatedButton(
+                    onPressed: _isPostingComment ? null : _addComment,
+                    style: ElevatedButton.styleFrom(
+                      shape: const CircleBorder(),
+                      backgroundColor: colorScheme.primary,
+                      padding: const EdgeInsets.all(12),
+                    ),
+                    child: _isPostingComment
+                        ? SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: colorScheme.onPrimary,
+                            ),
+                          )
+                        : Icon(Icons.send, color: colorScheme.onPrimary),
+                  ),
+                ],
+              ),
+            ),
+        ],
       ),
       bottomNavigationBar: BottomAppBar(
         color: colorScheme.error,
