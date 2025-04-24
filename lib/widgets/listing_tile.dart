@@ -1,4 +1,4 @@
-import 'package:dister/model/listing.dart';
+import 'package:dister/model/post.dart';
 import 'package:dister/pages/mobile/profile/profile.dart';
 import 'package:dister/controller/like_service/like_service.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/generated/l10n.dart';
 
 class ListingTile extends StatefulWidget {
-  final Listing listing;
+  final Post listing;
   final VoidCallback? onTap;
   final bool colorChange;
 

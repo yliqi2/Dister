@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Listing {
+class Post {
   String id;
   String title;
   String desc;
@@ -18,7 +18,7 @@ class Listing {
   List<String>? highlights;
   String owner;
 
-  Listing({
+  Post({
     this.id = '',
     required this.title,
     required this.desc,
@@ -57,8 +57,8 @@ class Listing {
     };
   }
 
-  factory Listing.fromMap(Map<String, dynamic> map, String documentId) {
-    return Listing(
+  factory Post.fromMap(Map<String, dynamic> map, String documentId) {
+    return Post(
       id: documentId,
       title: map['title'] ?? '',
       desc: map['desc'] ?? '',
@@ -81,15 +81,15 @@ class Listing {
     );
   }
 
-  factory Listing.fromFirestore(DocumentSnapshot doc) {
+  factory Post.fromFirestore(DocumentSnapshot doc) {
     final map = doc.data() as Map<String, dynamic>;
-    return Listing.fromMap(map, doc.id);
+    return Post.fromMap(map, doc.id);
   }
 
-  static Future<List<Listing>> getListings() async {
+  static Future<List<Post>> getListings() async {
     final querySnapshot =
         await FirebaseFirestore.instance.collection('listings').get();
-    return querySnapshot.docs.map((doc) => Listing.fromFirestore(doc)).toList();
+    return querySnapshot.docs.map((doc) => Post.fromFirestore(doc)).toList();
   }
 
   Map<String, dynamic> getTimeData() {

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/model/listing.dart';
+import 'package:dister/model/post.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dister/model/user.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +61,7 @@ class FirebaseServices {
 
       final categoryId = _getCategoryIdFromName(categories);
 
-      Listing listing = Listing(
+      Post listing = Post(
         title: title,
         desc: desc,
         publishedAt: DateTime.now(),

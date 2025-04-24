@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/model/listing.dart';
+import 'package:dister/model/post.dart';
 import 'package:dister/controller/like_service/like_service.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -13,7 +13,7 @@ import 'package:dister/controller/comment_service/comment_service.dart';
 import 'package:dister/widgets/comment_card.dart';
 
 class Listingdetails extends StatefulWidget {
-  final Listing listing;
+  final Post listing;
   const Listingdetails({super.key, required this.listing});
 
   @override

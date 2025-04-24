@@ -284,15 +284,14 @@ class _SettingsPageState extends State<SettingsPage> {
                     try {
                       final firebaseServices = FirebaseServices();
                       await firebaseServices.deleteAccount();
-                      if (mounted) {
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Login(),
-                          ),
-                          (route) => false,
-                        );
-                      }
+                      if (!mounted) return;
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Login(),
+                        ),
+                        (route) => false,
+                      );
                     } catch (e) {
                       if (mounted) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -314,14 +313,13 @@ class _SettingsPageState extends State<SettingsPage> {
                   final navigator = Navigator.of(context, rootNavigator: true);
 
                   await firebaseServices.signOut();
-                  if (mounted) {
-                    navigator.pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (context) => const Login(),
-                      ),
-                      (route) => false,
-                    );
-                  }
+                  if (!mounted) return;
+                  navigator.pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => const Login(),
+                    ),
+                    (route) => false,
+                  );
                 },
               ),
             ],

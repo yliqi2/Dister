@@ -12,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:dister/controller/provider/app_state_provider.dart';
 
 class LoginTab extends StatefulWidget {
   const LoginTab({super.key});
@@ -47,9 +48,16 @@ class _LoginTabState extends State<LoginTab> {
       _passwordController.text,
       errorNotifier,
     );
+    if (!mounted) return;
     if (user != null) {
+      final appState = Provider.of<AppStateProvider>(context, listen: false);
+      if (appState.saveCredentials) {
+        appState.saveUserCredentials(
+          _emailController.text.toLowerCase(),
+          _passwordController.text,
+        );
+      }
       Navigator.pushReplacement(
-        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
           builder: (context) => const HomeTablet(),

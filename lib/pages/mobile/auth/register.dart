@@ -10,6 +10,7 @@ import 'package:dister/controller/firebase/auth/auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:dister/controller/provider/app_state_provider.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -53,6 +54,13 @@ class _RegisterState extends State<Register> {
     });
 
     if (_user != null && mounted) {
+      final appState = Provider.of<AppStateProvider>(context, listen: false);
+      if (appState.saveCredentials) {
+        appState.saveUserCredentials(
+          _emailController.text.toLowerCase(),
+          _passwordController.text,
+        );
+      }
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

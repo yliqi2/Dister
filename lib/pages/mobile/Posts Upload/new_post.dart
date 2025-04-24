@@ -13,14 +13,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class Newlisting extends StatefulWidget {
-  const Newlisting({super.key});
+class NewPost extends StatefulWidget {
+  const NewPost({super.key});
 
   @override
-  State<Newlisting> createState() => _NewlistingState();
+  State<NewPost> createState() => _NewPostState();
 }
 
-class _NewlistingState extends State<Newlisting> {
+class _NewPostState extends State<NewPost> {
   final _linkcontroller = TextEditingController();
   final _titlecontroller = TextEditingController();
   final _shopcontroller = TextEditingController();

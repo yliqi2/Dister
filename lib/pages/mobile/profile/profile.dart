@@ -1,5 +1,5 @@
 import 'package:dister/controller/firebase/services/firebase_services.dart';
-import 'package:dister/model/listing.dart';
+import 'package:dister/model/post.dart';
 import 'package:dister/model/user.dart';
 import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
 import 'package:dister/pages/mobile/profile/settings_page.dart';
@@ -24,16 +24,14 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   bool _isExpanded = false;
 
-  Future<List<Listing>> _getUserListings(String userId) async {
+  Future<List<Post>> _getUserListings(String userId) async {
     try {
       final querySnapshot = await FirebaseFirestore.instance
           .collection('listings')
           .where('owner', isEqualTo: userId)
           .get();
 
-      return querySnapshot.docs
-          .map((doc) => Listing.fromFirestore(doc))
-          .toList();
+      return querySnapshot.docs.map((doc) => Post.fromFirestore(doc)).toList();
     } catch (e) {
       throw Exception('Error al cargar las publicaciones: $e');
     }
@@ -359,7 +357,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                       Expanded(
-                        child: FutureBuilder<List<Listing>>(
+                        child: FutureBuilder<List<Post>>(
                           future: _getUserListings(user.uid),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==

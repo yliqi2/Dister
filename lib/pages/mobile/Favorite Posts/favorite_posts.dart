@@ -3,18 +3,18 @@ import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dister/controller/firebase/services/firebase_services.dart';
-import 'package:dister/model/listing.dart';
+import 'package:dister/model/post.dart';
 import 'package:dister/generated/l10n.dart';
 
-class Savelisting extends StatefulWidget {
-  const Savelisting({super.key});
+class FavoritePosts extends StatefulWidget {
+  const FavoritePosts({super.key});
 
   @override
-  State<Savelisting> createState() => _SavelistingState();
+  State<FavoritePosts> createState() => _FavoritePostsState();
 }
 
-class _SavelistingState extends State<Savelisting> {
-  late Future<List<Listing>> _favoriteListingsFuture;
+class _FavoritePostsState extends State<FavoritePosts> {
+  late Future<List<Post>> _favoriteListingsFuture;
   final FirebaseServices firebaseServices = FirebaseServices();
 
   @override
@@ -24,12 +24,12 @@ class _SavelistingState extends State<Savelisting> {
     _favoriteListingsFuture = _getFavoriteListings(currentUserId);
   }
 
-  Future<List<Listing>> _getFavoriteListings(String userId) async {
+  Future<List<Post>> _getFavoriteListings(String userId) async {
     final likesCollection = FirebaseFirestore.instance.collection('likes');
     final querySnapshot =
         await likesCollection.where('userId', isEqualTo: userId).get();
 
-    List<Listing> favoriteListings = [];
+    List<Post> favoriteListings = [];
     for (var doc in querySnapshot.docs) {
       final data = doc.data();
       final listingId = data['listingId'];
@@ -40,7 +40,7 @@ class _SavelistingState extends State<Savelisting> {
           .get();
 
       if (listingSnapshot.exists) {
-        final listing = Listing.fromFirestore(listingSnapshot);
+        final listing = Post.fromFirestore(listingSnapshot);
         favoriteListings.add(listing);
       }
     }
@@ -60,7 +60,7 @@ class _SavelistingState extends State<Savelisting> {
     }
   }
 
-  void _removeListingFromFavorites(String userId, Listing listing) async {
+  void _removeListingFromFavorites(String userId, Post listing) async {
     await _removeLike(userId, listing.id);
     setState(() {
       _favoriteListingsFuture = _getFavoriteListings(userId);
@@ -82,7 +82,7 @@ class _SavelistingState extends State<Savelisting> {
         title: Text(S.of(context).favorites),
         centerTitle: true,
       ),
-      body: FutureBuilder<List<Listing>>(
+      body: FutureBuilder<List<Post>>(
         future: _favoriteListingsFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

@@ -1,7 +1,7 @@
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/model/categorie.dart';
 import 'package:dister/model/category_icons.dart';
-import 'package:dister/model/listing.dart';
+import 'package:dister/model/post.dart';
 import 'package:dister/pages/mobile/listingdetail/listingdetails.dart';
 import 'package:dister/widgets/listing_tile.dart';
 import 'package:dister/widgets/custom_dropdown.dart';
@@ -19,7 +19,7 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  Future<List<Listing>> _listingsFuture = Future.value([]);
+  Future<List<Post>> _listingsFuture = Future.value([]);
   String _selectedCategory = '';
   String _selectedSubcategory = '';
   String? categoryId;
@@ -33,13 +33,13 @@ class _HomescreenState extends State<Homescreen> {
     _listingsFuture = _fetchListings();
   }
 
-  Future<List<Listing>> _fetchListings() async {
+  Future<List<Post>> _fetchListings() async {
     final snapshot =
         await FirebaseFirestore.instance.collection('listings').get();
-    return snapshot.docs.map((doc) => Listing.fromFirestore(doc)).toList();
+    return snapshot.docs.map((doc) => Post.fromFirestore(doc)).toList();
   }
 
-  List<Listing> _filterListings(List<Listing> listings) {
+  List<Post> _filterListings(List<Post> listings) {
     return listings.where((listing) {
       final matchesCategory = _selectedCategory.isEmpty ||
           _selectedCategory == S.of(context).allCategoriesFilter;
@@ -266,7 +266,7 @@ class _HomescreenState extends State<Homescreen> {
               ),
             ),
             SliverToBoxAdapter(
-              child: FutureBuilder<List<Listing>>(
+              child: FutureBuilder<List<Post>>(
                 future: _listingsFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
