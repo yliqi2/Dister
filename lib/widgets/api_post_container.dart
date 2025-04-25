@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dister/model/post_model.dart';
+import 'package:dister/models/post_model.dart';
 import 'package:dister/generated/l10n.dart';
 import 'package:dister/controllers/favorite_service/api_favorite_service.dart';
 

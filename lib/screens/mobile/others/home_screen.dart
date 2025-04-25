@@ -1,7 +1,7 @@
 import 'package:dister/generated/l10n.dart';
-import 'package:dister/model/categorie_model.dart';
-import 'package:dister/model/category_icons_model.dart';
-import 'package:dister/model/post_model.dart';
+import 'package:dister/models/categorie_model.dart';
+import 'package:dister/models/category_icons_model.dart';
+import 'package:dister/models/post_model.dart';
 import 'package:dister/screens/mobile/posts/post_screen.dart';
 import 'package:dister/widgets/post_container.dart';
 import 'package:dister/widgets/custom_filter_dropdown.dart';

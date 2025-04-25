@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/model/user_model.dart';
+import 'package:dister/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:dister/controllers/provider/authnotifier.dart';
 

@@ -1,5 +1,5 @@
 import 'package:dister/controllers/firebase/other_services/firebase_services.dart';
-import 'package:dister/model/user_model.dart';
+import 'package:dister/models/user_model.dart';
 
 import 'package:flutter/material.dart';
 

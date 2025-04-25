@@ -1,7 +1,7 @@
 import 'package:dister/controllers/firebase/other_services/firebase_services.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/model/chat_model.dart';
+import 'package:dister/models/chat_model.dart';
 import 'package:dister/generated/l10n.dart';
 
 class ChatScreen extends StatefulWidget {

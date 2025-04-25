@@ -1,54 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:dister/model/post_model.dart';
+import 'package:dister/models/post_model.dart';
 import 'package:dister/screens/mobile/posts/api_post_screen.dart';
 import 'package:dister/widgets/api_post_container.dart';
 import 'package:dister/generated/l10n.dart';
 import 'package:animated_hint_textfield/animated_hint_textfield.dart';
 import 'package:dister/screens/mobile/chat/chat_list_screen.dart';
-
-class ApiPost {
-  final String id;
-  final String title;
-  final String imageUrl;
-  final double price;
-  final double? originalPrice;
-  final double? rating;
-  final String? seller;
-
-  ApiPost({
-    required this.id,
-    required this.title,
-    required this.imageUrl,
-    required this.price,
-    this.originalPrice,
-    this.rating,
-    this.seller,
-  });
-
-  factory ApiPost.fromJson(Map<String, dynamic> json) {
-    return ApiPost(
-      id: json['product_id']?.toString() ?? '',
-      title: json['product_title'] ?? '',
-      imageUrl: (json['product_photos'] != null &&
-              json['product_photos'] is List &&
-              json['product_photos'].isNotEmpty)
-          ? json['product_photos'][0]
-          : '',
-      price: (json['product_min_price'] is num)
-          ? (json['product_min_price'] as num).toDouble()
-          : 0.0,
-      originalPrice: (json['product_max_price'] is num)
-          ? (json['product_max_price'] as num).toDouble()
-          : null,
-      rating: (json['product_rating'] is num)
-          ? (json['product_rating'] as num).toDouble()
-          : null,
-      seller: json['product_seller'],
-    );
-  }
-}
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class ApiPostsScreen extends StatefulWidget {
   const ApiPostsScreen({super.key});
@@ -81,7 +40,7 @@ class _ApiPostsState extends State<ApiPostsScreen> {
     final url = Uri.parse(
         'https://real-time-product-search.p.rapidapi.com/search?q=${query.isEmpty ? "tecnologia" : query}&country=es&language=${Localizations.localeOf(context).languageCode}&page=1&limit=1&sort_by=BEST_MATCH&product_condition=NEW&on_sale=true&min_rating=3');
     final response = await http.get(url, headers: {
-      'x-rapidapi-key': '', //API KEY HERE
+      'x-rapidapi-key': dotenv.env['RAPIDAPI_KEY'] ?? '',
       'x-rapidapi-host': 'real-time-product-search.p.rapidapi.com',
     });
 

@@ -1,14 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/model/post_model.dart';
+import 'package:dister/models/post_model.dart';
 import 'package:dister/controllers/favorite_service/favorite_service.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dister/generated/l10n.dart';
-import 'package:dister/model/categorie_model.dart';
-import 'package:dister/model/highlight_model.dart';
+import 'package:dister/models/categorie_model.dart';
+import 'package:dister/models/highlight_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:dister/model/comment_model.dart';
+import 'package:dister/models/comment_model.dart';
 import 'package:dister/controllers/comment_service/comment_service.dart';
 import 'package:dister/widgets/comment_card.dart';
 

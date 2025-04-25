@@ -1,6 +1,6 @@
 import 'package:dister/controllers/firebase/other_services/firebase_services.dart';
-import 'package:dister/model/post_model.dart';
-import 'package:dister/model/user_model.dart';
+import 'package:dister/models/post_model.dart';
+import 'package:dister/models/user_model.dart';
 import 'package:dister/screens/mobile/posts/post_screen.dart';
 import 'package:dister/screens/mobile/others/settings_screen.dart';
 import 'package:dister/screens/mobile/profile/followers_screen.dart';

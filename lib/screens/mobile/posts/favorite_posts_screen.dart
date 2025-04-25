@@ -4,7 +4,7 @@ import 'package:dister/screens/mobile/posts/api_post_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dister/controllers/firebase/other_services/firebase_services.dart';
-import 'package:dister/model/post_model.dart';
+import 'package:dister/models/post_model.dart';
 import 'package:dister/generated/l10n.dart';
 
 class FavoritePostsScreen extends StatefulWidget {

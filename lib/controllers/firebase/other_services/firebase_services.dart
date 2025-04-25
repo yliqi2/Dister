@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/model/post_model.dart';
+import 'package:dister/models/post_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:dister/model/user_model.dart';
+import 'package:dister/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:intl/intl.dart';
-import 'package:dister/model/categorie_model.dart';
+import 'package:dister/models/categorie_model.dart';
 
 class FirebaseServices {
   final FirebaseFirestore _fs = FirebaseFirestore.instance;

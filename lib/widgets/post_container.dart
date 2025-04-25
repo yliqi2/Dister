@@ -1,4 +1,4 @@
-import 'package:dister/model/post_model.dart';
+import 'package:dister/models/post_model.dart';
 import 'package:dister/screens/mobile/profile/profile_screen.dart';
 import 'package:dister/controllers/favorite_service/favorite_service.dart';
 import 'package:flutter/material.dart';

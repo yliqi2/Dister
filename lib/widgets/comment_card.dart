@@ -1,6 +1,6 @@
 import 'package:dister/controllers/comment_service/comment_service.dart';
 import 'package:dister/generated/l10n.dart';
-import 'package:dister/model/comment_model.dart';
+import 'package:dister/models/comment_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

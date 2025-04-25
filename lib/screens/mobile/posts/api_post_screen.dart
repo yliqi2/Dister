@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dister/model/post_model.dart';
+import 'package:dister/models/post_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dister/generated/l10n.dart';

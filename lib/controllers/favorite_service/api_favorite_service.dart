@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:dister/model/post_model.dart';
+import 'package:dister/models/post_model.dart';
 
 class ApiFavoriteService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
