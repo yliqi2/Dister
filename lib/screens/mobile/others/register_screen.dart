@@ -168,42 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     value, _passwordController.text, context);
                               },
                             ),
-                            const SizedBox(height: 16),
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: S.of(context).infoTerms,
-                                    style: TextStyle(color: subtext),
-                                  ),
-                                  TextSpan(
-                                    text: S.of(context).terms,
-                                    style: TextStyle(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      decoration: TextDecoration.underline,
-                                      decorationColor:
-                                          Theme.of(context).colorScheme.primary,
-                                    ),
-                                  ),
-                                  TextSpan(
-                                    text: ' & ',
-                                    style: TextStyle(color: subtext),
-                                  ),
-                                  TextSpan(
-                                    text: S.of(context).privacy,
-                                    style: TextStyle(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      decoration: TextDecoration.underline,
-                                      decorationColor:
-                                          Theme.of(context).colorScheme.primary,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(height: 24),
+                            const SizedBox(height: 20),
                             GestureDetector(
                               onTap: () {
                                 if (_formKey.currentState!.validate()) {

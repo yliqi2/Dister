@@ -152,28 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             isPassword: true,
                             maxLines: 1,
                           ),
-                          const SizedBox(height: 16),
-                          Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: S.of(context).forgotPassword,
-                                  style: TextStyle(color: subtext),
-                                ),
-                                TextSpan(
-                                  text: S.of(context).resetPassword,
-                                  style: TextStyle(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    decoration: TextDecoration.underline,
-                                    decorationColor:
-                                        Theme.of(context).colorScheme.primary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: 20),
                           GestureDetector(
                             onTap: () {
                               if (_formKey.currentState?.validate() ?? false) {
@@ -188,7 +167,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
                     Center(
                       child: GestureDetector(
                         onTap: () {

@@ -234,38 +234,7 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
                                             isPassword: true,
                                             maxLines: 1,
                                           ),
-                                          const SizedBox(height: 16),
-                                          Text.rich(
-                                            TextSpan(
-                                              children: [
-                                                TextSpan(
-                                                  text: S
-                                                      .of(context)
-                                                      .forgotPassword,
-                                                  style:
-                                                      TextStyle(color: subtext),
-                                                ),
-                                                TextSpan(
-                                                  text: S
-                                                      .of(context)
-                                                      .resetPassword,
-                                                  style: TextStyle(
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .primary,
-                                                    decoration: TextDecoration
-                                                        .underline,
-                                                    decorationColor:
-                                                        Theme.of(context)
-                                                            .colorScheme
-                                                            .primary,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const SizedBox(height: 24),
-
+                                          const SizedBox(height: 20),
                                           // Botón de login
                                           GestureDetector(
                                             onTap: () {
@@ -287,7 +256,7 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
                                     ),
 
                                     // Enlace a la pantalla de registro
-                                    const SizedBox(height: 24),
+                                    const SizedBox(height: 20),
                                     Center(
                                       child: GestureDetector(
                                         onTap: () {
