@@ -214,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hintEmail": MessageLookupByLibrary.simpleMessage("Introduce tu email"),
     "hintPass": MessageLookupByLibrary.simpleMessage("Introduce tu contraseña"),
     "hintUser": MessageLookupByLibrary.simpleMessage("Introduce tu usuario"),
+    "home": MessageLookupByLibrary.simpleMessage("Inicio"),
     "incompleteUserData": MessageLookupByLibrary.simpleMessage(
       "Los datos del usuario están incompletos.",
     ),
@@ -267,6 +268,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "El usuario no debe tener más de 15 caracteres",
     ),
     "messages": MessageLookupByLibrary.simpleMessage("Mensajes"),
+    "newPost": MessageLookupByLibrary.simpleMessage("Nueva publicación"),
     "noAccount": MessageLookupByLibrary.simpleMessage("¿No tienes cuenta? "),
     "noComments": MessageLookupByLibrary.simpleMessage(
       "Aún no hay comentarios. ¡Sé el primero en comentar!",
@@ -293,6 +295,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "notValidDomainEmail": MessageLookupByLibrary.simpleMessage(
       "Tiene que terminar @gmail.com",
     ),
+    "onlinePosts": MessageLookupByLibrary.simpleMessage(
+      "Publicaciones en línea",
+    ),
     "originalMessage": MessageLookupByLibrary.simpleMessage("Mensaje original"),
     "originalprice": MessageLookupByLibrary.simpleMessage("Precio original"),
     "originalpriceerror": MessageLookupByLibrary.simpleMessage(
@@ -307,6 +312,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "productDetails": MessageLookupByLibrary.simpleMessage(
       "Detalles del producto",
     ),
+    "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
     "profileUpdated": MessageLookupByLibrary.simpleMessage(
       "Perfil actualizado correctamente.",
     ),

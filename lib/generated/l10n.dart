@@ -1779,6 +1779,31 @@ class S {
   String get justNow {
     return Intl.message('Just now', name: 'justNow', desc: '', args: []);
   }
+
+  /// `Home`
+  String get home {
+    return Intl.message('Home', name: 'home', desc: '', args: []);
+  }
+
+  /// `Online Posts`
+  String get onlinePosts {
+    return Intl.message(
+      'Online Posts',
+      name: 'onlinePosts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Post`
+  String get newPost {
+    return Intl.message('New Post', name: 'newPost', desc: '', args: []);
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message('Profile', name: 'profile', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

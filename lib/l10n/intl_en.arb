@@ -243,5 +243,10 @@
     "commentDeleted": "Comment deleted successfully",
     "commentAdded": "Comment added successfully",
     "enterComment": "Type your comment here...",
-    "justNow": "Just now"
+    "justNow": "Just now",
+
+    "home": "Home",
+    "onlinePosts": "Online Posts",
+    "newPost": "New Post",
+    "profile": "Profile"
 }

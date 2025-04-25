@@ -214,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "hintPass": MessageLookupByLibrary.simpleMessage("Enter your password"),
     "hintUser": MessageLookupByLibrary.simpleMessage("Enter your username"),
+    "home": MessageLookupByLibrary.simpleMessage("Home"),
     "incompleteUserData": MessageLookupByLibrary.simpleMessage(
       "User data is incomplete.",
     ),
@@ -263,6 +264,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Username cannot be more than 15 characters",
     ),
     "messages": MessageLookupByLibrary.simpleMessage("Messages"),
+    "newPost": MessageLookupByLibrary.simpleMessage("New Post"),
     "noAccount": MessageLookupByLibrary.simpleMessage(
       "Don\'t have an account? ",
     ),
@@ -289,6 +291,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "notValidDomainEmail": MessageLookupByLibrary.simpleMessage(
       "Email must end with @gmail.com",
     ),
+    "onlinePosts": MessageLookupByLibrary.simpleMessage("Online Posts"),
     "originalMessage": MessageLookupByLibrary.simpleMessage("Original message"),
     "originalprice": MessageLookupByLibrary.simpleMessage("Original Price"),
     "originalpriceerror": MessageLookupByLibrary.simpleMessage(
@@ -301,6 +304,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "postedTimeAgo": m12,
     "privacy": MessageLookupByLibrary.simpleMessage("Privacy Policy"),
     "productDetails": MessageLookupByLibrary.simpleMessage("Product Details"),
+    "profile": MessageLookupByLibrary.simpleMessage("Profile"),
     "profileUpdated": MessageLookupByLibrary.simpleMessage(
       "Profile picture updated successfully.",
     ),

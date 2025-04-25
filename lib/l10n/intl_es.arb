@@ -242,5 +242,12 @@
     "commentDeleted": "Comentario eliminado correctamente",
     "commentAdded": "Comentario añadido correctamente",
     "enterComment": "Escribe tu comentario aquí...",
-    "justNow": "Ahora mismo"
+    "justNow": "Ahora mismo",
+
+    "home": "Inicio",
+    "onlinePosts": "Publicaciones en línea",
+    "newPost": "Nueva publicación",
+    "favorites": "Favoritos",
+    "profile": "Perfil",
+    "logout": "Cerrar sesión"
 }
