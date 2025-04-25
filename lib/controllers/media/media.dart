@@ -23,6 +23,7 @@ class _MediaState extends State<Media> {
   User? _user;
   bool _isLoading = true;
   bool _seenOnboarding = false;
+  bool? _isTablet; // Almacena el tipo de dispositivo
 
   @override
   void initState() {
@@ -34,40 +35,28 @@ class _MediaState extends State<Media> {
     final user = await Logged().checkUserLoggedIn();
     final seenOnboarding = await Welcome().seenBoarding();
 
-    if (mounted) {
-      setState(() {
-        _user = user;
-        _seenOnboarding = seenOnboarding;
-        _isLoading = false;
-      });
-    }
-  }
+    if (!mounted) return;
 
-  bool _isTablet(BuildContext context) {
-    // Obtener información de la pantalla
-    final MediaQueryData mediaQuery = MediaQuery.of(context);
-    final Size size = mediaQuery.size;
-    final double devicePixelRatio = mediaQuery.devicePixelRatio;
+    // Detectar el tipo de dispositivo una sola vez
+    final mediaQuery = MediaQuery.of(context);
+    final size = mediaQuery.size;
+    final devicePixelRatio = mediaQuery.devicePixelRatio;
 
     // Calcular el tamaño físico real en pulgadas
-    final double physicalWidth = size.width * devicePixelRatio;
-    final double physicalHeight = size.height * devicePixelRatio;
-    final double diagonalInches =
+    final physicalWidth = size.width * devicePixelRatio;
+    final physicalHeight = size.height * devicePixelRatio;
+    final diagonalInches =
         (physicalWidth * physicalWidth + physicalHeight * physicalHeight) /
             (devicePixelRatio * devicePixelRatio * 160 * 160);
 
-    // En Android, una tablet típicamente tiene:
-    // - Diagonal mayor a 7 pulgadas
-    // - Densidad de píxeles menor a 600dp
-    // - Ratio de aspecto menor a 1.6 para excluir teléfonos muy alargados
-    bool isLargeScreen = diagonalInches > 7.0;
-    bool hasTabletDensity = (size.width / devicePixelRatio) >= 600;
-    bool hasTabletAspectRatio = size.longestSide / size.shortestSide <= 1.6;
+    // Criterios para detectar tablet en Android
+    final isLargeScreen = diagonalInches > 7.0;
+    final hasTabletDensity = (size.width / devicePixelRatio) >= 600;
+    final hasTabletAspectRatio = size.longestSide / size.shortestSide <= 1.6;
 
-    return isLargeScreen && hasTabletDensity && hasTabletAspectRatio;
-  }
+    final isTablet = isLargeScreen && hasTabletDensity && hasTabletAspectRatio;
 
-  void _setOrientation(bool isTablet) {
+    // Establecer la orientación según el tipo de dispositivo
     if (isTablet) {
       // Forzar orientación horizontal para tablets
       SystemChrome.setPreferredOrientations([
@@ -81,16 +70,18 @@ class _MediaState extends State<Media> {
         DeviceOrientation.portraitDown,
       ]);
     }
+
+    setState(() {
+      _user = user;
+      _seenOnboarding = seenOnboarding;
+      _isTablet = isTablet;
+      _isLoading = false;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    bool isTablet = _isTablet(context);
-
-    // Establecer la orientación según el tipo de dispositivo
-    _setOrientation(isTablet);
-
-    if (_isLoading) {
+    if (_isLoading || _isTablet == null) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -98,7 +89,7 @@ class _MediaState extends State<Media> {
       );
     }
 
-    if (!isTablet) {
+    if (!_isTablet!) {
       if (_user != null) {
         return const Navbar();
       } else {
@@ -111,17 +102,5 @@ class _MediaState extends State<Media> {
         return const LoginTabletScreen();
       }
     }
-  }
-
-  @override
-  void dispose() {
-    // Restaurar todas las orientaciones cuando se destruye el widget
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-    super.dispose();
   }
 }
