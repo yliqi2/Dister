@@ -19,7 +19,7 @@ class SidebarTablet extends StatelessWidget {
     final firebaseServices = FirebaseServices();
     final String uid = firebaseServices.getCurrentUser();
     return Container(
-      width: 230,
+      width: 245,
       color: const Color(0xFF232323),
       child: Column(
         children: [
