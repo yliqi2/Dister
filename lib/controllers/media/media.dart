@@ -10,6 +10,7 @@ import 'package:dister/screens/tablet/others/home_tablet_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Media extends StatefulWidget {
   const Media({super.key});
@@ -42,10 +43,52 @@ class _MediaState extends State<Media> {
     }
   }
 
+  bool _isTablet(BuildContext context) {
+    // Obtener información de la pantalla
+    final MediaQueryData mediaQuery = MediaQuery.of(context);
+    final Size size = mediaQuery.size;
+    final double devicePixelRatio = mediaQuery.devicePixelRatio;
+
+    // Calcular el tamaño físico real en pulgadas
+    final double physicalWidth = size.width * devicePixelRatio;
+    final double physicalHeight = size.height * devicePixelRatio;
+    final double diagonalInches =
+        (physicalWidth * physicalWidth + physicalHeight * physicalHeight) /
+            (devicePixelRatio * devicePixelRatio * 160 * 160);
+
+    // En Android, una tablet típicamente tiene:
+    // - Diagonal mayor a 7 pulgadas
+    // - Densidad de píxeles menor a 600dp
+    // - Ratio de aspecto menor a 1.6 para excluir teléfonos muy alargados
+    bool isLargeScreen = diagonalInches > 7.0;
+    bool hasTabletDensity = (size.width / devicePixelRatio) >= 600;
+    bool hasTabletAspectRatio = size.longestSide / size.shortestSide <= 1.6;
+
+    return isLargeScreen && hasTabletDensity && hasTabletAspectRatio;
+  }
+
+  void _setOrientation(bool isTablet) {
+    if (isTablet) {
+      // Forzar orientación horizontal para tablets
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    } else {
+      // Forzar orientación vertical para móviles
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    //screenWidth obtener el tamaño de la pantalla
-    double screenWidth = MediaQuery.of(context).size.width;
+    bool isTablet = _isTablet(context);
+
+    // Establecer la orientación según el tipo de dispositivo
+    _setOrientation(isTablet);
 
     if (_isLoading) {
       return const Scaffold(
@@ -55,7 +98,7 @@ class _MediaState extends State<Media> {
       );
     }
 
-    if (screenWidth < 600) {
+    if (!isTablet) {
       if (_user != null) {
         return const Navbar();
       } else {
@@ -68,5 +111,17 @@ class _MediaState extends State<Media> {
         return const LoginTabletScreen();
       }
     }
+  }
+
+  @override
+  void dispose() {
+    // Restaurar todas las orientaciones cuando se destruye el widget
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    super.dispose();
   }
 }
