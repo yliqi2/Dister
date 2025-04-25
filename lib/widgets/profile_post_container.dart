@@ -1,6 +1,6 @@
-import 'package:dister/model/post.dart';
-import 'package:dister/pages/mobile/screens/profile_screen.dart';
-import 'package:dister/controller/like_service/like_service.dart';
+import 'package:dister/model/post_model.dart';
+import 'package:dister/screens/mobile/profile/profile_screen.dart';
+import 'package:dister/controllers/favorite_service/favorite_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/generated/l10n.dart';
@@ -22,7 +22,7 @@ class ProfileListingTile extends StatefulWidget {
 class _ProfileListingTileState extends State<ProfileListingTile> {
   String? ownerPhoto;
   String? ownerName;
-  final LikeService _likeService = LikeService();
+  final FavoriteService _favoriteService = FavoriteService();
 
   @override
   void initState() {
@@ -83,7 +83,7 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) =>
-                              Profile(userId: widget.listing.owner),
+                              ProfileScreen(userId: widget.listing.owner),
                         ),
                       );
                     },
@@ -210,11 +210,12 @@ class _ProfileListingTileState extends State<ProfileListingTile> {
                   ],
                 ),
                 StreamBuilder<bool>(
-                  stream: _likeService.watchLikeStatus(widget.listing.id),
+                  stream: _favoriteService.watchLikeStatus(widget.listing.id),
                   builder: (context, snapshot) {
                     final bool isLiked = snapshot.data ?? false;
                     return GestureDetector(
-                      onTap: () => _likeService.toggleLike(widget.listing.id),
+                      onTap: () =>
+                          _favoriteService.toggleLike(widget.listing.id),
                       child: Icon(
                         isLiked ? Icons.favorite : Icons.favorite_border,
                         color:

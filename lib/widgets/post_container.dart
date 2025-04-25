@@ -1,6 +1,6 @@
-import 'package:dister/model/post.dart';
-import 'package:dister/pages/mobile/screens/profile_screen.dart';
-import 'package:dister/controller/like_service/like_service.dart';
+import 'package:dister/model/post_model.dart';
+import 'package:dister/screens/mobile/profile/profile_screen.dart';
+import 'package:dister/controllers/favorite_service/favorite_service.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dister/generated/l10n.dart';
@@ -20,7 +20,7 @@ class PostContainer extends StatefulWidget {
 class _PostContainerState extends State<PostContainer> {
   String? ownerPhoto;
   String? ownerName;
-  final LikeService _likeService = LikeService();
+  final FavoriteService _likeService = FavoriteService();
 
   @override
   void initState() {
@@ -107,7 +107,7 @@ class _PostContainerState extends State<PostContainer> {
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    Profile(userId: widget.listing.owner),
+                                    ProfileScreen(userId: widget.listing.owner),
                               ),
                             );
                           },

@@ -1,15 +1,15 @@
-import 'package:dister/controller/provider/authnotifier.dart';
+import 'package:dister/controllers/provider/authnotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:dister/theme/dark_mode.dart';
 import 'package:dister/theme/light_mode.dart';
 import 'package:dister/generated/l10n.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:dister/controller/firebase/firebase_options.dart';
+import 'package:dister/controllers/firebase/firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:dister/controller/media/media.dart';
-import 'package:dister/controller/provider/app_state_provider.dart';
+import 'package:dister/controllers/media/media.dart';
+import 'package:dister/controllers/provider/app_state_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
