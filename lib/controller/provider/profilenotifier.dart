@@ -14,12 +14,3 @@ class Profilenotifier extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-
-//TODO
-/*
-Al subir un post se guardara con onwer UID
-por tanto se podra acceder al perfil por UID
-quiero notificar el cambio de UID a la pantalla de profile
-asi al notificarlo cambiara toda la ui de profile
-*/
