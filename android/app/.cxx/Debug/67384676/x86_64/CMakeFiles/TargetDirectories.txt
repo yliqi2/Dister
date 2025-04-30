@@ -1,0 +1,2 @@
+C:/Users/Liqi/Documents/GitHub/Dister/android/app/.cxx/Debug/67384676/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Liqi/Documents/GitHub/Dister/android/app/.cxx/Debug/67384676/x86_64/CMakeFiles/rebuild_cache.dir
