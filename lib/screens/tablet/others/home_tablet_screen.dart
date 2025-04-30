@@ -26,11 +26,11 @@ class _HomeTabletScreenState extends State<HomeTabletScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
-    HomeTabletContent(), // El contenido de Home adaptado a tablet
-    ApiPostsScreen(),
-    NewPostScreen(),
-    FavoritePostsScreen(),
-    ProfileScreen(),
+    const HomeTabletContent(),
+    const ApiPostsScreen(),
+    const NewPostScreen(),
+    const FavoritePostsScreen(),
+    const ProfileScreen(),
   ];
 
   void _onSidebarTap(int index) {
@@ -59,7 +59,6 @@ class _HomeTabletScreenState extends State<HomeTabletScreen> {
   }
 }
 
-// El contenido de Home adaptado a tablet
 class HomeTabletContent extends StatefulWidget {
   const HomeTabletContent({super.key});
   @override
@@ -132,14 +131,14 @@ class _HomeTabletContentState extends State<HomeTabletContent> {
 
   @override
   Widget build(BuildContext context) {
-    final double horizontalPadding = 32;
-    final double gridSpacing = 24;
-    final int crossAxisCount = 4;
+    const double horizontalPadding = 32;
+    const double gridSpacing = 24;
+    const int crossAxisCount = 4;
     return Column(
       children: [
         Padding(
-          padding:
-              EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 16),
+          padding: const EdgeInsets.symmetric(
+              horizontal: horizontalPadding, vertical: 16),
           child: Row(
             children: [
               Expanded(
@@ -195,7 +194,7 @@ class _HomeTabletContentState extends State<HomeTabletContent> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+          padding: const EdgeInsets.symmetric(horizontal: horizontalPadding),
           child: Row(
             children: [
               Expanded(
@@ -289,8 +288,9 @@ class _HomeTabletContentState extends State<HomeTabletContent> {
                   return Center(child: Text(S.of(context).noListingsAvailable));
                 }
                 return GridView.builder(
-                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: horizontalPadding),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: crossAxisCount,
                     crossAxisSpacing: gridSpacing,
                     mainAxisSpacing: gridSpacing,

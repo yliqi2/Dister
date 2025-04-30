@@ -23,7 +23,7 @@ class SidebarTablet extends StatelessWidget {
       color: const Color(0xFF232323),
       child: Column(
         children: [
-          Container(
+          SizedBox(
             width: 100,
             child: FittedBox(
               fit: BoxFit.contain,
@@ -61,7 +61,7 @@ class SidebarTablet extends StatelessWidget {
             onTap: () => onTap(4),
           ),
           const Spacer(),
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Divider(color: Colors.white24, thickness: 1),
           ),
@@ -75,7 +75,8 @@ class SidebarTablet extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
                   child: Row(
                     children: [
-                      CircleAvatar(radius: 20, backgroundColor: Colors.grey),
+                      const CircleAvatar(
+                          radius: 20, backgroundColor: Colors.grey),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
@@ -107,7 +108,7 @@ class SidebarTablet extends StatelessWidget {
                               ? (user.photo.startsWith('http')
                                   ? NetworkImage(user.photo)
                                   : AssetImage(user.photo) as ImageProvider)
-                              : AssetImage('assets/images/default.png'),
+                              : const AssetImage('assets/images/default.png'),
                         ),
                         const SizedBox(width: 12),
                         Expanded(
@@ -115,7 +116,7 @@ class SidebarTablet extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('@${user.username}',
-                                  style: TextStyle(color: Colors.white)),
+                                  style: const TextStyle(color: Colors.white)),
                             ],
                           ),
                         ),
@@ -138,12 +139,12 @@ class SidebarTablet extends StatelessWidget {
                           (route) => false,
                         );
                       },
-                      icon: Icon(Icons.logout),
+                      icon: const Icon(Icons.logout),
                       label: Text(S.of(context).logout),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.white,
-                        minimumSize: Size(double.infinity, 40),
+                        minimumSize: const Size(double.infinity, 40),
                       ),
                     ),
                   ),
@@ -173,7 +174,7 @@ class _SidebarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: selected ? Colors.red.withOpacity(0.15) : Colors.transparent,
+      color: selected ? Colors.red.withAlpha(38) : Colors.transparent,
       child: InkWell(
         onTap: onTap,
         child: Container(
