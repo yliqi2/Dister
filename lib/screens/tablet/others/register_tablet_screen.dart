@@ -118,7 +118,7 @@ class _RegisterTabletScreenState extends State<RegisterTabletScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0),
+                    padding: const EdgeInsets.only(left: 16),
                     child: Image.asset('assets/images/intropage/intropage.png'),
                   ),
                   Align(
@@ -179,8 +179,7 @@ class _RegisterTabletScreenState extends State<RegisterTabletScreen> {
 
                         return SafeArea(
                           child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 26.0),
+                            padding: const EdgeInsets.symmetric(horizontal: 26),
                             child: ScrollConfiguration(
                               behavior: ScrollConfiguration.of(context)
                                   .copyWith(scrollbars: false),

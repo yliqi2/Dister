@@ -6,13 +6,17 @@ import 'package:flutter/material.dart';
 
 class SidebarTablet extends StatelessWidget {
   final int selectedIndex;
-  final ValueChanged<int> onTap;
+  final ValueChanged<int>? onTap;
 
   const SidebarTablet({
     super.key,
     required this.selectedIndex,
-    required this.onTap,
+    this.onTap,
   });
+
+  void _handleNavigation(BuildContext context, int index) {
+    if (onTap != null) onTap!(index);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,31 +38,31 @@ class SidebarTablet extends StatelessWidget {
             icon: Icons.home,
             label: S.of(context).home,
             selected: selectedIndex == 0,
-            onTap: () => onTap(0),
+            onTap: () => _handleNavigation(context, 0),
           ),
           _SidebarItem(
             icon: Icons.travel_explore,
             label: S.of(context).onlinePosts,
             selected: selectedIndex == 1,
-            onTap: () => onTap(1),
+            onTap: () => _handleNavigation(context, 1),
           ),
           _SidebarItem(
             icon: Icons.add,
             label: S.of(context).newPost,
             selected: selectedIndex == 2,
-            onTap: () => onTap(2),
+            onTap: () => _handleNavigation(context, 2),
           ),
           _SidebarItem(
             icon: Icons.favorite,
             label: S.of(context).favorites,
             selected: selectedIndex == 3,
-            onTap: () => onTap(3),
+            onTap: () => _handleNavigation(context, 3),
           ),
           _SidebarItem(
             icon: Icons.person,
             label: S.of(context).profile,
             selected: selectedIndex == 4,
-            onTap: () => onTap(4),
+            onTap: () => _handleNavigation(context, 4),
           ),
           const Spacer(),
           const Padding(

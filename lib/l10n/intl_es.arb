@@ -249,5 +249,10 @@
     "newPost": "Nueva publicación",
     "favorites": "Favoritos",
     "profile": "Perfil",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+
+    "noProductsFound": "No se encontraron productos",
+    "storeName": "Tienda",
+    "viewProductButton": "Ver producto",
+    "noFavoritesFound": "No se encontraron favoritos"
 }

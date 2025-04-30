@@ -29,6 +29,20 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
   final _controller = PageController();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final appState = Provider.of<AppStateProvider>(context, listen: false);
+      if (appState.savedEmail != null) {
+        _emailController.text = appState.savedEmail!;
+      }
+      if (appState.savedPassword != null) {
+        _passwordController.text = appState.savedPassword!;
+      }
+    });
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
@@ -111,7 +125,7 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
+                        padding: const EdgeInsets.only(left: 16),
                         child: Image.asset(
                             'assets/images/intropage/intropage.png'),
                       ),
@@ -179,7 +193,7 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
 
                             return Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 26.0),
+                                  const EdgeInsets.symmetric(horizontal: 26),
                               child: SingleChildScrollView(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,

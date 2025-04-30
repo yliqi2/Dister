@@ -2,41 +2,48 @@ import 'package:dister/generated/l10n.dart';
 import 'package:dister/models/categorie_model.dart';
 import 'package:dister/models/category_icons_model.dart';
 import 'package:dister/models/post_model.dart';
-import 'package:dister/screens/mobile/posts/post_screen.dart';
+import 'package:dister/screens/tablet/posts/post_tablet_screen.dart';
 import 'package:dister/widgets/post_container.dart';
 import 'package:dister/widgets/custom_filter_dropdown.dart';
-import 'package:dister/screens/mobile/chat/chat_list_screen.dart';
+import 'package:dister/screens/tablet/chat/chat_list_tablet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_hint_textfield/animated_hint_textfield.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dister/screens/mobile/posts/new_post_screen.dart';
-import 'package:dister/screens/mobile/posts/favorite_posts_screen.dart';
-import 'package:dister/screens/mobile/posts/api_posts_screen.dart';
-import 'package:dister/screens/mobile/profile/profile_screen.dart';
+import 'package:dister/screens/tablet/posts/new_post_tablet_screen.dart';
+import 'package:dister/screens/tablet/posts/favorite_posts_tablet_screen.dart';
+import 'package:dister/screens/tablet/posts/api_posts_tablet_screen.dart';
+import 'package:dister/screens/tablet/profile/profile_tablet_screen.dart';
 import 'package:dister/widgets/sidebar_tablet.dart';
 
 class HomeTabletScreen extends StatefulWidget {
-  const HomeTabletScreen({super.key});
+  final int initialIndex;
+  const HomeTabletScreen({super.key, this.initialIndex = 0});
 
   @override
   State<HomeTabletScreen> createState() => _HomeTabletScreenState();
 }
 
 class _HomeTabletScreenState extends State<HomeTabletScreen> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
 
   final List<Widget> _screens = [
     const HomeTabletContent(),
-    const ApiPostsScreen(),
-    const NewPostScreen(),
-    const FavoritePostsScreen(),
-    const ProfileScreen(),
+    const ApiPostsTabletScreen(),
+    const NewPostTabletScreen(),
+    const FavoritePostsTabletScreen(),
+    const ProfileTabletScreen(),
   ];
 
   void _onSidebarTap(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
   }
 
   @override
@@ -185,7 +192,7 @@ class _HomeTabletContentState extends State<HomeTabletContent> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const FollowingListPage(),
+                      builder: (context) => const ChatListTabletScreen(),
                     ),
                   );
                 },
@@ -304,7 +311,8 @@ class _HomeTabletContentState extends State<HomeTabletContent> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => PostScreen(listing: listing),
+                            builder: (context) =>
+                                PostTabletScreen(listing: listing),
                           ),
                         );
                       },
