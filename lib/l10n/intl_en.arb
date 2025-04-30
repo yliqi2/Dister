@@ -139,7 +139,7 @@
     "productDetails": "Product Details",
     "shoppingDetails": "Shopping Details",
     "ratingWithStars": "• Rating: {rating} ⭐",
-    "likesCount": "• {count} Likes",
+    "likesCount": "• {count} Favorites",
     "postedTimeAgo": "• Posted {time} ago",
     "expiresOn": "• Expires on {date}",
     "goForDiscount": "Go for the discount",
@@ -174,7 +174,7 @@
     "storePrefix": "• {name}",
     
     "timeAgo": "{time} ago",
-    "likesText": "{count} Likes",
+    "likesText": "{count} Favorites",
     "timeDay": "d",
     "timeHour": "H",
     "timeMinute": "min.",
@@ -227,5 +227,26 @@
     "languageSpanish": "Spanish",
     "shareYourListings": "Share your listings!",
     "noListingsToShow": "There are no listings to show",
-    "lastMessage": "{message}\n{date}"
+    "lastMessage": "{message}\n{date}",
+
+    "delete": "Delete",
+    "deleteConfirmation": "Delete Confirmation",
+    "deleteListingWarning": "Are you sure you want to delete this listing? This action cannot be undone.",
+    "listingDeleted": "Listing deleted successfully",
+
+    "comments": "Comments",
+    "addComment": "Add a comment",
+    "postComment": "Post",
+    "noComments": "No comments yet. Be the first to comment!",
+    "deleteCommentConfirmation": "Delete Comment?",
+    "deleteCommentWarning": "Are you sure you want to delete this comment?",
+    "commentDeleted": "Comment deleted successfully",
+    "commentAdded": "Comment added successfully",
+    "enterComment": "Type your comment here...",
+    "justNow": "Just now",
+
+    "home": "Home",
+    "onlinePosts": "Online Posts",
+    "newPost": "New Post",
+    "profile": "Profile"
 }

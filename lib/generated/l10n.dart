@@ -1035,10 +1035,10 @@ class S {
     );
   }
 
-  /// `• {count} Likes`
+  /// `• {count} Favorites`
   String likesCount(Object count) {
     return Intl.message(
-      '• $count Likes',
+      '• $count Favorites',
       name: 'likesCount',
       desc: '',
       args: [count],
@@ -1255,10 +1255,10 @@ class S {
     return Intl.message('$time ago', name: 'timeAgo', desc: '', args: [time]);
   }
 
-  /// `{count} Likes`
+  /// `{count} Favorites`
   String likesText(Object count) {
     return Intl.message(
-      '$count Likes',
+      '$count Favorites',
       name: 'likesText',
       desc: '',
       args: [count],
@@ -1658,6 +1658,151 @@ class S {
       desc: '',
       args: [message, date],
     );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message('Delete', name: 'delete', desc: '', args: []);
+  }
+
+  /// `Delete Confirmation`
+  String get deleteConfirmation {
+    return Intl.message(
+      'Delete Confirmation',
+      name: 'deleteConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this listing? This action cannot be undone.`
+  String get deleteListingWarning {
+    return Intl.message(
+      'Are you sure you want to delete this listing? This action cannot be undone.',
+      name: 'deleteListingWarning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Listing deleted successfully`
+  String get listingDeleted {
+    return Intl.message(
+      'Listing deleted successfully',
+      name: 'listingDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comments`
+  String get comments {
+    return Intl.message('Comments', name: 'comments', desc: '', args: []);
+  }
+
+  /// `Add a comment`
+  String get addComment {
+    return Intl.message(
+      'Add a comment',
+      name: 'addComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Post`
+  String get postComment {
+    return Intl.message('Post', name: 'postComment', desc: '', args: []);
+  }
+
+  /// `No comments yet. Be the first to comment!`
+  String get noComments {
+    return Intl.message(
+      'No comments yet. Be the first to comment!',
+      name: 'noComments',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Comment?`
+  String get deleteCommentConfirmation {
+    return Intl.message(
+      'Delete Comment?',
+      name: 'deleteCommentConfirmation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete this comment?`
+  String get deleteCommentWarning {
+    return Intl.message(
+      'Are you sure you want to delete this comment?',
+      name: 'deleteCommentWarning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comment deleted successfully`
+  String get commentDeleted {
+    return Intl.message(
+      'Comment deleted successfully',
+      name: 'commentDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Comment added successfully`
+  String get commentAdded {
+    return Intl.message(
+      'Comment added successfully',
+      name: 'commentAdded',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your comment here...`
+  String get enterComment {
+    return Intl.message(
+      'Type your comment here...',
+      name: 'enterComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Just now`
+  String get justNow {
+    return Intl.message('Just now', name: 'justNow', desc: '', args: []);
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message('Home', name: 'home', desc: '', args: []);
+  }
+
+  /// `Online Posts`
+  String get onlinePosts {
+    return Intl.message(
+      'Online Posts',
+      name: 'onlinePosts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New Post`
+  String get newPost {
+    return Intl.message('New Post', name: 'newPost', desc: '', args: []);
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message('Profile', name: 'profile', desc: '', args: []);
   }
 }
 

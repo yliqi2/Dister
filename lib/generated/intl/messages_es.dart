@@ -38,9 +38,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m8(message, date) => "${message}\n${date}";
 
-  static String m9(count) => "• ${count} Me gusta";
+  static String m9(count) => "• ${count} Favoritos";
 
-  static String m10(count) => "${count} Me gusta";
+  static String m10(count) => "${count} Favoritos";
 
   static String m11(percent) => "${percent}% descuento";
 
@@ -59,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "AlreadyAccount": MessageLookupByLibrary.simpleMessage(
       "¿Ya tienes una cuenta? ",
     ),
+    "addComment": MessageLookupByLibrary.simpleMessage("Añadir un comentario"),
     "allCategoriesFilter": MessageLookupByLibrary.simpleMessage(
       "Todas las categorías",
     ),
@@ -82,6 +83,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "categorylabel": MessageLookupByLibrary.simpleMessage("Categoría"),
     "changeLanguage": MessageLookupByLibrary.simpleMessage("Cambiar idioma"),
     "chatWith": m0,
+    "commentAdded": MessageLookupByLibrary.simpleMessage(
+      "Comentario añadido correctamente",
+    ),
+    "commentDeleted": MessageLookupByLibrary.simpleMessage(
+      "Comentario eliminado correctamente",
+    ),
+    "comments": MessageLookupByLibrary.simpleMessage("Comentarios"),
     "confirm": MessageLookupByLibrary.simpleMessage("Confirmar"),
     "confirmDeleteAccount": MessageLookupByLibrary.simpleMessage(
       "¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.",
@@ -103,7 +111,20 @@ class MessageLookup extends MessageLookupByLibrary {
       "Selecciona una fecha",
     ),
     "datelabel": MessageLookupByLibrary.simpleMessage("La oferta expira el..."),
+    "delete": MessageLookupByLibrary.simpleMessage("Eliminar"),
     "deleteAccount": MessageLookupByLibrary.simpleMessage("Borrar cuenta"),
+    "deleteCommentConfirmation": MessageLookupByLibrary.simpleMessage(
+      "¿Eliminar comentario?",
+    ),
+    "deleteCommentWarning": MessageLookupByLibrary.simpleMessage(
+      "¿Estás seguro de que quieres eliminar este comentario?",
+    ),
+    "deleteConfirmation": MessageLookupByLibrary.simpleMessage(
+      "Confirmar eliminación",
+    ),
+    "deleteListingWarning": MessageLookupByLibrary.simpleMessage(
+      "¿Estás seguro de que quieres eliminar este anuncio? Esta acción no se puede deshacer.",
+    ),
     "description": MessageLookupByLibrary.simpleMessage("Descripción"),
     "descriptionerror": MessageLookupByLibrary.simpleMessage(
       "Por favor introduce una descripción",
@@ -131,6 +152,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "emptyUsername": MessageLookupByLibrary.simpleMessage(
       "Introduce tu usuario",
+    ),
+    "enterComment": MessageLookupByLibrary.simpleMessage(
+      "Escribe tu comentario aquí...",
     ),
     "error": m1,
     "errorCredential": MessageLookupByLibrary.simpleMessage(
@@ -190,6 +214,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hintEmail": MessageLookupByLibrary.simpleMessage("Introduce tu email"),
     "hintPass": MessageLookupByLibrary.simpleMessage("Introduce tu contraseña"),
     "hintUser": MessageLookupByLibrary.simpleMessage("Introduce tu usuario"),
+    "home": MessageLookupByLibrary.simpleMessage("Inicio"),
     "incompleteUserData": MessageLookupByLibrary.simpleMessage(
       "Los datos del usuario están incompletos.",
     ),
@@ -200,6 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Por favor ingrese una dirección válida",
     ),
     "joinUs": MessageLookupByLibrary.simpleMessage("Unete"),
+    "justNow": MessageLookupByLibrary.simpleMessage("Ahora mismo"),
     "languageEnglish": MessageLookupByLibrary.simpleMessage("Inglés"),
     "languageOptions": MessageLookupByLibrary.simpleMessage(
       "Opciones de idioma",
@@ -223,6 +249,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "linkhelptext": MessageLookupByLibrary.simpleMessage(
       "Pega el enlace donde otros usuarios puedan encontrar la oferta",
     ),
+    "listingDeleted": MessageLookupByLibrary.simpleMessage(
+      "Anuncio eliminado correctamente",
+    ),
     "listings": MessageLookupByLibrary.simpleMessage("Anuncios"),
     "loading": MessageLookupByLibrary.simpleMessage("Cargando..."),
     "loadingChats": MessageLookupByLibrary.simpleMessage("Cargando..."),
@@ -239,7 +268,11 @@ class MessageLookup extends MessageLookupByLibrary {
       "El usuario no debe tener más de 15 caracteres",
     ),
     "messages": MessageLookupByLibrary.simpleMessage("Mensajes"),
+    "newPost": MessageLookupByLibrary.simpleMessage("Nueva publicación"),
     "noAccount": MessageLookupByLibrary.simpleMessage("¿No tienes cuenta? "),
+    "noComments": MessageLookupByLibrary.simpleMessage(
+      "Aún no hay comentarios. ¡Sé el primero en comentar!",
+    ),
     "noDescription": MessageLookupByLibrary.simpleMessage(
       "No se ha añadido ninguna descripción.",
     ),
@@ -262,6 +295,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "notValidDomainEmail": MessageLookupByLibrary.simpleMessage(
       "Tiene que terminar @gmail.com",
     ),
+    "onlinePosts": MessageLookupByLibrary.simpleMessage(
+      "Publicaciones en línea",
+    ),
     "originalMessage": MessageLookupByLibrary.simpleMessage("Mensaje original"),
     "originalprice": MessageLookupByLibrary.simpleMessage("Precio original"),
     "originalpriceerror": MessageLookupByLibrary.simpleMessage(
@@ -270,11 +306,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "otherOptions": MessageLookupByLibrary.simpleMessage("Otras opciones"),
     "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
     "percentOff": m11,
+    "postComment": MessageLookupByLibrary.simpleMessage("Publicar"),
     "postedTimeAgo": m12,
     "privacy": MessageLookupByLibrary.simpleMessage("Política de privacidad"),
     "productDetails": MessageLookupByLibrary.simpleMessage(
       "Detalles del producto",
     ),
+    "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
     "profileUpdated": MessageLookupByLibrary.simpleMessage(
       "Perfil actualizado correctamente.",
     ),

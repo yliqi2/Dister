@@ -138,7 +138,7 @@
     "productDetails": "Detalles del producto",
     "shoppingDetails": "Detalles de compra",
     "ratingWithStars": "• Valoración: {rating} ⭐",
-    "likesCount": "• {count} Me gusta",
+    "likesCount": "• {count} Favoritos",
     "postedTimeAgo": "• Publicado hace {time}",
     "expiresOn": "• Expira el {date}",
     "goForDiscount": "Obtener descuento",
@@ -173,7 +173,7 @@
     "storePrefix": "• {name}",
     
     "timeAgo": "hace {time}",
-    "likesText": "{count} Me gusta",
+    "likesText": "{count} Favoritos",
     "timeDay": "d",
     "timeHour": "h",
     "timeMinute": "min.",
@@ -226,5 +226,28 @@
     "languageSpanish": "Español",
     "shareYourListings": "¡Comparte tus anuncios!",
     "noListingsToShow": "No hay anuncios para mostrar",
-    "lastMessage": "{message}\n{date}"
+    "lastMessage": "{message}\n{date}",
+
+    "delete": "Eliminar",
+    "deleteConfirmation": "Confirmar eliminación",
+    "deleteListingWarning": "¿Estás seguro de que quieres eliminar este anuncio? Esta acción no se puede deshacer.",
+    "listingDeleted": "Anuncio eliminado correctamente",
+
+    "comments": "Comentarios",
+    "addComment": "Añadir un comentario",
+    "postComment": "Publicar",
+    "noComments": "Aún no hay comentarios. ¡Sé el primero en comentar!",
+    "deleteCommentConfirmation": "¿Eliminar comentario?",
+    "deleteCommentWarning": "¿Estás seguro de que quieres eliminar este comentario?",
+    "commentDeleted": "Comentario eliminado correctamente",
+    "commentAdded": "Comentario añadido correctamente",
+    "enterComment": "Escribe tu comentario aquí...",
+    "justNow": "Ahora mismo",
+
+    "home": "Inicio",
+    "onlinePosts": "Publicaciones en línea",
+    "newPost": "Nueva publicación",
+    "favorites": "Favoritos",
+    "profile": "Perfil",
+    "logout": "Cerrar sesión"
 }
