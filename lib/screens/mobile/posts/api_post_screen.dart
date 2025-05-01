@@ -154,7 +154,8 @@ class APIpostScreen extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
-                                  '-${percentOff.round()}%',
+                                  S.of(context).percentOff(
+                                      percentOff.round().toString()),
                                   style: theme.textTheme.bodyMedium?.copyWith(
                                     color: Theme.of(context).brightness ==
                                             Brightness.dark

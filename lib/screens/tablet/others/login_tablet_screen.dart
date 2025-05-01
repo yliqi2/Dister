@@ -65,12 +65,10 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
     if (!mounted) return;
     if (user != null) {
       final appState = Provider.of<AppStateProvider>(context, listen: false);
-      if (appState.saveCredentials) {
-        appState.saveUserCredentials(
-          _emailController.text.toLowerCase(),
-          _passwordController.text,
-        );
-      }
+      appState.saveUserCredentials(
+        _emailController.text.toLowerCase(),
+        _passwordController.text,
+      );
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(

@@ -61,26 +61,68 @@ class _ApiPostsTabletScreenState extends State<ApiPostsTabletScreen> {
           return 1.0;
         }
 
+        final offer = json['offer'] ?? {};
+        double discountPrice = 1.0;
+        double originalPrice = 1.0;
+        if (offer['price'] != null) {
+          discountPrice = parsePrice(offer['price']);
+        } else if (json['typical_price_range'] != null &&
+            json['typical_price_range'] is List &&
+            json['typical_price_range'].isNotEmpty) {
+          discountPrice = parsePrice(json['typical_price_range'][0]);
+        } else if (json['product_min_price'] != null) {
+          discountPrice = parsePrice(json['product_min_price']);
+        }
+        if (offer['original_price'] != null) {
+          originalPrice = parsePrice(offer['original_price']);
+        } else if (json['typical_price_range'] != null &&
+            json['typical_price_range'] is List &&
+            json['typical_price_range'].length > 1) {
+          originalPrice = parsePrice(json['typical_price_range'][1]);
+        } else if (json['product_max_price'] != null) {
+          originalPrice = parsePrice(json['product_max_price']);
+        } else {
+          originalPrice = discountPrice;
+        }
+        String storeName = offer['store_name'] ?? '';
+        String link = offer['offer_page_url'] ?? json['product_page_url'] ?? '';
+        List<String> images = [];
+        if (json['product_photos'] != null && json['product_photos'] is List) {
+          images = List<String>.from(json['product_photos']);
+        }
+
         return Post(
-          id: json['id'] ?? '',
-          title: json['title'] ?? '',
-          desc: json['description'] ?? '',
-          images: [json['image'] ?? ''],
-          owner: '',
+          id: json['product_id']?.toString() ?? '',
+          title: json['product_title'] ?? '',
+          desc: json['product_description'] ?? '',
+          publishedAt: DateTime.now(),
+          expiresAt: null,
+          link: link,
+          originalPrice: originalPrice,
+          discountPrice: discountPrice,
+          storeName: storeName,
           categories: '',
           subcategories: '',
-          link: json['url'] ?? '',
-          originalPrice: parsePrice(json['originalPrice']),
-          discountPrice: parsePrice(json['price']),
-          storeName: json['storeName'] ?? '',
-          publishedAt: DateTime.now(),
-          likes: 0,
+          likes: (json['product_num_reviews'] is num)
+              ? (json['product_num_reviews'] as num).toInt()
+              : 0,
+          rating: (json['product_rating'] is num)
+              ? (json['product_rating'] as num).toDouble()
+              : null,
+          images: images,
           highlights: [],
+          owner: 'api',
         );
       }).toList();
     } else {
       throw Exception('Failed to load products');
     }
+  }
+
+  void _performSearch() {
+    setState(() {
+      _productsFuture = fetchProducts(_searchController.text.trim());
+    });
   }
 
   @override
@@ -98,18 +140,13 @@ class _ApiPostsTabletScreenState extends State<ApiPostsTabletScreen> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 12),
           child: Row(
             children: [
               Expanded(
                 child: AnimatedTextField(
                   controller: _searchController,
                   animationType: Animationtype.typer,
-                  onChanged: (value) {
-                    setState(() {
-                      _productsFuture = fetchProducts(value);
-                    });
-                  },
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
@@ -134,6 +171,28 @@ class _ApiPostsTabletScreenState extends State<ApiPostsTabletScreen> {
                     S.of(context).searchHint3,
                   ],
                   animationDuration: const Duration(seconds: 3),
+                ),
+              ),
+              const SizedBox(width: 8),
+              SizedBox(
+                height: 48,
+                width: 48,
+                child: ElevatedButton(
+                  onPressed: _performSearch,
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    backgroundColor: const Color(0xFFFF4343),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    elevation: 0,
+                  ),
+                  child: const Icon(
+                    Icons.search,
+                    size: 24,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               const SizedBox(width: 16),
@@ -191,15 +250,34 @@ class _ApiPostsTabletScreenState extends State<ApiPostsTabletScreen> {
                         );
                       },
                       child: Card(
+                        color: Theme.of(context).colorScheme.surfaceContainer,
+                        clipBehavior: Clip.antiAlias,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              child: Image.network(
-                                product.images.isNotEmpty
-                                    ? product.images[0]
-                                    : 'assets/images/default.png',
-                                fit: BoxFit.cover,
+                            AspectRatio(
+                              aspectRatio: 1,
+                              child: Container(
+                                width: double.infinity,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .surfaceContainerHighest,
+                                child: Image.network(
+                                  product.images.isNotEmpty
+                                      ? product.images[0]
+                                      : 'assets/images/default.png',
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Center(
+                                    child: Icon(
+                                      Icons.broken_image,
+                                      size: 48,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onSurfaceVariant,
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                             Padding(
@@ -216,12 +294,32 @@ class _ApiPostsTabletScreenState extends State<ApiPostsTabletScreen> {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(height: 4),
-                                  Text(
-                                    '${product.discountPrice}€',
-                                    style: const TextStyle(
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        '${product.discountPrice}€',
+                                        style: TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .error,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      if (product.originalPrice >
+                                          product.discountPrice) ...[
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          '${product.originalPrice}€',
+                                          style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .outline,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                          ),
+                                        ),
+                                      ],
+                                    ],
                                   ),
                                 ],
                               ),
