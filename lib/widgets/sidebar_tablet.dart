@@ -74,7 +74,6 @@ class SidebarTablet extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Divider(color: theme.dividerColor, thickness: 1),
                 ),
-                // Usuario real y logout
                 FutureBuilder<Users?>(
                   future: firebaseServices.getCredentialsUser(uid),
                   builder: (context, snapshot) {
@@ -87,7 +86,7 @@ class SidebarTablet extends StatelessWidget {
                             CircleAvatar(
                                 radius: 20,
                                 backgroundColor:
-                                    theme.colorScheme.surfaceVariant),
+                                    theme.colorScheme.surfaceContainerHighest),
                             const SizedBox(width: 12),
                             Expanded(
                               child: Column(
@@ -96,12 +95,14 @@ class SidebarTablet extends StatelessWidget {
                                   Container(
                                       height: 12,
                                       width: 60,
-                                      color: theme.colorScheme.surfaceVariant),
+                                      color: theme
+                                          .colorScheme.surfaceContainerHighest),
                                   const SizedBox(height: 4),
                                   Container(
                                       height: 10,
                                       width: 80,
-                                      color: theme.colorScheme.surfaceVariant),
+                                      color: theme
+                                          .colorScheme.surfaceContainerHighest),
                                 ],
                               ),
                             ),
@@ -135,7 +136,7 @@ class SidebarTablet extends StatelessWidget {
                                     Text('@${user.username}',
                                         style: TextStyle(
                                             color: colorScheme.onSurface
-                                                .withOpacity(0.87))),
+                                                .withAlpha(222))),
                                   ],
                                 ),
                               ),
@@ -178,7 +179,7 @@ class SidebarTablet extends StatelessWidget {
           Container(
             width: 1,
             height: double.infinity,
-            color: colorScheme.outline.withOpacity(0.3),
+            color: colorScheme.outline.withAlpha(77),
           ),
         ],
       ),
@@ -204,8 +205,7 @@ class _SidebarItem extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     return Material(
-      color:
-          selected ? colorScheme.primary.withOpacity(0.12) : Colors.transparent,
+      color: selected ? colorScheme.primary.withAlpha(30) : Colors.transparent,
       child: InkWell(
         onTap: onTap,
         child: Container(
@@ -216,14 +216,14 @@ class _SidebarItem extends StatelessWidget {
               Icon(icon,
                   color: selected
                       ? colorScheme.primary
-                      : colorScheme.onSurface.withOpacity(0.87)),
+                      : colorScheme.onSurface.withAlpha(222)),
               const SizedBox(width: 16),
               Text(
                 label,
                 style: TextStyle(
                   color: selected
                       ? colorScheme.primary
-                      : colorScheme.onSurface.withOpacity(0.87),
+                      : colorScheme.onSurface.withAlpha(222),
                   fontWeight: selected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
