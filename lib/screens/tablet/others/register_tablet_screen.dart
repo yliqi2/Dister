@@ -185,10 +185,6 @@ class _RegisterTabletScreenState extends State<RegisterTabletScreen> {
                               behavior: ScrollConfiguration.of(context)
                                   .copyWith(scrollbars: false),
                               child: SingleChildScrollView(
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context)
-                                        .viewInsets
-                                        .bottom),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [

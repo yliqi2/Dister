@@ -122,6 +122,7 @@ class _SettingsTabletScreenState extends State<SettingsTabletScreen> {
     return Consumer<AppStateProvider>(
       builder: (context, appState, _) {
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           body: SafeArea(
             child: Row(
               children: [

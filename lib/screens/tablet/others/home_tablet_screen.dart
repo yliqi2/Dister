@@ -49,6 +49,7 @@ class _HomeTabletScreenState extends State<HomeTabletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Row(
           children: [

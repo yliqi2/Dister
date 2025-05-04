@@ -24,6 +24,7 @@ class _FollowersTabletScreenState extends State<FollowersTabletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Row(
           children: [

@@ -122,128 +122,123 @@ class _EditProfileTabletScreenState extends State<EditProfileTabletScreen> {
               },
             ),
             Expanded(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SingleChildScrollView(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 32.0, vertical: 24.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              IconButton(
-                                onPressed: () => Navigator.of(context).pop(),
-                                icon: const Icon(Icons.arrow_back),
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                S.of(context).editProfile,
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 24),
-                          Align(
-                            alignment: Alignment.center,
-                            child: GestureDetector(
-                              onTap: _pickAndUploadImage,
-                              child: Stack(
-                                children: [
-                                  CircleAvatar(
-                                    radius: 50,
-                                    backgroundImage: _selectedImage != null
-                                        ? FileImage(_selectedImage!)
-                                        : (_userPhoto != null &&
-                                                    !_userPhoto!
-                                                        .startsWith('assets/')
-                                                ? NetworkImage(_userPhoto!)
-                                                : const AssetImage(
-                                                    'assets/images/default.png'))
-                                            as ImageProvider,
-                                  ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    child: Container(
-                                      padding: const EdgeInsets.all(4),
-                                      decoration: BoxDecoration(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(
-                                        Icons.camera_alt,
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onPrimary,
-                                        size: 20,
-                                      ),
-                                    ),
-                                  ),
-                                ],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32.0, vertical: 24.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              icon: const Icon(Icons.arrow_back),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              S.of(context).editProfile,
+                              style: const TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 24),
-                          CustomTextField(
-                            controller: _usernameController,
-                            isPassword: false,
-                            hintText: S.of(context).hintUser,
-                            label: S.of(context).userLabel,
-                          ),
-                          const SizedBox(height: 16),
-                          CustomTextField(
-                            controller: _descController,
-                            isPassword: false,
-                            hintText: S.of(context).description,
-                            label: S.of(context).description,
-                            maxLines: 3,
-                          ),
-                          const SizedBox(height: 20),
-                          _isLoading
-                              ? const Align(
-                                  alignment: Alignment.center,
-                                  child: CircularProgressIndicator())
-                              : Align(
-                                  alignment: Alignment.center,
-                                  child: ElevatedButton(
-                                    onPressed: _saveChanges,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor:
+                          ],
+                        ),
+                        const SizedBox(height: 24),
+                        Align(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: _pickAndUploadImage,
+                            child: Stack(
+                              children: [
+                                CircleAvatar(
+                                  radius: 50,
+                                  backgroundImage:
+                                      _selectedImage != null
+                                          ? FileImage(_selectedImage!)
+                                          : (_userPhoto != null &&
+                                                      !_userPhoto!
+                                                          .startsWith('assets/')
+                                                  ? NetworkImage(_userPhoto!)
+                                                  : const AssetImage(
+                                                      'assets/images/default.png'))
+                                              as ImageProvider,
+                                ),
+                                Positioned(
+                                  bottom: 0,
+                                  right: 0,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color:
                                           Theme.of(context).colorScheme.primary,
-                                      foregroundColor: Theme.of(context)
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      color: Theme.of(context)
                                           .colorScheme
                                           .onPrimary,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 36, vertical: 14),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                    child: Text(
-                                      S.of(context).saveChanges,
-                                      style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                      size: 20,
                                     ),
                                   ),
                                 ),
-                        ],
-                      ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        CustomTextField(
+                          controller: _usernameController,
+                          isPassword: false,
+                          hintText: S.of(context).hintUser,
+                          label: S.of(context).userLabel,
+                        ),
+                        const SizedBox(height: 16),
+                        CustomTextField(
+                          controller: _descController,
+                          isPassword: false,
+                          hintText: S.of(context).description,
+                          label: S.of(context).description,
+                          maxLines: 3,
+                        ),
+                        const SizedBox(height: 20),
+                        _isLoading
+                            ? const Align(
+                                alignment: Alignment.center,
+                                child: CircularProgressIndicator())
+                            : Align(
+                                alignment: Alignment.center,
+                                child: ElevatedButton(
+                                  onPressed: _saveChanges,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor:
+                                        Theme.of(context).colorScheme.primary,
+                                    foregroundColor:
+                                        Theme.of(context).colorScheme.onPrimary,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 36, vertical: 14),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    S.of(context).saveChanges,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

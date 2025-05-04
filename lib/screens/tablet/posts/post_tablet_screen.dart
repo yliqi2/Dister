@@ -212,6 +212,7 @@ class _PostTabletScreenState extends State<PostTabletScreen> {
     final colorScheme = theme.colorScheme;
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Row(
           children: [
