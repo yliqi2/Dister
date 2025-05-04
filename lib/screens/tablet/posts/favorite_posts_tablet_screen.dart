@@ -146,11 +146,21 @@ class _FavoritePostsTabletScreenState extends State<FavoritePostsTabletScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
-                                  child: Image.network(
-                                    listing.images.isNotEmpty
-                                        ? listing.images[0]
-                                        : 'assets/images/default.png',
-                                    fit: BoxFit.cover,
+                                  child: AspectRatio(
+                                    aspectRatio: 1,
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.vertical(
+                                          top: Radius.circular(12)),
+                                      child: Image.network(
+                                        listing.images.isNotEmpty
+                                            ? listing.images[0]
+                                            : 'assets/images/default.png',
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                const Icon(Icons.broken_image),
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 Padding(
