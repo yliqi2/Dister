@@ -91,7 +91,6 @@ class _ChatTabletScreenState extends State<ChatTabletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Row(
           children: [

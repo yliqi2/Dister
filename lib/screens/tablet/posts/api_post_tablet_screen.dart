@@ -46,7 +46,6 @@ class ApiPostTabletScreen extends StatelessWidget {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: Row(
           children: [

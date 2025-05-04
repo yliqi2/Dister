@@ -36,7 +36,6 @@ class ChatListTabletScreen extends StatelessWidget {
     final currentUserId = firebaseServices.getCurrentUser();
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: Row(
         children: [
           SidebarTablet(
