@@ -15,6 +15,18 @@ import 'package:flutter/services.dart';
 class Media extends StatefulWidget {
   const Media({super.key});
 
+  static bool isTabletByWindow(Size size, double devicePixelRatio) {
+    final physicalWidth = size.width * devicePixelRatio;
+    final physicalHeight = size.height * devicePixelRatio;
+    final diagonalInches =
+        (physicalWidth * physicalWidth + physicalHeight * physicalHeight) /
+            (devicePixelRatio * devicePixelRatio * 160 * 160);
+    final isLargeScreen = diagonalInches > 7.0;
+    final hasTabletDensity = (size.width / devicePixelRatio) >= 600;
+    final hasTabletAspectRatio = size.longestSide / size.shortestSide <= 1.6;
+    return isLargeScreen && hasTabletDensity && hasTabletAspectRatio;
+  }
+
   @override
   State<Media> createState() => _MediaState();
 }
@@ -23,7 +35,7 @@ class _MediaState extends State<Media> {
   User? _user;
   bool _isLoading = true;
   bool _seenOnboarding = false;
-  bool? _isTablet; // Almacena el tipo de dispositivo
+  bool? _isTablet;
 
   @override
   void initState() {
@@ -56,7 +68,6 @@ class _MediaState extends State<Media> {
 
     final isTablet = isLargeScreen && hasTabletDensity && hasTabletAspectRatio;
 
-    // Establecer la orientación según el tipo de dispositivo
     if (isTablet) {
       // Forzar orientación horizontal para tablets
       SystemChrome.setPreferredOrientations([
