@@ -141,77 +141,81 @@ class _ApiPostsTabletScreenState extends State<ApiPostsTabletScreen> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 12),
-          child: Row(
-            children: [
-              Expanded(
-                child: AnimatedTextField(
-                  controller: _searchController,
-                  animationType: Animationtype.typer,
-                  decoration: InputDecoration(
-                    prefixIcon: const Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.red,
-                        width: 2,
+          child: Container(
+            width: 300,
+            color: Theme.of(context).colorScheme.surface,
+            child: Row(
+              children: [
+                Expanded(
+                  child: AnimatedTextField(
+                    controller: _searchController,
+                    animationType: Animationtype.typer,
+                    decoration: InputDecoration(
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.red,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.primary,
-                        width: 2,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.primary,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      borderRadius: BorderRadius.circular(10),
+                      contentPadding: const EdgeInsets.all(12),
                     ),
-                    contentPadding: const EdgeInsets.all(12),
-                  ),
-                  hintTexts: [
-                    S.of(context).searchHint,
-                    S.of(context).searchHint2,
-                    S.of(context).searchHint3,
-                  ],
-                  animationDuration: const Duration(seconds: 3),
-                ),
-              ),
-              const SizedBox(width: 8),
-              SizedBox(
-                height: 48,
-                width: 48,
-                child: ElevatedButton(
-                  onPressed: _performSearch,
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    backgroundColor: const Color(0xFFFF4343),
-                    foregroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    elevation: 0,
-                  ),
-                  child: const Icon(
-                    Icons.search,
-                    size: 24,
-                    color: Colors.white,
+                    hintTexts: [
+                      S.of(context).searchHint,
+                      S.of(context).searchHint2,
+                      S.of(context).searchHint3,
+                    ],
+                    animationDuration: const Duration(seconds: 3),
                   ),
                 ),
-              ),
-              const SizedBox(width: 16),
-              IconButton(
-                icon: Icon(
-                  Icons.chat_bubble_rounded,
-                  color: Theme.of(context).brightness == Brightness.light
-                      ? Colors.black
-                      : Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const FollowingListPage(),
+                const SizedBox(width: 8),
+                SizedBox(
+                  height: 48,
+                  width: 48,
+                  child: ElevatedButton(
+                    onPressed: _performSearch,
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      backgroundColor: const Color(0xFFFF4343),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 0,
                     ),
-                  );
-                },
-              ),
-            ],
+                    child: const Icon(
+                      Icons.search,
+                      size: 24,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                IconButton(
+                  icon: Icon(
+                    Icons.chat_bubble_rounded,
+                    color: Theme.of(context).brightness == Brightness.light
+                        ? Colors.black
+                        : Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const FollowingListPage(),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
         Expanded(
@@ -232,9 +236,9 @@ class _ApiPostsTabletScreenState extends State<ApiPostsTabletScreen> {
                   padding: const EdgeInsets.all(16),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
-                    crossAxisSpacing: 16.0,
-                    mainAxisSpacing: 16.0,
-                    childAspectRatio: 0.75,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                    childAspectRatio: 0.70,
                   ),
                   itemCount: products.length,
                   itemBuilder: (context, index) {
