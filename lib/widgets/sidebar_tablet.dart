@@ -25,7 +25,7 @@ class SidebarTablet extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     return Container(
-      width: 255,
+      width: 275,
       color: colorScheme.surface,
       child: Row(
         children: [
