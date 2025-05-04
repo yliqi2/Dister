@@ -23,7 +23,6 @@ class _MediaState extends State<Media> {
   User? _user;
   bool _isLoading = true;
   bool _seenOnboarding = false;
-  bool? _isTablet;
 
   @override
   void initState() {
@@ -37,50 +36,31 @@ class _MediaState extends State<Media> {
 
     if (!mounted) return;
 
-    // Detectar el tipo de dispositivo una sola vez
-    final mediaQuery = MediaQuery.of(context);
-    final size = mediaQuery.size;
-    final devicePixelRatio = mediaQuery.devicePixelRatio;
-
-    // Calcular el tamaño físico real en pulgadas
-    final physicalWidth = size.width * devicePixelRatio;
-    final physicalHeight = size.height * devicePixelRatio;
-    final diagonalInches =
-        (physicalWidth * physicalWidth + physicalHeight * physicalHeight) /
-            (devicePixelRatio * devicePixelRatio * 160 * 160);
-
-    // Criterios para detectar tablet en Android
-    final isLargeScreen = diagonalInches > 7.0;
-    final hasTabletDensity = (size.width / devicePixelRatio) >= 600;
-    final hasTabletAspectRatio = size.longestSide / size.shortestSide <= 1.6;
-
-    final isTablet = isLargeScreen && hasTabletDensity && hasTabletAspectRatio;
-
-    if (isTablet) {
-      // Forzar orientación horizontal para tablets
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ]);
-    } else {
-      // Forzar orientación vertical para móviles
-      SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-    }
-
     setState(() {
       _user = user;
       _seenOnboarding = seenOnboarding;
-      _isTablet = isTablet;
       _isLoading = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isLoading || _isTablet == null) {
+    final size = MediaQuery.of(context).size;
+    final isTablet = size.shortestSide >= 600;
+
+    if (isTablet) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    } else {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+    }
+
+    if (_isLoading) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
@@ -88,7 +68,7 @@ class _MediaState extends State<Media> {
       );
     }
 
-    if (!_isTablet!) {
+    if (!isTablet) {
       if (_user != null) {
         return const Navbar();
       } else {
