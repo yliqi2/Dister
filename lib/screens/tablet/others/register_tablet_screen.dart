@@ -208,84 +208,88 @@ class _RegisterTabletScreenState extends State<RegisterTabletScreen> {
                                       ),
                                     ),
                                     const SizedBox(height: 24),
-                                    Form(
-                                      key: _formKey,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          CustomTextField(
-                                              controller: _usernameController,
+                                    SingleChildScrollView(
+                                      child: Form(
+                                        key: _formKey,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            CustomTextField(
+                                                controller: _usernameController,
+                                                isPassword: false,
+                                                hintText:
+                                                    S.of(context).hintUser,
+                                                label: S.of(context).userLabel,
+                                                validator: (value) {
+                                                  return FormValidator
+                                                      .usernameValidator(
+                                                          value, context);
+                                                }),
+                                            const SizedBox(height: 16),
+                                            CustomTextField(
+                                              controller: _emailController,
                                               isPassword: false,
-                                              hintText: S.of(context).hintUser,
-                                              label: S.of(context).userLabel,
+                                              hintText: S.of(context).hintEmail,
+                                              label: 'Email',
                                               validator: (value) {
                                                 return FormValidator
-                                                    .usernameValidator(
+                                                    .emailValidator(
                                                         value, context);
-                                              }),
-                                          const SizedBox(height: 16),
-                                          CustomTextField(
-                                            controller: _emailController,
-                                            isPassword: false,
-                                            hintText: S.of(context).hintEmail,
-                                            label: 'Email',
-                                            validator: (value) {
-                                              return FormValidator
-                                                  .emailValidator(
-                                                      value, context);
-                                            },
-                                            maxLines: 1,
-                                          ),
-                                          const SizedBox(height: 16),
-                                          CustomTextField(
-                                            controller: _passwordController,
-                                            isPassword: true,
-                                            hintText: S.of(context).hintPass,
-                                            label: S.of(context).password,
-                                            validator: (value) {
-                                              return FormValidator
-                                                  .passwordValidator(
-                                                      value, context);
-                                            },
-                                            maxLines: 1,
-                                          ),
-                                          const SizedBox(height: 16),
-                                          CustomTextField(
-                                            controller:
-                                                _confirmPasswordController,
-                                            isPassword: true,
-                                            hintText:
-                                                S.of(context).hintConfirmPass,
-                                            label:
-                                                S.of(context).confirmPassword,
-                                            validator: (value) {
-                                              return FormValidator
-                                                  .confirmPassValidator(
-                                                      value,
-                                                      _passwordController.text,
-                                                      context);
-                                            },
-                                            maxLines: 1,
-                                          ),
-                                          const SizedBox(height: 20),
-                                          GestureDetector(
-                                            onTap: () {
-                                              if (_formKey.currentState!
-                                                  .validate()) {
-                                                register(errorNotifier);
-                                              } else {
-                                                showSnack(
-                                                  S.of(context).formError,
-                                                );
-                                              }
-                                            },
-                                            child: primaryButton(
-                                              context: context,
-                                              text: S.of(context).registerbtn,
+                                              },
+                                              maxLines: 1,
                                             ),
-                                          ),
-                                        ],
+                                            const SizedBox(height: 16),
+                                            CustomTextField(
+                                              controller: _passwordController,
+                                              isPassword: true,
+                                              hintText: S.of(context).hintPass,
+                                              label: S.of(context).password,
+                                              validator: (value) {
+                                                return FormValidator
+                                                    .passwordValidator(
+                                                        value, context);
+                                              },
+                                              maxLines: 1,
+                                            ),
+                                            const SizedBox(height: 16),
+                                            CustomTextField(
+                                              controller:
+                                                  _confirmPasswordController,
+                                              isPassword: true,
+                                              hintText:
+                                                  S.of(context).hintConfirmPass,
+                                              label:
+                                                  S.of(context).confirmPassword,
+                                              validator: (value) {
+                                                return FormValidator
+                                                    .confirmPassValidator(
+                                                        value,
+                                                        _passwordController
+                                                            .text,
+                                                        context);
+                                              },
+                                              maxLines: 1,
+                                            ),
+                                            const SizedBox(height: 20),
+                                            GestureDetector(
+                                              onTap: () {
+                                                if (_formKey.currentState!
+                                                    .validate()) {
+                                                  register(errorNotifier);
+                                                } else {
+                                                  showSnack(
+                                                    S.of(context).formError,
+                                                  );
+                                                }
+                                              },
+                                              child: primaryButton(
+                                                context: context,
+                                                text: S.of(context).registerbtn,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     const SizedBox(height: 24),

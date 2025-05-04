@@ -25,7 +25,7 @@ class SidebarTablet extends StatelessWidget {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
     return Container(
-      width: 245,
+      width: 255,
       color: colorScheme.surface,
       child: Row(
         children: [
@@ -71,7 +71,7 @@ class SidebarTablet extends StatelessWidget {
                 ),
                 const Spacer(),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: Divider(color: theme.dividerColor, thickness: 1),
                 ),
                 FutureBuilder<Users?>(
@@ -80,7 +80,7 @@ class SidebarTablet extends StatelessWidget {
                     if (!snapshot.hasData) {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8),
+                            horizontal: 16, vertical: 8),
                         child: Row(
                           children: [
                             CircleAvatar(

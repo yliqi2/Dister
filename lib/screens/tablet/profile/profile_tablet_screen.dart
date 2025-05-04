@@ -370,7 +370,7 @@ class _ProfileTabletScreenState extends State<ProfileTabletScreen> {
                               crossAxisCount: 4,
                               crossAxisSpacing: 16,
                               mainAxisSpacing: 16,
-                              childAspectRatio: 0.8,
+                              childAspectRatio: 0.75,
                             ),
                             itemCount: posts.length,
                             itemBuilder: (context, index) {

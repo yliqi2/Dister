@@ -301,7 +301,7 @@ class _HomeTabletContentState extends State<HomeTabletContent> {
                     crossAxisCount: crossAxisCount,
                     crossAxisSpacing: gridSpacing,
                     mainAxisSpacing: gridSpacing,
-                    childAspectRatio: 0.8,
+                    childAspectRatio: 0.75,
                   ),
                   itemCount: filteredListings.length,
                   itemBuilder: (context, index) {

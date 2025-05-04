@@ -234,7 +234,7 @@ class _ApiPostsTabletScreenState extends State<ApiPostsTabletScreen> {
                     crossAxisCount: 4,
                     crossAxisSpacing: 16.0,
                     mainAxisSpacing: 16.0,
-                    childAspectRatio: 0.8,
+                    childAspectRatio: 0.75,
                   ),
                   itemCount: products.length,
                   itemBuilder: (context, index) {

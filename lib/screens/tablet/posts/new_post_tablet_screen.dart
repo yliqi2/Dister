@@ -143,129 +143,132 @@ class _NewPostTabletScreenState extends State<NewPostTabletScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    CustomTextField(
-                      controller: _linkcontroller,
-                      isPassword: false,
-                      hintText: S.of(context).exampleUrl,
-                      label: S.of(context).link,
-                      helptext: S.of(context).linkhelptext,
-                      validator: (value) {
-                        final RegExp urlPattern = RegExp(
-                            r'^(https?:\/\/)?(www\.)?[\w\-]+(\.[\w\-]+)+([\/?].*)?$',
-                            caseSensitive: false);
-                        if (value == null || value.isEmpty) {
-                          return S.of(context).linkempty;
-                        } else if (!urlPattern.hasMatch(value)) {
-                          return S.of(context).linkerror;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15),
-                    CustomTextField(
-                      controller: _titlecontroller,
-                      isPassword: false,
-                      hintText: S.of(context).titlehint,
-                      label: S.of(context).titlelabel,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return S.of(context).titleerror;
-                        } else if (value.length < 3) {
-                          return S.of(context).titleerror2;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15),
-                    CustomTextField(
-                      controller: _shopcontroller,
-                      isPassword: false,
-                      hintText: S.of(context).tiendahint,
-                      label: S.of(context).tiendalabel,
-                      validator: (value) => value == null || value.isEmpty
-                          ? S.of(context).tiendaerror
-                          : null,
-                    ),
-                    const SizedBox(height: 15),
-                    CustomTextField(
-                      controller: _descriptioncontroller,
-                      isPassword: false,
-                      hintText: S.of(context).descriptionhint,
-                      label: S.of(context).descriptionlabel,
-                      maxLines: 5,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return S.of(context).descriptionerror;
-                        }
-                        if (value.length < 10) {
-                          return S.of(context).descriptionerror2;
-                        }
-                        if (value.length > 200) {
-                          return S.of(context).descriptionerror3;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15),
-                    CustomTextField(
-                      controller: _originalcontroller,
-                      isPassword: false,
-                      hintText: '90',
-                      label: S.of(context).originalprice,
-                      validator: (value) {
-                        final double? originalPrice =
-                            double.tryParse(value ?? '');
-                        if (originalPrice == null || originalPrice <= 0) {
-                          return S.of(context).originalpriceerror;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15),
-                    CustomTextField(
-                      controller: _finalpricecontroller,
-                      isPassword: false,
-                      hintText: '30',
-                      label: S.of(context).finalpricelabel,
-                      validator: (value) {
-                        final double? finalPrice = double.tryParse(value ?? '');
-                        final double originalPrice =
-                            double.tryParse(_originalcontroller.text) ?? 0;
-                        if (finalPrice == null || finalPrice < 0) {
-                          return S.of(context).finalpriceerror;
-                        }
-                        if (finalPrice >= originalPrice) {
-                          return S.of(context).finalpriceerror2;
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 15),
-                    GestureDetector(
-                      onTap: () {
-                        _validateForm();
-                        if (_isFormValidNotifier.value) {
-                          _pageController.nextPage(
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeIn,
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(S.of(context).formError),
-                            ),
-                          );
-                        }
-                      },
-                      child: primaryButton(
-                          text: S.of(context).continuebtn, context: context),
-                    ),
-                    const SizedBox(height: 24),
-                  ],
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                        controller: _linkcontroller,
+                        isPassword: false,
+                        hintText: S.of(context).exampleUrl,
+                        label: S.of(context).link,
+                        helptext: S.of(context).linkhelptext,
+                        validator: (value) {
+                          final RegExp urlPattern = RegExp(
+                              r'^(https?:\/\/)?(www\.)?[\w\-]+(\.[\w\-]+)+([\/?].*)?$',
+                              caseSensitive: false);
+                          if (value == null || value.isEmpty) {
+                            return S.of(context).linkempty;
+                          } else if (!urlPattern.hasMatch(value)) {
+                            return S.of(context).linkerror;
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      CustomTextField(
+                        controller: _titlecontroller,
+                        isPassword: false,
+                        hintText: S.of(context).titlehint,
+                        label: S.of(context).titlelabel,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return S.of(context).titleerror;
+                          } else if (value.length < 3) {
+                            return S.of(context).titleerror2;
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      CustomTextField(
+                        controller: _shopcontroller,
+                        isPassword: false,
+                        hintText: S.of(context).tiendahint,
+                        label: S.of(context).tiendalabel,
+                        validator: (value) => value == null || value.isEmpty
+                            ? S.of(context).tiendaerror
+                            : null,
+                      ),
+                      const SizedBox(height: 15),
+                      CustomTextField(
+                        controller: _descriptioncontroller,
+                        isPassword: false,
+                        hintText: S.of(context).descriptionhint,
+                        label: S.of(context).descriptionlabel,
+                        maxLines: 5,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return S.of(context).descriptionerror;
+                          }
+                          if (value.length < 10) {
+                            return S.of(context).descriptionerror2;
+                          }
+                          if (value.length > 200) {
+                            return S.of(context).descriptionerror3;
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      CustomTextField(
+                        controller: _originalcontroller,
+                        isPassword: false,
+                        hintText: '90',
+                        label: S.of(context).originalprice,
+                        validator: (value) {
+                          final double? originalPrice =
+                              double.tryParse(value ?? '');
+                          if (originalPrice == null || originalPrice <= 0) {
+                            return S.of(context).originalpriceerror;
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      CustomTextField(
+                        controller: _finalpricecontroller,
+                        isPassword: false,
+                        hintText: '30',
+                        label: S.of(context).finalpricelabel,
+                        validator: (value) {
+                          final double? finalPrice =
+                              double.tryParse(value ?? '');
+                          final double originalPrice =
+                              double.tryParse(_originalcontroller.text) ?? 0;
+                          if (finalPrice == null || finalPrice < 0) {
+                            return S.of(context).finalpriceerror;
+                          }
+                          if (finalPrice >= originalPrice) {
+                            return S.of(context).finalpriceerror2;
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 15),
+                      GestureDetector(
+                        onTap: () {
+                          _validateForm();
+                          if (_isFormValidNotifier.value) {
+                            _pageController.nextPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeIn,
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(S.of(context).formError),
+                              ),
+                            );
+                          }
+                        },
+                        child: primaryButton(
+                            text: S.of(context).continuebtn, context: context),
+                      ),
+                      const SizedBox(height: 24),
+                    ],
+                  ),
                 ),
               ),
             ),
