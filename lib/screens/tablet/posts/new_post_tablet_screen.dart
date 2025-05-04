@@ -73,50 +73,53 @@ class _NewPostTabletScreenState extends State<NewPostTabletScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.surface,
-            border: Border(
-              bottom: BorderSide(
-                color: Theme.of(context).colorScheme.surfaceContainerHighest,
-                width: 1,
-              ),
-            ),
-          ),
-          child: Row(
-            children: [
-              Text(
-                S.of(context).newPost,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              border: Border(
+                bottom: BorderSide(
+                  color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                  width: 1,
                 ),
               ),
-            ],
+            ),
+            child: Row(
+              children: [
+                Text(
+                  S.of(context).newPost,
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          child: ValueListenableBuilder<bool>(
-            valueListenable: _isFormValidNotifier,
-            builder: (context, isFormValid, child) {
-              return PageView(
-                controller: _pageController,
-                physics: isFormValid
-                    ? const BouncingScrollPhysics()
-                    : const NeverScrollableScrollPhysics(),
-                children: [
-                  firstPage(context),
-                  secondPage(context),
-                  thirdPage(context),
-                ],
-              );
-            },
+          Expanded(
+            child: ValueListenableBuilder<bool>(
+              valueListenable: _isFormValidNotifier,
+              builder: (context, isFormValid, child) {
+                return PageView(
+                  controller: _pageController,
+                  physics: isFormValid
+                      ? const BouncingScrollPhysics()
+                      : const NeverScrollableScrollPhysics(),
+                  children: [
+                    firstPage(context),
+                    secondPage(context),
+                    thirdPage(context),
+                  ],
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

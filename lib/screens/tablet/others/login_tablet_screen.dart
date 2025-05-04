@@ -84,6 +84,7 @@ class _LoginTabletScreenState extends State<LoginTabletScreen> {
     double widht = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: SizedBox(

@@ -84,6 +84,7 @@ class _RegisterTabletScreenState extends State<RegisterTabletScreen> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SizedBox(
         height: height,
         width: widht,
