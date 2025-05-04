@@ -10,8 +10,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:dister/controllers/media/media.dart';
 import 'package:dister/controllers/provider/app_state_provider.dart';
-import 'package:flutter/services.dart';
-import 'dart:ui' as ui;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,22 +17,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
-  final platformDispatcher = ui.PlatformDispatcher.instance;
-  final view = platformDispatcher.views.first;
-  final size = view.physicalSize / view.devicePixelRatio;
-  final devicePixelRatio = view.devicePixelRatio;
-  if (Media.isTabletByWindow(size, devicePixelRatio)) {
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-  } else {
-    await SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-  }
 
   runApp(
     MultiProvider(
