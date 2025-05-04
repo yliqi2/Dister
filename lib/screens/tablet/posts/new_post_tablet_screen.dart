@@ -125,6 +125,8 @@ class _NewPostTabletScreenState extends State<NewPostTabletScreen> {
 
   Widget firstPage(BuildContext context) {
     return SingleChildScrollView(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(

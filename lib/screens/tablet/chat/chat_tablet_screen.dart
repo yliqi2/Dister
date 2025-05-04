@@ -91,207 +91,217 @@ class _ChatTabletScreenState extends State<ChatTabletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Row(
-          children: [
-            SidebarTablet(
-              selectedIndex: 0,
-              onTap: (index) {
-                Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => HomeTabletScreen(initialIndex: index),
-                  ),
-                  (route) => false,
-                );
-              },
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 12.0),
-                    child: Row(
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.arrow_back),
-                          onPressed: () => Navigator.of(context).pop(),
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          S.of(context).chatWith(widget.recipientName),
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+        child: SingleChildScrollView(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: Row(
+            children: [
+              SidebarTablet(
+                selectedIndex: 0,
+                onTap: (index) {
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          HomeTabletScreen(initialIndex: index),
                     ),
-                  ),
-                  Expanded(
-                    child: StreamBuilder<QuerySnapshot>(
-                      stream: _firestore
-                          .collection('chats')
-                          .doc(chatId)
-                          .collection('messages')
-                          .orderBy('sentDate', descending: false)
-                          .snapshots(),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                              child: CircularProgressIndicator());
-                        }
-
-                        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                          return Center(child: Text(S.of(context).noMessages));
-                        }
-
-                        final messages = snapshot.data!.docs;
-
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          if (messages.isNotEmpty) {
-                            _scrollToBottom();
+                    (route) => false,
+                  );
+                },
+              ),
+              Expanded(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 12.0),
+                      child: Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.arrow_back),
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            S.of(context).chatWith(widget.recipientName),
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: StreamBuilder<QuerySnapshot>(
+                        stream: _firestore
+                            .collection('chats')
+                            .doc(chatId)
+                            .collection('messages')
+                            .orderBy('sentDate', descending: false)
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
-                        });
 
-                        return ListView.builder(
-                          controller: _scrollController,
-                          itemCount: messages.length,
-                          physics: const ClampingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            final data =
-                                messages[index].data() as Map<String, dynamic>;
-                            final chat = Chat.fromMap(data);
-                            final isMe = chat.sender == currentUserId;
+                          if (!snapshot.hasData ||
+                              snapshot.data!.docs.isEmpty) {
+                            return Center(
+                                child: Text(S.of(context).noMessages));
+                          }
 
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0,
-                                vertical: 8.0,
-                              ),
-                              child: Row(
-                                mainAxisAlignment: isMe
-                                    ? MainAxisAlignment.end
-                                    : MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    constraints: BoxConstraints(
-                                      maxWidth:
-                                          MediaQuery.of(context).size.width *
-                                              0.6,
-                                    ),
-                                    padding: const EdgeInsets.all(12.0),
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(context).brightness ==
-                                              Brightness.light
-                                          ? Theme.of(context)
-                                              .colorScheme
-                                              .surfaceContainer
-                                              .withAlpha(204)
-                                          : Theme.of(context)
-                                              .colorScheme
-                                              .surfaceContainer,
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Theme.of(context).brightness ==
-                                              Brightness.light
-                                          ? Border.all(
+                          final messages = snapshot.data!.docs;
+
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            if (messages.isNotEmpty) {
+                              _scrollToBottom();
+                            }
+                          });
+
+                          return ListView.builder(
+                            controller: _scrollController,
+                            itemCount: messages.length,
+                            physics: const ClampingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              final data = messages[index].data()
+                                  as Map<String, dynamic>;
+                              final chat = Chat.fromMap(data);
+                              final isMe = chat.sender == currentUserId;
+
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16.0,
+                                  vertical: 8.0,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: isMe
+                                      ? MainAxisAlignment.end
+                                      : MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      constraints: BoxConstraints(
+                                        maxWidth:
+                                            MediaQuery.of(context).size.width *
+                                                0.6,
+                                      ),
+                                      padding: const EdgeInsets.all(12.0),
+                                      decoration: BoxDecoration(
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.light
+                                            ? Theme.of(context)
+                                                .colorScheme
+                                                .surfaceContainer
+                                                .withAlpha(204)
+                                            : Theme.of(context)
+                                                .colorScheme
+                                                .surfaceContainer,
+                                        borderRadius: BorderRadius.circular(15),
+                                        border: Theme.of(context).brightness ==
+                                                Brightness.light
+                                            ? Border.all(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .onSurface
+                                                    .withAlpha(25),
+                                                width: 0.5,
+                                              )
+                                            : null,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            chat.message,
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              color: isMe
+                                                  ? Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary
+                                                  : Theme.of(context)
+                                                      .colorScheme
+                                                      .secondary,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(
+                                            _formatDate(chat.sentDate),
+                                            style: TextStyle(
+                                              fontSize: 10,
                                               color: Theme.of(context)
                                                   .colorScheme
-                                                  .onSurface
-                                                  .withAlpha(25),
-                                              width: 0.5,
-                                            )
-                                          : null,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          chat.message,
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            color: isMe
-                                                ? Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary
-                                                : Theme.of(context)
-                                                    .colorScheme
-                                                    .secondary,
+                                                  .tertiary,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Text(
-                                          _formatDate(chat.sentDate),
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .tertiary,
-                                          ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: _messageController,
-                            decoration: InputDecoration(
-                              hintText: S.of(context).typeMessage,
-                              hintStyle: TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.tertiary),
-                              filled: true,
-                              fillColor: Theme.of(context)
-                                  .colorScheme
-                                  .surfaceContainer,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide.none,
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
-                                  color: Theme.of(context).colorScheme.primary,
-                                  width: 1.5,
+                                  ],
                                 ),
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 10),
-                            ),
-                            style: TextStyle(
-                                color: Theme.of(context).colorScheme.secondary),
-                            textInputAction: TextInputAction.send,
-                            onSubmitted: (_) => _sendMessage(),
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.send,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          onPressed: _sendMessage,
-                        ),
-                      ],
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              controller: _messageController,
+                              decoration: InputDecoration(
+                                hintText: S.of(context).typeMessage,
+                                hintStyle: TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary),
+                                filled: true,
+                                fillColor: Theme.of(context)
+                                    .colorScheme
+                                    .surfaceContainer,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide.none,
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    width: 1.5,
+                                  ),
+                                ),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 15, vertical: 10),
+                              ),
+                              style: TextStyle(
+                                  color:
+                                      Theme.of(context).colorScheme.secondary),
+                              textInputAction: TextInputAction.send,
+                              onSubmitted: (_) => _sendMessage(),
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.send,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                            onPressed: _sendMessage,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
