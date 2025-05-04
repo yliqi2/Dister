@@ -91,26 +91,24 @@ class _ChatTabletScreenState extends State<ChatTabletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Row(
-            children: [
-              SidebarTablet(
-                selectedIndex: 0,
-                onTap: (index) {
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          HomeTabletScreen(initialIndex: index),
-                    ),
-                    (route) => false,
-                  );
-                },
-              ),
-              Expanded(
+        child: Row(
+          children: [
+            SidebarTablet(
+              selectedIndex: 0,
+              onTap: (index) {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => HomeTabletScreen(initialIndex: index),
+                  ),
+                  (route) => false,
+                );
+              },
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   children: [
                     Padding(
@@ -300,8 +298,8 @@ class _ChatTabletScreenState extends State<ChatTabletScreen> {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

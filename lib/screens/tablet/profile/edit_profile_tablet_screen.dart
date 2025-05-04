@@ -107,26 +107,24 @@ class _EditProfileTabletScreenState extends State<EditProfileTabletScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Row(
-            children: [
-              SidebarTablet(
-                selectedIndex: 4,
-                onTap: (index) {
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          HomeTabletScreen(initialIndex: index),
-                    ),
-                    (route) => false,
-                  );
-                },
-              ),
-              Expanded(
+        child: Row(
+          children: [
+            SidebarTablet(
+              selectedIndex: 4,
+              onTap: (index) {
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => HomeTabletScreen(initialIndex: index),
+                  ),
+                  (route) => false,
+                );
+              },
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -247,8 +245,8 @@ class _EditProfileTabletScreenState extends State<EditProfileTabletScreen> {
                   ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
