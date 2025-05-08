@@ -262,7 +262,7 @@ class _ApiPostsState extends State<ApiPostsScreen> {
                       crossAxisCount: crossAxisCount,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
-                      childAspectRatio: 0.85,
+                      childAspectRatio: 0.675,
                     ),
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
