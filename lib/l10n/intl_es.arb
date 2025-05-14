@@ -254,5 +254,10 @@
     "noProductsFound": "No se encontraron productos",
     "storeName": "Tienda",
     "viewProductButton": "Ver producto",
-    "noFavoritesFound": "No se encontraron favoritos"
+    "noFavoritesFound": "No se encontraron favoritos",
+
+    "hintAge": "Introduce tu edad",
+    "ageLabel": "Edad",
+    "hintPhone": "Introduce tu número de teléfono",
+    "phoneLabel": "Número de Teléfono"
 }

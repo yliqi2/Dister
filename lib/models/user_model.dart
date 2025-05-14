@@ -6,6 +6,8 @@ class Users {
   List<String> following;
   int listings;
   String? desc;
+  int? age;
+  String? phoneNumber;
 
   Users({
     required this.uid,
@@ -15,6 +17,8 @@ class Users {
     required this.following,
     required this.listings,
     this.desc,
+    this.age,
+    this.phoneNumber,
   });
 
   factory Users.fromMap(Map<String, dynamic> map) {
@@ -26,6 +30,8 @@ class Users {
       following: List<String>.from(map['following'] ?? []),
       listings: map['listings'] ?? 0,
       desc: map['desc'] ?? '',
+      age: map['age'],
+      phoneNumber: map['phoneNumber'],
     );
   }
 
@@ -38,6 +44,8 @@ class Users {
       'following': following,
       'listings': listings,
       'desc': desc,
+      'age': age,
+      'phoneNumber': phoneNumber,
     };
   }
 }

@@ -248,5 +248,10 @@
     "home": "Home",
     "onlinePosts": "Online Posts",
     "newPost": "New Post",
-    "profile": "Profile"
+    "profile": "Profile",
+    
+    "hintAge": "Enter your age",
+    "ageLabel": "Age",
+    "hintPhone": "Enter your phone number",
+    "phoneLabel": "Phone Number"
 }

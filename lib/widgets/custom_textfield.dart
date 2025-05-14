@@ -10,6 +10,7 @@ class CustomTextField extends StatefulWidget {
   final String? helptext;
   final int? maxLines;
   final bool isDateField;
+  final TextInputType? keyboardType;
 
   const CustomTextField({
     super.key,
@@ -21,6 +22,7 @@ class CustomTextField extends StatefulWidget {
     this.helptext,
     this.maxLines,
     this.isDateField = false,
+    this.keyboardType,
   });
 
   @override
@@ -69,6 +71,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 maxLines: widget.maxLines,
                 obscureText: _isPasswordVisible,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
+                keyboardType: widget.keyboardType,
                 decoration: InputDecoration(
                   alignLabelWithHint: true,
                   suffixIcon: widget.isPassword
@@ -124,6 +127,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               maxLines: widget.maxLines,
               obscureText: _isPasswordVisible,
               autovalidateMode: AutovalidateMode.onUserInteraction,
+              keyboardType: widget.keyboardType,
               decoration: InputDecoration(
                 alignLabelWithHint: true,
                 suffixIcon: widget.isPassword

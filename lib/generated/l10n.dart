@@ -1804,6 +1804,31 @@ class S {
   String get profile {
     return Intl.message('Profile', name: 'profile', desc: '', args: []);
   }
+
+  /// `Enter your age`
+  String get hintAge {
+    return Intl.message('Enter your age', name: 'hintAge', desc: '', args: []);
+  }
+
+  /// `Age`
+  String get ageLabel {
+    return Intl.message('Age', name: 'ageLabel', desc: '', args: []);
+  }
+
+  /// `Enter your phone number`
+  String get hintPhone {
+    return Intl.message(
+      'Enter your phone number',
+      name: 'hintPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number`
+  String get phoneLabel {
+    return Intl.message('Phone Number', name: 'phoneLabel', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
