@@ -114,8 +114,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
       appBar: AppBar(
         title: Text(S.of(context).editProfile),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            left: 16,
+            right: 16,
+            top: 16),
         child: Column(
           children: [
             Center(
