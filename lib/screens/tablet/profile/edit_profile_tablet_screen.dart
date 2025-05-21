@@ -20,6 +20,8 @@ class EditProfileTabletScreen extends StatefulWidget {
 class _EditProfileTabletScreenState extends State<EditProfileTabletScreen> {
   final TextEditingController _descController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   bool _isLoading = false;
   String? _userPhoto;
   File? _selectedImage;
@@ -42,6 +44,8 @@ class _EditProfileTabletScreenState extends State<EditProfileTabletScreen> {
         setState(() {
           _descController.text = userDoc['desc'] ?? '';
           _usernameController.text = userDoc['username'] ?? '';
+          _ageController.text = userDoc['age']?.toString() ?? '';
+          _phoneController.text = userDoc['phoneNumber'] ?? '';
           _userPhoto = userDoc['photo'];
         });
       }
@@ -76,6 +80,8 @@ class _EditProfileTabletScreenState extends State<EditProfileTabletScreen> {
           .update({
         'desc': _descController.text.trim(),
         'username': _usernameController.text.trim(),
+        'age': int.tryParse(_ageController.text.trim()),
+        'phoneNumber': _phoneController.text.trim(),
       });
 
       if (_selectedImage != null) {
@@ -200,6 +206,22 @@ class _EditProfileTabletScreenState extends State<EditProfileTabletScreen> {
                         ),
                         const SizedBox(height: 16),
                         CustomTextField(
+                          controller: _ageController,
+                          isPassword: false,
+                          hintText: S.of(context).hintAge,
+                          label: S.of(context).ageLabel,
+                          keyboardType: TextInputType.number,
+                        ),
+                        const SizedBox(height: 16),
+                        CustomTextField(
+                          controller: _phoneController,
+                          isPassword: false,
+                          hintText: S.of(context).hintPhone,
+                          label: S.of(context).phoneLabel,
+                          keyboardType: TextInputType.phone,
+                        ),
+                        const SizedBox(height: 16),
+                        CustomTextField(
                           controller: _descController,
                           isPassword: false,
                           hintText: S.of(context).description,
@@ -251,6 +273,8 @@ class _EditProfileTabletScreenState extends State<EditProfileTabletScreen> {
   void dispose() {
     _descController.dispose();
     _usernameController.dispose();
+    _ageController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 }
