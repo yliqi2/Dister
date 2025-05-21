@@ -51,6 +51,8 @@ class AuthService {
         'following': newUser.following,
         'listings': newUser.listings,
         'desc': newUser.desc,
+        'age': 0,
+        'phoneNumber': '',
       });
 
       return userCredential.user;
