@@ -23,9 +23,10 @@ Por qué es interesante
 Demo / Captura
 --------------
 
-![Captura de ejemplo](assets/screenshot.png)
+![Boceto (Figma)](https://github.com/yliqi2/Dister/blob/main/assets/MainPage.png)
 
-(Si no tienes la imagen, elimina la línea anterior o añade una captura real en `assets/`.)
+*Nota: la imagen es un boceto realizado en Figma.*
+
 
 Instalación rápida
 ------------------
@@ -67,6 +68,12 @@ Este proyecto fue creado por:
 
 - Marc Hunter — https://github.com/MarcHunter87
 - yliqi2 — https://github.com/yliqi2
+
+Contacto
+--------
+
+Para dudas o colaboraciones abre un issue en el repositorio o contacta a los autores vía sus perfiles de GitHub (enlaces arriba).
+
 
 
 
