@@ -67,6 +67,7 @@ Autores
 Este proyecto fue creado por:
 
 - Marc Hunter — https://github.com/MarcHunter87
+- https://github.com/JordiDago23
 - yliqi2 — https://github.com/yliqi2
 
 Contacto
