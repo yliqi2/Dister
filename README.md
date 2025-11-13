@@ -1,56 +1,72 @@
-# Dister
+# 🚀 Dister
 
-A Flutter application.
+[![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com)
+[![RapidAPI](https://img.shields.io/badge/RapidAPI-00BFFF?style=for-the-badge&logo=rapidapi&logoColor=white)](https://rapidapi.com)
 
-## Features
+Una app móvil elegante y rápida — creada con Flutter + Dart.
 
-- Cross-platform support (Android, etc.)
-- Modern UI built with Flutter
-- Scalable and maintainable codebase
-- High performance and responsiveness
-- Easy to customize and extend
+Descripción breve
+------------------
 
-## Requirements
+Dister es una aplicación móvil multiplataforma (Android / iOS) desarrollada con Flutter. Está pensada para ofrecer una experiencia UI moderna y fluida, consumir APIs externas (vía RapidAPI u otras) y apoyarse en Firebase para funcionalidades backend como autenticación, base de datos en tiempo real / Firestore y almacenamiento.
 
-- Flutter SDK: [Install Flutter](https://docs.flutter.dev/get-started/install)
-- Dart: Included with Flutter SDK
+Por qué es interesante
+----------------------
 
-## Getting Started
+- Interfaz moderna y responsive con widgets reutilizables.
+- Integración con servicios externos (APIs) para datos dinámicos.
+- Firebase para autenticación, sincronización y despliegue.
+- Código escalable pensado para facilitar mantenimiento y extensiones.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yliqi2/Dister
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd Dister
-   ```
-3. Get the dependencies:
-   ```bash
-   flutter pub get
-   ```
-4. Run the app:
-   ```bash
-   flutter run
-   ```
+Demo / Captura
+--------------
 
-## Folder Structure
+![Captura de ejemplo](assets/screenshot.png)
 
-```
-Dister/
-├── lib/                # Main application code
-│   ├── screens/        # UI screens
-│   ├── widgets/        # Reusable widgets
-│   ├── models/         # Data models
-│   ├── services/       # Business logic and API calls
-│   └── main.dart       # Entry point of the application
-├── assets/             # Static assets (images, fonts, etc.)
-├── test/               # Unit and widget tests
-└── pubspec.yaml        # Project configuration
+(Si no tienes la imagen, elimina la línea anterior o añade una captura real en `assets/`.)
+
+Instalación rápida
+------------------
+
+1. Clona el repo:
+
+```bash
+git clone https://github.com/yliqi2/Dister.git
+cd Dister
 ```
 
-## Resources
+2. Instala dependencias y ejecuta:
 
-- [Flutter Documentation](https://docs.flutter.dev/)
-- [Dart Language](https://dart.dev/)
-- [Flutter Packages](https://pub.dev/)
+```bash
+flutter pub get
+flutter run
+```
+
+Documentación completa
+----------------------
+
+Toda la documentación detallada (instalación avanzada, arquitectura, endpoints, ejemplos y diagramas) está en el PDF incluido en el repositorio:
+
+https://github.com/yliqi2/Dister/blob/main/Documentacion.pdf
+
+Contribuir
+----------
+
+Si quieres contribuir:
+
+1. Crea una rama: `git checkout -b feat/mi-cambio`
+2. Haz tus cambios y pruebas.
+3. Abre un PR explicando el objetivo.
+
+Autores
+-------
+
+Este proyecto fue creado por:
+
+- Marc Hunter — https://github.com/MarcHunter87
+- yliqi2 — https://github.com/yliqi2
+
+
+
